@@ -1,0 +1,34 @@
+.header-container{
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 10px;
+    background-color: #000;
+    height: 5rem;
+}
+.mc-logo{
+    height: 60px;
+    width: 150px;
+    float: left;
+    margin-left: 2.5rem;
+}
+
+.auth-links{
+    border: 1px solid #fff;
+    line-height: normal;
+    font-weight: 400;
+    text-decoration: none !important;
+    float: right;
+    font-size: 1rem;
+    padding: .625rem 1.3rem;
+    margin: .5rem .625rem .5rem 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #fff;
+    border-radius: 3px;
+}

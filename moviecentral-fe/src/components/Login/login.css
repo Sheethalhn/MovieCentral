@@ -1,0 +1,126 @@
+.login-background{
+    background-image: url("background-img.jpg");
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    opacity: 0.8;
+}
+
+.login-body {
+    margin: 0 auto -236px;
+    min-height: 100vh;
+    background-color: transparent;
+    max-width: 600px;
+    color: #333;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.login-body:before {
+    content: "";
+    height: 155px;
+    display: block;
+}
+
+.signup-body{
+    margin: 0 auto -236px;
+    min-height: 100vh;
+    background-color: transparent;
+    max-width: 600px;
+    color: #333;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.signup-body::before{
+    content: "";
+    height: 85px;
+    display: block;
+}
+
+.hybrid-login-form{
+    min-height: 360px;
+    padding: 60px 68px 40px;
+    margin-bottom: 90px;
+    background-color: rgba(0,0,0,.75);
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    margin: 0;
+    width: 100%;
+}
+
+.hybrid-login-form h1 {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    float: left;
+}
+
+.hybrid-login-form .hybrid-login-form-main {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+}
+
+.hybrid-login-form .login-form {
+    margin-bottom: 0;
+}
+
+.hybrid-login-form .nfTextField {
+    border-radius: 4px;
+    border: 0;
+    color: #fff;
+    height: 50px;
+    line-height: 50px;
+    background: #333 !important;
+}
+
+.nfTextField {
+    box-sizing: border-box;
+    font-size: 16px;
+    display: block;
+    -webkit-appearance: none;
+}
+
+.nfTextField::placeholder {
+    top: 50%;
+    transition: font .1s ease,top .1s ease,transform .1s ease,-webkit-transform .1s ease,-moz-transform .1s ease,-o-transform .1s ease;
+    color: #8c8c8c;
+}
+
+.login-button.btn{
+    padding: 16px;
+    background: #e50914;
+}
+
+.btn.btn-small{
+    display: inline-block;
+    min-width: 310px;
+    min-height: 37px;
+    line-height: 1em;
+}
+
+.btn-submit{
+    color: #fff;
+    box-shadow: 0 1px 0 rgba(0,0,0,.55);
+}
+
+.hybrid-login-form .login-signup-now {
+    color: #737373;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 16px;
+    float: left;
+}
+
+.hybrid-login-form .login-signup-now a {
+    color: #fff;
+}
+
+a:hover {
+    text-decoration: underline;
+}

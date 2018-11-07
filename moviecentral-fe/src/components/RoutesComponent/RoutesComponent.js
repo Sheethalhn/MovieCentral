@@ -5,7 +5,9 @@
 
 import React, { Component } from 'react';
 import { Route, withRouter} from 'react-router-dom';
-import Landing from '../Landing/Landing'
+import Landing from '../Landing/Landing';
+import Login from '../Login/login';
+import SignUp from '../Login/signup';
 import PageNotFound from '../ErrorHandler/PageNotFound';
 
 class RoutesComponent extends Component {
@@ -14,6 +16,8 @@ class RoutesComponent extends Component {
         return (
             <div>
                 <Route exact path="/" component={Landing} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={SignUp} />
                 <Route exact path="/pagenotfound" component={PageNotFound} />
             </div>
         );
