@@ -10,6 +10,7 @@ import Login from '../Login/login';
 import SignUp from '../Login/signup';
 import PageNotFound from '../ErrorHandler/PageNotFound';
 import Movie_detail from '../Moviedetail/movidetail';
+import Payment from '../Payment/payment';
 
 class RoutesComponent extends Component {
 
@@ -21,6 +22,7 @@ class RoutesComponent extends Component {
                 <Route exact path="/signup" component={SignUp} />
                 <Route exact path="/moviedetail" component={Movie_detail} />
                 <Route exact path="/pagenotfound" component={PageNotFound} />
+                <Route exact path="/payment" component={Payment} />
             </div>
         );
     }
