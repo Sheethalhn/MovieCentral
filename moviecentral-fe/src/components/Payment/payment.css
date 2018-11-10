@@ -1,0 +1,105 @@
+
+
+.outerBody{
+    background-color:black; 
+    overflow: -webkit-paged-y;
+}
+
+.creditCardForm {
+    max-width: 600px;
+    background: radial-gradient(closest-side at 50% 135%,#2c2c2c 0,#161616 100%);
+    padding: 25px;
+    overflow: auto;
+    position:relative;
+    top:100px;
+    
+    color: white; 
+}
+.creditCardForm label {
+    width: 100%;
+    margin-bottom: 10px;
+    color: #8c8c8c;
+}
+.creditCardForm .heading h1 {
+    text-align: center;
+    color: white;
+    font-size: 28px;
+    font-weight: 700;
+    
+}
+.creditCardForm .payment {
+    float: left;
+    font-size: 18px;
+    padding: 10px 25px;
+    margin-top: 20px;
+    position: relative;
+}
+.creditCardForm .payment .form-group {
+    float: left;
+    margin-bottom: 15px;
+
+}
+.creditCardForm .payment .form-control  {
+    line-height: 40px;
+    height: auto;
+    padding: 0 16px;
+}
+.creditCardForm .owner {
+    width: 63%;
+    margin-right: 10px;
+    text-align: left;
+}
+.creditCardForm .CVV {
+    width: 35%;
+    text-align: left;
+}
+.creditCardForm #card-number-field {
+    width: 100%;
+    text-align: left;
+}
+.creditCardForm #expiration-date {
+    width: 50%;
+    text-align: left;
+}
+.creditCardForm #credit_cards {
+    width: 50%;
+    margin-top: 30px;
+    text-align: right;
+}
+.creditCardForm #pay-now {
+    width: 100%;
+    margin-top: 25px;
+}
+.creditCardForm .payment .btn {
+    width: 100%;
+    margin-top: 3px;
+    background-color: #e50914;
+    color: white;
+    box-shadow: 0 1px 0 rgba(0,0,0,.55);
+    font-size: 16px;
+    font-weight: 500;
+}
+.creditCardForm .payment select {
+    padding: 10px;
+    margin-right: 15px;
+}
+.transparent {
+    opacity: 0.2;
+}
+@media(max-width: 650px) {
+    .creditCardForm .owner,
+    .creditCardForm .CVV,
+    .creditCardForm #expiration-date,
+    .creditCardForm #credit_cards {
+        width: 100%;
+    }
+    .creditCardForm #credit_cards {
+        text-align: left;
+    }
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
