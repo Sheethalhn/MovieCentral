@@ -53,12 +53,15 @@
     width: 100%;
 }
 
+.signup-form{
+    padding-top: 30px !important;
+}
+
 .hybrid-login-form h1 {
     color: #fff;
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 28px;
-    float: left;
 }
 
 .hybrid-login-form .hybrid-login-form-main {
@@ -123,4 +126,17 @@
 
 a:hover {
     text-decoration: underline;
+    color: #fff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.pd-15{
+    padding: 15px;
+}
+
+.radio-label{
+    color: white;
 }
