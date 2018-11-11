@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import './login.css';
 import LandingHeader from '../header/LandingHeader';
 import Message from '../Message/Message';
-import { Link } from 'react-router-dom';
+import * as API from '../../api/API';
+import { loginUser } from "../../actions";
 
 class Login extends Component {
+
+    notify = (message) => toast(message);
 
     constructor(props) {
         super(props);
@@ -30,11 +35,34 @@ class Login extends Component {
     handleSubmit(e) {
         e.preventDefault();
         this.setState({ submitted: true });
+        if (this.state.email != undefined && this.state.email != "" && this.state.password != undefined && this.state.password != "") {
+            API.login(this.state)
+                .then((resultData) => {
+                    if (resultData.data !== undefined && resultData.data !== null) {
+                        this.setState({
+                            isLoggedIn: true,
+                            message: resultData.message,
+                            user: resultData.data,
+                        });
+                        this.props.history.push("/home");
+                    } else {
+                        this.setState({
+                            isLoggedIn: false,
+                            message: resultData.message,
+                        });
+                        this.notify(resultData.message);
+                    }
+                }).catch(error => {
+                    console.log("error :", error);
+                    this.notify(error.message);
+                });
+        }
     }
 
     render() {
         return (
             <div className="login-background">
+                <ToastContainer />
                 <LandingHeader iconRequired={false} />
                 <div className="login-body">
                     <div className="login-content login-form hybrid-login-form hybrid-login-form-signup">
@@ -76,7 +104,7 @@ class Login extends Component {
                                 <div className="form-group">
                                     <button className="btn login-button btn-submit btn-small">Sign In</button>
                                 </div>
-                                <div class="login-signup-now">
+                                <div className="login-signup-now">
                                     New to Movie Central?
                                     <Link to="/signup">  Sign up now</Link>
                                     .
@@ -98,7 +126,7 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({}, dispatch)
+    return bindActionCreators({ loginUser: loginUser }, dispatch)
 }
 
 
