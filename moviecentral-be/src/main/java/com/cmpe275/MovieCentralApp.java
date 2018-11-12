@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackendJavaApplication {
+public class MovieCentralApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackendJavaApplication.class, args);
+		SpringApplication.run(MovieCentralApp.class, args);
 	}
 }
