@@ -7,7 +7,9 @@ package com.cmpe275.repository;
 
 import com.cmpe275.entity.User;
 import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 /**
  * User JPA Repository for user related operations in database
@@ -21,4 +23,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     User findByEmail(String email);
 
     User findByUserId(Integer id);
+
+    User findByVerificationCode(String verificationCode);
 }

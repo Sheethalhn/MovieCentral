@@ -35,7 +35,7 @@ class Login extends Component {
     handleSubmit(e) {
         e.preventDefault();
         this.setState({ submitted: true });
-        if (this.state.email != undefined && this.state.email != "" && this.state.password != undefined && this.state.password != "") {
+        if (this.state.email !== undefined && this.state.email !== "" && this.state.password !== undefined && this.state.password !== "") {
             API.login(this.state)
                 .then((resultData) => {
                     if (resultData.data !== undefined && resultData.data !== null) {

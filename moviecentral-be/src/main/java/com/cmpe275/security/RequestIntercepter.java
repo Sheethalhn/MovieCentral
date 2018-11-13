@@ -16,6 +16,7 @@ public class RequestIntercepter extends HandlerInterceptorAdapter {
         HttpSession session = request.getSession(true);
 
         String uri = request.getRequestURI();
+        System.out.println("uri :" + uri);
         if (uri.equalsIgnoreCase("/signup") || uri.equalsIgnoreCase("/login")) {
             System.out.println("URI is " + uri);
             return true;

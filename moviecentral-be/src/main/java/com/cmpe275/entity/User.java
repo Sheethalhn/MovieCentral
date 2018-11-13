@@ -16,6 +16,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.CreationTimestamp;
 
 /**
  *
@@ -33,6 +36,7 @@ public class User {
     private String email;
 
     private String password;
+    
     @Column(name = "first_name")
     private String firstName;
 
@@ -42,14 +46,16 @@ public class User {
     @Column(name = "screen_name")
     private String screenName;
 
-    private Long role;
+    private String role;
 
     @Column(name = "email_verified")
     private Boolean emailVerified;
 
     @Column(name = "verification_code")
-    private Integer verificationCode = new Random().nextInt(10000);
+    private String verificationCode = Integer.valueOf(new Random().nextInt(10000)).toString();
 
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_on")
     private Date createdOn;
 
@@ -113,11 +119,11 @@ public class User {
         this.screenName = screenName;
     }
 
-    public Long getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Long role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -129,11 +135,11 @@ public class User {
         this.emailVerified = emailVerified;
     }
 
-    public Integer getVerificationCode() {
+    public String getVerificationCode() {
         return verificationCode;
     }
 
-    public void setVerificationCode(Integer verificationCode) {
+    public void setVerificationCode(String verificationCode) {
         this.verificationCode = verificationCode;
     }
 
