@@ -140,3 +140,11 @@ a:hover {
 .radio-label{
     color: white;
 }
+.successful-register{
+    color: white;
+}
+.successful-register h3{
+    padding-top: 170px;
+    color: white;
+    font-weight: bold;
+}

@@ -6,8 +6,12 @@ import LandingHeader from '../header/LandingHeader';
 import { Link } from 'react-router-dom';
 import Message from '../Message/Message';
 import * as API from '../../api/API';
+import * as _ from 'lodash';
+import { ToastContainer, toast } from 'react-toastify';
 
 class Signup extends Component {
+
+    notify = (message1) => toast(message1);
 
     constructor(props) {
         super(props);
@@ -16,11 +20,12 @@ class Signup extends Component {
             firstName: '',
             lastName: '',
             screenName: '',
-            role: 'admin',
+            role: 'customer',
             email: '',
             password: '',
             confirmPassword: '',
-            submitted: false
+            submitted: false,
+            signedUp: false
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -29,18 +34,30 @@ class Signup extends Component {
         e.preventDefault();
         this.setState({ submitted: true });
         if (this.state.role != undefined && this.state.role != "") {
-            API.signup(this.state)
+            let requestData = _.cloneDeep(this.state);;
+            delete requestData.submitted;
+            delete requestData.confirmPassword;
+            requestData.emailVerified = false;
+            console.log("state :", this.state);
+            API.signup(requestData)
                 .then((resultData) => {
-                })
+                    console.log(resultData.meta.message);
+                    this.notify(resultData.meta.message);
+                    this.setState({ signedUp: true })
+                }).catch(error => {
+                    this.setState({ signedUp: false });
+                    this.notify(error);
+                });
         }
     }
 
     render() {
         return (
             <div className="login-background">
+                <ToastContainer />
                 <LandingHeader iconRequired={false} />
                 <div className="signup-body">
-                    <div className="login-content login-form hybrid-login-form signup-form hybrid-login-form-signup">
+                    {!this.state.signedUp && <div className="login-content login-form hybrid-login-form signup-form hybrid-login-form-signup">
                         <div className="hybrid-login-form-main">
                             <h1>Create an Account</h1>
                             <form className="login-form" noValidate onSubmit={this.handleSubmit}>
@@ -84,7 +101,7 @@ class Signup extends Component {
                                         value={this.state.screenName}
                                         onChange={(event) => {
                                             this.setState({
-                                                lastName: event.target.value
+                                                screenName: event.target.value
                                             });
                                         }} />
                                 </div>
@@ -147,7 +164,7 @@ class Signup extends Component {
                                                 });
                                             }} />
                                         <label className="form-check-label radio-label"
-                                            for="inlineRadio1">Admin</label>
+                                            htmlFor="inlineRadio1">Admin</label>
                                     </div>
                                     <div className="form-check form-check-inline">
                                         <input className="form-check-input"
@@ -161,7 +178,7 @@ class Signup extends Component {
                                                     role: event.target.value
                                                 });
                                             }} />
-                                        <label className="form-check-label radio-label" for="inlineRadio2">Customer</label>
+                                        <label className="form-check-label radio-label" htmlFor="inlineRadio2">Customer</label>
                                     </div>
                                     {this.state.submitted && !this.state.role &&
                                         <Message message={"Role is required"} />
@@ -170,7 +187,7 @@ class Signup extends Component {
                                 <div className="form-group">
                                     <button className="btn login-button btn-submit btn-small">Join Up</button>
                                 </div>
-                                <div class="login-signup-now">
+                                <div className="login-signup-now">
                                     Already have an Account?
                                     <Link to="/login">  Sign In</Link>
                                     .
@@ -178,6 +195,8 @@ class Signup extends Component {
                             </form>
                         </div>
                     </div>
+                    }
+                    {this.state.signedUp && <div className="successful-register"><h3>Thank You for Registering to Movie Central. Please verify your email before Login!</h3></div>}
                 </div>
             </div>
         )
