@@ -9,14 +9,13 @@ import { connect } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import moviecentral from './moviecentral.png';
 import './header.css';
+import { loginUser } from "../../actions";
 
 class CommonHeader extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-
-        }
+        console.log("user props :", this.props.user);
     }
 
     render() {
@@ -33,7 +32,10 @@ class CommonHeader extends Component {
                             <li className="navigation-tab">Home</li>
                             <li className="navigation-tab">Movies</li>
                             <li className="navigation-tab">Recently watched</li>
-                            <li className="navigation-tab nav-drop">User Profile</li>
+                            <li className="navigation-tab nav-drop">
+                                <a>Welcome, <span className="user-name-color">{this.props.user !== undefined && this.props.user !== null ? this.props.user.firstName + " " + this.props.user.lastName : ''}</span></a>
+                                <a>Logout</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -44,10 +46,11 @@ class CommonHeader extends Component {
 
 function mapStateToProps(state) {
     return {
+        user: state.loginUser
     }
 }
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({}, dispatch)
+    return bindActionCreators({loginUser:loginUser}, dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(CommonHeader);

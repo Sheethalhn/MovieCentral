@@ -22,8 +22,8 @@ public class RequestIntercepter extends HandlerInterceptorAdapter {
             return true;
         }
 
-        if (session.getAttribute("id") != null) {
-            String userid = String.valueOf(session.getAttribute("id"));
+        if (session.getAttribute("userId") != null) {
+            String userid = String.valueOf(session.getAttribute("userId"));
             if (userid == null || userid.equals("0")) {
                 session.invalidate();
                 return false;
