@@ -135,6 +135,7 @@ class Payment extends Component {
                             </div>
                             <div class="form-group" id="pay-now">
                                 <button type="submit" class="btn btn-default" id="confirm-purchase">Pay Now</button>
+                                <button type="button" class="btn btn-default" id="cancel-purchase">Cancel</button>
                             </div>
                     </form>
                 </div>
