@@ -19,7 +19,6 @@ class LandingHeader extends Component {
         this.state = {
             iconRequired: this.props.iconRequired
         }
-        console.log(this.state)
     }
 
     render() {

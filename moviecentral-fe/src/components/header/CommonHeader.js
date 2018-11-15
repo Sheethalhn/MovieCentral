@@ -46,8 +46,7 @@ class CommonHeader extends Component {
                             {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">Reports</li>}
                             <li className="navigation-tab nav-drop">
                                 <a>Welcome, <span className="user-name-color">{this.props.user !== undefined && this.props.user !== null ? this.props.user.firstName + " " + this.props.user.lastName : ''}</span></a>
-                                <button className="btn-link"
-                                    type="button" onClick={(event) => { this.signOut(event) }}>Logout</button>
+                                <a href="javascript:void(0)" onClick={(event) => { this.signOut(event) }}>Logout</a>
                             </li>
                         </ul>
                     </div>
