@@ -36,21 +36,23 @@ class Login extends Component {
         e.preventDefault();
         this.setState({ submitted: true });
         if (this.state.email !== undefined && this.state.email !== "" && this.state.password !== undefined && this.state.password !== "") {
+            console.log("state :",this.state);
             API.login(this.state)
                 .then((resultData) => {
                     if (resultData.data !== undefined && resultData.data !== null) {
                         this.setState({
                             isLoggedIn: true,
-                            message: resultData.message,
+                            message: resultData.meta.message,
                             user: resultData.data,
                         });
+                        this.props.loginUser(resultData.data);
                         this.props.history.push("/home");
                     } else {
                         this.setState({
                             isLoggedIn: false,
-                            message: resultData.message,
+                            message: resultData.meta.message,
                         });
-                        this.notify(resultData.message);
+                        this.notify(resultData.meta.message);
                     }
                 }).catch(error => {
                     console.log("error :", error);

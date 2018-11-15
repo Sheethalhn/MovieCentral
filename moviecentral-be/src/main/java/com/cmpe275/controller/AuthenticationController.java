@@ -61,7 +61,7 @@ public class AuthenticationController {
         Boolean passwordValidity = authenticationService.checkPasswordPattern(userEntity.getPassword());
         if (!passwordValidity) {
             responseObject.setData(null);
-            responseObject.setMeta("The password is too weak");
+            responseObject.setMeta("The password is too weak! Include 1 Capital Letter, 1 small Letter, 1 digit and 1 special character with minimum 8 character length");
             return new ResponseEntity(responseObject, HttpStatus.BAD_REQUEST);
         }
         User existedUser = authenticationService.checkUserExist(userEntity);

@@ -51,7 +51,7 @@ export const getUserFromCode = (payload) =>
         credentials: 'include'
     }).then(res => res.json())
         .then(res => {
-            return res;
+            return successHandler(res);
         })
         .catch(error => {
             console.log("This is error");
@@ -69,9 +69,32 @@ export const verifyUser = (payload) =>
         body: JSON.stringify(payload)
     }).then(res => res.json())
         .then(res => {
-            return res;
+            return successHandler(res);
         })
         .catch(error => {
             console.log("This is error");
             return error;
         });
+
+export const getLimitedMovies = (noOfRecords) =>
+    fetch(`${api}/getMovies`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({ count: noOfRecords })
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
+let successHandler = (res) => {
+    if (res.status === 401) {
+        // UserHelper.redirectToLogin();
+    } else {
+        return res.json();
+    }
+}

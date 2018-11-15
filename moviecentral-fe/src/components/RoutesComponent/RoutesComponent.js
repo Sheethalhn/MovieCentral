@@ -8,6 +8,7 @@ import { Route, withRouter} from 'react-router-dom';
 import Landing from '../Landing/Landing';
 import Login from '../Login/login';
 import SignUp from '../Login/signup';
+import Home from '../Home/Home';
 import Verify from '../Login/verify';
 import PageNotFound from '../ErrorHandler/PageNotFound';
 import Movie_detail from '../Moviedetail/movidetail';
@@ -21,6 +22,7 @@ class RoutesComponent extends Component {
                 <Route exact path="/" component={Landing} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={SignUp} />
+                <Route exact path="/home" component={Home} />
                 <Route exact path="/verify/:code" component={Verify} />
                 <Route exact path="/moviedetail" component={Movie_detail} />
                 <Route exact path="/pagenotfound" component={PageNotFound} />
