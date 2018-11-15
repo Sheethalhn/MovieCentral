@@ -3,9 +3,11 @@
 
 import { combineReducers } from 'redux';
 import movieReducer from './reducer-movie';
+import loginReducer from './reducer-login';
 
 const allReducers =  combineReducers({
-    selectedMovie: movieReducer
+    selectedMovie: movieReducer,
+    loginUser: loginReducer
 });
 
 export default allReducers;

@@ -42,8 +42,7 @@ class Login extends Component {
                     if (resultData.data !== undefined && resultData.data !== null) {
                         this.setState({
                             isLoggedIn: true,
-                            message: resultData.meta.message,
-                            user: resultData.data,
+                            message: resultData.meta.message
                         });
                         this.props.loginUser(resultData.data);
                         this.props.history.push("/home");

@@ -80,21 +80,15 @@
     height: 100%;
 }
 
-#menu > li:last-child
-{
+#menu .nav-drop {
     margin-left: auto;
     margin-right: 25px;
 }
 
-.inner-drop a{
-    text-decoration: none;
+#menu .nav-drop a{
+    padding-left: 30px;
 }
 
-.inner-drop a:hover{
-    color: black;
-}
-
-.nav-drop .first-anchor{
-    text-decoration: none;
-    color: #fff;
+.user-name-color{
+    color: #E50914 !important;
 }
