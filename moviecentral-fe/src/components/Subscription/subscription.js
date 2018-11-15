@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './subscription.css';
+import LandingHeader from '../header/LandingHeader';
 import {Link} from 'react-router-dom';
-import { connect } from 'react-redux';
-import CommonHeader from '../header/CommonHeader';
+
 
 class Subscription extends Component {
 
@@ -17,20 +17,20 @@ class Subscription extends Component {
     render() {
 
         return (
-            <div>
-                <CommonHeader />
+            <div className="subscription-body">
+                <LandingHeader />
                 <div id="container">
-                    <div class="whole">
-                        <div class="type standard">
+                    <div className="whole">
+                        <div className="type standard">
                             <p>Standard</p>
                         </div>
-                        <div class="plan">
+                        <div className="plan">
 
-                            <div class="header">
+                            <div className="header">
                                 <span>$</span>10<sup>00</sup>
-                                <p class="month">per month</p>
+                                <p className="month">per month</p>
                             </div>
-                            <div class="content">
+                            <div className="content">
                                 <ul>
                                     <li>Unlimited Movie Streaming</li>
                                     <li>50% Discounts on Premium Movies </li>
@@ -61,11 +61,11 @@ class Subscription extends Component {
                                         Total Amount : $ {this.state.total_amount}
                                     </li>
                                     <li>
-                                        <div class="form-group" id="pay-now">
+                                        <div className="form-group" id="pay-now">
                                         <Link to="/payment">
-                                            <button Link to="/signup" type="submit" class="btn btn-default" id="confirm-purchase">Purchase</button>
+                                            <button type="submit" className="btn btn-default" id="confirm-purchase">Purchase</button>
                                         </Link>
-                                        <button Link to="" type="back" class="btn btn-default" id="cancel-purchase">Back</button>
+                                        <button type="button" className="btn btn-default" id="cancel-purchase">Back</button>
                                         </div>
                                     </li>
                                 </ul>
@@ -81,12 +81,4 @@ class Subscription extends Component {
     }
 }
 
-
-function mapStateToProps(state) {
-    return {
-        amount: state.total_amount
-    }
-}
-
-
-export default connect(mapStateToProps)(Subscription);
+export default Subscription;

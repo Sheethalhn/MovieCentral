@@ -63,8 +63,7 @@ export const getUserFromCode = (payload) =>
             'Content-Type': 'application/json'
         },
         credentials: 'include'
-    }).then(res => res.json())
-        .then(res => {
+    }).then(res => {
             return successHandler(res);
         })
         .catch(error => {
@@ -81,7 +80,7 @@ export const verifyUser = (payload) =>
         },
         credentials: 'include',
         body: JSON.stringify(payload)
-    }).then(res => res.json())
+    })
         .then(res => {
             return successHandler(res);
         })
