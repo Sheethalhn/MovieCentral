@@ -75,13 +75,11 @@
     box-shadow: 0 1px 0 rgba(0,0,0,.55);
     font-size: 16px;
     font-weight: 500;
+    margin: 20px;
 }
 .creditCardForm .payment select {
     padding: 10px;
     margin-right: 15px;
-}
-.transparent {
-    opacity: 0.2;
 }
 
 input[type=number]::-webkit-inner-spin-button, 

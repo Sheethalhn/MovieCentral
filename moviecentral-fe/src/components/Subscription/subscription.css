@@ -1,11 +1,8 @@
-
-
-sup{
-
+.subscription-body .whole .plan .header sup{
 	font-size: 40px;
 }
 
-ul{
+.subscription-body .whole .plan .content ul{
 	list-style: none;
 	font-size: 15px;
 	font-family:'Open Sans';
@@ -16,8 +13,7 @@ ul{
 
 }
 
-
-li{
+.subscription-body .whole .plan .content li{
 border-bottom: 1px solid #494a5a;
 padding: 0px;
 margin: 0px;
@@ -27,30 +23,21 @@ line-height: 52px;
 }
 
 
-#container{
+.subscription-body #container{
 	width: 100%;
 	text-align:center;
 	position:relative;
 	top:100px;
 }
 
-.whole{
+.subscription-body .whole{
 	display: inline-block;
   
 }
 
 
 
-.type{
-	width: 300px;
-	border-radius: 5px 5px 0px 0px;
-	background-color: #eac80d;
-	height: 62px;
-	border-bottom: 3px solid #bfa30c;
-
-}
-
-.type p{
+.subscription-body .whole .type p{
 	font-family:'Open Sans';
     font-weight: 800;
 	font-size: 29px;
@@ -63,7 +50,7 @@ line-height: 52px;
 
 }
 
-.plan{
+.subscription-body .whole .plan{
 	width: 300px;
 	background-color: #2b2937;
 
@@ -76,59 +63,39 @@ line-height: 52px;
 
 
 }
-.standard{
+.subscription-body .whole .standard{
 	background-color:  #e50914;
 	border-bottom: 3px solid #e50914;
 }
 
-.header{
+.subscription-body .whole .plan .header{
 	border-bottom: 1px solid #494a5a;
-	padding-bottom: 12px;
+	padding-bottom: 8px;
 
 
 }
 
-.header span{
+.subscription-body .whole .plan .header span{
 	font-size: 32px;
 
 	
 }
 
-.month{
+.subscription-body .whole .plan .header .month{
 	font-size: 14px;
 	color: #575757;
 	padding: 0px;
 	margin: -10px;
 }
 
-.price{
-	height:80px;
-}
-
-.cart{
-  
-  color:white;
-  position: relative;
-  top: 16px;
-  background : #e50914;
-  
-}
-
-.top{
-  margin-top:35px;
-}
-
-.nodisplay{
-  opacity: 0.1;
-}
-
-.btn{
+.subscription-body .whole .plan .content .form-group .btn{
 background: #e50914;
 color:white;
 font-size: 16px;
 font-weight: 500;
-margin-left: 15px;
-margin-right: 15px;
+margin-left: 20px;
+margin-right: 20px;
+width:28%;
 }
 
 
