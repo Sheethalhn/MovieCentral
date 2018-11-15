@@ -13,6 +13,7 @@ import Verify from '../Login/verify';
 import PageNotFound from '../ErrorHandler/PageNotFound';
 import Movie_detail from '../Moviedetail/movidetail';
 import Payment from '../Payment/payment';
+import Subscription from '../Subscription/subscription';
 
 class RoutesComponent extends Component {
 
@@ -27,6 +28,7 @@ class RoutesComponent extends Component {
                 <Route exact path="/moviedetail" component={Movie_detail} />
                 <Route exact path="/pagenotfound" component={PageNotFound} />
                 <Route exact path="/payment" component={Payment} />
+                <Route exact path="/subscription" component={Subscription} />
             </div>
         );
     }
