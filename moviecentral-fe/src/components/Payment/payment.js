@@ -37,20 +37,20 @@ class Payment extends Component {
     }
     render() {
         return (
-            <div class="outerBody">
+            <div className="outerBody">
             <LandingHeader />
-            <div class="row justify-content-center">
-            <div class="creditCardForm">
-                <div class="heading">
+            <div className="row justify-content-center">
+            <div className="creditCardForm">
+                <div className="heading">
                     <h1>Confirm Purchase</h1>
                 </div>
-                <div class="payment">
+                <div className="payment">
                     <form noValidate onSubmit={this.handleSubmit}>
-                        <div class="form-group owner">
+                        <div className="form-group owner">
                             <label for="owner">Name</label>
                             <input
                                 type="text"
-                                class="form-control-sm col-sm-12"
+                                className="form-control-sm col-sm-12"
                                 id="owner"
                                 value={this.state.name}
                                 onChange={(event) => {
@@ -63,12 +63,12 @@ class Payment extends Component {
                                 <Message message={"Name is required"} />
                             }
                         </div>
-                        <div class="form-group CVV">
+                        <div className="form-group CVV">
                             <label for="cvv">CVV</label>
                             <input
                                 type="number"
 
-                                class="form-control-sm col-sm-12" id="cvv"
+                                className="form-control-sm col-sm-12" id="cvv"
                                 max="9999"
                                 value={this.state.cvv}
                                 onChange={(event) => {
@@ -81,11 +81,11 @@ class Payment extends Component {
                                 <Message message={"CVV is required"} />
                             }
                         </div>
-                        <div class="form-group" id="card-number-field">
+                        <div className="form-group" id="card-number-field">
                             <label for="cardNumber">Card Number</label>
                             <input
                                 type="number"
-                                class="form-control-sm col-sm-12"
+                                className="form-control-sm col-sm-12"
                                 id="cardNumber"
                                 value={this.state.card_number}
                                 onChange={(event) => {
@@ -101,9 +101,9 @@ class Payment extends Component {
                                 <Message message={"Card Number is invalid"} />
                             }
                         </div>
-                        <div class="form-group" id="expiration-date">
+                        <div className="form-group" id="expiration-date">
                                 <label>Expiration Date</label>
-                                <div class="form-group form-control-sm">
+                                <div className="form-group form-control-sm">
                                 <select >
                                     <option value="01">January</option>
                                     <option value="02">February </option>
@@ -128,14 +128,14 @@ class Payment extends Component {
                                 </select>
                             </div>
                             </div>
-                            <div class="form-group" id="credit_cards">
+                            <div className="form-group" id="credit_cards">
                                 <img src={visalogo} id="visa" />
                                 <img src={masterlogo} id="mastercard" />
                                 <img src={amexlogo} id="amex" />
                             </div>
-                            <div class="form-group" id="pay-now">
-                                <button type="submit" class="btn btn-default" id="confirm-purchase">Pay Now</button>
-                                <button type="button" class="btn btn-default" id="cancel-purchase">Cancel</button>
+                            <div className="form-group" id="pay-now">
+                                <button type="submit" className="btn btn-default" id="confirm-purchase">Pay Now</button>
+                                <button type="button" className="btn btn-default" id="cancel-purchase">Cancel</button>
                             </div>
                     </form>
                 </div>
