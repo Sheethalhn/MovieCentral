@@ -41,23 +41,19 @@ export const signup = (payload) =>
             return error;
         });
 
-export const logout = (payload) =>
+export const logout = () =>
     fetch(`${api}/logout`, {
         method: 'POST',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
         },
-        credentials: 'include',
-        body: JSON.stringify(payload)
-    }).then(res => res.json())
-        .then(res => {
-            return res;
-        })
-        .catch(error => {
-            console.log("This is error");
-            return error;
-        });
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
 
 export const getUserFromCode = (payload) =>
     fetch(`${api}/code/` + payload, {

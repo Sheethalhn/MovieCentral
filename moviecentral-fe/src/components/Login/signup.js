@@ -33,7 +33,7 @@ class Signup extends Component {
     handleSubmit(e) {
         e.preventDefault();
         this.setState({ submitted: true });
-        if (this.state.role != undefined && this.state.role != "") {
+        if (this.state.role !== undefined && this.state.role !== "") {
             let requestData = _.cloneDeep(this.state);;
             delete requestData.submitted;
             delete requestData.confirmPassword;
@@ -41,9 +41,12 @@ class Signup extends Component {
             console.log("state :", this.state);
             API.signup(requestData)
                 .then((resultData) => {
-                    console.log(resultData.meta.message);
+                    if (resultData.data !== null && resultData.data != undefined) {
+                        this.setState({ signedUp: true })
+                    }else{
+                        this.setState({ signedUp: false })
+                    }
                     this.notify(resultData.meta.message);
-                    this.setState({ signedUp: true })
                 }).catch(error => {
                     this.setState({ signedUp: false });
                     this.notify(error);
@@ -156,7 +159,7 @@ class Signup extends Component {
                                             type="radio"
                                             name="inlineRadioOptions"
                                             id="inlineRadio1"
-                                            value={this.state.role}
+                                            value="admin"
                                             checked={this.state.role === 'admin'}
                                             onChange={(event) => {
                                                 this.setState({
@@ -171,7 +174,7 @@ class Signup extends Component {
                                             type="radio"
                                             name="inlineRadioOptions"
                                             id="inlineRadio2"
-                                            value={this.state.role}
+                                            value="customer"
                                             checked={this.state.role === 'customer'}
                                             onChange={(event) => {
                                                 this.setState({

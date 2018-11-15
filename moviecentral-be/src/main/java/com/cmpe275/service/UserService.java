@@ -16,16 +16,20 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserService {
-    
+
     @Autowired
     private UserRepository userRepository;
-    
+
     public User getUserByCode(String code) {
         return userRepository.findByVerificationCode(code);
     }
-    
-     public void addOrUpdateUser(User user) {
+
+    public void addOrUpdateUser(User user) {
         userRepository.save(user);
+    }
+
+    public User getUserById(Long userId) {
+        return userRepository.findByUserId(userId);
     }
 
 }

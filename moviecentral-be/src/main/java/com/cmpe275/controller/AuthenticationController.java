@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  *
@@ -38,10 +40,13 @@ public class AuthenticationController {
     @Autowired
     EmailController emailController;
 
+    @Autowired
+    HttpSession session;
+
     ResponseFormat responseObject = new ResponseFormat();
 
     @PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> login(@RequestBody User userEntity, HttpSession session) {
+    public ResponseEntity<?> login(@RequestBody User userEntity) {
         User dbUserEntity = authenticationService.login(userEntity);
         if (dbUserEntity != null) {
             session.setAttribute("userId", dbUserEntity.getUserId());
@@ -117,9 +122,21 @@ public class AuthenticationController {
         }
     }
 
-    @PostMapping(path = "/logout", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/logout")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<?> logout(HttpSession session) {
         session.invalidate();
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/checksession", consumes = MediaType.APPLICATION_JSON_VALUE) // Map
+    public @ResponseBody
+    ResponseEntity<?> checkSession() {
+        if (session.getAttribute("userId") == null) {
+            return new ResponseEntity(false, HttpStatus.FOUND);
+        }
+        Long uid = Long.parseLong(session.getAttribute("userId").toString());
+        User userObj = userService.getUserById(uid);
+        return new ResponseEntity(userObj, HttpStatus.FOUND);
     }
 }

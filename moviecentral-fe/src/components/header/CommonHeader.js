@@ -19,10 +19,12 @@ class CommonHeader extends Component {
         console.log("user props :", this.props.user);
     }
 
-    logout() {
+    signOut(event) {
+        event.stopPropagation();
         API.logout().then(() => {
-            window.location = "/"
+            console.log("inside if");
             this.props.loginUser(null);
+            window.location = "/";
         })
     }
 
@@ -40,9 +42,12 @@ class CommonHeader extends Component {
                             <li className="navigation-tab">Home</li>
                             <li className="navigation-tab">Movies</li>
                             <li className="navigation-tab">Recently watched</li>
+                            {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">Customers</li>}
+                            {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">Reports</li>}
                             <li className="navigation-tab nav-drop">
                                 <a>Welcome, <span className="user-name-color">{this.props.user !== undefined && this.props.user !== null ? this.props.user.firstName + " " + this.props.user.lastName : ''}</span></a>
-                                <a onClick={this.logout}>Logout</a>
+                                <button className="btn-link"
+                                    type="button" onClick={(event) => { this.signOut(event) }}>Logout</button>
                             </li>
                         </ul>
                     </div>

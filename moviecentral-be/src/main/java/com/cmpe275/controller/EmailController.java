@@ -21,27 +21,6 @@ public class EmailController {
     @Autowired
     private JavaMailSender sender;
 
-    private String emailTemplate = "<!DOCTYPE html>\n"
-            + "<html>\n"
-            + "<body>\n"
-            + "<h1>Verification your Account of Movie Central</h1>\n"
-            + "<p>Hi {{user}},<BR/>\n"
-            + "Click this link to confirm your email address and complete setup for your candidate account.\n"
-            + "\n"
-            + "http://localhost:3000/verify/.\n"
-            + "<BR/><BR/>\n"
-            + ", we request you not to reply to this mail.\n"
-            + "<BR/><BR/>\n"
-            + "</p>\n"
-            + "\n"
-            + "<p>\n"
-            + "Thanks,<BR/>\n"
-            + "Movie Central Team!\n"
-            + "</p>\n"
-            + "\n"
-            + "</body>\n"
-            + "</html>";
-
     public void sendEmail(String userName, String to, String subject, String text) throws Exception {
         String emailTemplate = "<!DOCTYPE html>\n"
                 + "<html>\n"
@@ -50,7 +29,7 @@ public class EmailController {
                 + "<p>Hi " + userName + ",<BR/><BR/>\n"
                 + "Click this link to confirm your email address and complete setup for your candidate account.<BR/><BR/>\n"
                 + "\n"
-                + "http://localhost:3000/verify/" + text + ".\n"
+                + "http://localhost:3000/verify/" + text + "\n"
                 + "<BR/><BR/>\n"
                 + "we request you not to reply to this mail.\n"
                 + "<BR/><BR/>\n"

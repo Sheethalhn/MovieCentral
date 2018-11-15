@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
 import slide1 from './slide1.jpg';
 import slide2 from './slide2.jpg';
-import slide3 from './slide3.jpg';
 import * as API from '../../api/API';
 import { bindActionCreators } from "redux";
 import { selectedMovie } from "../../actions";
