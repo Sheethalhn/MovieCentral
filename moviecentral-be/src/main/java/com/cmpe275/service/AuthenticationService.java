@@ -22,19 +22,21 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AuthenticationService {
-    
+
     @Autowired
     private UserRepository userRepository;
-    
+
     @Bean
     private PasswordEncoder getEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
     public User login(User userEntity) {
         User dbUserObj = userRepository.findByEmail(userEntity.getEmail());
-        if (getEncoder().matches(userEntity.getPassword(), dbUserObj.getPassword())) {
-            return dbUserObj;
+        if (dbUserObj != null) {
+            if (getEncoder().matches(userEntity.getPassword(), dbUserObj.getPassword())) {
+                return dbUserObj;
+            }
         }
         return null;
     }
