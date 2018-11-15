@@ -22,7 +22,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     User findByEmail(String email);
 
-    User findByUserId(Integer id);
+    User findByUserId(Long id);
 
     User findByVerificationCode(String verificationCode);
 }

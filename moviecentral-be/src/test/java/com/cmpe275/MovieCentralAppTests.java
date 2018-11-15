@@ -1,4 +1,4 @@
-package com;
+package com.cmpe275;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
