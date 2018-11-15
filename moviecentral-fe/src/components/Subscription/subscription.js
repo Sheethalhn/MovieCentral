@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './subscription.css';
-import LandingHeader from '../header/LandingHeader';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
+import CommonHeader from '../header/CommonHeader';
 
 class Subscription extends Component {
 
@@ -18,7 +18,7 @@ class Subscription extends Component {
 
         return (
             <div>
-                <LandingHeader />
+                <CommonHeader />
                 <div id="container">
                     <div class="whole">
                         <div class="type standard">
