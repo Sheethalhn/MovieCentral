@@ -13,6 +13,9 @@ class Movie_detail extends Component {
 
     constructor(props) {
         super(props);
+        this.props.movie.photos = "//images.fandango.com/ImageRenderer/300/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/207628/fmc_mc_Rampage.jpg"
+        this.props.movie.movie_name = "Avengers: Infinity War";
+        this.props.movie.description = "Iron Man, Thor, the Hulk and the rest of the Avengers unite to battle their most powerful enemy yet -- the evil Thanos. On a mission to collect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twisted will on reality. The fate of the planet and existence itself has never been more uncertain as everything the Avengers have fought for has led up to this moment.";
         this.state = {
             ActiveComponent: <MoveOverview />
         }
@@ -79,11 +82,11 @@ class Movie_detail extends Component {
                                                     Overview
                                                 </label>
                                             </li>
-                                            <li className="movie-detail-section-subnav-item">
-                                                <Link to="/movietickets" className="movie-detail-section-subnav-item-link">
-                                                    Movie Times + tickets
-                                                </Link>
-                                            </li>
+                                            {/*<li className="movie-detail-section-subnav-item">*/}
+                                                {/*<Link to="/movietickets" className="movie-detail-section-subnav-item-link">*/}
+                                                    {/*Movie Times + tickets*/}
+                                                {/*</Link>*/}
+                                            {/*</li>*/}
                                             <li className="movie-detail-section-subnav-item">
                                                 <Link to="/moviedetailreview" className="movie-detail-section-subnav-item-link">
                                                     REVIEWS
@@ -119,7 +122,6 @@ function mapStateToProps(state) {
     return {
         movie: state.selectedMovie,
         user: state.loginUser
-        // trace: state.selectedTrace
     }
 }
 

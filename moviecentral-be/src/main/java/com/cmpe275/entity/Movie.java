@@ -5,6 +5,9 @@
  */
 package com.cmpe275.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +27,16 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "movie_id")
     private Long movieId;
-    
+    private String title;
 
+    public Movie(@JsonProperty("title") String title){
+        this.title = title;
+    }
+
+    public Movie(){}
+
+    public Long getMovieId() {
+        return movieId;
+    }
+    public String getTitle(){ return title; }
 }

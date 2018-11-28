@@ -13,7 +13,17 @@ class Subscription extends Component {
             subscription_months: 1,
             total_amount: 10
         };
+        this.submitSubscription = this.submitSubscription.bind(this)
     }
+submitSubscription = () => {
+    this.props.history.push({
+         pathname:"/payment",
+        state : {
+            subscription_months : this.state.subscription_months
+        }
+    })
+}
+
     render() {
 
         return (
@@ -62,9 +72,9 @@ class Subscription extends Component {
                                     </li>
                                     <li>
                                         <div className="form-group" id="pay-now">
-                                        <Link to="/payment">
-                                            <button type="submit" className="btn btn-default" id="confirm-purchase">Purchase</button>
-                                        </Link>
+                                         {/* <Link to="/payment">  */}
+                                            <button type="submit" className="btn btn-default" id="confirm-purchase" onClick={this.submitSubscription}>Purchase</button>
+                                         {/* </Link>  */}
                                         <button type="button" className="btn btn-default" id="cancel-purchase">Back</button>
                                         </div>
                                     </li>

@@ -15,3 +15,11 @@ export const loginUser = (userinfo) => {
         payload: userinfo
     }
 };
+
+export const userSubscription = (subscriptioninfo) => {
+    console.log(subscriptioninfo);
+    return{
+        type: 'USER_SUBSCRIPTION',
+        payload: subscriptioninfo
+    }
+};
