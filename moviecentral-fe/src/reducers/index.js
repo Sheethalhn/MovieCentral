@@ -4,12 +4,12 @@
 import { combineReducers } from 'redux';
 import movieReducer from './reducer-movie';
 import loginReducer from './reducer-login';
-import SubscriptionReducer from './reducer-subscription';
+import subscriptionReducer from './reducer-subscription';
 
 const allReducers =  combineReducers({
     selectedMovie: movieReducer,
     loginUser: loginReducer,
-    userSubscription:SubscriptionReducer
+    userSubscription:subscriptionReducer
 });
 
 export default allReducers;
