@@ -14,6 +14,7 @@ import PageNotFound from '../ErrorHandler/PageNotFound';
 import Movie_detail from '../Moviedetail/movidetail';
 import Payment from '../Payment/payment';
 import Subscription from '../Subscription/subscription';
+import AllMovies from '../MovieList/AllMovies'
 
 class RoutesComponent extends Component {
 
@@ -29,6 +30,7 @@ class RoutesComponent extends Component {
                 <Route exact path="/pagenotfound" component={PageNotFound} />
                 <Route exact path="/payment" component={Payment} />
                 <Route exact path="/subscription" component={Subscription} />
+                <Route exact path="/browse" component={AllMovies} />
             </div>
         );
     }

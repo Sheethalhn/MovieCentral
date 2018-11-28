@@ -32,6 +32,7 @@ public class Movie {
     public Movie(@JsonProperty("title") String title){
         this.title = title;
     }
+
     public Movie(){}
 
     public Long getMovieId() {
