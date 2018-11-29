@@ -44,33 +44,59 @@ class ViewUser extends Component {
     }
 
     render() {
-        const columns = [{
-            Header: 'Customer Name',
-            accessor: 'firstName',
+        const playBackcolumns = [{
+            Header: 'Movie Name',
+            accessor: 'movieObj',
             width: 250,
             style: { 'whiteSpace': 'unset' },
             Cell: props =>
-
-                (<div className="user-name"><Link to={'/viewuser/' + props.row._original.userId}>
-                    <button
-                        className="btn btn-link user-name"
-                        type="button"><b>{props.row._original.firstName + " " + props.row._original.lastName}</b>
-                    </button>
-                </Link>
-                </div>)
-        }, {
-            Header: 'Customer Email',
-            accessor: 'email',
-            style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
-            Cell: props => (
-                <span className="visual-sub-title dark"
+                (<span className="visual-sub-title dark"
                     style={{ 'display': 'block', 'margin': 'auto' }}>
-                    {props.row._original.email}</span>)
+                    {props.row._original.movieObj.title}</span>)
         }, {
-            Header: 'Created On',
-            accessor: 'createdOn',
+            Header: 'Genre',
+            accessor: 'movieObj',
+            width: 200,
             style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
-            Cell: props => <span className='number'><Timestamp time={props.value} format='date' /></span>
+            Cell: props =>
+                (<span className="visual-sub-title dark"
+                    style={{ 'display': 'block', 'margin': 'auto' }}>
+                    {props.row._original.movieObj.genre}</span>)
+        }, {
+            Header: 'Watch Time',
+            accessor: 'movieObj',
+            width: 250,
+            style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
+            Cell: props => <span className='number'><Timestamp time={props.row._original.movieObj.timestamp} format='full' /></span>
+        }]
+
+        const subscriptioncolumns = [{
+            Header: 'Movie Name',
+            accessor: 'movieObj',
+            width: 250,
+            style: { 'whiteSpace': 'unset' },
+            Cell: props =>
+                (<span className="visual-sub-title dark"
+                    style={{ 'display': 'block', 'margin': 'auto' }}>
+                    {props.row._original.movieSubscriptionObj.title}</span>)
+        }, {
+            Header: 'Subscription Type',
+            accessor: 'movieObj',
+            width: 200,
+            style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
+            Cell: props =>
+                (<span className="visual-sub-title dark"
+                    style={{ 'display': 'block', 'margin': 'auto' }}>
+                    {props.row._original.subscriptionType}</span>)
+        }, {
+            Header: 'Duration',
+            accessor: 'movieObj',
+            width: 250,
+            style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
+            Cell: props =>
+                (<span className="visual-sub-title dark"
+                    style={{ 'display': 'block', 'margin': 'auto' }}>
+                    {props.row._original.duration}</span>)
         }]
 
         return (
@@ -117,16 +143,35 @@ class ViewUser extends Component {
                                 <section className="collapsable-section-content account-section-content collapsable-section-content-visible">
                                     <div className="account-subsection clearfix">
                                         <div className="clearfix">
-                                            <div className="account-section-group">
-                                                < ReactTable
-                                                    minRows={0}
-                                                    defaultPageSize={5}
-                                                    noDataText="No Playback History Found"
-                                                    filterable={true}
-                                                    pagination={true}
-                                                    data={this.state.userObj.userPlaybackHistory}
-                                                    columns={columns} />
-                                            </div>
+                                            {/* <div className="account-section-group"> */}
+                                            < ReactTable
+                                                minRows={0}
+                                                defaultPageSize={5}
+                                                noDataText="No Playback History Found"
+                                                filterable={true}
+                                                pagination={true}
+                                                data={this.state.userObj.userPlaybackHistory}
+                                                columns={playBackcolumns} />
+                                            {/* </div> */}
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div className="account-section collapsable-panel clearfix membership-section-wrapper membership-section-with-button">
+                                <header class="account-section-header collapsable-section-toggle">
+                                    <h2 class="account-section-heading">SUBSCRIPTION INFORMATION</h2>
+                                </header>
+                                <section className="collapsable-section-content account-section-content collapsable-section-content-visible">
+                                    <div className="account-subsection clearfix">
+                                        <div className="clearfix">
+                                            < ReactTable
+                                                minRows={0}
+                                                defaultPageSize={5}
+                                                noDataText="No Subscriptions Found"
+                                                filterable={true}
+                                                pagination={true}
+                                                data={this.state.userObj.userSubscriptions}
+                                                columns={subscriptioncolumns} />
                                         </div>
                                     </div>
                                 </section>

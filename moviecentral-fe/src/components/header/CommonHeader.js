@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 import moviecentral from './moviecentral.png';
 import './header.css';
 import { loginUser } from "../../actions";
@@ -45,7 +46,12 @@ class CommonHeader extends Component {
                             {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">Customers</li>}
                             {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">Reports</li>}
                             <li className="navigation-tab nav-drop">
-                                <a>Welcome, <span className="user-name-color">{this.props.user !== undefined && this.props.user !== null ? this.props.user.firstName + " " + this.props.user.lastName : ''}</span></a>
+                                <Link to={'/viewuser/' + this.props.user.userId}>Welcome, 
+                                    <button
+                                        className="btn btn-link user-name-color"
+                                        type="button"><b>{this.props.user !== undefined && this.props.user !== null ? this.props.user.firstName + " " + this.props.user.lastName : ''}</b>
+                                    </button>
+                                </Link>
                                 <a href="javascript:void(0)" onClick={(event) => { this.signOut(event) }}>Logout</a>
                             </li>
                         </ul>
