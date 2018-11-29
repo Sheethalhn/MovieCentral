@@ -118,15 +118,14 @@ class ViewUser extends Component {
                                     <div className="account-subsection clearfix">
                                         <div className="clearfix">
                                             <div className="account-section-group">
-                                                <div className="account-section-item account-section-email">
-                                                    Email: shah.shreya.3012@gmail.com
-                                                </div>
-                                                <div className="account-section-item account-section-item-disabled">
-                                                    Screen Name: Shreya Shah
-                                                </div>
-                                                <div className="account-section-item account-section-item-disabled">
-                                                    Created On: <Timestamp time={this.state.userObj.createdOn} format='date' />
-                                                </div>
+                                                < ReactTable
+                                                    minRows={0}
+                                                    defaultPageSize={5}
+                                                    noDataText="No Playback History Found"
+                                                    filterable={true}
+                                                    pagination={true}
+                                                    data={this.state.userObj.userPlaybackHistory}
+                                                    columns={columns} />
                                             </div>
                                         </div>
                                     </div>

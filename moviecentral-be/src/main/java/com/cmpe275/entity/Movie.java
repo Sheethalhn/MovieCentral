@@ -5,15 +5,17 @@
  */
 package com.cmpe275.entity;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.annotations.CreationTimestamp;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -27,17 +29,127 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "movie_id")
     private Long movieId;
-    
-    private String title;
 
-    public Movie(@JsonProperty("title") String title){
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_on")
+    private Date createdOn;
+
+    private String title;
+    private String genre;
+    private String year;
+    private String studio;
+    private String synopsis;
+    // private String image;
+    // private List<Actor> actors;
+    private String director;
+    private String country;
+    private String rating;
+    private String availability;
+
+    @Override
+    public String toString() {
+        return "{" +
+            " movieId='" + getMovieId() + "'" +
+            ", createdOn='" + getCreatedOn() + "'" +
+            ", title='" + getTitle() + "'" +
+            ", genre='" + getGenre() + "'" +
+            ", year='" + getYear() + "'" +
+            ", studio='" + getStudio() + "'" +
+            ", synopsis='" + getSynopsis() + "'" +
+            ", director='" + getDirector() + "'" +
+            ", country='" + getCountry() + "'" +
+            ", rating='" + getRating() + "'" +
+            ", availability='" + getAvailability() + "'" +
+            "}";
+    }
+
+    public Long getMovieId() {
+        return this.movieId;
+    }
+
+    public void setMovieId(Long movieId) {
+        this.movieId = movieId;
+    }
+
+    public Date getCreatedOn() {
+        return this.createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public Movie(){}
-
-    public Long getMovieId() {
-        return movieId;
+    public String getGenre() {
+        return this.genre;
     }
-    public String getTitle(){ return title; }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getYear() {
+        return this.year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getStudio() {
+        return this.studio;
+    }
+
+    public void setStudio(String studio) {
+        this.studio = studio;
+    }
+
+    public String getSynopsis() {
+        return this.synopsis;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
+    }
+
+    public String getDirector() {
+        return this.director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getCountry() {
+        return this.country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getRating() {
+        return this.rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public String getAvailability() {
+        return this.availability;
+    }
+
+    public void setAvailability(String availability) {
+        this.availability = availability;
+    }
+    
 }
