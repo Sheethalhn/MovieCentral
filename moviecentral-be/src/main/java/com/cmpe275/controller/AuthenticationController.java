@@ -95,6 +95,7 @@ public class AuthenticationController {
     @GetMapping(path = "/code/{verificationCode}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getUserFromCode(@PathVariable String verificationCode) {
         User dbUserEntity = userService.getUserByCode(verificationCode);
+        System.out.println("dbUserEntity :"+dbUserEntity.getEmail());
         if (dbUserEntity != null) {
             responseObject.setData(dbUserEntity);
             responseObject.setMeta("User Retrieved successfully.");

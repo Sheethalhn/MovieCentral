@@ -5,6 +5,7 @@
  */
 package com.cmpe275.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,6 +33,7 @@ public class UserRating implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User userRatingObj;
 
     @ManyToOne
@@ -82,11 +84,6 @@ public class UserRating implements Serializable {
 
     public void setReviewMessage(String reviewMessage) {
         this.reviewMessage = reviewMessage;
-    }
-
-    @Override
-    public String toString() {
-        return "UserRating{" + "id=" + id + ", rating=" + rating + ", userRatingObj=" + userRatingObj + ", movieRatingObj=" + movieRatingObj + ", reviewMessage=" + reviewMessage + '}';
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package com.cmpe275.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,20 +23,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "playback_history")
 public class PlaybackHistory {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-    
+
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User userObj;
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
     private Movie movieObj;
-    
+
     private Date timestamp;
 
     public PlaybackHistory() {
@@ -71,11 +73,6 @@ public class PlaybackHistory {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
-    }
-
-    @Override
-    public String toString() {
-        return "PlaybackHistory{" + "id=" + id + ", userObj=" + userObj + ", movieObj=" + movieObj + ", timestamp=" + timestamp + '}';
     }
 
 }
