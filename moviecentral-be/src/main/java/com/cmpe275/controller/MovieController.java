@@ -10,9 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import java.util.List;
 
-
-import java.awt.*;
 import java.net.URI;
 
 /**
@@ -28,17 +27,29 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @PostMapping(path = "/movie", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> Create(@RequestBody Movie m){
-        ResponseFormat resp = new ResponseFormat();
-        try{
-            Movie result = movieService.createMovie(m);
-            resp.setData(result);
+    // @PostMapping(path = "/movie", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<Movie> Create(@RequestBody Movie m){
+    //     ResponseFormat resp = new ResponseFormat();
+    //     try{
+    //         Movie result = movieService.createMovie(m);
+    //         resp.setData(result);
 
-            URI location  = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                            .buildAndExpand(result.getMovieId()).toUri();
-            return new ResponseEntity(resp, HttpStatus.CREATED).created(location).build();
-        }catch (Exception e){
+    //         URI location  = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+    //                         .buildAndExpand(result.getMovieId()).toUri();
+    //         return new ResponseEntity(resp, HttpStatus.CREATED).created(location).build();
+    //     }catch (Exception e){
+    //         resp.setData(e);
+    //         return new ResponseEntity(resp, HttpStatus.NO_CONTENT).noContent().build();
+    //     }
+    // }
+
+    @PostMapping(path = "/movie", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
+        ResponseFormat resp = new ResponseFormat();
+        try {
+            Movie newMovie = movieService.createMovie(movie);
+            return ResponseEntity.ok(newMovie);
+        } catch (Exception e) {
             resp.setData(e);
             return new ResponseEntity(resp, HttpStatus.NO_CONTENT).noContent().build();
         }
@@ -49,5 +60,11 @@ public class MovieController {
         ResponseFormat resp = new ResponseFormat();
         resp.setData(movieService.getAllMovies());
         return new ResponseEntity(resp, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/allmovies", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> GetAllMovies() {
+        List<Movie> movies = movieService.getAllMovies();
+        return ResponseEntity.ok(movies);
     }
 }

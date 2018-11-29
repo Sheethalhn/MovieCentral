@@ -18,6 +18,7 @@ import AllMovies from '../MovieList/AllMovies'
 
 // Admin Routes
 import adminDashboard from "../admin/dashboard/dashboard";
+import addMovie from "../admin/addMovie/addMovie";
 
 class RoutesComponent extends Component {
 
@@ -36,8 +37,9 @@ class RoutesComponent extends Component {
                 <Route exact path="/browse" component={AllMovies} />
 
 	        	<Route exact path="/admin/dashboard" component={adminDashboard} />
+                {/* <Route path="/admin/dashboard/addmovie" component={addMovie} /> */}
             </div>
-        );
+        );``
     }
 }
 

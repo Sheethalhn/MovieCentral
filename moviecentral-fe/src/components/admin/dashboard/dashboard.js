@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import CommonHeader from '../../header/CommonHeader';
 import { withRouter } from 'react-router-dom';
 import './dashboard.css';
+
+import AddMovie from "../addMovie/addMovie";
 // import Search from './Search';
 // import NavBar from './Navigation';
 // import { DropdownButton, MenuItem } from 'react-bootstrap';
@@ -60,7 +62,7 @@ class Dashboard extends Component {
                     </div>
                     <div id="page-content-wrapper">
                         <div className="container-fluid">
-                            <h1>  Hello  </h1>
+                            <AddMovie/>
                         </div>
                     </div>
                 </div>
