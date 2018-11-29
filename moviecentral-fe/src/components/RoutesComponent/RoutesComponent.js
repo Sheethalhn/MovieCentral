@@ -16,6 +16,10 @@ import Payment from '../Payment/payment';
 import Subscription from '../Subscription/subscription';
 import AllMovies from '../MovieList/AllMovies'
 
+// Admin Routes
+import adminDashboard from "../admin/dashboard/dashboard";
+import addMovie from "../admin/addMovie/addMovie";
+
 class RoutesComponent extends Component {
 
     render() {
@@ -31,8 +35,11 @@ class RoutesComponent extends Component {
                 <Route exact path="/payment" component={Payment} />
                 <Route exact path="/subscription" component={Subscription} />
                 <Route exact path="/browse" component={AllMovies} />
+
+	        	<Route exact path="/admin/dashboard" component={adminDashboard} />
+                {/* <Route path="/admin/dashboard/addmovie" component={addMovie} /> */}
             </div>
-        );
+        );``
     }
 }
 
