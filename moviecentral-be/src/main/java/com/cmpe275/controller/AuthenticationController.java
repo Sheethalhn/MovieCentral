@@ -38,9 +38,6 @@ public class AuthenticationController {
     UserService userService;
 
     @Autowired
-    EmailController emailController;
-
-    @Autowired
     HttpSession session;
 
     ResponseFormat responseObject = new ResponseFormat();
@@ -77,11 +74,6 @@ public class AuthenticationController {
         }
         User dbUserDatabean = authenticationService.signUp(userEntity);
         if (dbUserDatabean != null) {
-            try {
-                emailController.sendEmail(dbUserDatabean.getFirstName(), dbUserDatabean.getEmail(), "Verify your Account of Movie Central", dbUserDatabean.getVerificationCode());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
             responseObject.setData(dbUserDatabean);
             responseObject.setMeta("Your account has been created successfully. Please activate the account from your email");
             return new ResponseEntity(responseObject, HttpStatus.OK);

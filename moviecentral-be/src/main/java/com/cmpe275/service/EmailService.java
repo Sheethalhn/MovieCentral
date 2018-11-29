@@ -3,24 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cmpe275.controller;
+package com.cmpe275.service;
 
 import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Controller;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Shreya Shah
  */
-@Controller
-public class EmailController {
+@Service
+public class EmailService {
 
     @Autowired
     private JavaMailSender sender;
-
+    
+    @Async
     public void sendEmail(String userName, String to, String subject, String text) throws Exception {
         String emailTemplate = "<!DOCTYPE html>\n"
                 + "<html>\n"

@@ -35,7 +35,7 @@ class Signup extends Component {
         e.preventDefault();
         this.setState({ submitted: true });
         this.emailSplit = this.state.email.split("@");
-        if (this.state.role !== undefined && this.state.role !== "" && (this.state.role == 'admin' && this.emailSplit[1] == 'sjsu.edu')) {
+        if (this.state.role !== undefined && this.state.role !== "" && ((this.state.role == 'admin' && this.emailSplit[1] == 'sjsu.edu') || this.state.role == 'customer')) {
             let requestData = _.cloneDeep(this.state);;
             delete requestData.submitted;
             delete requestData.confirmPassword;
