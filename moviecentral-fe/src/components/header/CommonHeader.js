@@ -46,7 +46,7 @@ class CommonHeader extends Component {
                             {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">Customers</li>}
                             {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">Reports</li>}
                             <li className="navigation-tab nav-drop">
-                                <Link to={'/viewuser/' + this.props.user.userId}>Welcome, 
+                                <Link to={(this.props.user !== undefined && this.props.user !== null) ? '/viewuser/' + this.props.user.userId : ''}>Welcome, 
                                     <button
                                         className="btn btn-link user-name-color"
                                         type="button"><b>{this.props.user !== undefined && this.props.user !== null ? this.props.user.firstName + " " + this.props.user.lastName : ''}</b>

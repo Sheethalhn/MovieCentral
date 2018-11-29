@@ -115,8 +115,8 @@ class ViewUser extends Component {
                         </div>
                         <div className="responsive-account-content">
                             <div className="account-section collapsable-panel clearfix membership-section-wrapper membership-section-with-button">
-                                <header class="account-section-header collapsable-section-toggle">
-                                    <h2 class="account-section-heading">PERSONAL INFORMATION</h2>
+                                <header className="account-section-header collapsable-section-toggle">
+                                    <h2 className="account-section-heading">PERSONAL INFORMATION</h2>
                                 </header>
                                 <section className="collapsable-section-content account-section-content collapsable-section-content-visible">
                                     <div className="account-subsection clearfix">
@@ -137,8 +137,8 @@ class ViewUser extends Component {
                                 </section>
                             </div>
                             <div className="account-section collapsable-panel clearfix membership-section-wrapper membership-section-with-button">
-                                <header class="account-section-header collapsable-section-toggle">
-                                    <h2 class="account-section-heading">WATCH HISTORY INFORMATION</h2>
+                                <header className="account-section-header collapsable-section-toggle">
+                                    <h2 className="account-section-heading">WATCH HISTORY INFORMATION</h2>
                                 </header>
                                 <section className="collapsable-section-content account-section-content collapsable-section-content-visible">
                                     <div className="account-subsection clearfix">
@@ -158,8 +158,8 @@ class ViewUser extends Component {
                                 </section>
                             </div>
                             <div className="account-section collapsable-panel clearfix membership-section-wrapper membership-section-with-button">
-                                <header class="account-section-header collapsable-section-toggle">
-                                    <h2 class="account-section-heading">SUBSCRIPTION INFORMATION</h2>
+                                <header className="account-section-header collapsable-section-toggle">
+                                    <h2 className="account-section-heading">SUBSCRIPTION INFORMATION</h2>
                                 </header>
                                 <section className="collapsable-section-content account-section-content collapsable-section-content-visible">
                                     <div className="account-subsection clearfix">

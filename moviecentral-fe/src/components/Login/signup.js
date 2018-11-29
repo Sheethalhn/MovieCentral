@@ -12,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 class Signup extends Component {
 
     notify = (message1) => toast(message1);
+    emailSplit = [];
 
     constructor(props) {
         super(props);
@@ -33,17 +34,17 @@ class Signup extends Component {
     handleSubmit(e) {
         e.preventDefault();
         this.setState({ submitted: true });
-        if (this.state.role !== undefined && this.state.role !== "") {
+        this.emailSplit = this.state.email.split("@");
+        if (this.state.role !== undefined && this.state.role !== "" && (this.state.role == 'admin' && this.emailSplit[1] == 'sjsu.edu')) {
             let requestData = _.cloneDeep(this.state);;
             delete requestData.submitted;
             delete requestData.confirmPassword;
             requestData.emailVerified = false;
-            console.log("state :", this.state);
             API.signup(requestData)
                 .then((resultData) => {
                     if (resultData.data !== null && resultData.data != undefined) {
                         this.setState({ signedUp: true })
-                    }else{
+                    } else {
                         this.setState({ signedUp: false })
                     }
                     this.notify(resultData.meta.message);
@@ -121,6 +122,9 @@ class Signup extends Component {
                                         }} required />
                                     {this.state.submitted && !this.state.email &&
                                         <Message message={"Email is required"} />
+                                    }
+                                    {this.state.role == 'admin' && this.emailSplit[1] !== 'sjsu.edu' &&
+                                        <Message message={"For Admin Role Sjsu email is required"} />
                                     }
                                 </div>
                                 <div className="form-group">
