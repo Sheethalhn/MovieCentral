@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,9 +21,9 @@ public class EmailService {
 
     @Autowired
     private JavaMailSender sender;
-    
+
     @Async
-    public void sendEmail(String userName, String to, String subject, String text) throws Exception {
+    public void generateVerificationTemplate(String userName, String to, String subject, String text) throws Exception {
         String emailTemplate = "<!DOCTYPE html>\n"
                 + "<html>\n"
                 + "<body>\n"
@@ -45,6 +44,35 @@ public class EmailService {
                 + "\n"
                 + "</body>\n"
                 + "</html>";
+        this.sendEmail(userName, to, subject, emailTemplate);
+    }
+
+    @Async
+    public void generateConfirmationTemplate(String userName, String to, String subject, String text) throws Exception {
+        String emailTemplate = "<!DOCTYPE html>\n"
+                + "<html>\n"
+                + "<body>\n"
+                + "<h1>Welcome to Movie Central!</h1>\n"
+                + "<p>Hi " + userName + ",<BR/><BR/>\n"
+                + "Enjoy all the latest Movies with High Definition Quality.<BR/><BR/>\n"
+                + "\n"
+                + "<BR/><BR/>\n"
+                + "we request you not to reply to this mail.\n"
+                + "<BR/><BR/>\n"
+                + "</p>\n"
+                + "\n"
+                + "<p>\n"
+                + "Thanks,<BR/>\n"
+                + "Movie Central Team!\n"
+                + "</p>\n"
+                + "\n"
+                + "</body>\n"
+                + "</html>";
+        this.sendEmail(userName, to, subject, emailTemplate);
+    }
+
+    @Async
+    public void sendEmail(String userName, String to, String subject, String emailTemplate) throws Exception {
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setTo(to);

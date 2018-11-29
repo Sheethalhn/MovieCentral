@@ -36,7 +36,24 @@ public class AuthenticationAspect {
             User dbUserDatabean = (User) responseFormat.getData();
             if (dbUserDatabean != null) {
                 try {
-                    emailService.sendEmail(dbUserDatabean.getFirstName(), dbUserDatabean.getEmail(), "Verify your Account of Movie Central", dbUserDatabean.getVerificationCode());
+                    emailService.generateVerificationTemplate(dbUserDatabean.getFirstName(), dbUserDatabean.getEmail(), "Verify your Account of Movie Central", dbUserDatabean.getVerificationCode());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    
+    @AfterReturning(pointcut = "execution(* com.cmpe275.controller.AuthenticationController.verifyUser(..))", returning = "result")
+    public void sendConfirmationEmail(JoinPoint joinPoint, Object result) {
+        System.out.println("Sending Confirmation Email-------");
+        if (result != null) {
+            ResponseEntity responseEntity = (ResponseEntity) result;
+            ResponseFormat responseFormat = (ResponseFormat) responseEntity.getBody();
+            User dbUserDatabean = (User) responseFormat.getData();
+            if (dbUserDatabean != null) {
+                try {
+                    emailService.generateConfirmationTemplate(dbUserDatabean.getFirstName(), dbUserDatabean.getEmail(), "Confirmation for your Account of Movie Central", dbUserDatabean.getVerificationCode());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
