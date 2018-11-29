@@ -27,6 +27,7 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "movie_id")
     private Long movieId;
+    
     private String title;
 
     public Movie(@JsonProperty("title") String title){

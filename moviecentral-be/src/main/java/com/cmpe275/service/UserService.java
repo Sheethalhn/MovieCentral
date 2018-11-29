@@ -7,6 +7,11 @@ package com.cmpe275.service;
 
 import com.cmpe275.entity.User;
 import com.cmpe275.repository.UserRepository;
+import com.cmpe275.utility.Constant;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +34,45 @@ public class UserService {
     }
 
     public User getUserById(Long userId) {
-        return userRepository.findByUserId(userId);
+        Optional<User> userObj = userRepository.findById(userId);
+        User dbUserObj = null;
+        if (userObj.isPresent()) {
+            dbUserObj = userObj.get();
+        }
+        return dbUserObj;
+    }
+
+    public List<User> getAllActiveUsers() {
+        List<User> allActiveUsers = (List<User>) userRepository.getAllActiveUsers();
+        return allActiveUsers;
+    }
+
+    public List<User> getTopUsersBasedOnTime(String timeDef) {
+        Calendar currentCal = Calendar.getInstance();
+        currentCal.set(Calendar.HOUR_OF_DAY, 0);
+        currentCal.set(Calendar.MINUTE, 0);
+        currentCal.set(Calendar.SECOND, 0);
+        currentCal.set(Calendar.MILLISECOND, 0);
+        Date currentDate = currentCal.getTime();
+        Calendar cal = Calendar.getInstance();
+        Date previousDate;
+        if (timeDef.equals(Constant.LAST_24_HOURS)) {
+            cal.setTime(currentDate);
+            cal.add(Calendar.HOUR, -24);
+        } else if (timeDef.equals(Constant.LAST_MONTH)) {
+            cal.setTime(currentDate);
+            cal.add(Calendar.MONTH, -1);
+        } else if (timeDef.equals(Constant.LAST_WEEK)) {
+            cal.setTime(currentDate);
+            cal.add(Calendar.WEEK_OF_YEAR, -1);
+        }
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        previousDate = cal.getTime();
+        List<User> topUsers = userRepository.getTopUsersBasedOnTime(previousDate.toString(), currentDate.toString());
+        return topUsers;
     }
 
 }

@@ -15,6 +15,8 @@ import Movie_detail from '../Moviedetail/movidetail';
 import Payment from '../Payment/payment';
 import Subscription from '../Subscription/subscription';
 import AllMovies from '../MovieList/AllMovies'
+import UserActivity from '../UserActivity/UserActivity';
+import ViewUser from '../User/ViewUser';
 
 class RoutesComponent extends Component {
 
@@ -31,6 +33,8 @@ class RoutesComponent extends Component {
                 <Route exact path="/payment" component={Payment} />
                 <Route exact path="/subscription" component={Subscription} />
                 <Route exact path="/browse" component={AllMovies} />
+                <Route exact path="/useractivity" component={UserActivity} />
+                <Route exact path="/viewuser/:userId" component={ViewUser} />
             </div>
         );
     }

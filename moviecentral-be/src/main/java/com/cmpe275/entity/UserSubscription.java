@@ -5,6 +5,7 @@
  */
 package com.cmpe275.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,6 +35,7 @@ public class UserSubscription {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User userSubscriptionObj;
 
     private String subscriptionType;
@@ -99,10 +101,4 @@ public class UserSubscription {
     public void setDuration(Long duration) {
         this.duration = duration;
     }
-
-    @Override
-    public String toString() {
-        return "UserSubscription{" + "id=" + id + ", userSubscriptionObj=" + userSubscriptionObj + ", subscriptionType=" + subscriptionType + ", movieSubscriptionObj=" + movieSubscriptionObj + ", createdOn=" + createdOn + ", duration=" + duration + '}';
-    }
-
 }

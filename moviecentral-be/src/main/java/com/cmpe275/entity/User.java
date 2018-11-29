@@ -5,6 +5,8 @@
  */
 package com.cmpe275.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -36,7 +38,7 @@ public class User {
     private String email;
 
     private String password;
-    
+
     @Column(name = "first_name")
     private String firstName;
 
@@ -48,7 +50,7 @@ public class User {
 
     private String role;
 
-    @Column(name = "email_verified")
+    @Column(name = "email_verified", nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean emailVerified;
 
     @Column(name = "verification_code")
@@ -60,15 +62,28 @@ public class User {
     private Date createdOn;
 
     @OneToMany(mappedBy = "userSubscriptionObj", fetch = FetchType.LAZY)
-    private List<UserSubscription> userSubscriptions;
+    @JsonManagedReference
+    private List<UserSubscription> userSubscriptions = new ArrayList<>();
 
     @OneToMany(mappedBy = "userRatingObj", fetch = FetchType.LAZY)
-    private List<UserRating> userRatings;
+    @JsonManagedReference
+    private List<UserRating> userRatings = new ArrayList<>();
 
     @OneToMany(mappedBy = "userObj", fetch = FetchType.LAZY)
-    private List<PlaybackHistory> userPlaybackHistory;
+    @JsonManagedReference
+    private List<PlaybackHistory> userPlaybackHistory = new ArrayList<>();
 
     public User() {
+    }
+
+    public User(Long userId, String firstName, String lastName, String screenName,Date createdOn, String role, String email) {
+        this.userId = userId;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.screenName = screenName;
+        this.role = role;
+        this.createdOn = createdOn;
     }
 
     public Long getUserId() {
@@ -173,11 +188,6 @@ public class User {
 
     public void setUserPlaybackHistory(List<PlaybackHistory> userPlaybackHistory) {
         this.userPlaybackHistory = userPlaybackHistory;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" + "userId=" + userId + ", email=" + email + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", screenName=" + screenName + ", role=" + role + ", emailVerified=" + emailVerified + ", verificationCode=" + verificationCode + ", createdOn=" + createdOn + ", userSubscriptions=" + userSubscriptions + ", userRatings=" + userRatings + ", userPlaybackHistory=" + userPlaybackHistory + '}';
     }
 
 }

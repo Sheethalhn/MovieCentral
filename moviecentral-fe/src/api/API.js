@@ -64,8 +64,8 @@ export const getUserFromCode = (payload) =>
         },
         credentials: 'include'
     }).then(res => {
-            return successHandler(res);
-        })
+        return successHandler(res);
+    })
         .catch(error => {
             console.log("This is error");
             return error;
@@ -89,6 +89,36 @@ export const verifyUser = (payload) =>
             return error;
         });
 
+export const getAllActiveUsers = () =>
+    fetch(`${api}/users`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+export const getUserById = (payload) =>
+    fetch(`${api}/user/` + payload, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
 export const getLimitedMovies = (noOfRecords) =>
     fetch(`${api}/getMovies`, {
         method: 'POST',
@@ -104,7 +134,7 @@ export const getLimitedMovies = (noOfRecords) =>
         return error;
     });
 
- export const addSubscription = (payload) =>
+export const addSubscription = (payload) =>
     fetch(`${api}/payment`, {
         method: 'POST',
         headers: {

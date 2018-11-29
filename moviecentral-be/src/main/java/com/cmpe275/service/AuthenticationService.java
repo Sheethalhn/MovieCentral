@@ -33,8 +33,9 @@ public class AuthenticationService {
 
     public User login(User userEntity) {
         User dbUserObj = userRepository.findByEmail(userEntity.getEmail());
+        System.out.println("dbUserObj :"+dbUserObj);
         if (dbUserObj != null) {
-            if (getEncoder().matches(userEntity.getPassword(), dbUserObj.getPassword())) {
+            if (getEncoder().matches(userEntity.getPassword(), dbUserObj.getPassword()) && dbUserObj.getEmailVerified().equals(true)) {
                 return dbUserObj;
             }
         }
