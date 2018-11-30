@@ -38,6 +38,7 @@ public class UserSubscription {
     @JsonBackReference
     private User userSubscriptionObj;
 
+    @Column(name = "subscription_type")
     private String subscriptionType;
 
     @ManyToOne
@@ -50,6 +51,9 @@ public class UserSubscription {
     private Date createdOn;
 
     private Long duration;
+    
+    @Column(name = "expires_on")
+    private Date expiresOn;
 
     public UserSubscription() {
     }
@@ -100,5 +104,13 @@ public class UserSubscription {
 
     public void setDuration(Long duration) {
         this.duration = duration;
+    }
+    
+    public Date getExpiresOn() {
+        return createdOn;
+    }
+
+    public void setExpiresOn(Date expiresOn) {
+        this.expiresOn = expiresOn;
     }
 }

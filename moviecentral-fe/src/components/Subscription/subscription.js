@@ -11,19 +11,25 @@ class Subscription extends Component {
         super(props);
         this.state = {
             subscription_months: 1,
-            total_amount: 10
+            total_amount: 10,
+            subscription_type:"M"
         };
-        this.submitSubscription = this.submitSubscription.bind(this)
+        this.submitSubscription = this.submitSubscription.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
     }
 submitSubscription = () => {
     this.props.history.push({
          pathname:"/payment",
         state : {
-            subscription_months : this.state.subscription_months
+            subscription_months : this.state.subscription_months,
+            subscription_type : this.state.subscription_type
+
         }
     })
 }
-
+handleCancel(){
+    this.props.history.push("/home");
+}
     render() {
 
         return (
@@ -75,7 +81,7 @@ submitSubscription = () => {
                                          {/* <Link to="/payment">  */}
                                             <button type="submit" className="btn btn-default" id="confirm-purchase" onClick={this.submitSubscription}>Purchase</button>
                                          {/* </Link>  */}
-                                        <button type="button" className="btn btn-default" id="cancel-purchase">Back</button>
+                                        <button type="button" onClick ={this.handleCancel} className="btn btn-default" id="cancel-purchase">Back</button>
                                         </div>
                                     </li>
                                 </ul>

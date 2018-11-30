@@ -5,9 +5,13 @@
  */
 package com.cmpe275.repository;
 
-
 import com.cmpe275.entity.UserSubscription;
+import com.cmpe275.entity.User;
+
+import java.util.Date;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 
 /**
@@ -19,4 +23,12 @@ public interface SubscriptionRepository extends CrudRepository<UserSubscription,
 
 	@Override
 	<S extends UserSubscription> S save(S s);
+	
+	@Query(value = "SELECT u from"
+            + " UserSubscription as u where expiresOn > :currentDate  and userSubscriptionObj = :user")
+    UserSubscription findByUserId(@Param("currentDate") Date currentDate,@Param("user") User user);
 }
+
+//
+//
+//
