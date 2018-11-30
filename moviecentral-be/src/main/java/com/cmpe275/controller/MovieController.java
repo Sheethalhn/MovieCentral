@@ -4,6 +4,12 @@ import com.cmpe275.service.MovieServ;
 import com.cmpe275.entity.Movie;
 import com.cmpe275.utility.ResponseFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedResources;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -53,16 +59,14 @@ public class MovieController {
         }
     }
 
-    @GetMapping(path = "/movie", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> AllMovies(){
-        ResponseFormat resp = new ResponseFormat();
-        resp.setData(movieService.getAllMovies());
-        return new ResponseEntity(resp, HttpStatus.OK);
-    }
-
     @GetMapping(path = "/allmovies", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> GetAllMovies() {
         List<Movie> movies = movieService.getAllMovies();
         return ResponseEntity.ok(movies);
+    }
+
+    @GetMapping(path = "/movie")
+    public HttpEntity<PagedResources<Movie>> GetAllMovies(Pageable p, PagedResourcesAssembler assembler) {
+        return new ResponseEntity<>(assembler.toResource(movieService.getAllMovies(p)),HttpStatus.OK);
     }
 }
