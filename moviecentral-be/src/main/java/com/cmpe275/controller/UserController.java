@@ -61,8 +61,8 @@ public class UserController {
     }
     
     @GetMapping(path = "/users/{time}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getTopUsersBasedOnTime(@PathVariable String timeDef) {
-        List<User> allActiveUsers = userService.getAllActiveUsers();
+    public ResponseEntity<?> getTopUsersBasedOnTime(@PathVariable String time) {
+        List<User> allActiveUsers = userService.getTopUsersBasedOnTime(time);
         if (!CollectionUtils.isEmpty(allActiveUsers)) {
             responseObject.setData(allActiveUsers);
             responseObject.setMeta("Users retrieved successfully.");

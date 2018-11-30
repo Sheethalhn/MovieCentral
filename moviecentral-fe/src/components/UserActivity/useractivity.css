@@ -52,3 +52,12 @@
     font-size: 16px;
     color: steelblue;
   }
+
+.link-pad-top{
+  padding-top: 25px;
+}
+
+.top-cust-header{
+  margin: 20px 0 2px;
+  font-weight: 400;
+}

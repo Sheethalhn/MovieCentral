@@ -20,9 +20,16 @@ class UserActivity extends Component {
         this.state = {
             customerList: []
         };
+
+        this.fetchTopUsers = this.fetchTopUsers.bind(this);
+        this.getAllCustomers = this.getAllCustomers.bind(this);
     }
 
     componentDidMount() {
+        this.getAllCustomers();
+    }
+
+    getAllCustomers() {
         API.getAllActiveUsers()
             .then((resultData) => {
                 if (!!resultData.data) {
@@ -30,6 +37,25 @@ class UserActivity extends Component {
                         customerList: resultData.data
                     });
                 } else {
+                    console.log("No Users Available");
+                }
+            }).catch(error => {
+                this.notify(error);
+            });
+    }
+
+    fetchTopUsers(time) {
+        API.getTopUsersBasedOnTime(time)
+            .then((resultData) => {
+                if (!!resultData.data) {
+                    console.log(resultData.data)
+                    this.setState({
+                        customerList: resultData.data
+                    });
+                } else {
+                    this.setState({
+                        customerList: []
+                    });
                     console.log("No Users Available");
                 }
             }).catch(error => {
@@ -48,7 +74,7 @@ class UserActivity extends Component {
                 (<div className="user-name"><Link to={'/viewuser/' + props.row._original.userId}>
                     <button
                         className="btn btn-link user-name"
-                        type="button"><b>{props.row._original.firstName + " "+ props.row._original.lastName}</b>
+                        type="button"><b>{props.row._original.firstName + " " + props.row._original.lastName}</b>
                     </button>
                 </Link>
                 </div>)
@@ -61,10 +87,13 @@ class UserActivity extends Component {
                     style={{ 'display': 'block', 'margin': 'auto' }}>
                     {props.row._original.email}</span>)
         }, {
-            Header: 'Created On',
+            Header: '# of Movie Played',
             accessor: 'createdOn',
             style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
-            Cell: props => <span className='number'><Timestamp time={props.value} format='date' /></span>
+            Cell: props => (
+                <span className="visual-sub-title dark"
+                    style={{ 'display': 'block', 'margin': 'auto' }}>
+                    {props.row._original.userPlaybackHistory.length}</span>)
         }]
 
         return (
@@ -74,7 +103,22 @@ class UserActivity extends Component {
                 <div className="row justify-content-center">
                     <div className=" col-md-12 page-header-container">
                         <div className="col-md-11 pd-left-0">
-                            <h2 className="schedule-page-header">Total Number of  <span className="page-header-emphasis"> Customers</span></h2>
+                            <div className="row justify-content-center">
+                                <h4 className="top-cust-header">Most Played Movie Top 10 Customers : </h4>
+                                <a className="nav-link page-header-emphasis link-pad-top"
+                                    href="javascript:void(0);"
+                                    onClick={() => { this.getAllCustomers() }}>All </a>
+                                <a className="nav-link page-header-emphasis link-pad-top"
+                                    href="javascript:void(0);"
+                                    onClick={() => { this.fetchTopUsers('last24hrs') }}>Last 24 hours </a>
+                                <a className="nav-link page-header-emphasis link-pad-top"
+                                    href="javascript:void(0);"
+                                    onClick={() => { this.fetchTopUsers('lastweek') }}>Last week</a>
+                                <a className="nav-link page-header-emphasis link-pad-top"
+                                    href="javascript:void(0);"
+                                    onClick={() => { this.fetchTopUsers('lastmonth') }}>Last Month</a>
+                            </div>
+                            <h2 className="schedule-page-header">Valuable All <span className="page-header-emphasis"> Customers</span></h2>
                         </div>
                     </div>
                     <div className="col-md-9 pd-left-0">

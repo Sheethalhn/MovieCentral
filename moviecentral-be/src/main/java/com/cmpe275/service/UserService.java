@@ -8,11 +8,13 @@ package com.cmpe275.service;
 import com.cmpe275.entity.User;
 import com.cmpe275.repository.UserRepository;
 import com.cmpe275.utility.Constant;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,6 +23,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserService {
+
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     @Autowired
     private UserRepository userRepository;
@@ -71,7 +75,7 @@ public class UserService {
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
         previousDate = cal.getTime();
-        List<User> topUsers = userRepository.getTopUsersBasedOnTime(previousDate.toString(), currentDate.toString());
+        List<User> topUsers = userRepository.getTopUsersBasedOnTime(previousDate, currentDate,new PageRequest(0, 10));
         return topUsers;
     }
 

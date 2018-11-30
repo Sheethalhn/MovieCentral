@@ -104,6 +104,21 @@ export const getAllActiveUsers = () =>
         return error;
     });
 
+export const getTopUsersBasedOnTime = (payload) =>
+    fetch(`${api}/users/` + payload, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
 export const getUserById = (payload) =>
     fetch(`${api}/user/` + payload, {
         method: 'GET',
