@@ -40,11 +40,12 @@ class Dashboard extends Component {
                     <CommonHeader />
                 </div>
 
-                <div id="wrapper">
+                <div id="wrapper" className="toggled">
+                    {/* Sidebar */}
                     <div id="sidebar-wrapper">
                         <ul className="sidebar-nav">
                             <li>
-                                <a href="#">Add Movie</a>
+                                <a href="#" >Add Movie</a>
                             </li>
                             <li>
                                 <a href="#">Edit Movie</a>
@@ -60,12 +61,18 @@ class Dashboard extends Component {
                             </li>
                         </ul>
                     </div>
+                    {/* /#sidebar-wrapper */}
+                    {/* Page Content */}
                     <div id="page-content-wrapper">
                         <div className="container-fluid">
                             <AddMovie/>
                         </div>
                     </div>
+                    {/* /#page-content-wrapper */}
                 </div>
+                {/* /#wrapper */}
+
+
             </div>
 
         )
