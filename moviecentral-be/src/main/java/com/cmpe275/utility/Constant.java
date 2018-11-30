@@ -17,4 +17,12 @@ public class Constant {
     
     public static final String LAST_MONTH = "lastmonth";
     
+    public static final String MONTHLY_SUBSCRIPTION = "M";
+    
+    public static final String PAY_PER_VIEW = "V";
+    
+    public static final String PAID = "P";
+    
+    
+    
 }

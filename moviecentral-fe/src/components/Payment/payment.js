@@ -26,7 +26,8 @@ class Payment extends Component {
             expiration: '',
             cvv: '',
             submitted: false,
-            subscription_months: this.props.location.state.subscription_months
+            subscription_months: this.props.location.state.subscription_months,
+            subscription_type: this.props.location.state.subscription_type
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
@@ -39,7 +40,7 @@ class Payment extends Component {
         this.setState({ submitted: true });
         console.log(this.state);
         if (this.state.card_number !== undefined && this.state.card_number !== "" && this.state.name !== undefined && this.state.name !== ""  && this.state.cvv !== undefined && this.state.cvv !== "" ) {
-            let requestData ={duration : this.state.subscription_months,userSubscriptionObj :this.props.user};
+            let requestData ={duration : this.state.subscription_months,userSubscriptionObj :this.props.user,subscriptionType : this.state.subscription_type};
             console.log(requestData);
             console.log(this.props.user);
             API.addSubscription(requestData)
@@ -156,7 +157,7 @@ class Payment extends Component {
                                 </div>
                                 <div className="form-group" id="pay-now">
                                     <button type="submit" className="btn btn-default" id="confirm-purchase">Pay Now</button>
-                                    <button type="button" onClick ={this.handleCancel}className="btn btn-default" id="cancel-purchase">Cancel</button>
+                                    <button type="button" onClick ={this.handleCancel} className="btn btn-default" id="cancel-purchase">Cancel</button>
                                 </div>
                             </form>
                         </div>
