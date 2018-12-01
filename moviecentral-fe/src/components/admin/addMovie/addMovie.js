@@ -1,93 +1,219 @@
 import React, { Component } from 'react';
-// import Search from './Search';
-// import NavBar from './Navigation';
-import MovieForm from './movieForm';
-// import CommonHeader from '../header/CommonHeader';
-// import '../MovieHall/subheader.css';
+import Select from 'react-select';
+import CreatableSelect from 'react-select/lib/Creatable';
+import { getActors, addNewActor } from "../../../api/API";
+import { ToastContainer, toast } from 'react-toastify';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({}, dispatch)
+}
+
+const mapStateToProps = (state) => {
+    return {
+        // currentUser: state.loginReducer.currentUser,
+    };
+}
+
+const colourStyles = {
+    control: styles => ({ ...styles, backgroundColor: 'white', color:  'black'}),
+    option: (styles) => {
+        return {
+            ...styles,
+            color: 'black'
+        };
+    }
+}
+
+const mapActorsToSelect = (actors) => {
+    return actors.map((actor) => {
+        return {
+            value: actor.name,
+            label: actor.name,
+            id: actor.actorId
+        }
+    });
+}
+
+const ratings = [
+    { value: 'G', label: 'G' },
+    { value: 'PG', label: 'PG' },
+    { value: 'PG-13', label: 'PG-13' },
+    { value: 'R', label: 'R' },
+    { value: 'NC-17', label: 'NC-17' }
+]
 
 class AddMovie extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         group: ''
-    //     };
-    // }
-    // componentDidMount() {
-    //     this.setState({
-    //         group: 'Movies'
-    //     })
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            movie: {
+                title: "",
+                genre: "",
+                year: "",
+                studio: "",
+                synopsis: "",
+                image: "",
+                movie: "",
+                actors: "",
+                director: "",
+                country: "",
+                rating: "",
+                availability: "",
+                price: "",
+            },
+            actors: []
+        };
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleActor = this.handleActor.bind(this);
+
+    }
+
+    componentDidMount() {
+        getActors().then((actors) => {
+            this.setState({actors: mapActorsToSelect(actors)});
+        })
+    }
+
+    handleChange(event) {
+        event.preventDefault();
+        let movie = {...this.state.movie};
+        movie[event.target.id] = event.target.value;
+        this.setState({movie});
+    }
+
+    handleRating(rating) {
+        this.setState(prevState => ({
+            ...prevState,
+            movie: {
+                ...prevState.movie,
+                rating: rating.value
+            }
+        }))
+    }
+
+    handleSubmit() {
+        debugger
+    }
+
+    handleActor(newValue) {
+        if (newValue) {
+            if (newValue.__isNew__) {
+                addNewActor({ name: newValue.label }).then((result) => {
+                    let newActors = [ ...this.state.actors ];
+                    newActors.push({
+                        value: result.name,
+                        label: result.name,
+                        id: result.actorId
+                    })
+                    this.setState({ actors: newActors });
+
+                    this.setState(prevState => ({
+                        ...prevState,
+                        movie: {
+                            ...prevState.movie,
+                            actor: result.actorId
+                        }
+                    }))
+                })
+            } else {
+                this.setState(prevState => ({
+                    ...prevState,
+                    movie: {
+                        ...prevState.movie,
+                        actor: newValue.id
+                    }
+                }))
+            }
+        } else {
+            this.setState(prevState => ({
+                ...prevState,
+                movie: {
+                    ...prevState.movie,
+                    actor: ""
+                }
+            }))
+        }
+    }
+    
     render() {
-        // console.log(this.props);
         return (
             <div id="FullMovieForm" className="admin-sub-header">
-                {/* <Search group={this.state.group} placeholder='Search for Movies' /> */}
-                {/* <MovieForm /> */}
                 <h2>Add New Movie</h2>
                 <br/>
                 <form>
                     <div className="form-row">
                         <div className="form-group col-md-4">
                             <label>Title</label>
-                            <input type="text" className="form-control"  placeholder="Movie Name" />
+                            <input id="title" className="form-control" placeholder="Movie Name" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group col-md-4">
                             <label>Studio</label>
-                            <input type="text" className="form-control" placeholder="Studio Name" />
+                            <input id="studio" className="form-control" placeholder="Studio Name" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group col-md-4">
                             <label>Year</label>
-                            <input type="text" className="form-control" placeholder="Year" />
+                            <input id="year" type="number" className="form-control" placeholder="Year" onChange={this.handleChange}/>
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="form-group col-md-4">
                             <label>Director</label>
-                            <input type="text" className="form-control" placeholder="Name" />
+                            <input id="director" className="form-control" placeholder="Director Name" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group col-md-4">
                             <label>Actors</label>
-                            <input type="text" className="form-control" placeholder="Names" />
+                            {/* <input id="actors" className="form-control" placeholder="Actors" onChange={this.handleChange}/> */}
+                            <CreatableSelect
+                                isClearable
+                                onChange={this.handleActor}
+                                options={this.state.actors}
+                                formatOptionLabel="name"
+                                styles={colourStyles}                         
+                            />
                         </div>
                         <div className="form-group col-md-4">
                             <label>Genre</label>
-                            <input type="text" className="form-control" placeholder="Type" />
+                            <input id="genre" className="form-control" placeholder="Type" onChange={this.handleChange}/>
                         </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="inputAddress">Synopsis</label>
-                        <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" />
+                        <textarea id="synopsis" className="form-control" rows="4" placeholder="Movie Summary" onChange={this.handleChange}/>
                     </div>
                     <div className="form-row">
                         <div className="form-group col-md-4">
                             <label>Country</label>
-                            <input type="text" className="form-control" placeholder="Country" />
+                            <input id="country" className="form-control" placeholder="Country" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group col-md-4">
                             <label>Rating</label>
-                            <input type="text" className="form-control" placeholder="Rating" />
+                            <Select id="rating" options={ratings} styles={colourStyles} onChange={this.handleRating.bind(this)}/>
                         </div>
                         <div className="form-group col-md-4">
                             <label>Availability</label>
-                            <input type="text" className="form-control" />
+                            <input id="availabilty" className="form-control" onChange={this.handleChange}/>
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="form-group col-md-4">
-                            <label>Image</label>
-                            <input type="text" className="form-control"/>
+                            <label>Image URL</label>
+                            <input id="image" className="form-control" placeholder="Image URL" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group col-md-4">
                             <label>Movie URL</label>
-                            <input type="text" className="form-control" placeholder="URL" />
+                            <input id="movie" className="form-control" placeholder="Youtube URL" onChange={this.handleChange}/>
                         </div>
                         <div className="form-group col-md-4">
                             <label>Price</label>
-                            <input type="text" className="form-control" placeholder="$$" />
+                            <input id="price" type="number" className="form-control" placeholder="$$" onChange={this.handleChange}/>
                         </div>
                     </div>
                     
-                    <button type="submit" className="btn btn-primary">Add New Movie</button>
+                    <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Add New Movie</button>
                 </form>
 
             </div>
@@ -95,4 +221,4 @@ class AddMovie extends Component {
     }
 }
 
-export default AddMovie;
+export default connect(mapStateToProps, mapDispatchToProps)(AddMovie);
