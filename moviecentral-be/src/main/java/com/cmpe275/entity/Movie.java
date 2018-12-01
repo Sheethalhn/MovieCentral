@@ -46,6 +46,7 @@ public class Movie {
     private String country;
     private String rating;
     private String availability;
+    private Integer stars;
 
     @Override
     public String toString() {
@@ -61,8 +62,12 @@ public class Movie {
             ", country='" + getCountry() + "'" +
             ", rating='" + getRating() + "'" +
             ", availability='" + getAvailability() + "'" +
+                ", stars='" + getStars() + "'" +
             "}";
     }
+
+    public Integer getStars() { return this.stars;}
+    public void setStars(Integer stars) { this.stars = stars;}
 
     public Long getMovieId() {
         return this.movieId;
