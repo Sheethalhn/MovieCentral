@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @author rachitchokshi
+ * @author Tarun Arora
  */
 @Controller
 @CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")

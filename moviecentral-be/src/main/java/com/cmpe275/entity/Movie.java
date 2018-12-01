@@ -6,16 +6,23 @@
 package com.cmpe275.entity;
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  *
@@ -40,13 +47,16 @@ public class Movie {
     private String year;
     private String studio;
     private String synopsis;
-    // private String image;
-    // private List<Actor> actors;
+    private String image;
     private String director;
     private String country;
     private String rating;
     private String availability;
     private Integer stars;
+
+    @OneToMany(mappedBy = "actor", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Actor> actors = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -58,11 +68,13 @@ public class Movie {
             ", year='" + getYear() + "'" +
             ", studio='" + getStudio() + "'" +
             ", synopsis='" + getSynopsis() + "'" +
+            ", image='" + getImage() + "'" +
             ", director='" + getDirector() + "'" +
             ", country='" + getCountry() + "'" +
             ", rating='" + getRating() + "'" +
             ", availability='" + getAvailability() + "'" +
-                ", stars='" + getStars() + "'" +
+            ", stars='" + getStars() + "'" +
+            ", actors='" + getActors() + "'" +
             "}";
     }
 
@@ -125,6 +137,14 @@ public class Movie {
         this.synopsis = synopsis;
     }
 
+    public String getImage() {
+        return this.image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getDirector() {
         return this.director;
     }
@@ -156,5 +176,14 @@ public class Movie {
     public void setAvailability(String availability) {
         this.availability = availability;
     }
+
+    public List<Actor> getActors() {
+        return this.actors;
+    }
+
+    public void setActors(List<Actor> actors) {
+        this.actors = actors;
+    }
+
     
 }
