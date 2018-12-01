@@ -202,6 +202,22 @@ export const getActors = () =>
             'Content-Type': 'application/json'
         },
         credentials: 'include',
+        body: JSON.stringify()
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
+export const getAllMovies = () =>
+    fetch(`${api}/movies`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify()
     }).then(res => {
         return successHandler(res);
     }).catch(error => {
