@@ -164,6 +164,50 @@ export const addSubscription = (payload) =>
         return error;
     });
 
+export const addNewMovie = (payload) =>
+    fetch(`${api}/payment`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
+export const addNewActor = (payload) =>
+    fetch(`${api}/actors`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
+export const getActors = () =>
+    fetch(`${api}/actors`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 let successHandler = (res) => {
     if (res.status === 401) {
         // UserHelper.redirectToLogin();
