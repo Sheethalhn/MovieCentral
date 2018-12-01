@@ -28,9 +28,24 @@ class All_Movies extends Component {
         }
     }
 
+    prevPage(){
+        if(this.state.currentPage-1>0){
+            this.pageChange(this.state.currentPage-1)
+        }
+    }
+
+    nextPage(){
+        if(this.state.currentPage+1<=this.state.totalPages){
+            this.pageChange(this.state.currentPage+1)
+        }
+    }
     render(){
         let moviedata = [];
-        let paging = <Paging size={this.state.totalPages} current={this.state.currentPage} onPageChange={(page)=>{this.pageChange(page)}}/>
+        let paging = <Paging size={this.state.totalPages} current={this.state.currentPage}
+                             onPageChange={(page)=>{this.pageChange(page)}}
+                             onPrevPage={()=>{this.prevPage()}}
+                             onNextPage={()=>{this.nextPage()}}
+        />
         if(this.state.content){
                 for(var index in this.state.content){
                     let movie = this.state.content[index];

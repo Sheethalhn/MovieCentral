@@ -22,7 +22,7 @@ class Paging extends Component {
         let flag = true;
         let css = page_item_dark;
         page_items.push(<li id={page_item_css} key={0}>
-            <label id={css}>«</label>
+            <label id={css} onClick={this.props.onPrevPage}>«</label>
         </li>);
         let i = 1;
         for(i; i<=this.props.size;i++){
@@ -50,7 +50,7 @@ class Paging extends Component {
         }
 
         page_items.push(<li id={page_item_css} key={i+1}>
-            <label id={css}>»</label>
+            <label id={css} onClick={this.props.onNextPage}>»</label>
         </li>);
 
         return(
