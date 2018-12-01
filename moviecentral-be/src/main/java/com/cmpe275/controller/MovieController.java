@@ -69,4 +69,10 @@ public class MovieController {
     public HttpEntity<PagedResources<Movie>> GetAllMovies(Pageable p, PagedResourcesAssembler assembler) {
         return new ResponseEntity<>(assembler.toResource(movieService.getAllMovies(p)),HttpStatus.OK);
     }
+
+    @GetMapping(path = "/movie/filters")
+    public ResponseEntity<?> GetAllFilterValues(){
+        return ResponseEntity.ok(movieService.GetAllFilterValues());
+    }
+
 }

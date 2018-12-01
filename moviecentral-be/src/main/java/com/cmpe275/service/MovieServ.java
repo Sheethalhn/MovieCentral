@@ -1,6 +1,7 @@
 package com.cmpe275.service;
 import com.cmpe275.repository.MovieRepository;
 import com.cmpe275.entity.Movie;
+import com.cmpe275.utility.FilterValues;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,5 +31,11 @@ public class MovieServ {
 
     public List<Movie> getAllMovies(){
         return movieRepo.findAll();
+    }
+
+
+    public FilterValues GetAllFilterValues(){
+        return new FilterValues(movieRepo.findDistinctGenre(),movieRepo.findDistinctYear(),movieRepo.findDistinctDirector(),
+                movieRepo.findDistinctRating(),movieRepo.findDistinctStars());
     }
 }
