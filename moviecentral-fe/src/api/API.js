@@ -210,7 +210,7 @@ export const getActors = () =>
     });
 
 export const getAllMovies = () =>
-    fetch(`${api}/movies`, {
+    fetch(`${api}/movie`, {
         method: 'GET',
         headers: {
             ...headers,
