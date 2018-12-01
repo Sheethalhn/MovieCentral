@@ -210,7 +210,22 @@ export const getActors = () =>
     });
 
 export const getAllMovies = () =>
-    fetch(`${api}/movie`, {
+    fetch(`${api}/movie?size=1`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify()
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
+export const getNewPage = (page) =>
+    fetch(`${api}/movie?page=${page}&size=1`, {
         method: 'GET',
         headers: {
             ...headers,
