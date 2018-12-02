@@ -16,7 +16,8 @@ class All_Movies extends Component {
     constructor(props){
         super(props);
         this.state = {
-            'currentPage':1
+            'currentPage':1,
+            'filterMode':false
         }
     }
 
@@ -51,7 +52,7 @@ class All_Movies extends Component {
                              onPageChange={(page)=>{this.pageChange(page)}}
                              onPrevPage={()=>{this.prevPage()}}
                              onNextPage={()=>{this.nextPage()}}
-        />
+        />;
         if(this.state.content){
                 for(var index in this.state.content){
                     let movie = this.state.content[index];
@@ -67,6 +68,12 @@ class All_Movies extends Component {
                 "Loading..."
             );
             paging = undefined
+        }
+        let filterformelement = undefined;
+        if(this.state.filterMode){
+            filterformelement = <FilterForm/>;
+        }else{
+            filterformelement = "";
         }
         return(
             <div>
@@ -88,14 +95,14 @@ class All_Movies extends Component {
                             <div className={'container'}>
                                 <div className={'widget-rachit'}>
                                     <div className={'widget-rachit-title'}>
-                                        <span id="FilterSPAN_1">
+                                        <span id="FilterSPAN_1" onClick={()=>{this.setState({...this.state,'filterMode':(!this.state.filterMode)})}}>
                                             <Filter/> Filter
                                         </span>
                                         <h1 id="H1_1">
                                             Movies
                                         </h1>
 
-                                        <FilterForm/>
+                                        {filterformelement}
 
                                     </div>
                                     <div className={'widget-rachit-body'}>

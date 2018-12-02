@@ -333,7 +333,7 @@
 .widget-rachit-title {
     margin-bottom: 10px;
     position: relative;
-
+    text-align: left;
 }
 
 #H1_1 {
@@ -407,6 +407,7 @@
 }
 
 #FilterSPAN_1 {
+    text-align: center;
     box-sizing: border-box;
     color: rgb(142, 149, 165);
     cursor: pointer;
@@ -575,4 +576,152 @@
     -webkit-border-start: 0px none rgb(142, 149, 165);
     -webkit-transform-origin: 0px 0px;
 }/*#FilterI_2:before*/
+
+#MessageP_1 {
+    box-sizing: border-box;
+    color: rgb(213, 216, 222);
+    height: 20px;
+    text-align: center;
+    text-decoration: none solid rgb(213, 216, 222);
+    text-size-adjust: 100%;
+    width: 1120px;
+    column-rule-color: rgb(213, 216, 222);
+    perspective-origin: 560px 10px;
+    transform-origin: 560px 10px;
+    caret-color: rgb(213, 216, 222);
+    border: 0px none rgb(213, 216, 222);
+    font: normal normal 300 normal 14.3px / 20.4286px Roboto, sans-serif;
+    margin: 5px 0px 10px;
+    outline: rgb(213, 216, 222) none 0px;
+}/*#MessageP_1*/
+
+#MessageP_1:after {
+    box-sizing: border-box;
+    color: rgb(213, 216, 222);
+    text-align: center;
+    text-decoration: none solid rgb(213, 216, 222);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(213, 216, 222);
+    caret-color: rgb(213, 216, 222);
+    border: 0px none rgb(213, 216, 222);
+    font: normal normal 300 normal 14.3px / 20.4286px Roboto, sans-serif;
+    outline: rgb(213, 216, 222) none 0px;
+}/*#MessageP_1:after*/
+
+#MessageP_1:before {
+    box-sizing: border-box;
+    color: rgb(213, 216, 222);
+    text-align: center;
+    text-decoration: none solid rgb(213, 216, 222);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(213, 216, 222);
+    caret-color: rgb(213, 216, 222);
+    border: 0px none rgb(213, 216, 222);
+    font: normal normal 300 normal 14.3px / 20.4286px Roboto, sans-serif;
+    outline: rgb(213, 216, 222) none 0px;
+}/*#MessageP_1:before*/
+
+#MessageDIV_1 {
+    box-sizing: border-box;
+    color: rgb(221, 221, 221);
+    height: 36px;
+    text-align: center;
+    text-decoration: none solid rgb(221, 221, 221);
+    text-size-adjust: 100%;
+    width: 1120px;
+    column-rule-color: rgb(221, 221, 221);
+    perspective-origin: 560px 18px;
+    transform-origin: 560px 18px;
+    caret-color: rgb(221, 221, 221);
+    border: 0px none rgb(221, 221, 221);
+    font: normal normal 300 normal 14.3px / 20.4286px Roboto, sans-serif;
+    margin: 30px 0px 0px;
+    outline: rgb(221, 221, 221) none 0px;
+}/*#MessageDIV_1*/
+
+#MessageDIV_1:after {
+    box-sizing: border-box;
+    color: rgb(221, 221, 221);
+    text-align: center;
+    text-decoration: none solid rgb(221, 221, 221);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(221, 221, 221);
+    caret-color: rgb(221, 221, 221);
+    border: 0px none rgb(221, 221, 221);
+    font: normal normal 300 normal 14.3px / 20.4286px Roboto, sans-serif;
+    outline: rgb(221, 221, 221) none 0px;
+}/*#MessageDIV_1:after*/
+
+#MessageDIV_1:before {
+    box-sizing: border-box;
+    color: rgb(221, 221, 221);
+    text-align: center;
+    text-decoration: none solid rgb(221, 221, 221);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(221, 221, 221);
+    caret-color: rgb(221, 221, 221);
+    border: 0px none rgb(221, 221, 221);
+    font: normal normal 300 normal 14.3px / 20.4286px Roboto, sans-serif;
+    outline: rgb(221, 221, 221) none 0px;
+}/*#MessageDIV_1:before*/
+
+#MessageBUTTON_2 {
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    height: 36px;
+    letter-spacing: 1.56px;
+    min-height: 0px;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-size-adjust: 100%;
+    text-transform: uppercase;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 229.562px;
+    column-rule-color: rgb(255, 255, 255);
+    perspective-origin: 114.781px 18px;
+    transform-origin: 114.781px 18px;
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    background: rgb(0, 172, 193) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 1px solid rgb(0, 172, 193);
+    border-radius: 3px 3px 0 0;
+    font: normal normal 400 normal 15.6px / 22.2857px Roboto, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 6px 50px;
+}/*#MessageBUTTON_2*/
+
+#MessageBUTTON_2:after {
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    letter-spacing: 1.56px;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-size-adjust: 100%;
+    text-transform: uppercase;
+    white-space: nowrap;
+    column-rule-color: rgb(255, 255, 255);
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal 400 normal 15.6px / 22.2857px Roboto, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+}/*#MessageBUTTON_2:after*/
+
+#MessageBUTTON_2:before {
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    letter-spacing: 1.56px;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-size-adjust: 100%;
+    text-transform: uppercase;
+    white-space: nowrap;
+    column-rule-color: rgb(255, 255, 255);
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal 400 normal 15.6px / 22.2857px Roboto, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+}/*#MessageBUTTON_2:before*/
 

@@ -7,6 +7,9 @@ class FilterForm extends Component{
         super(props);
         this.state = {
 
+        };
+        this.data = {
+
         }
     }
 
@@ -28,6 +31,8 @@ class FilterForm extends Component{
         }
 
     }
+
+    
 
     render() {
         let data = this.state.options;
@@ -62,6 +67,15 @@ class FilterForm extends Component{
 
             <div className="row filter-items">
                 {jsx}
+                <p id="MessageP_1">
+                    Leave an option empty means choose "all"
+                </p>
+                <div id="MessageDIV_1">
+
+                    <button type="submit" id="MessageBUTTON_2">
+                        Filter movies
+                    </button>
+                </div>
             </div>
         );
     }
