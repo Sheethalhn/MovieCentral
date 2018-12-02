@@ -3,36 +3,64 @@ import HomeHeader from './../header/CommonHeader'
 import MovieItem from './MovieItem/MovieItem'
 import './AllMovies.css'
 import {getAllMovies} from "../../api/API";
+import Paging from './Paging/paging'
+import {getNewPage} from "../../api/API";
 
 class All_Movies extends Component {
     constructor(props){
         super(props);
         this.state = {
-
+            'currentPage':1
         }
     }
 
     componentDidMount(){
         getAllMovies().then((data) => {
-            this.setState({...this.state,"content" : data.content})
+            this.setState({...this.state,"content" : data.content, "totalPages":data.page.totalPages})
         })
     }
 
+    pageChange(page){
+        if(page !== this.state.currentPage){
+            getNewPage(page-1).then((data) => {
+                this.setState({...this.state,"content" : data.content, "currentPage":page})
+            })
+        }
+    }
+
+    prevPage(){
+        if(this.state.currentPage-1>0){
+            this.pageChange(this.state.currentPage-1)
+        }
+    }
+
+    nextPage(){
+        if(this.state.currentPage+1<=this.state.totalPages){
+            this.pageChange(this.state.currentPage+1)
+        }
+    }
     render(){
         let moviedata = [];
+        let paging = <Paging size={this.state.totalPages} current={this.state.currentPage}
+                             onPageChange={(page)=>{this.pageChange(page)}}
+                             onPrevPage={()=>{this.prevPage()}}
+                             onNextPage={()=>{this.nextPage()}}
+        />
         if(this.state.content){
                 for(var index in this.state.content){
                     let movie = this.state.content[index];
                     moviedata.push(<MovieItem quality = "HD" movie_id={movie.movieId}
                                               image={movie.image}
                                               title={movie.title}
+                                              key = {movie.movieId}
                     />)
                 }
 
         }else{
             moviedata.push(
                 "Loading..."
-            )
+            );
+            paging = undefined
         }
         return(
             <div>
@@ -61,6 +89,7 @@ class All_Movies extends Component {
                                     </div>
                                     <div className={'widget-rachit-body'}>
 
+                                        {paging}
 
                                         <div className={'widget-rachit-row-movie-list'}>
                                             <div className={'widget-rachit-row-movie-list'}>
