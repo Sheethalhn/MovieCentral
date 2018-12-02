@@ -405,3 +405,174 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     box-sizing: border-box;
 }
+
+#FilterSPAN_1 {
+    box-sizing: border-box;
+    color: rgb(142, 149, 165);
+    cursor: pointer;
+    display: block;
+    float: right;
+    height: 24px;
+    text-decoration: none solid rgb(142, 149, 165);
+    text-size-adjust: 100%;
+    text-transform: uppercase;
+    vertical-align: middle;
+    width: 10%;
+    column-rule-color: rgb(142, 149, 165);
+    -webkit-locale: "en-US";
+    perspective-origin: 38.6719px 12px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-text-emphasis-color: rgb(142, 149, 165);
+    -webkit-text-fill-color: rgb(142, 149, 165);
+    -webkit-text-stroke-color: rgb(142, 149, 165);
+    transform-origin: 38.6719px 12px;
+    caret-color: rgb(142, 149, 165);
+    background: rgb(52, 57, 70) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(142, 149, 165);
+    border-radius: 2px 2px 2px 2px;
+    font: normal normal 500 normal 13px / 18.5714px Roboto, sans-serif;
+    list-style: none outside none;
+    outline: rgb(142, 149, 165) none 0px;
+    padding: 3px 12px;
+    transition: all 0.1s ease-in-out 0s;
+    -webkit-border-after: 0px none rgb(142, 149, 165);
+    -webkit-border-before: 0px none rgb(142, 149, 165);
+    -webkit-border-end: 0px none rgb(142, 149, 165);
+    -webkit-border-start: 0px none rgb(142, 149, 165);
+    -webkit-transition: all 0.1s ease-in-out 0s;
+    -webkit-transform-origin: 38.6719px 12px;
+}/*#FilterSPAN_1*/
+
+#FilterSPAN_1:after {
+    box-sizing: border-box;
+    color: rgb(142, 149, 165);
+    cursor: pointer;
+    text-decoration: none solid rgb(142, 149, 165);
+    text-size-adjust: 100%;
+    text-transform: uppercase;
+    column-rule-color: rgb(142, 149, 165);
+    -webkit-locale: "en-US";
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-text-emphasis-color: rgb(142, 149, 165);
+    -webkit-text-fill-color: rgb(142, 149, 165);
+    -webkit-text-stroke-color: rgb(142, 149, 165);
+    caret-color: rgb(142, 149, 165);
+    border: 0px none rgb(142, 149, 165);
+    font: normal normal 500 normal 13px / 18.5714px Roboto, sans-serif;
+    list-style: none outside none;
+    outline: rgb(142, 149, 165) none 0px;
+    -webkit-border-after: 0px none rgb(142, 149, 165);
+    -webkit-border-before: 0px none rgb(142, 149, 165);
+    -webkit-border-end: 0px none rgb(142, 149, 165);
+    -webkit-border-start: 0px none rgb(142, 149, 165);
+}/*#FilterSPAN_1:after*/
+
+#FilterSPAN_1:before {
+    box-sizing: border-box;
+    color: rgb(142, 149, 165);
+    cursor: pointer;
+    text-decoration: none solid rgb(142, 149, 165);
+    text-size-adjust: 100%;
+    text-transform: uppercase;
+    column-rule-color: rgb(142, 149, 165);
+    -webkit-locale: "en-US";
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-text-emphasis-color: rgb(142, 149, 165);
+    -webkit-text-fill-color: rgb(142, 149, 165);
+    -webkit-text-stroke-color: rgb(142, 149, 165);
+    caret-color: rgb(142, 149, 165);
+    border: 0px none rgb(142, 149, 165);
+    font: normal normal 500 normal 13px / 18.5714px Roboto, sans-serif;
+    list-style: none outside none;
+    outline: rgb(142, 149, 165) none 0px;
+    -webkit-border-after: 0px none rgb(142, 149, 165);
+    -webkit-border-before: 0px none rgb(142, 149, 165);
+    -webkit-border-end: 0px none rgb(142, 149, 165);
+    -webkit-border-start: 0px none rgb(142, 149, 165);
+}/*#FilterSPAN_1:before*/
+
+#FilterI_2 {
+    box-sizing: border-box;
+    color: rgb(142, 149, 165);
+    cursor: pointer;
+    display: inline-block;
+    height: 13px;
+    text-decoration: none solid rgb(142, 149, 165);
+    text-size-adjust: 100%;
+    text-transform: uppercase;
+    width: 10.2188px;
+    column-rule-color: rgb(142, 149, 165);
+    -webkit-font-smoothing: antialiased;
+    -webkit-locale: "en-US";
+    perspective-origin: 5.10938px 6.5px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-text-emphasis-color: rgb(142, 149, 165);
+    -webkit-text-fill-color: rgb(142, 149, 165);
+    -webkit-text-stroke-color: rgb(142, 149, 165);
+    transform-origin: 5.10938px 6.5px;
+    caret-color: rgb(142, 149, 165);
+    border: 0px none rgb(142, 149, 165);
+    font: normal normal 400 normal 13px / 13px FontAwesome;
+    list-style: none outside none;
+    outline: rgb(142, 149, 165) none 0px;
+    -webkit-border-after: 0px none rgb(142, 149, 165);
+    -webkit-border-before: 0px none rgb(142, 149, 165);
+    -webkit-border-end: 0px none rgb(142, 149, 165);
+    -webkit-border-start: 0px none rgb(142, 149, 165);
+    -webkit-transform-origin: 5.10938px 6.5px;
+}/*#FilterI_2*/
+
+#FilterI_2:after {
+    box-sizing: border-box;
+    color: rgb(142, 149, 165);
+    cursor: pointer;
+    text-decoration: none solid rgb(142, 149, 165);
+    text-size-adjust: 100%;
+    text-transform: uppercase;
+    column-rule-color: rgb(142, 149, 165);
+    -webkit-font-smoothing: antialiased;
+    -webkit-locale: "en-US";
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-text-emphasis-color: rgb(142, 149, 165);
+    -webkit-text-fill-color: rgb(142, 149, 165);
+    -webkit-text-stroke-color: rgb(142, 149, 165);
+    caret-color: rgb(142, 149, 165);
+    border: 0px none rgb(142, 149, 165);
+    font: normal normal 400 normal 13px / 13px FontAwesome;
+    list-style: none outside none;
+    outline: rgb(142, 149, 165) none 0px;
+    -webkit-border-after: 0px none rgb(142, 149, 165);
+    -webkit-border-before: 0px none rgb(142, 149, 165);
+    -webkit-border-end: 0px none rgb(142, 149, 165);
+    -webkit-border-start: 0px none rgb(142, 149, 165);
+}/*#FilterI_2:after*/
+
+#FilterI_2:before {
+    box-sizing: border-box;
+    color: rgb(142, 149, 165);
+    content: "\f0b0";
+    cursor: pointer;
+    text-decoration: none solid rgb(142, 149, 165);
+    text-size-adjust: 100%;
+    text-transform: uppercase;
+    column-rule-color: rgb(142, 149, 165);
+    -webkit-font-smoothing: antialiased;
+    -webkit-locale: "en-US";
+    perspective-origin: 0px 0px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-text-emphasis-color: rgb(142, 149, 165);
+    -webkit-text-fill-color: rgb(142, 149, 165);
+    -webkit-text-stroke-color: rgb(142, 149, 165);
+    transform-origin: 0px 0px;
+    caret-color: rgb(142, 149, 165);
+    border: 0px none rgb(142, 149, 165);
+    font: normal normal 400 normal 13px / 13px FontAwesome;
+    list-style: none outside none;
+    outline: rgb(142, 149, 165) none 0px;
+    -webkit-border-after: 0px none rgb(142, 149, 165);
+    -webkit-border-before: 0px none rgb(142, 149, 165);
+    -webkit-border-end: 0px none rgb(142, 149, 165);
+    -webkit-border-start: 0px none rgb(142, 149, 165);
+    -webkit-transform-origin: 0px 0px;
+}/*#FilterI_2:before*/
+

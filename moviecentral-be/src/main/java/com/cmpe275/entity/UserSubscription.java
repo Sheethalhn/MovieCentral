@@ -35,7 +35,6 @@ public class UserSubscription {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference
     private User userSubscriptionObj;
 
     @Column(name = "subscription_type")

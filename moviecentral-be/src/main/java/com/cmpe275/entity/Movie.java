@@ -59,7 +59,6 @@ public class Movie {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="actor_id")
     private List<Actor> actors = new ArrayList<>();
-
     @Override
     public String toString() {
         return "{" +
@@ -79,7 +78,6 @@ public class Movie {
             ", actors='" + getActors() + "'" +
             "}";
     }
-
     public Integer getStars() { return this.stars;}
     public void setStars(Integer stars) { this.stars = stars;}
 
