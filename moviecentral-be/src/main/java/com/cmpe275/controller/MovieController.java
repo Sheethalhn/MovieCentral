@@ -34,7 +34,8 @@ public class MovieController {
         ResponseFormat resp = new ResponseFormat();
         try {
             Movie newMovie = movieService.createMovie(movie);
-            return ResponseEntity.ok(newMovie);
+            // return ResponseEntity.ok(newMovie);
+            return new ResponseEntity<Movie>(newMovie, HttpStatus.CREATED);
         } catch (Exception e) {
             resp.setData(e);
             return new ResponseEntity(resp, HttpStatus.NO_CONTENT).noContent().build();

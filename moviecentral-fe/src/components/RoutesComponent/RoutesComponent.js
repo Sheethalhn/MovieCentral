@@ -40,7 +40,8 @@ class RoutesComponent extends Component {
                 <Route exact path="/useractivity" component={UserActivity} />
                 <Route exact path="/viewuser/:userId" component={ViewUser} />
 	        	<Route exact path="/admin/dashboard" component={adminDashboard} />
-                <Route path="/admin/dashboard/addmovie" component={addMovie} />
+
+                
             </div>
         );``
     }

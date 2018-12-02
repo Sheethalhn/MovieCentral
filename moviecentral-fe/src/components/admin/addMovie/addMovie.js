@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import CreatableSelect from 'react-select/lib/Creatable';
-import { getActors, addNewActor } from "../../../api/API";
+import { getActors, addNewActor, addNewMovie } from "../../../api/API";
 import { ToastContainer, toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -36,6 +36,15 @@ const mapActorsToSelect = (actors) => {
     });
 }
 
+const mapActorsFromSelect = (actors) => {
+    return actors.map((actor) => {
+        return {
+            name: actor.value,
+            actorId: actor.id
+        }
+    })
+}
+
 const ratings = [
     { value: 'G', label: 'G' },
     { value: 'PG', label: 'PG' },
@@ -44,7 +53,16 @@ const ratings = [
     { value: 'NC-17', label: 'NC-17' }
 ]
 
+const availability = [
+    { value: "Free", label: "Free" },
+    { value: "SubscriptionOnly", label: "Subscription Only" },
+    { value: "PayPerViewOnly", label: "Pay Per View Only" },
+    { value: "Paid", label: "Paid" },
+]
+
 class AddMovie extends Component {
+    notify = (message) => toast(message);
+
     constructor(props) {
         super(props);
         this.state = {
@@ -56,7 +74,7 @@ class AddMovie extends Component {
                 synopsis: "",
                 image: "",
                 movie: "",
-                actors: "",
+                actors: [],
                 director: "",
                 country: "",
                 rating: "",
@@ -69,6 +87,8 @@ class AddMovie extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleActor = this.handleActor.bind(this);
+
+        this.selectedActors = [];
 
     }
 
@@ -95,6 +115,16 @@ class AddMovie extends Component {
         }))
     }
 
+    handleAvailability(availability) {
+        this.setState(prevState => ({
+            ...prevState,
+            movie: {
+                ...prevState.movie,
+                availability: availability.value
+            }
+        }))
+    }
+
     resetForm(event) {
         event.preventDefault();
         let movie =  {
@@ -105,7 +135,7 @@ class AddMovie extends Component {
             synopsis: "",
             image: "",
             movie: "",
-            actors: "",
+            actors: [],
             director: "",
             country: "",
             rating: "",
@@ -115,48 +145,34 @@ class AddMovie extends Component {
         this.setState({movie});
     }
 
-    handleSubmit() {
-        debugger
+    handleSubmit(event) {
+        // event.preventDefault();
+        let formattedActors = mapActorsFromSelect(this.selectedActors);
+        let movie = {...this.state.movie};
+        movie.actors = formattedActors;
+        
+        addNewMovie(movie).then((result) => {
+            debugger
+            // this.notify("Movie Successfully Added!!")
+            // this.resetForm();
+        })
     }
 
     handleActor(newValue) {
-        if (newValue) {
-            if (newValue.__isNew__) {
-                addNewActor({ name: newValue.label }).then((result) => {
-                    let newActors = [ ...this.state.actors ];
+        this.selectedActors = newValue;
+        newValue.forEach((actor) => {
+            if(actor.__isNew__) {
+                addNewActor({ name: actor.label }).then((result) => {
+                    let newActors = [...this.state.actors];
                     newActors.push({
                         value: result.name,
                         label: result.name,
                         id: result.actorId
                     })
                     this.setState({ actors: newActors });
-
-                    this.setState(prevState => ({
-                        ...prevState,
-                        movie: {
-                            ...prevState.movie,
-                            actor: result.actorId
-                        }
-                    }))
                 })
-            } else {
-                this.setState(prevState => ({
-                    ...prevState,
-                    movie: {
-                        ...prevState.movie,
-                        actor: newValue.id
-                    }
-                }))
             }
-        } else {
-            this.setState(prevState => ({
-                ...prevState,
-                movie: {
-                    ...prevState.movie,
-                    actor: ""
-                }
-            }))
-        }
+        });
     }
     
     render() {
@@ -188,9 +204,9 @@ class AddMovie extends Component {
                             <label>Actors</label>
                             <CreatableSelect
                                 isClearable
+                                isMulti
                                 onChange={this.handleActor}
                                 options={this.state.actors}
-                                formatOptionLabel="name"
                                 styles={colourStyles}                         
                             />
                         </div>
@@ -210,11 +226,11 @@ class AddMovie extends Component {
                         </div>
                         <div className="form-group col-md-4">
                             <label>Rating</label>
-                            <Select id="rating" options={ratings} styles={colourStyles} onChange={this.handleRating.bind(this)} value={this.state.movie.rating}/>
+                            <Select id="rating" options={ratings} styles={colourStyles} onChange={this.handleRating.bind(this)} />
                         </div>
                         <div className="form-group col-md-4">
                             <label>Availability</label>
-                            <input id="availabilty" className="form-control" onChange={this.handleChange} value={this.state.movie.availability}/>
+                            <Select id="rating" options={availability} styles={colourStyles} onChange={this.handleAvailability.bind(this)} />
                         </div>
                     </div>
                     <div className="form-row">

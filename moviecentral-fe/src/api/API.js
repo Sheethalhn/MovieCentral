@@ -165,7 +165,7 @@ export const addSubscription = (payload) =>
     });
 
 export const addNewMovie = (payload) =>
-    fetch(`${api}/payment`, {
+    fetch(`${api}/movie`, {
         method: 'POST',
         headers: {
             ...headers,
