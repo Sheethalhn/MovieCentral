@@ -68,6 +68,43 @@ public class MovieSpecification implements Specification<Movie> {
             pres.add(in);
         }
 
+        //If a movie is returned in the search result, every word is the keywords must match at least one attribute of this movie
+        if (criteria.getKeywords() != null && !criteria.getKeywords().isEmpty()) {
+            for(String keyword: criteria.getKeywords()){
+                pres.add(
+                        builder.or(
+                                builder.like(
+                                        builder.lower(root.get("title")),"%" + keyword.toLowerCase() + "%"
+                                ),
+                                builder.like(
+                                        builder.lower(root.get("genre")),"%" + keyword.toLowerCase() + "%"
+                                ),
+                                builder.like(
+                                        builder.lower(root.get("year")),"%" + keyword.toLowerCase() + "%"
+                                ),
+                                builder.like(
+                                        builder.lower(root.get("studio")),"%" + keyword.toLowerCase() + "%"
+                                ),
+                                builder.like(
+                                        builder.lower(root.get("synopsis")),"%" + keyword.toLowerCase() + "%"
+                                ),
+                                builder.like(
+                                        builder.lower(root.get("director")),"%" + keyword.toLowerCase() + "%"
+                                ),
+                                builder.like(
+                                        builder.lower(root.get("country")),"%" + keyword.toLowerCase() + "%"
+                                ),
+                                builder.like(
+                                        builder.lower(root.get("rating")),"%" + keyword.toLowerCase() + "%"
+                                ),
+                                builder.like(
+                                        builder.lower(root.get("availability")),"%" + keyword.toLowerCase() + "%"
+                                )
+                        )
+                );
+            }
+        }
+
         Predicate[] p = new Predicate[pres.size()];
         return builder.and(pres.toArray(p));
     }

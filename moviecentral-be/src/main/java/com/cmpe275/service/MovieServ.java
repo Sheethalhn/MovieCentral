@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -46,15 +47,21 @@ public class MovieServ {
             List<Integer> stars,
             List<String> years,
             List<String> directors,
-            List<String> ratings
+            List<String> ratings,
+            List<String> keywords
     ){
+
+        if(genres == null && stars == null && years == null && directors == null && ratings == null && keywords == null){
+            return Collections.emptyList();
+        }
         MovieSpecification spec = new MovieSpecification(
                 new FilterCriteria(
                         genres,
                         stars,
                         years,
                         directors,
-                        ratings
+                        ratings,
+                        keywords
                 )
         );
 
