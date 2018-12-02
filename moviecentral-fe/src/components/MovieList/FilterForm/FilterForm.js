@@ -8,9 +8,7 @@ class FilterForm extends Component{
         this.state = {
 
         };
-        this.data = {
-
-        }
+        this.data = {}
     }
 
     componentDidMount(){
@@ -32,7 +30,15 @@ class FilterForm extends Component{
 
     }
 
-    
+    captureData(category,item){
+        let data = this.data;
+        if(!data[category]){
+            data[category] = [];
+        }
+        data[category].push(item);
+    }
+
+
 
     render() {
         let data = this.state.options;
@@ -49,7 +55,10 @@ class FilterForm extends Component{
                     category_options.push(<a className="list-group-item col-group-rc">
                         <div className="form-check">
                             <label className="form-check-label">
-                                <input className="form-check-input" type="checkbox" name="genre[]"  value={data[category][i]}/>
+                                <input className="form-check-input" type="checkbox" name="genre[]"
+                                       value={data[category][i]}
+                                       onChange={(e)=>{this.captureData(category,data[category][i])}}
+                                />
                                 {this.capitalizeFirstLetter(data[category][i])}
                             </label>
                         </div>
@@ -72,7 +81,7 @@ class FilterForm extends Component{
                 </p>
                 <div id="MessageDIV_1">
 
-                    <button type="submit" id="MessageBUTTON_2">
+                    <button type="submit" id="MessageBUTTON_2" onClick={()=>{this.props.onSubmit(this.data)}}>
                         Filter movies
                     </button>
                 </div>

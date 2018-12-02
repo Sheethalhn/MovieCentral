@@ -3,6 +3,7 @@ package com.cmpe275.repository;
 import com.cmpe275.entity.Movie;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author Rachit Chokshi
  */
-public interface MovieRepository extends PagingAndSortingRepository<Movie,Long> {
+public interface MovieRepository extends PagingAndSortingRepository<Movie,Long>, JpaSpecificationExecutor<Movie> {
     Movie findByMovieId(Long id);
 
     @Override

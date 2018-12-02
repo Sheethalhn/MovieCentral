@@ -58,4 +58,18 @@ public class MovieController {
         return ResponseEntity.ok(movieService.GetAllFilterValues());
     }
 
+    @GetMapping(path = "/movie/filters/execute")
+    public ResponseEntity<?> GetFilteredMovies(@RequestParam(value = "genre") List<String> genres,
+                                               @RequestParam(value = "stars") List<Integer> stars,
+                                               @RequestParam(value = "year") List<String> years,
+                                               @RequestParam(value = "director") List<String> directors,
+                                               @RequestParam(value = "rating") List<String> ratings) {
+        return ResponseEntity.ok(movieService.getFilteredMovies(
+                genres,
+                stars,
+                years,
+                directors,
+                ratings
+        ));
+    }
 }

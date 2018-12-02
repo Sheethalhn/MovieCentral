@@ -17,7 +17,8 @@ class All_Movies extends Component {
         super(props);
         this.state = {
             'currentPage':1,
-            'filterMode':false
+            'filterMode':false,
+            'filterData':{}
         }
     }
 
@@ -46,6 +47,19 @@ class All_Movies extends Component {
             this.pageChange(this.state.currentPage+1)
         }
     }
+
+    handleFilterData(data){
+        let query = [];
+        for(let category in data){
+            if(data.hasOwnProperty(category)){
+                for(let j = 0; j<data[category].length; j++){
+                    query.push(category + '=' + data[category][j])
+                }
+            }
+        }
+        debugger;
+        encodeURI(query.join("&"));
+    }
     render(){
         let moviedata = [];
         let paging = <Paging size={this.state.totalPages} current={this.state.currentPage}
@@ -71,7 +85,7 @@ class All_Movies extends Component {
         }
         let filterformelement = undefined;
         if(this.state.filterMode){
-            filterformelement = <FilterForm/>;
+            filterformelement = <FilterForm data={this.state.filterData} onSubmit={this.handleFilterData}/>;
         }else{
             filterformelement = "";
         }
