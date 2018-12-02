@@ -16,6 +16,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
@@ -46,6 +47,7 @@ public class Movie {
     private String genre;
     private String year;
     private String studio;
+    @Column(name = "synopsis", columnDefinition = "TEXT")
     private String synopsis;
     private String image;
     private String director;
@@ -54,8 +56,8 @@ public class Movie {
     private String availability;
     private Integer stars;
 
-    @OneToMany(mappedBy = "actor", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="actor_id")
     private List<Actor> actors = new ArrayList<>();
 
     @Override

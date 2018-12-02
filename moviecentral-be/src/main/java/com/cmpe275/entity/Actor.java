@@ -36,17 +36,11 @@ public class Actor {
     @NotNull
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "movie_id")
-    @JsonBackReference
-    private Actor actor;
-
     @Override
     public String toString() {
         return "{" +
             " actorId='" + getActorId() + "'" +
             ", name='" + getName() + "'" +
-            ", actor='" + getActor() + "'" +
             "}";
     }
 
@@ -66,12 +60,14 @@ public class Actor {
         this.name = name;
     }
 
-    public Actor getActor() {
-        return this.actor;
-    }
+    // @ManyToOne
+    // @JoinColumn(name = "movie_id")
+    // @JsonBackReference
+    // private Movie actor;
 
-    public void setActor(Actor actor) {
-        this.actor = actor;
-    }
+    // @ManyToOne
+    // @JoinColumn(name = "user_id")
+    // @JsonBackReference
+    // private User userSubscriptionObj;
 
 }

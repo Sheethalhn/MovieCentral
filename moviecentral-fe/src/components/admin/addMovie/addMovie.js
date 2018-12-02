@@ -125,8 +125,7 @@ class AddMovie extends Component {
         }))
     }
 
-    resetForm(event) {
-        event.preventDefault();
+    resetForm() {
         let movie =  {
             title: "",
             genre: "",
@@ -146,15 +145,15 @@ class AddMovie extends Component {
     }
 
     handleSubmit(event) {
-        // event.preventDefault();
+        event.preventDefault();
         let formattedActors = mapActorsFromSelect(this.selectedActors);
         let movie = {...this.state.movie};
         movie.actors = formattedActors;
         
         addNewMovie(movie).then((result) => {
             debugger
-            // this.notify("Movie Successfully Added!!")
-            // this.resetForm();
+            this.notify("Movie Successfully Added!!")
+            this.resetForm();
         })
     }
 
