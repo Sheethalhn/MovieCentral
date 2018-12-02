@@ -25,10 +25,10 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie,Long> 
     <S extends Movie> S save(S s);
 
     //for getting possible filter values
-    @Query("select distinct genre from Movie")
+    @Query("select distinct genre from Movie  where genre is not null")
     List<String> findDistinctGenre();
 
-    @Query("select distinct year from Movie ")
+    @Query("select distinct year from Movie  where year is not null")
     List<String> findDistinctYear();
 
     /*
@@ -37,12 +37,12 @@ TODO: Actor field with relationships
 List<Movie> findDistinctActors();
 */
 
-    @Query(value = "select distinct director from Movie ")
+    @Query(value = "select distinct director from Movie where director is not null")
     List<String> findDistinctDirector();
 
-    @Query(value = "select distinct rating from Movie ")
+    @Query(value = "select distinct rating from Movie  where rating is not null")
     List<String> findDistinctRating();
 
-    @Query(value = "select distinct stars from Movie ")
+    @Query(value = "select distinct stars from Movie  where stars is not null")
     List<Integer> findDistinctStars();
 }
