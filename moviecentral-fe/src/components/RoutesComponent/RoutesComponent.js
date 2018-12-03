@@ -19,9 +19,9 @@ import UserActivity from '../UserActivity/UserActivity';
 import ViewUser from '../User/ViewUser';
 
 // Admin Routes
-import AdminDashboard from "../admin/Dashboard/Dashboard";
-import AddMovie from "../admin/AddEditMovie/AddMovie";
-import EditMovie from "../admin/AddEditMovie/EditMovie";
+import AdminDashboard from "../admin/dashboard/dashboard";
+import AddMovie from "../admin/AddEditMovie/addMovie";
+import EditMovie from "../admin/AddEditMovie/editMovie";
 
 
 class RoutesComponent extends Component {
