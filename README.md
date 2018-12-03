@@ -1,7 +1,7 @@
 # MovieCentral (Team Falcons)
 
 1. **Rachit Chokshi**, ID: 012550044, rachit.chokshi@sjsu.edu
-2. <Your Name Goes Here>
+2. **Shreya Shah**, ID: 012541984, shreya.shah@sjsu.edu
 
 
 ## Technologies used
