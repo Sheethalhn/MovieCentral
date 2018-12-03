@@ -29,6 +29,9 @@ Instance of **MariaDB 10.3** managed by Amazon RDS
 		
 ### Spring HATEOAS
  * For supporting RESt representations of Page and Filtering results.
+
+### Spring AOP
+ * <For what?>
  
 ### JavaMail API
  * For Mail System supporting user sign-ups
