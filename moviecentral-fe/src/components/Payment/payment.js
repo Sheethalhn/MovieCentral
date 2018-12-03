@@ -6,11 +6,11 @@ import amexlogo from './amex.jpg';
 import masterlogo from './mastercard.jpg';
 import visalogo from './visa.jpg';
 import Message from '../Message/Message';
-import LandingHeader from '../header/LandingHeader';
 import * as CardValidator from '../Helper/CardValidator';
 import * as API from '../../api/API';
 import { userSubscription } from "../../actions";
 import { loginUser } from "../../actions";
+import CommonHeader from '../header/CommonHeader';
 import { ToastContainer, toast } from 'react-toastify';
 
 
@@ -40,11 +40,12 @@ class Payment extends Component {
         this.setState({ submitted: true });
         console.log(this.state);
         if (this.state.card_number !== undefined && this.state.card_number !== "" && this.state.name !== undefined && this.state.name !== ""  && this.state.cvv !== undefined && this.state.cvv !== "" ) {
-            let requestData ={duration : this.state.subscription_months,userSubscriptionObj :this.props.user,subscriptionType : this.state.subscription_type};
+            let requestData ={duration : this.state.subscription_months,userSubscriptionObj :this.props.user,subscriptionType : this.state.subscription_type,movieSubscriptionObj:this.props.movie};
             console.log(requestData);
             console.log(this.props.user);
             API.addSubscription(requestData)
                 .then((resultData) => {
+                    this.notify(resultData.meta.message);
                     this.props.history.push("/home");
                     console.log("Payment is done");
                 }).catch(error => {
@@ -59,7 +60,7 @@ class Payment extends Component {
     render() {
         return (
             <div className="outerBody">
-                <LandingHeader />
+                <CommonHeader />
                 <div className="row justify-content-center">
                     <div className="creditCardForm">
                         <div className="heading">
@@ -171,7 +172,8 @@ class Payment extends Component {
 function mapStateToProps(state) {
     return {
         userSubscription: state.userSubscription,
-        user: state.loginUser
+        user: state.loginUser,
+        movie:state.selectedMovie
     }
 }
 

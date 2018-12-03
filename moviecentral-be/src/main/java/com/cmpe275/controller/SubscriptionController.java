@@ -24,18 +24,19 @@ public class SubscriptionController {
 	
     @PostMapping(path = "/payment", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createSubscription(@RequestBody UserSubscription us, HttpSession session) {
-        System.out.print(us);
     	ResponseFormat resp = new ResponseFormat();
         try{
             UserSubscription result = subscriptionService.addSubscription(us);
             if(result != null) {
             	resp.setData(result);
+            	resp.setMeta("Subscription created succesfully");
                 return new ResponseEntity(resp, HttpStatus.OK);
                
             }
             else {
+            	resp.setData(null);
                 resp.setMeta("Subscription already exists");
-                return new ResponseEntity(resp, HttpStatus.NO_CONTENT);
+                return new ResponseEntity(resp, HttpStatus.BAD_REQUEST);
             }
             	
         }catch (Exception e){
