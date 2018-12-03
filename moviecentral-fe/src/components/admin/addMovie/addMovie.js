@@ -27,13 +27,17 @@ const colourStyles = {
 }
 
 const mapActorsToSelect = (actors) => {
-    return actors.map((actor) => {
-        return {
-            value: actor.name,
-            label: actor.name,
-            id: actor.actorId
-        }
-    });
+    if(actors.length > 0) {
+        return actors.map((actor) => {
+            return {
+                value: actor.name,
+                label: actor.name,
+                id: actor.actorId
+            }
+        });
+    } else {
+        return [];
+    }
 }
 
 const mapActorsFromSelect = (actors) => {
