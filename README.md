@@ -25,6 +25,9 @@ Instance of **MariaDB 10.3** managed by Amazon RDS
  - **Spring Specifications** interface using the Criteria API for filter conditions.
  - Entity Relationships and Transactions
 		
+#### Spring MVC
+- Jackson API for sending request response in Json to frontend
+
 #### Spring HATEOAS
  * For supporting RESt representations of Page and Filtering results.
  
@@ -41,4 +44,3 @@ Instance of **MariaDB 10.3** managed by Amazon RDS
  * ChartJS
  * react-youtube
  * react-toastify
- * 
