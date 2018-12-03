@@ -10,9 +10,9 @@ class Sidebar extends Component {
                 <li>
                     <Link to="/admin/dashboard/addmovie">Add Movie</Link>
                 </li>
-                <li>
+                {/* <li>
                     <Link to="/admin/dashboard/editmovie">Edit Movie</Link>
-                </li>
+                </li> */}
                 <li>
                     <Link to="/admin/dashboard/useractivity">User Activity</Link>
                 </li>

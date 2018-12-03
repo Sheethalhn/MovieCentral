@@ -181,83 +181,77 @@ class FullMovieForm extends Component {
 
     render() {
         return(
-            <div id="FullMovieForm" className="admin-sub-header">
-                <h2>Add New Movie</h2>
-                <br />
-                <form>
-                    <div className="form-row">
-                        <div className="form-group col-md-4">
-                            <label>Title</label>
-                            <input id="title" className="form-control" placeholder="Movie Name" onChange={this.handleChange} value={this.state.movie.title} />
-                        </div>
-                        <div className="form-group col-md-4">
-                            <label>Studio</label>
-                            <input id="studio" className="form-control" placeholder="Studio Name" onChange={this.handleChange} value={this.state.movie.studio} />
-                        </div>
-                        <div className="form-group col-md-4">
-                            <label>Year</label>
-                            <input id="year" type="number" className="form-control" placeholder="Year" onChange={this.handleChange} value={this.state.movie.year} />
-                        </div>
+            <form>
+                <div className="form-row">
+                    <div className="form-group col-md-4">
+                        <label>Title</label>
+                        <input id="title" className="form-control" placeholder="Movie Name" onChange={this.handleChange} value={this.state.movie.title} />
                     </div>
-                    <div className="form-row">
-                        <div className="form-group col-md-4">
-                            <label>Director</label>
-                            <input id="director" className="form-control" placeholder="Director Name" onChange={this.handleChange} value={this.state.movie.director} />
-                        </div>
-                        <div className="form-group col-md-4">
-                            <label>Actors</label>
-                            <CreatableSelect
-                                isClearable
-                                isMulti
-                                onChange={this.handleActor}
-                                options={this.state.actors}
-                                styles={colourStyles}
-                            />
-                        </div>
-                        <div className="form-group col-md-4">
-                            <label>Genre</label>
-                            <input id="genre" className="form-control" placeholder="Type" onChange={this.handleChange} value={this.state.movie.genre} />
-                        </div>
+                    <div className="form-group col-md-4">
+                        <label>Studio</label>
+                        <input id="studio" className="form-control" placeholder="Studio Name" onChange={this.handleChange} value={this.state.movie.studio} />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="inputAddress">Synopsis</label>
-                        <textarea id="synopsis" className="form-control" rows="4" placeholder="Movie Summary" onChange={this.handleChange} value={this.state.movie.synopsis} />
+                    <div className="form-group col-md-4">
+                        <label>Year</label>
+                        <input id="year" type="number" className="form-control" placeholder="Year" onChange={this.handleChange} value={this.state.movie.year} />
                     </div>
-                    <div className="form-row">
-                        <div className="form-group col-md-4">
-                            <label>Country</label>
-                            <input id="country" className="form-control" placeholder="Country" onChange={this.handleChange} value={this.state.movie.country} />
-                        </div>
-                        <div className="form-group col-md-4">
-                            <label>Rating</label>
-                            <Select id="rating" options={ratings} styles={colourStyles} onChange={this.handleRating.bind(this)} />
-                        </div>
-                        <div className="form-group col-md-4">
-                            <label>Availability</label>
-                            <Select id="rating" options={availability} styles={colourStyles} onChange={this.handleAvailability.bind(this)} />
-                        </div>
+                </div>
+                <div className="form-row">
+                    <div className="form-group col-md-4">
+                        <label>Director</label>
+                        <input id="director" className="form-control" placeholder="Director Name" onChange={this.handleChange} value={this.state.movie.director} />
                     </div>
-                    <div className="form-row">
-                        <div className="form-group col-md-4">
-                            <label>Image URL</label>
-                            <input id="image" className="form-control" placeholder="Image URL" onChange={this.handleChange} value={this.state.movie.image} />
-                        </div>
-                        <div className="form-group col-md-4">
-                            <label>Movie URL</label>
-                            <input id="movie" className="form-control" placeholder="Youtube URL" onChange={this.handleChange} value={this.state.movie.movie} />
-                        </div>
-                        <div className="form-group col-md-4">
-                            <label>Price</label>
-                            <input id="price" type="number" className="form-control" placeholder="$$" onChange={this.handleChange} value={this.state.movie.price} />
-                        </div>
+                    <div className="form-group col-md-4">
+                        <label>Actors</label>
+                        <CreatableSelect
+                            isClearable
+                            isMulti
+                            onChange={this.handleActor}
+                            options={this.state.actors}
+                            styles={colourStyles}
+                        />
                     </div>
+                    <div className="form-group col-md-4">
+                        <label>Genre</label>
+                        <input id="genre" className="form-control" placeholder="Type" onChange={this.handleChange} value={this.state.movie.genre} />
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="inputAddress">Synopsis</label>
+                    <textarea id="synopsis" className="form-control" rows="4" placeholder="Movie Summary" onChange={this.handleChange} value={this.state.movie.synopsis} />
+                </div>
+                <div className="form-row">
+                    <div className="form-group col-md-4">
+                        <label>Country</label>
+                        <input id="country" className="form-control" placeholder="Country" onChange={this.handleChange} value={this.state.movie.country} />
+                    </div>
+                    <div className="form-group col-md-4">
+                        <label>Rating</label>
+                        <Select id="rating" options={ratings} styles={colourStyles} onChange={this.handleRating.bind(this)} />
+                    </div>
+                    <div className="form-group col-md-4">
+                        <label>Availability</label>
+                        <Select id="rating" options={availability} styles={colourStyles} onChange={this.handleAvailability.bind(this)} />
+                    </div>
+                </div>
+                <div className="form-row">
+                    <div className="form-group col-md-4">
+                        <label>Image URL</label>
+                        <input id="image" className="form-control" placeholder="Image URL" onChange={this.handleChange} value={this.state.movie.image} />
+                    </div>
+                    <div className="form-group col-md-4">
+                        <label>Movie URL</label>
+                        <input id="movie" className="form-control" placeholder="Youtube URL" onChange={this.handleChange} value={this.state.movie.movie} />
+                    </div>
+                    <div className="form-group col-md-4">
+                        <label>Price</label>
+                        <input id="price" type="number" className="form-control" placeholder="$$" onChange={this.handleChange} value={this.state.movie.price} />
+                    </div>
+                </div>
 
-                    <button className="btn btn-secondary" onClick={this.resetForm.bind(this)}>Reset</button>
-                    <button type="submit" className="btn btn-primary float-right" onClick={this.handleSubmit}>Add New Movie</button>
-                </form>
-
-            </div>
-
+                <button className="btn btn-secondary" onClick={this.resetForm.bind(this)}>Reset</button>
+                <button type="submit" className="btn btn-primary float-right" onClick={this.handleSubmit}>Add New Movie</button>
+            </form>
         )
     }
 }

@@ -17,7 +17,11 @@ class AddMovie extends Component {
                     </div>
                     <div id="page-content-wrapper">
                         <div className="container-fluid">
-                            <FullMovieForm />
+                            <div id="FullMovieForm" className="admin-sub-header">
+                                <h2>Add New Movie</h2>
+                                <br />
+                                <FullMovieForm />
+                            </div>
                         </div>
                     </div>
                 </div>
