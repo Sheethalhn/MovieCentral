@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import HomeHeader from './../header/CommonHeader'
 import MovieItem from './MovieItem/MovieItem'
 import './AllMovies.css'
-import {getAllMovies} from "../../api/API";
+import {getAllMovies, getFilterMovies, getNewPage} from "../../api/API";
 import Paging from './Paging/paging'
-import {getNewPage} from "../../api/API";
 import FilterForm from './FilterForm/FilterForm';
 
 let Filter = () => (<svg aria-hidden="true" data-prefix="fas" data-icon="filter" className="svg-inline--fa fa-filter fa-w-16" role="img"
@@ -18,8 +17,9 @@ class All_Movies extends Component {
         this.state = {
             'currentPage':1,
             'filterMode':false,
-            'filterData':{}
-        }
+            'filterState':{},
+            'searchText': ''
+        };
     }
 
     componentDidMount(){
@@ -30,9 +30,15 @@ class All_Movies extends Component {
 
     pageChange(page){
         if(page !== this.state.currentPage){
-            getNewPage(page-1).then((data) => {
+            if(this.generateURI().length>0){
+                getFilterMovies(page-1,this.generateURI()).then((data) => {
+                    this.setState({...this.state,"content" : data.content, "currentPage":page})
+                });
+            }else{
+                getNewPage(page-1).then((data) => {
                 this.setState({...this.state,"content" : data.content, "currentPage":page})
-            })
+                })
+            }
         }
     }
 
@@ -48,8 +54,41 @@ class All_Movies extends Component {
         }
     }
 
-    handleFilterData(data){
+    handleFilterData = () => {
+        this.setState({...this.state,"content" : undefined, "totalPages":undefined,'currentPage':1, 'filterMode':false});
+        if(this.generateURI().length>0){
+            getFilterMovies(0,this.generateURI()).then((data) => {
+                this.setState({...this.state,"content" : data.content, "totalPages":data.page.totalPages})
+            });
+        }else{
+            getAllMovies().then((data) => {
+                this.setState({...this.state,"content" : data.content, "totalPages":data.page.totalPages})
+            })
+        }
+
+    };
+
+    handleSearchChange = (e) => {
+        this.setState({...this.state,'SearchText': e.target.value});
+    };
+
+    captureData = (category,item) => {
+        let data2 = Object.assign(this.state['filterState']);
+        if(!data2[category]){
+            data2[category] = [];
+        }
+        if(data2[category].includes(item)){
+            data2[category].splice(data2[category].indexOf(item),1);
+        }else{
+            data2[category].push(item);
+        }
+
+        this.setState({...this.state,'filterState':data2})
+    };
+
+    generateURI = () => {
         let query = [];
+        let data = this.state.filterState;
         for(let category in data){
             if(data.hasOwnProperty(category)){
                 for(let j = 0; j<data[category].length; j++){
@@ -57,9 +96,21 @@ class All_Movies extends Component {
                 }
             }
         }
-        debugger;
-        encodeURI(query.join("&"));
-    }
+
+        let data2 = [];
+        if(this.state['SearchText']){
+            data2 = this.state.SearchText.split(' ').filter((el)=>{
+                return (el != null && el!== undefined && el!== '')
+            });
+        }
+
+        for(let word in data2){
+            query.push('keyword' + '=' + data2[word]);
+        }
+        let uri = encodeURI(query.join("&"));
+        return uri
+    };
+
     render(){
         let moviedata = [];
         let paging = <Paging size={this.state.totalPages} current={this.state.currentPage}
@@ -85,7 +136,9 @@ class All_Movies extends Component {
         }
         let filterformelement = undefined;
         if(this.state.filterMode){
-            filterformelement = <FilterForm data={this.state.filterData} onSubmit={this.handleFilterData}/>;
+            filterformelement = <FilterForm data={this.state.filterState} onSubmit={this.handleFilterData}
+                                            captureData = {this.captureData}
+                                />;
         }else{
             filterformelement = "";
         }
@@ -96,8 +149,11 @@ class All_Movies extends Component {
                     </div>
                     <div>
                         <div id="DIV_1">
-                            <form method="get" action="https://www4.fmovies.to/search" id="FORM_2">
-                                <input type="text" name="keyword" placeholder="Enter keywords here" id="INPUT_3" />
+                            <form method="get" onSubmit={(e)=>{e.preventDefault();this.handleFilterData(this.state.filterData)}}>
+                                <input type="text" name="keyword" placeholder="Enter keywords here"
+                                       id="INPUT_3"
+                                       onChange={this.handleSearchChange}
+                                />
                                 <button type="submit" id="BUTTON_4">
                                     {/*<i id="I_5" className={"fa fa-search"}></i>*/}
                                 </button>

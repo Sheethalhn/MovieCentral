@@ -8,7 +8,7 @@ class FilterForm extends Component{
         this.state = {
 
         };
-        this.data = {}
+        this.data = this.props.data;
     }
 
     componentDidMount(){
@@ -30,14 +30,14 @@ class FilterForm extends Component{
 
     }
 
-    captureData(category,item){
-        let data = this.data;
-        if(!data[category]){
-            data[category] = [];
+    getState(category,item){
+        if(this.props.data){
+            if(this.props.data[category]){
+                return (!!this.props.data[category].includes(item))
+            }
         }
-        data[category].push(item);
+        return false
     }
-
 
 
     render() {
@@ -57,7 +57,8 @@ class FilterForm extends Component{
                             <label className="form-check-label">
                                 <input className="form-check-input" type="checkbox" name="genre[]"
                                        value={data[category][i]}
-                                       onChange={(e)=>{this.captureData(category,data[category][i])}}
+                                       onChange={(e)=>{this.props.captureData(category,data[category][i])}}
+                                       checked={this.getState(category,data[category][i])}
                                 />
                                 {this.capitalizeFirstLetter(data[category][i])}
                             </label>

@@ -6,6 +6,7 @@ import com.cmpe275.entity.Movie;
 import com.cmpe275.utility.FilterValues;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -42,17 +43,18 @@ public class MovieServ {
                 movieRepo.findDistinctRating(),movieRepo.findDistinctStars());
     }
 
-    public List<Movie> getFilteredMovies(
+    public Page<Movie> getFilteredMovies(
             List<String> genres,
             List<Integer> stars,
             List<String> years,
             List<String> directors,
             List<String> ratings,
-            List<String> keywords
+            List<String> keywords,
+            Pageable p
     ){
 
         if(genres == null && stars == null && years == null && directors == null && ratings == null && keywords == null){
-            return Collections.emptyList();
+            return new PageImpl<>(Collections.emptyList());
         }
         MovieSpecification spec = new MovieSpecification(
                 new FilterCriteria(
@@ -65,6 +67,6 @@ public class MovieServ {
                 )
         );
 
-        return movieRepo.findAll(spec);
+        return movieRepo.findAll(spec,p);
     }
 }

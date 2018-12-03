@@ -49,6 +49,7 @@ public class MovieController {
     }
 
     @GetMapping(path = "/movie")
+    @SuppressWarnings("unchecked")
     public HttpEntity<PagedResources<Movie>> GetAllMovies(Pageable p, PagedResourcesAssembler assembler) {
         return new ResponseEntity<>(assembler.toResource(movieService.getAllMovies(p)),HttpStatus.OK);
     }
@@ -59,20 +60,24 @@ public class MovieController {
     }
 
     @GetMapping(path = "/movie/filters/execute")
-    public ResponseEntity<?> GetFilteredMovies(@RequestParam(value = "genre", required = false) List<String> genres,
-                                               @RequestParam(value = "stars", required = false) List<Integer> stars,
-                                               @RequestParam(value = "year", required = false) List<String> years,
-                                               @RequestParam(value = "director", required = false) List<String> directors,
-                                               @RequestParam(value = "rating", required = false) List<String> ratings,
-                                               @RequestParam(value = "keyword", required = false) List<String> keywords)
+    @SuppressWarnings("unchecked")
+    public HttpEntity<PagedResources<Movie>> GetFilteredMovies(
+            Pageable p, PagedResourcesAssembler assembler,
+            @RequestParam(value = "genre", required = false) List<String> genres,
+            @RequestParam(value = "stars", required = false) List<Integer> stars,
+            @RequestParam(value = "year", required = false) List<String> years,
+            @RequestParam(value = "director", required = false) List<String> directors,
+            @RequestParam(value = "rating", required = false) List<String> ratings,
+            @RequestParam(value = "keyword", required = false) List<String> keywords)
     {
-        return ResponseEntity.ok(movieService.getFilteredMovies(
+        return new ResponseEntity<>(assembler.toResource(movieService.getFilteredMovies(
                 genres,
                 stars,
                 years,
                 directors,
                 ratings,
-                keywords
-        ));
+                keywords,
+                p
+        )),HttpStatus.OK);
     }
 }

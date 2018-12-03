@@ -254,6 +254,21 @@ export const getFilterOptions = () =>
         return error;
     });
 
+export const getFilterMovies = (page,uri) =>
+    fetch(`${api}/movie/filters/execute?page=${page}&size=1&${uri}`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify()
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 let successHandler = (res) => {
     if (res.status === 401) {
         // UserHelper.redirectToLogin();
