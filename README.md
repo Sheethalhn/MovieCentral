@@ -51,4 +51,8 @@ Instance of **MariaDB 10.3** managed by Amazon RDS
  * react-youtube
  * react-toastify
  
- ## Server technology
+ ## Server technologies
+ * public facing **Nginx** instance for serving the UI, reverse proxying the backend via `/api` route.
+ * Embedded **Tomcat** container for serving the Backend.
+ * EC2 t2.micro instance in dedicated VPC hosting the backend and UI.
+ * No-IP **dynamic dns** for making the website accessible.
