@@ -3,6 +3,7 @@
 1. **Rachit Chokshi**, ID: 012550044, rachit.chokshi@sjsu.edu
 2. **Shreya Shah**, ID: 012541984, shreya.shah@sjsu.edu
 3. **Sheethal Halandur Nagaraja**, ID: 012564786, sheethal.halandurnagaraja@sjsu.edu
+4. **Tarun Arora**, ID: 012420772, tarun.arora@sjsu.edu
 
 
 
