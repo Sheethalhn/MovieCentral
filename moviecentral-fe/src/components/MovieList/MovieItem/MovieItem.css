@@ -260,11 +260,11 @@
     -webkit-transform-origin: 63.125px 100px;
 }/*#MovieItemA_4*/
 
-#MovieItemA_4:after {
+#MovieItemA_4::after {
     bottom: 0px;
     box-sizing: border-box;
     color: rgb(0, 172, 193);
-    content: '""';
+    content: '';
     display: block;
     height: 60px;
     left: 0px;
@@ -295,7 +295,26 @@
     -webkit-transform-origin: 63.125px 30px;
 }/*#MovieItemA_4:after*/
 
-#MovieItemA_4:before {
+
+#FilterSPAN_100{
+    position: absolute;
+    top: 50%;
+    left: 23%;
+    background: rgb(52, 57, 70) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(142, 149, 165);
+    border-radius: 2px 2px 2px 2px;
+    height: 11%;
+    width: 50%;
+    padding-top: 2px;
+    opacity: 0;
+    transition: opacity .4s;
+}
+#MovieItemA_4:hover #FilterSPAN_100{
+    opacity: 1;
+}
+
+#MovieItemA_4:hover{
+    display: block;
     bottom: 0px;
     box-sizing: border-box;
     color: rgb(0, 172, 193);
@@ -303,7 +322,7 @@
     display: block;
     height: 200px;
     left: 0px;
-    opacity: 0;
+    opacity: 0.6;
     position: absolute;
     right: 0px;
     text-decoration: none solid rgb(0, 172, 193);
@@ -330,7 +349,7 @@
     -webkit-border-before: 0px none rgb(0, 172, 193);
     -webkit-border-end: 0px none rgb(0, 172, 193);
     -webkit-border-start: 0px none rgb(0, 172, 193);
-    -webkit-transition: top 0.5s ease 0s, left 0.5s ease 0s, right 0.5s ease 0s, bottom 0.5s ease 0s, opacity 0.5s ease-out 0s;
+    /*-webkit-transition: top 0.5s ease 0s, left 0.5s ease 0s, right 0.5s ease 0s, bottom 0.5s ease 0s, opacity 0.5s ease-out 0s;*/
     -webkit-transform-origin: 63.125px 100px;
 }/*#MovieItemA_4:before*/
 
