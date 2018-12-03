@@ -43,6 +43,8 @@ Instance of **MariaDB 10.3** managed by Amazon RDS
  * FontAwesome
  * Bootstrap
  * ChartJS
+ * Redux
  * react-youtube
  * react-toastify
- * 
+ 
+ ## Server technology
