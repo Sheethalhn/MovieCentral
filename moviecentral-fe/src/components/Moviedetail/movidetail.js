@@ -13,35 +13,18 @@ class Movie_detail extends Component {
 
     constructor(props) {
         super(props);
-        this.props.movie.photos = "//images.fandango.com/ImageRenderer/300/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/207628/fmc_mc_Rampage.jpg"
-        this.props.movie.movie_name = "Avengers: Infinity War";
-        this.props.movie.description = "Iron Man, Thor, the Hulk and the rest of the Avengers unite to battle their most powerful enemy yet -- the evil Thanos. On a mission to collect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twisted will on reality. The fate of the planet and existence itself has never been more uncertain as everything the Avengers have fought for has led up to this moment.";
         this.state = {
             ActiveComponent: <MoveOverview />
         }
-        // this.handleLogs = this.handleLogs.bind(this);
     }
 
-
-    handleLogs() {
-        // log1.info('{"event":"page_click","page_name":"Movie Detail","count":"1"}');
-     }
-
-    componentDidMount() {
-        // let pages = this.props.trace;
-        // pages.push("Movie Details");
-        // if (this.props.user !== undefined && this.props.user.role == 3) {
-        //     this.props.selectedTrace(pages)
-        // }
-        // log1.info(`{"event":"movie_click","movie_id":"${this.props.movie.id}","movie_name":"${this.props.movie.movie_name}","count":"1"}`);
-    }
 
     render() {
         let background = "//images.fandango.com/ImageRenderer/300/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/207628/fmc_mc_Rampage.jpg";
-        if (this.props.movie.photos) background = this.props.movie.photos;
+        if (this.props.movie.image) background = this.props.movie.image;
 
         return (
-            <div onClick={this.handleLogs}>
+            <div>
                 <HomeHeader />
                 <div className="movie-detail-main">
                     <div className="movie-detail-mop">
@@ -69,7 +52,7 @@ class Movie_detail extends Component {
 
 
 
-                                            {this.props.movie.movie_name}
+                                            {this.props.movie.title}
 
 
 
@@ -102,9 +85,9 @@ class Movie_detail extends Component {
                                 </div>
                             </section>
                             <div className="footer-overview">
-                                <h4 className="footer-overview-font">{this.props.movie.movie_name}   <span style={{ color: "#f15500" }}>Synopsis</span></h4>
+                                <h4 className="footer-overview-font">{this.props.movie.title}   <span style={{ color: "#f15500" }}>Synopsis</span></h4>
                                 <div style={{ marginLeft: "25%", width: "50%", textAlign: "center", marginTop: '20px' }}>
-                                    <h4 className="footer-overview-font" style={{ paddingTop: '0px' }}>{this.props.movie.description} </h4>
+                                    <h4 className="footer-overview-font" style={{ paddingTop: '0px' }}>{this.props.movie.synopsis} </h4>
                                 </div>
                             </div>
                             {this.state.ActiveComponent}
@@ -120,8 +103,8 @@ class Movie_detail extends Component {
 
 function mapStateToProps(state) {
     return {
-        movie: state.selectedMovie,
-        user: state.loginUser
+        user: state.loginUser,
+        movie: state.selectedMovie
     }
 }
 

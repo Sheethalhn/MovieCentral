@@ -26,6 +26,11 @@ import EditMovie from "../admin/AddEditMovie/editMovie";
 
 class RoutesComponent extends Component {
 
+    redirectURL = (url) => {
+        this.props.history.push(url);
+
+    };
+
     render() {
         return (
             <div>
@@ -38,7 +43,12 @@ class RoutesComponent extends Component {
                 <Route exact path="/pagenotfound" component={PageNotFound} />
                 <Route exact path="/payment" component={Payment} />
                 <Route exact path="/subscription" component={Subscription} />
-                <Route exact path="/browse" component={AllMovies} />
+                <Route exact path="/browse" render={() => (
+                    <div>
+
+                        <AllMovies redirectURL={this.redirectURL} />
+                    </div>
+                )}/>
                 <Route exact path="/useractivity" component={UserActivity} />
                 <Route exact path="/viewuser/:userId" component={ViewUser} />
     
@@ -47,7 +57,7 @@ class RoutesComponent extends Component {
                 <Route exact path="/admin/dashboard/editmovie/:id" component={EditMovie} />
                 
             </div>
-        );``
+        );
     }
 }
 
