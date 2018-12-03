@@ -19,8 +19,10 @@ import UserActivity from '../UserActivity/UserActivity';
 import ViewUser from '../User/ViewUser';
 
 // Admin Routes
-import adminDashboard from "../admin/dashboard/dashboard";
-import addMovie from "../admin/addMovie/addMovie";
+import AdminDashboard from "../admin/Dashboard/Dashboard";
+import AddMovie from "../admin/AddEditMovie/AddMovie";
+import EditMovie from "../admin/AddEditMovie/EditMovie";
+
 
 class RoutesComponent extends Component {
 
@@ -39,8 +41,10 @@ class RoutesComponent extends Component {
                 <Route exact path="/browse" component={AllMovies} />
                 <Route exact path="/useractivity" component={UserActivity} />
                 <Route exact path="/viewuser/:userId" component={ViewUser} />
-	        	<Route exact path="/admin/dashboard" component={adminDashboard} />
-
+    
+	        	<Route exact path="/admin/dashboard" component={AdminDashboard} />
+                <Route exact path="/admin/dashboard/addmovie" component={AddMovie} />
+                <Route exact path="/admin/dashboard/editmovie/:id" component={EditMovie} />
                 
             </div>
         );``

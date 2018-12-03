@@ -164,6 +164,21 @@ export const addSubscription = (payload) =>
         return error;
     });
 
+export const getAllMovies = () =>
+    fetch(`${api}/movie?size=1`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify()
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 export const addNewMovie = (payload) =>
     fetch(`${api}/movie`, {
         method: 'POST',
@@ -173,6 +188,36 @@ export const addNewMovie = (payload) =>
         },
         credentials: 'include',
         body: JSON.stringify(payload)
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
+export const updateMovie = (payload) =>
+    fetch(`${api}/movie`, {
+        method: 'PUT',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
+export const deleteMovie = (payload) =>
+    fetch(`${api}/movie/:id`, {
+        method: 'DELETE',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        // body: JSON.stringify(payload)
     }).then(res => {
         return successHandler(res);
     }).catch(error => {
@@ -196,21 +241,6 @@ export const addNewActor = (payload) =>
 
 export const getActors = () =>
     fetch(`${api}/actors`, {
-        method: 'GET',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify()
-    }).then(res => {
-        return successHandler(res);
-    }).catch(error => {
-        return error;
-    });
-
-export const getAllMovies = () =>
-    fetch(`${api}/movie?size=1`, {
         method: 'GET',
         headers: {
             ...headers,
