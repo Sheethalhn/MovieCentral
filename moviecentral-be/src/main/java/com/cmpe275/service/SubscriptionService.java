@@ -37,7 +37,7 @@ public class SubscriptionService {
   
         
     	if (userSubscription.getSubscriptionType().equals(Constant.MONTHLY_SUBSCRIPTION) ) {
-    		if(checkObj.equals(null))
+    		if(checkObj == null)
     		{
     			Calendar cal = Calendar.getInstance();
     	    	cal.set(Calendar.HOUR_OF_DAY, 0);
