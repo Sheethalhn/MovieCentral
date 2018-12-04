@@ -8,6 +8,7 @@ package com.cmpe275.controller;
 import com.cmpe275.entity.User;
 import com.cmpe275.service.UserService;
 import com.cmpe275.utility.ResponseFormat;
+import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -63,6 +64,20 @@ public class UserController {
     @GetMapping(path = "/users/{time}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getTopUsersBasedOnTime(@PathVariable String time) {
         List<User> allActiveUsers = userService.getTopUsersBasedOnTime(time);
+        if (!CollectionUtils.isEmpty(allActiveUsers)) {
+            responseObject.setData(allActiveUsers);
+            responseObject.setMeta("Users retrieved successfully.");
+            return new ResponseEntity(responseObject, HttpStatus.OK);
+        } else {
+            responseObject.setData(null);
+            responseObject.setMeta("No Users found");
+            return new ResponseEntity(responseObject, HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @GetMapping(path = "/users/{type}/{month}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getUsersBySubscriptionType(@PathVariable("type") String type,@PathVariable("monrh") Integer month) {
+        List<User> allActiveUsers = userService.getUsersBySubscriptionType(Arrays.asList(type.split(",")),month);
         if (!CollectionUtils.isEmpty(allActiveUsers)) {
             responseObject.setData(allActiveUsers);
             responseObject.setMeta("Users retrieved successfully.");

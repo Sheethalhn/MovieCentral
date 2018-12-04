@@ -33,10 +33,9 @@ public class SubscriptionService {
     	
     	UserSubscription userSubObj= null;
     	Calendar currentTime = Calendar.getInstance();
-    	UserSubscription checkObj = subscriptionRepository.findByUserId(currentTime.getTime(),userSubscription.getUserSubscriptionObj());
-  
-        
+    	
     	if (userSubscription.getSubscriptionType().equals(Constant.MONTHLY_SUBSCRIPTION) ) {
+    		UserSubscription checkObj = subscriptionRepository.findByUserId(currentTime.getTime(),userSubscription.getUserSubscriptionObj());    
     		if(checkObj == null)
     		{
     			Calendar cal = Calendar.getInstance();
@@ -51,11 +50,13 @@ public class SubscriptionService {
     		}
     		else
     		{
+    			
     			return userSubObj;
 	    
     		}
     	}else if(userSubscription.getSubscriptionType().equals(Constant.PAY_PER_VIEW) || userSubscription.getSubscriptionType().equals(Constant.PAID) ){
-    		
+    		UserSubscription checkObjMovie = subscriptionRepository.findByMovieId(currentTime.getTime(),userSubscription.getUserSubscriptionObj(),userSubscription.getMovieSubscriptionObj());
+    		if(checkObjMovie == null) {
     		Calendar cal = Calendar.getInstance();
 	    	cal.set(Calendar.HOUR_OF_DAY, 0);
 	    	cal.set(Calendar.MINUTE, 0);
@@ -64,7 +65,11 @@ public class SubscriptionService {
 	       	cal.add(Calendar.DAY_OF_MONTH, 1);
 			Date expiresOn = cal.getTime();
 			userSubscription.setExpiresOn(expiresOn);
-	    		
+    		}
+    		else
+    		{
+    			return userSubObj;
+    		}
     	}
 
     	userSubObj=subscriptionRepository.save(userSubscription);

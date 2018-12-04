@@ -51,7 +51,7 @@ class RoutesComponent extends Component {
                     </div>
                 )}/>
                 <Route exact path="/moviedetailcrew" component={Movie_detail_crew} />
-                <Route exact path="/useractivity" component={UserActivity} />
+                <Route exact path="/admin/useractivity" component={UserActivity} />
                 <Route exact path="/viewuser/:userId" component={ViewUser} />
     
 	        	<Route exact path="/admin/dashboard" component={AdminDashboard} />

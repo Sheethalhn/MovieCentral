@@ -14,13 +14,13 @@ class Sidebar extends Component {
                     <Link to="/admin/dashboard/editmovie">Edit Movie</Link>
                 </li> */}
                 <li>
-                    <Link to="/admin/dashboard/useractivity">User Activity</Link>
+                    <Link to="/admin/useractivity">User Activity</Link>
                 </li>
                 <li>
-                    <Link to="/admin/dashboard/movieactivity">Movie Acitvity Report</Link>
+                    <Link to="/admin/movieactivity">Movie Acitvity Report</Link>
                 </li>
                 <li>
-                    <Link to="/admin/dashboard/finance">Financial Report</Link>
+                    <Link to="/admin/financereports">Financial Report</Link>
                 </li>
             </ul>
         )

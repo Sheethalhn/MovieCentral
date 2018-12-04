@@ -23,6 +23,8 @@ public class Constant {
     
     public static final String PAID = "P";
     
+    public static final Integer SUBSCRIPTION_FEES = 10;
+    
     
     
 }

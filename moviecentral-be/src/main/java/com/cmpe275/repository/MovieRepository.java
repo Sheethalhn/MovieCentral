@@ -1,13 +1,17 @@
 package com.cmpe275.repository;
 
 import com.cmpe275.entity.Movie;
+import com.cmpe275.entity.User;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,4 +50,9 @@ List<Movie> findDistinctActors();
 
     @Query(value = "select distinct stars from Movie  where stars is not null")
     List<Integer> findDistinctStars();
+    
+    @Query(value = "SELECT m from"
+            + " Movie as m JOIN PlaybackHistory ph on m.movieId=ph.movieObj where ph.timestamp >= :previousDate and ph.timestamp <= :currentDate"
+            + " group by ph.movieObj order by count(ph.movieObj) desc")
+    List<Movie> getTopMoviesBasedOnTime(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate,Pageable pageable);
 }
