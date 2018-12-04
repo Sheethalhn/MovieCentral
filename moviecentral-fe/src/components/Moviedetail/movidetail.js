@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 // import {selectedTrace} from '../../actions'
 import {bindActionCreators} from "redux";
 import MovieCrew from './MovieCrew/MovieCrew'
+import MovieReview from "./MovieOverview/MovieReview";
 
 class Movie_detail extends Component {
 
@@ -20,6 +21,10 @@ class Movie_detail extends Component {
 
     handleCastClick = ()=> {
         this.setState({...this.state,ActiveComponent: <MovieCrew/>})
+    };
+
+    handleReviews = ()=>{
+        this.setState({...this.state,ActiveComponent: <MovieReview/>})
     };
 
     render() {
@@ -74,9 +79,9 @@ class Movie_detail extends Component {
                                                 {/*</Link>*/}
                                             {/*</li>*/}
                                             <li className="movie-detail-section-subnav-item">
-                                                <Link to="/moviedetailreview" className="movie-detail-section-subnav-item-link">
-                                                    <label className="movie-detail-section-subnav-item-link">REVIEWS</label>
-                                                </Link>
+                                                {/*<Link to="/moviedetailreview" className="movie-detail-section-subnav-item-link">*/}
+                                                    <label className="movie-detail-section-subnav-item-link" onClick={()=>this.handleReviews()} >REVIEWS</label>
+
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
                                                     <label className="movie-detail-section-subnav-item-link" onClick={()=>this.handleCastClick()}>

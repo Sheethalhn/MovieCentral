@@ -14,6 +14,6 @@ public interface ReviewRepository extends CrudRepository<Review, Long> {
     <S extends Review> S save(S s);
 
     @Query("select new com.cmpe275.utility.Reviews.ReviewsAggregateResults(COUNT (reviewId), AVG(rating)) FROM Review where movieId=:id")
-    public ReviewsAggregateResults findAvgAndTotalRatingsByMovieId(@Param("id") Long id);
+    ReviewsAggregateResults findAvgAndTotalRatingsByMovieId(@Param("id") Long id);
 
 }

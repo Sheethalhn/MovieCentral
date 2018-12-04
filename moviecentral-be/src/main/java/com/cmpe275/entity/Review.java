@@ -1,5 +1,6 @@
 package com.cmpe275.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -22,15 +23,27 @@ public class Review {
     private String text;
     private Double rating;
 
+    @OneToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "user_id")
+    private User user;
 
     private Long movieId;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Review(){}
 
-    public Review(String text, Double rating, Long movieId) {
+    public Review(String text, Double rating, Long movieId, User user) {
         this.text = text;
         this.rating = rating;
         this.movieId = movieId;
+        this.user = user;
     }
 
     public Long getReviewId() {
