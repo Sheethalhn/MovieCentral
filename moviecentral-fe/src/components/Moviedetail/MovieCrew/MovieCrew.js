@@ -18,17 +18,13 @@ class MovieCrew extends Component {
         var result = [];
 
         for(i=0;i<arr.length;i++){
-            result.push(<h5 key={i} className="crew-font">{arr[i]['name']}</h5>)
+            result.push(<h6 key={i} className="crew-font">{arr[i]['name']}</h6>)
         }
         return result;
     }
 
 
     render(){
-        let availability = this.props.movie.availability;
-        if(!this.props.movie.availability || availability === ""){
-            availability = "Paid"
-        }
 
         return(
             <div className="movie-overview-layout" style={{ height: '100%'}}>
@@ -40,8 +36,11 @@ class MovieCrew extends Component {
                     <div id="DIV_2">
                         <div id="DIV_3">
                             <div id="DIV_4">
-                                <div className="crew-info col-md-offset-1" >
-                                    <h4 className="crew-font"> CREW DETAILS</h4>
+                                <div className="crew-info" >
+                                    <h3 className="crew-font"> CREW DETAILS</h3>
+                                    <h4 className="crew-font"> Director </h4>
+                                    <h6 className="crew-font"> {this.props.movie.director} </h6>
+                                    <h4 className="crew-font"> Actors </h4>
                                     {this.renderCast()}
 
                                 </div>

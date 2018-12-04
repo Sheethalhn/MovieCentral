@@ -45,7 +45,7 @@ class Login extends Component {
                             message: resultData.meta.message
                         });
                         this.props.loginUser(resultData.data);
-                        this.props.history.push("/home");
+                        this.props.history.push("/browse");
                     } else {
                         this.setState({
                             isLoggedIn: false,
