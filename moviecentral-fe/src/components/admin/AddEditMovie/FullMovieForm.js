@@ -80,7 +80,7 @@ class FullMovieForm extends Component {
                 studio: "",
                 synopsis: "",
                 image: "",
-                movie: "",
+                movieURL: "",
                 actors: [],
                 director: "",
                 country: "",
@@ -100,15 +100,19 @@ class FullMovieForm extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.movie.movieId !== prevState.movie.movieId) {
-            return { someState: nextProps.movie };
-        }
-        else return null;
+        if(nextProps.movie) {
+            if(nextProps.movie.movieId !== prevState.movie.movieId) {
+                return { someState: nextProps.movie };
+            }
+            else return null;
+        } else return null;
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.movie.title !== this.props.movie.title) {
-            this.setState({ movie: this.props.movie });
+        if (prevProps.movie) {
+            if (prevProps.movie.title !== this.props.movie.title) {
+                this.setState({ movie: this.props.movie });
+            }
         }
     }
 
@@ -153,7 +157,7 @@ class FullMovieForm extends Component {
             studio: "",
             synopsis: "",
             image: "",
-            movie: "",
+            movieURL: "",
             actors: [],
             director: "",
             country: "",
@@ -171,8 +175,12 @@ class FullMovieForm extends Component {
         movie.actors = formattedActors;
         
         addNewMovie(movie).then((result) => {
-            this.notify(`${result.title} Successfully Added!!`);
-            this.resetForm();
+            if(this.props.type === "edit") {
+                this.notify(`${result.title} Updated Successfully!!`);
+            } else {
+                this.notify(`${result.title} Successfully Added!!`);
+                this.resetForm();
+            }
         });
     }
 
@@ -194,9 +202,6 @@ class FullMovieForm extends Component {
     }
 
     render() {
-        if(typeof this.props.movie === 'undefined') {
-            return null;
-        }
         return(
             <form>
                 <div className="form-row">
@@ -258,7 +263,7 @@ class FullMovieForm extends Component {
                     </div>
                     <div className="form-group col-md-4">
                         <label>Movie URL</label>
-                        <input id="movie" className="form-control" placeholder="Youtube URL" onChange={this.handleChange} value={this.state.movie.movie} />
+                        <input id="movieURL" className="form-control" placeholder="Youtube URL" onChange={this.handleChange} value={this.state.movie.movieURL} />
                     </div>
                     <div className="form-group col-md-4">
                         <label>Price</label>
