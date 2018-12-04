@@ -28,7 +28,7 @@ class VerifyPage extends Component {
         API.getUserFromCode(this.props.match.params.code)
             .then((resultData) => {
                 console.log("data :"+resultData);
-                if (resultData.data != undefined && resultData.data !== undefined) {
+                if (resultData.data !== undefined && resultData.data !== undefined) {
                     this.setState({
                         userObj: resultData.data,
                         email: resultData.data.email

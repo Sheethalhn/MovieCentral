@@ -17,14 +17,20 @@ import Subscription from '../Subscription/subscription';
 import AllMovies from '../MovieList/AllMovies'
 import UserActivity from '../UserActivity/UserActivity';
 import ViewUser from '../User/ViewUser';
+import Movie_detail_crew from "../Moviedetail/MovieCrew/MovieCrew";
 
 // Admin Routes
-import AdminDashboard from "../admin/Dashboard/Dashboard";
-import AddMovie from "../admin/AddEditMovie/AddMovie";
-import EditMovie from "../admin/AddEditMovie/EditMovie";
+import AdminDashboard from "../admin/dashboard/dashboard";
+import AddMovie from "../admin/AddEditMovie/addMovie";
+import EditMovie from "../admin/AddEditMovie/editMovie";
 
 
 class RoutesComponent extends Component {
+
+    redirectURL = (url) => {
+        this.props.history.push(url);
+
+    };
 
     render() {
         return (
@@ -38,7 +44,13 @@ class RoutesComponent extends Component {
                 <Route exact path="/pagenotfound" component={PageNotFound} />
                 <Route exact path="/payment" component={Payment} />
                 <Route exact path="/subscription" component={Subscription} />
-                <Route exact path="/browse" component={AllMovies} />
+                <Route exact path="/browse" render={() => (
+                    <div>
+
+                        <AllMovies redirectURL={this.redirectURL} />
+                    </div>
+                )}/>
+                <Route exact path="/moviedetailcrew" component={Movie_detail_crew} />
                 <Route exact path="/useractivity" component={UserActivity} />
                 <Route exact path="/viewuser/:userId" component={ViewUser} />
     
@@ -47,7 +59,7 @@ class RoutesComponent extends Component {
                 <Route exact path="/admin/dashboard/editmovie/:id" component={EditMovie} />
                 
             </div>
-        );``
+        );
     }
 }
 

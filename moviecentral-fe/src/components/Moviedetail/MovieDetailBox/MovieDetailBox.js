@@ -12,9 +12,9 @@ class Movie_Box extends Component{
     constructor(props){
         super(props);
         this.state={
-            avgrating: 0,
+            avgrating: this.props.movie.stars,
             totalrating: 0,
-            movie_id: this.props.movie.id
+            movie_id: this.props.movie.movieId
         }
     }
 
@@ -30,28 +30,29 @@ class Movie_Box extends Component{
     }
 
     render(){
-        if(!this.props.movie.see_it_in)this.props.movie.see_it_in = "35MM";
+        let availability = this.props.movie.availability;
+        if(!this.props.movie.availability || availability === ""){
+            availability = "Paid"
+        }
         return <div>
             <section className="movie-overview-layout-left-section1">
                 <a className="movie-overview-layout-left-section1-poster" href="/">
                     <img className="movie-overview-layout-left-section1-poster-image"
-                         src={this.props.movie.photos}
-                         alt={this.props.movie.movie_name +" Movie Poster"}/>
+                         src={this.props.movie.image}
+                         alt={this.props.movie.title +" Movie Poster"}/>
                 </a>
                 <ul className="movie-overview-layout-left-section1-detail">
                     <li>Released</li>
-                    <li className="movie-overview-layout-left-section1-detail-release-date">{this.props.movie.release_date}</li>
+                    <li className="movie-overview-layout-left-section1-detail-release-date">{this.props.movie.year}</li>
                     <li>
 
 
-                        PG-13,
+                        {this.props.movie.rating}
 
 
-
-                        {this.props.movie.movie_length} min
 
                     </li>
-                    <li>{this.props.movie.genres}</li>
+                    <li>{this.props.movie.genre}</li>
                     {/*<li>Sci-Fi/Fantasy</li>*/}
                     <li className="movie-overview-layout-left-section1-detail-rating">
                         {/*<div className="movie-overview-layout-left-section1-detail-rating-inner" data-star-rating="5">*/}
@@ -90,12 +91,27 @@ class Movie_Box extends Component{
                             readonly={true}
                         />
                     </li>
-                    <li className="movie-overview-layout-left-section1-detail-rating-number">{this.state.totalrating} Fan Ratings</li>
+                    <li style={
+                        {
+                            'color': '#FFF',
+                            fontSize: '1.857em',
+                        lineHeight: '1',
+                        marginBottom: '5px',
+                        marginTop: '20px',
+                        fontStyle: 'normal',
+                        fontFamily: 'alternate-gothic-no-1-d,"Futura Condensed","Arial Narrow",Arial,sans-serif',
+                        display: 'list-item',
+                        textAlign: '-webkit-match-parent'
+                        }
+                    }>
+                        {this.props.movie.studio} Studios
+                    </li>
+                    {/*<li className="movie-overview-layout-left-section1-detail-rating-number">{this.state.totalrating} Fan Ratings</li>*/}
                 </ul>
                 <ul className="movie-overview-layout-left-section1-detail-seeitin">
                     <h3 className="movie-overview-layout-left-section1-detail-seeitin-header">SEE IT IN</h3>
                     <li className="movie-overview-layout-left-section1-detail-seeitin-header-format"><span
-                        className="movie-overview-layout-left-section1-detail-seeitin-header-format-span">{this.props.movie.see_it_in}</span></li>
+                        className="movie-overview-layout-left-section1-detail-seeitin-header-format-span">{availability}</span></li>
                     {/*<li className="movie-overview-layout-left-section1-detail-seeitin-header-format"><span*/}
                     {/*className="movie-overview-layout-left-section1-detail-seeitin-header-format-span">DIGITAL 3D</span></li>*/}
                     {/*<li className="movie-overview-layout-left-section1-detail-seeitin-header-format"><span*/}

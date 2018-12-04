@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 import CommonHeader from '../header/CommonHeader';
-import { ToastContainer, toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as API from '../../api/API';
 import './user.css';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-import { Link } from 'react-router-dom';
 const Timestamp = require('react-timestamp');
 
 
 class ViewUser extends Component {
-
-    notify = (message) => toast(message);
 
     constructor(props) {
         super(props);

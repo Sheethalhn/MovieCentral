@@ -35,14 +35,14 @@ class Signup extends Component {
         e.preventDefault();
         this.setState({ submitted: true });
         this.emailSplit = this.state.email.split("@");
-        if (this.state.role !== undefined && this.state.role !== "" && ((this.state.role == 'admin' && this.emailSplit[1] == 'sjsu.edu') || this.state.role == 'customer')) {
+        if (this.state.role !== undefined && this.state.role !== "" && ((this.state.role === 'admin' && this.emailSplit[1] === 'sjsu.edu') || this.state.role === 'customer')) {
             let requestData = _.cloneDeep(this.state);;
             delete requestData.submitted;
             delete requestData.confirmPassword;
             requestData.emailVerified = false;
             API.signup(requestData)
                 .then((resultData) => {
-                    if (resultData.data !== null && resultData.data != undefined) {
+                    if (resultData.data !== null && resultData.data !== undefined) {
                         this.setState({ signedUp: true })
                     } else {
                         this.setState({ signedUp: false })
@@ -123,7 +123,7 @@ class Signup extends Component {
                                     {this.state.submitted && !this.state.email &&
                                         <Message message={"Email is required"} />
                                     }
-                                    {this.state.role == 'admin' && this.emailSplit[1] !== 'sjsu.edu' &&
+                                    {this.state.submitted && this.state.role === 'admin' && this.emailSplit[1] !== 'sjsu.edu' &&
                                         <Message message={"For Admin Role Sjsu email is required"} />
                                     }
                                 </div>

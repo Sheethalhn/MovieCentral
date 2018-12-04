@@ -5,6 +5,9 @@ import './AllMovies.css'
 import {getAllMovies, getFilterMovies, getNewPage} from "../../api/API";
 import Paging from './Paging/paging'
 import FilterForm from './FilterForm/FilterForm';
+import {selectedMovie} from "../../actions";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 let Filter = () => (<svg aria-hidden="true" data-prefix="fas" data-icon="filter" className="svg-inline--fa fa-filter fa-w-16" role="img"
          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style={{height:'8px'}}>
@@ -111,6 +114,11 @@ class All_Movies extends Component {
         return uri
     };
 
+    handleClick = (movie)=>{
+        this.props.selectedMovie(movie);
+        this.props.redirectURL('/moviedetail')
+    };
+
     render(){
         let moviedata = [];
         let paging = <Paging size={this.state.totalPages} current={this.state.currentPage}
@@ -121,11 +129,11 @@ class All_Movies extends Component {
         if(this.state.content){
                 for(var index in this.state.content){
                     let movie = this.state.content[index];
-                    moviedata.push(<MovieItem quality = "HD" movie_id={movie.movieId}
-                                              image={movie.image}
-                                              title={movie.title}
-                                              key = {movie.movieId}
-                    />)
+                    moviedata.push(<div onClick={()=>this.handleClick(movie)}><MovieItem quality = "HD" movie_id={movie.movieId}
+                                                   image={movie.image}
+                                                   title={movie.title}
+                                                   key = {movie.movieId}
+                    /></div>)
                 }
 
         }else{
@@ -199,4 +207,12 @@ class All_Movies extends Component {
 
 }
 
-export default All_Movies;
+function mapStateToProps(state){
+    return{
+
+    }
+}
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({selectedMovie: selectedMovie}, dispatch)
+}
+export default connect(mapStateToProps, matchDispatchToProps)(All_Movies);

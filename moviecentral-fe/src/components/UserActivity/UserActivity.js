@@ -8,7 +8,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as API from '../../api/API';
 import { Link } from 'react-router-dom';
-const Timestamp = require('react-timestamp');
 
 class UserActivity extends Component {
 

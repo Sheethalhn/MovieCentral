@@ -31,6 +31,7 @@ public class PlaybackHistory {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User userObj;
 
     @ManyToOne
