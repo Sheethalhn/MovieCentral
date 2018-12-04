@@ -16,6 +16,7 @@ import Payment from '../Payment/payment';
 import Subscription from '../Subscription/subscription';
 import AllMovies from '../MovieList/AllMovies'
 import UserActivity from '../UserActivity/UserActivity';
+import MovieActivity from '../MovieActivity/MovieActivity';
 import ViewUser from '../User/ViewUser';
 import Movie_detail_crew from "../Moviedetail/MovieCrew/MovieCrew";
 
@@ -52,6 +53,7 @@ class RoutesComponent extends Component {
                 )}/>
                 <Route exact path="/moviedetailcrew" component={Movie_detail_crew} />
                 <Route exact path="/admin/useractivity" component={UserActivity} />
+                <Route exact path="/admin/movieactivity" component={MovieActivity} />
                 <Route exact path="/viewuser/:userId" component={ViewUser} />
     
 	        	<Route exact path="/admin/dashboard" component={AdminDashboard} />
