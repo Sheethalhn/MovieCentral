@@ -13,7 +13,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-
 /**
  * User JPA Repository for user related operations in database
  *
@@ -21,12 +20,18 @@ import org.springframework.data.repository.query.Param;
  */
 public interface SubscriptionRepository extends CrudRepository<UserSubscription, Long> {
 
-	@Override
-	<S extends UserSubscription> S save(S s);
-	
-	@Query(value = "SELECT u from"
+    @Override
+    <S extends UserSubscription> S save(S s);
+
+    @Query(value = "SELECT u from"
             + " UserSubscription as u where expiresOn > :currentDate  and userSubscriptionObj = :user")
-    UserSubscription findByUserId(@Param("currentDate") Date currentDate,@Param("user") User user);
+    UserSubscription findByUserId(@Param("currentDate") Date currentDate, @Param("user") User user);
+
+    @Query(value = "SELECT COUNT(*) as income FROM UserSubscription where subscriptionType = 'M' AND createdOn <= previousDate AND createdOn >= currentDate ")
+    Long getMonthlySubscriptionIncome(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
+    
+    @Query(value = "SELECT COUNT(*) as income FROM UserSubscription where subscriptionType = 'M' AND createdOn <= previousDate AND createdOn >= currentDate ")
+    Long getMonthlyPayPerViewIncome(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
 }
 
 //

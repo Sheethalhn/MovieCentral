@@ -40,9 +40,16 @@ class CommonHeader extends Component {
                             </a>
                         </LinkContainer>
                         <ul id="menu" className="tabbed-primary-navigation" role="navigation">
-                            <li className="navigation-tab">Home</li>
-                            <li className="navigation-tab">Movies</li>
-                            <li className="navigation-tab">Recently watched</li>
+                            <li className="navigation-tab">
+                                <Link to='/browse'>
+                                    Movies
+                                </Link>
+                            </li>
+                            <li className="navigation-tab">
+                                <Link to='/subscription'>
+                                    Subscriptions
+                                </Link>
+                            </li>
                             {/* {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">Customers</li>} */}
                             {/* {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">Reports</li>} */}
                             {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">
@@ -51,7 +58,7 @@ class CommonHeader extends Component {
                                 </Link>
                             </li>}
                             <li className="navigation-tab nav-drop">
-                                <Link to={(this.props.user !== undefined && this.props.user !== null) ? '/viewuser/' + this.props.user.userId : ''}>Welcome, 
+                                <Link to={(this.props.user !== undefined && this.props.user !== null) ? '/viewuser/' + this.props.user.userId : ''}>Welcome,
                                     <button
                                         className="btn btn-link user-name-color"
                                         type="button"><b>{this.props.user !== undefined && this.props.user !== null ? this.props.user.firstName + " " + this.props.user.lastName : ''}</b>

@@ -69,7 +69,7 @@ class Payment extends Component {
                         <div className="payment">
                             <form noValidate onSubmit={this.handleSubmit}>
                                 <div className="form-group owner">
-                                    <label for="owner">Name</label>
+                                    <label htmlFor="owner">Name</label>
                                     <input
                                         type="text"
                                         className="form-control-sm col-sm-12"
@@ -87,7 +87,7 @@ class Payment extends Component {
                                     }
                                 </div>
                                 <div className="form-group CVV">
-                                    <label for="cvv">CVV</label>
+                                    <label htmlFor="cvv">CVV</label>
                                     <input
                                         type="number"
 
@@ -105,7 +105,7 @@ class Payment extends Component {
                                     }
                                 </div>
                                 <div className="form-group" id="card-number-field">
-                                    <label for="cardNumber">Card Number</label>
+                                    <label htmlFor="cardNumber">Card Number</label>
                                     <input
                                         type="number"
                                         className="form-control-sm col-sm-12"

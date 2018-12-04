@@ -73,4 +73,18 @@ public class UserController {
             return new ResponseEntity(responseObject, HttpStatus.NOT_FOUND);
         }
     }
+    
+    @GetMapping(path = "/users/{type}/{month}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getUsersBySubscriptionType(@PathVariable("type") String type,@PathVariable("monrh") Integer month) {
+        List<User> allActiveUsers = userService.getUsersBySubscriptionType(type,month);
+        if (!CollectionUtils.isEmpty(allActiveUsers)) {
+            responseObject.setData(allActiveUsers);
+            responseObject.setMeta("Users retrieved successfully.");
+            return new ResponseEntity(responseObject, HttpStatus.OK);
+        } else {
+            responseObject.setData(null);
+            responseObject.setMeta("No Users found");
+            return new ResponseEntity(responseObject, HttpStatus.NOT_FOUND);
+        }
+    }
 }

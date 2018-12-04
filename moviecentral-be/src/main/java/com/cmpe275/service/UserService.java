@@ -75,7 +75,37 @@ public class UserService {
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
         previousDate = cal.getTime();
-        List<User> topUsers = userRepository.getTopUsersBasedOnTime(previousDate, currentDate,new PageRequest(0, 10));
+        List<User> topUsers = userRepository.getTopUsersBasedOnTime(previousDate, currentDate, new PageRequest(0, 10));
+        return topUsers;
+    }
+
+    public List<User> getUsersBySubscriptionType(List<String> subscriptionType, Integer month) {
+        Calendar currentCal = Calendar.getInstance();
+        currentCal.set(Calendar.HOUR_OF_DAY, 0);
+        currentCal.set(Calendar.MINUTE, 0);
+        currentCal.set(Calendar.SECOND, 0);
+        currentCal.set(Calendar.MILLISECOND, 0);
+        Date currentDate = currentCal.getTime();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(currentDate);
+        Date previousDate;
+        if (!month.equals(null)) {
+            currentCal.set(Calendar.MONTH, month);
+            currentCal.set(Calendar.DAY_OF_MONTH, 1);
+            currentDate = currentCal.getTime();
+            currentCal.add(Calendar.MONTH, 1);
+            currentCal.add(Calendar.DAY_OF_MONTH, -1);
+            previousDate = currentCal.getTime();
+        } else {
+            cal.set(Calendar.MONTH, 0);
+            cal.set(Calendar.YEAR, 1050);
+        }
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        previousDate = cal.getTime();
+        List<User> topUsers = userRepository.getUsersBySubscriptionType(previousDate, currentDate, subscriptionType);
         return topUsers;
     }
 
