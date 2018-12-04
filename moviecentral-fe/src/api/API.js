@@ -388,6 +388,51 @@ export const getFilterMovies = (page, uri) =>
         return error;
     });
 
+export const getRatings = (movieId) =>
+    fetch(`${api}/movie/reviews?movieId=${movieId}`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify()
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
+export const getTopMoviesBasedOnTime = (payload) =>
+    fetch(`${api}/movies/activity/` + payload, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+export const addRating = (payload) =>
+    fetch(`${api}/movie/reviews`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
 let successHandler = (res) => {
     if (res.status === 401) {
         // UserHelper.redirectToLogin();

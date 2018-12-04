@@ -17,14 +17,15 @@ import Subscription from '../Subscription/subscription';
 import AllMovies from '../MovieList/AllMovies'
 import UserActivity from '../UserActivity/UserActivity';
 import SubscriptionReport from '../FinancialReports/SubscriptionReport';
+import IncomeReport from '../FinancialReports/IncomeReport';
+import MovieActivity from '../MovieActivity/MovieActivity';
 import ViewUser from '../User/ViewUser';
-import Movie_detail_crew from "../Moviedetail/MovieCrew/MovieCrew";
 
 // Admin Routes
 import AdminDashboard from "../admin/dashboard/dashboard";
 import AddMovie from "../admin/AddEditMovie/addMovie";
 import EditMovie from "../admin/AddEditMovie/editMovie";
-import IncomeReport from '../FinancialReports/IncomeReport';
+
 
 
 class RoutesComponent extends Component {
@@ -52,12 +53,11 @@ class RoutesComponent extends Component {
                         <AllMovies redirectURL={this.redirectURL} />
                     </div>
                 )}/>
-                <Route exact path="/moviedetailcrew" component={Movie_detail_crew} />
+                <Route exact path="/viewuser/:userId" component={ViewUser} />
                 <Route exact path="/admin/useractivity" component={UserActivity} />
                 <Route exact path="/admin/subscriptionreports" component={SubscriptionReport} />
                 <Route exact path="/admin/incomereports" component={IncomeReport} />
-                <Route exact path="/viewuser/:userId" component={ViewUser} />
-    
+                <Route exact path="/admin/movieactivity" component={MovieActivity} />
 	        	<Route exact path="/admin/dashboard" component={AdminDashboard} />
                 <Route exact path="/admin/dashboard/addmovie" component={AddMovie} />
                 <Route exact path="/admin/dashboard/editmovie/:id" component={EditMovie} />

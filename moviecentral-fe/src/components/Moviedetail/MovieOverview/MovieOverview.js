@@ -5,9 +5,10 @@ import stargrey from './star-grey.png'
 import staryellow from './staryellow.png'
 import {connect} from "react-redux";
 // import * as API from "../../../api/apicall_for_users"; Temporarily disabling API calls
-import YouTube from 'react-youtube';
-import MovieBox from '../MovieDetailBox/MovieDetailBox'
-import MovieCrew from '../MovieCrew/MovieCrew'
+import MovieBox from '../MovieDetailBox/MovieDetailBox';
+import MovieCrew from '../MovieCrew/MovieCrew';
+import ReactPlayer from 'react-player'
+
 
 class MovieOverview extends Component {
 
@@ -17,6 +18,7 @@ class MovieOverview extends Component {
             avgrating: this.props.stars,
             totalrating: 0
         }
+        this.movieStart = this.movieStart.bind(this);
     }
 
     componentDidMount(){
@@ -28,6 +30,10 @@ class MovieOverview extends Component {
         //             "totalrating":result.data.aggregates.totalrating,
         //         });
         //     })
+    }
+
+    movieStart() {
+        debugger
     }
 
     render(){
@@ -47,10 +53,11 @@ class MovieOverview extends Component {
                     <div id="DIV_2">
                         <div id="DIV_3">
                             <div id="DIV_4">
-                                <YouTube
-                                    videoId={'mBBuzHrZBro'}
-                                    autoplay={true}
-                                    opts={{"height": '125%',"width": '130%'}}
+                                <ReactPlayer 
+                                    url={this.props.movie.movieURL} 
+                                    height="125%"
+                                    width="130%"
+                                    onStart={this.movieStart}
                                 />
                             </div>
                         </div>
