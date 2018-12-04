@@ -313,6 +313,21 @@ export const getFilterMovies = (page,uri) =>
         return error;
     });
 
+export const getRatings = (movieId) =>
+    fetch(`${api}/movie/reviews?movieId=${movieId}`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify()
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 let successHandler = (res) => {
     if (res.status === 401) {
         // UserHelper.redirectToLogin();

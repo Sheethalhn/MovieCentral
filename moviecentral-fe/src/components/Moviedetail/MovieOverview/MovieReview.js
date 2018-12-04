@@ -5,10 +5,9 @@ import {Link} from 'react-router-dom';
 import stargrey from './star-grey.png';
 import staryellow from './staryellow.png';
 import {connect} from "react-redux";
-import * as API from './../../../api/apicall_for_users';
+import * as API from '../../../api/API';
 import {selectedReview} from "../../../actions";
-import {bindActionCreators} from "redux";
-import MovieHallsBox from '../../MovieDetailBox/MovieDetailBox';
+import MovieHallsBox from '../MovieDetailBox/MovieDetailBox';
 
 class MovieReview extends Component {
 
@@ -16,19 +15,22 @@ class MovieReview extends Component {
         super(props);
 
         this.state={
-            movie_id: this.props.movie.id.toString(),
+            movie_id: this.props.movie.movieId.toString(),
             reviews: [],
-            ratings: '',
+            ratings: {
+                "totalreviews": 2,
+                "avgratings": 5
+            },
             display: ''
         }
     }
 
     componentDidMount(){
-        API.getRatings(this.state)
+        API.getRatings(this.props.movie.movieId)
             .then((result) => {
                 this.setState({
-                    ratings: result.data.aggregates,
-                    reviews: result.data.ratings,
+                    ratings: result.aggregates,
+                    reviews: result.data,
                 });
 
             })
@@ -47,17 +49,17 @@ class MovieReview extends Component {
         else if(this.props.user !== undefined && this.props.user !== null) {
             this.state.reviews.map((review) => {
 
-                if (review.userId == this.props.user.userId) {
+                if (review.user.userId === this.props.user.userId) {
                     display = "no";
                 }
 
             })
         }
 
-        if(display == "no"){
+        if(display === "no"){
             return (<div></div>)
         }
-        else if(display == "semi") {
+        else if(display === "semi") {
             return(
                 <div className="submit-review">
                     <Link to="/login"> LOGIN HERE TO WRITE REVIEW!!</Link>
@@ -77,7 +79,7 @@ class MovieReview extends Component {
     renderReviews(){
         if(this.props.user === undefined || this.props.user === null){
             return this.state.reviews.map((review) => {
-                console.log(review);
+
                 return (
                     <div className="review-tab">
                         <div className="star-review-pos">
@@ -89,14 +91,14 @@ class MovieReview extends Component {
                             />
 
                         </div>
-                        <div className="review-spacing">
-                            <h4>{review.review_title}</h4>
-                        </div>
+                        {/*<div className="review-spacing">*/}
+                            {/*<h4>{review.review_title}</h4>*/}
+                        {/*</div>*/}
                         <div className="reviewer-name">
-                            <h5>Review By: {review.first_name}</h5>
+                            <h5>Review By: {review.user.screenName}</h5>
                         </div>
                         <div className="review-body">
-                            <h6>{review.review_body}
+                            <h6>{review.text}
                             </h6>
                         </div>
                     </div>
@@ -110,7 +112,7 @@ class MovieReview extends Component {
             return this.state.reviews.map((review) => {
 
 
-                if (review.userId != this.props.user.userId) {
+                if (review.user.userId !== this.props.user.userId) {
                     return (
                         <div className="review-tab">
                             <div className="star-review-pos">
@@ -122,14 +124,14 @@ class MovieReview extends Component {
                                 />
 
                             </div>
-                            <div className="review-spacing">
-                                <h4>{review.review_title}</h4>
-                            </div>
+                            {/*<div className="review-spacing">*/}
+                                {/*<h4>{review.review_title}</h4>*/}
+                            {/*</div>*/}
                             <div className="reviewer-name">
-                                <h5>Review By: {review.first_name}</h5>
+                                <h5>Review By: {review.user.screenName}</h5>
                             </div>
                             <div className="review-body">
-                                <h6>{review.review_body}
+                                <h6>{review.text}
                                 </h6>
                             </div>
                         </div>
@@ -147,22 +149,22 @@ class MovieReview extends Component {
                                 />
 
                             </div>
-                            <div className="review-spacing">
-                                <h4>{review.review_title}</h4>
-                            </div>
+                            {/*<div className="review-spacing">*/}
+                                {/*<h4>{review.review_title}</h4>*/}
+                            {/*</div>*/}
                             <div className="reviewer-name">
-                                <h5>Review By: {review.first_name}</h5>
+                                <h5>Review By: {review.screenName}</h5>
                             </div>
                             <div className="review-body">
-                                <h6>{review.review_body}
+                                <h6>{review.text}
                                 </h6>
                             </div>
-                            <div style={{}}>
-                                <button type="button" className="btn"
-                                        style={{marginTop: "120px", marginLeft: '80%', backgroundColor: '#f15500'}}
-                                        onClick={() => this.updateReview(this.props.selectedReview(review))}>EDIT
-                                </button>
-                            </div>
+                            {/*<div style={{}}>*/}
+                                {/*<button type="button" className="btn"*/}
+                                        {/*style={{marginTop: "120px", marginLeft: '80%', backgroundColor: '#f15500'}}*/}
+                                        {/*onClick={() => this.updateReview(this.props.selectedReview(review))}>EDIT*/}
+                                {/*</button>*/}
+                            {/*</div>*/}
                         </div>
                     )
                 }
@@ -187,13 +189,13 @@ class MovieReview extends Component {
                         <h3 className="review-header-font">FANS SAY</h3>
                         <div className="star-pos">
                             <Rating
-                                placeholderRating={this.state.ratings.avgrating}
+                                placeholderRating={this.state.ratings.avgratings}
                                 emptySymbol={<img src={stargrey} className="icon" />}
                                 placeholderSymbol={<img src={staryellow} className="icon" />}
                                 fullSymbol={<img src={staryellow} className="icon" />}
                             />
                         </div>
-                        <h6 className="fans-rating"> {this.state.ratings.totalrating} Fan Ratings</h6>
+                        <h6 className="fans-rating"> {this.state.ratings.totalreviews} Fan Ratings</h6>
 
                     </div>
 
@@ -211,11 +213,11 @@ function mapStateToProps(state){
     return{
         user: state.loginUser,
         movie: state.selectedMovie,
-        review: state.selectedReview
+        // review: state.selectedReview
     }
 }
 
-function matchDispatchToProps(dispatch){
-    return bindActionCreators({selectedReview: selectedReview}, dispatch)
-}
-export default connect(mapStateToProps, matchDispatchToProps)(MovieReview);
+// function matchDispatchToProps(dispatch){
+//     return bindActionCreators({selectedReview: selectedReview}, dispatch)
+// }
+export default connect(mapStateToProps, null)(MovieReview);
