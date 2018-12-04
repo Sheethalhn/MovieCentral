@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './MovieItem.css'
 import { Link } from 'react-router-dom';
 
+
 class MovieItem extends Component{
     constructor(props){
         super(props);
