@@ -27,6 +27,8 @@ public class Review {
     @JoinColumn(referencedColumnName = "user_id")
     private User user;
 
+    private String title;
+
     private Long movieId;
 
     public User getUser() {
@@ -39,11 +41,20 @@ public class Review {
 
     public Review(){}
 
-    public Review(String text, Double rating, Long movieId, User user) {
+    public Review(String text, Double rating, Long movieId, User user, String title) {
         this.text = text;
         this.rating = rating;
         this.movieId = movieId;
         this.user = user;
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Long getReviewId() {

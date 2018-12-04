@@ -9,22 +9,28 @@ import { connect } from "react-redux";
 import {bindActionCreators} from "redux";
 import MovieCrew from './MovieCrew/MovieCrew'
 import MovieReview from "./MovieOverview/MovieReview";
+import AddReview from "./MovieOverview/MovieAddReview";
 
 class Movie_detail extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            ActiveComponent: <MoveOverview />
+            ActiveComponent: <MoveOverview />,
+            showSynopsys: 'block'
         }
     }
 
     handleCastClick = ()=> {
-        this.setState({...this.state,ActiveComponent: <MovieCrew/>})
+        this.setState({...this.state,ActiveComponent: <MovieCrew/>, showSynopsys: 'block'})
     };
 
     handleReviews = ()=>{
-        this.setState({...this.state,ActiveComponent: <MovieReview/>})
+        this.setState({...this.state,ActiveComponent: <MovieReview onAdd={this.handleAddReviews}/>,showSynopsys:'none'})
+    };
+
+    handleAddReviews = ()=>{
+        this.setState({...this.state, ActiveComponent: <AddReview onDone={this.handleReviews}/>})
     };
 
     render() {
@@ -69,7 +75,7 @@ class Movie_detail extends Component {
                                         </h1>
                                         <ul className="movie-detail-section-subnav">
                                             <li className="movie-detail-section-subnav-item">
-                                                <label className="movie-detail-section-subnav-item-link" onClick={() => this.setState({ ...this.state, ActiveComponent: <MoveOverview /> })}>
+                                                <label className="movie-detail-section-subnav-item-link" onClick={() => this.setState({ ...this.state, ActiveComponent: <MoveOverview />,  showSynopsys: 'block' })}>
                                                     Overview
                                                 </label>
                                             </li>
@@ -92,7 +98,7 @@ class Movie_detail extends Component {
                                     </div>
                                 </div>
                             </section>
-                            <div className="footer-overview">
+                            <div className="footer-overview" style={{'display':this.state.showSynopsys}}>
                                 <h4 className="footer-overview-font">{this.props.movie.title}   <span style={{ color: "#f15500" }}>Synopsis</span></h4>
                                 <div style={{ marginLeft: "25%", width: "50%", textAlign: "center", marginTop: '20px' }}>
                                     <h4 className="footer-overview-font" style={{ paddingTop: '0px' }}>{this.props.movie.synopsis} </h4>

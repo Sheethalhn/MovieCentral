@@ -342,6 +342,22 @@ export const getTopMoviesBasedOnTime = (payload) =>
         console.log("This is error");
         return error;
     });
+
+export const addRating = (payload) =>
+    fetch(`${api}/movie/reviews`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
 let successHandler = (res) => {
     if (res.status === 401) {
         // UserHelper.redirectToLogin();

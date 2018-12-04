@@ -18,7 +18,6 @@ import AllMovies from '../MovieList/AllMovies'
 import UserActivity from '../UserActivity/UserActivity';
 import MovieActivity from '../MovieActivity/MovieActivity';
 import ViewUser from '../User/ViewUser';
-// import Movie_detail_crew from "../Moviedetail/MovieCrew/MovieCrew";
 
 // Admin Routes
 import AdminDashboard from "../admin/dashboard/dashboard";
@@ -51,7 +50,6 @@ class RoutesComponent extends Component {
                         <AllMovies redirectURL={this.redirectURL} />
                     </div>
                 )}/>
-                {/*<Route exact path="/moviedetailcrew" component={Movie_detail_crew} />*/}
                 <Route exact path="/admin/useractivity" component={UserActivity} />
                 <Route exact path="/admin/movieactivity" component={MovieActivity} />
                 <Route exact path="/viewuser/:userId" component={ViewUser} />

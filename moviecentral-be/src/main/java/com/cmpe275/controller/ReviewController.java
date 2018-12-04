@@ -35,12 +35,12 @@ public class ReviewController {
 
     @PostMapping(path = "/movie/reviews")
     public ResponseEntity<?> addReview(@RequestBody Review r){
-        User u = userServ.getUserById((Long)session.getAttribute("userId"));
+        Long id = (Long)session.getAttribute("userId");
 
-        if(u.getUserId() == null){
+        if(id == null){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("401");
         }
-        r.setUser(u);
+        r.setUser(userServ.getUserById(id));
         return ResponseEntity.ok(serv.addReview(r));
     }
     

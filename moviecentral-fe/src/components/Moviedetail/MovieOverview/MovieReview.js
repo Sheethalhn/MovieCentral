@@ -69,7 +69,7 @@ class MovieReview extends Component {
         else{
             return(
                 <div className="submit-review">
-                    <Link to="/moviedetailaddreview">TELL US WHAT YOU THINK!!</Link>
+                    <label className="submit-review-button" style={{display:"block"}} onClick={this.props.onAdd}>TELL US WHAT YOU THINK!!</label>
                 </div>
             )
         }
@@ -88,12 +88,13 @@ class MovieReview extends Component {
                                 emptySymbol={<img src={stargrey} className="icon"/>}
                                 placeholderSymbol={<img src={staryellow} className="icon"/>}
                                 fullSymbol={<img src={staryellow} className="icon"/>}
+                                readonly = {true}
                             />
 
                         </div>
-                        {/*<div className="review-spacing">*/}
-                            {/*<h4>{review.review_title}</h4>*/}
-                        {/*</div>*/}
+                        <div className="review-spacing">
+                            <h4>{review.title}</h4>
+                        </div>
                         <div className="reviewer-name">
                             <h5>Review By: {review.user.screenName}</h5>
                         </div>
@@ -121,12 +122,13 @@ class MovieReview extends Component {
                                     emptySymbol={<img src={stargrey} className="icon"/>}
                                     placeholderSymbol={<img src={staryellow} className="icon"/>}
                                     fullSymbol={<img src={staryellow} className="icon"/>}
+                                    readonly = {true}
                                 />
 
                             </div>
-                            {/*<div className="review-spacing">*/}
-                                {/*<h4>{review.review_title}</h4>*/}
-                            {/*</div>*/}
+                            <div className="review-spacing">
+                                <h4>{review.title}</h4>
+                            </div>
                             <div className="reviewer-name">
                                 <h5>Review By: {review.user.screenName}</h5>
                             </div>
@@ -146,14 +148,15 @@ class MovieReview extends Component {
                                     emptySymbol={<img src={stargrey} className="icon"/>}
                                     placeholderSymbol={<img src={staryellow} className="icon"/>}
                                     fullSymbol={<img src={staryellow} className="icon"/>}
+                                    readonly = {true}
                                 />
 
                             </div>
-                            {/*<div className="review-spacing">*/}
-                                {/*<h4>{review.review_title}</h4>*/}
-                            {/*</div>*/}
+                            <div className="review-spacing">
+                                <h4>{review.title}</h4>
+                            </div>
                             <div className="reviewer-name">
-                                <h5>Review By: {review.screenName}</h5>
+                                <h5>Review By: {review.user.screenName}</h5>
                             </div>
                             <div className="review-body">
                                 <h6>{review.text}
@@ -193,6 +196,7 @@ class MovieReview extends Component {
                                 emptySymbol={<img src={stargrey} className="icon" />}
                                 placeholderSymbol={<img src={staryellow} className="icon" />}
                                 fullSymbol={<img src={staryellow} className="icon" />}
+                                readonly = {true}
                             />
                         </div>
                         <h6 className="fans-rating"> {this.state.ratings.totalreviews} Fan Ratings</h6>

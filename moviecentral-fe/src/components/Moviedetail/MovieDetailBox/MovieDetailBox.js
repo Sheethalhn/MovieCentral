@@ -84,7 +84,7 @@ class Movie_Box extends Component{
 
                         {/*</div>*/}
                         <Rating
-                            placeholderRating={this.state.avgrating}
+                            initialRating={this.state.avgrating}
                             emptySymbol={<img src={stargrey} className="icon" />}
                             placeholderSymbol={<img src={staryellow} className="icon" />}
                             fullSymbol={<img src={staryellow} className="icon" />}

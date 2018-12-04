@@ -275,8 +275,8 @@
 }
 
 .view-review-box{
-    min-height: 300px;
     margin-top: 1%;
+    left: 40%;
 
 }
 
@@ -295,15 +295,13 @@
 }
 
 .star-pos{
-    position: absolute;
+    position: relative;
     padding-left: 25%;
-    padding-top: 10px;
+    padding-top: 3.5%;
 }
 
 .fans-rating{
-    position: absolute;
     padding-left: 25%;
-    padding-top: 40px;
     font-size: 12px;
     color: white;
     font-style: italic;
@@ -311,9 +309,21 @@
 
 .submit-review{
     border: 1px solid white;
-    height: 50px;
+     /*height: 50px;*/
     background-color: white;
-    padding-top: 15px;
+    /* padding-top: 15px; */
+    text-decoration: none;
+    width: 100%;
+    padding-left: 70%;
+}
+
+.submit-review-button{
+    background-color: darkorange; /* Green */
+    border: none;
+    color: white;
+    padding: 0px 20px;
+    text-align: center;
+    text-decoration: none;
 }
 
 .review-tab{
@@ -1447,7 +1457,7 @@
 
 
 .addreview-header{
-    height: 70px;
+    height: 100px;
     background-color: white;
     margin-top: 2px;
 
@@ -1458,6 +1468,7 @@
     text-align: left;
     padding-left: 10px;
     padding-top: 20px;
+    width: 72%;
 }
 
 .addreview-header-star{
@@ -1474,7 +1485,7 @@
 }
 
 .addreview-body-input{
-    padding-top: 12%;
+    padding-top: 10%;
     padding-left: 10px;
     width: 90%
 }
