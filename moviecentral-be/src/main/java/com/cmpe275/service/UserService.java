@@ -81,15 +81,12 @@ public class UserService {
 
     public List<User> getUsersBySubscriptionType(List<String> subscriptionType, Integer month) {
         Calendar currentCal = Calendar.getInstance();
-        currentCal.set(Calendar.HOUR_OF_DAY, 0);
-        currentCal.set(Calendar.MINUTE, 0);
-        currentCal.set(Calendar.SECOND, 0);
-        currentCal.set(Calendar.MILLISECOND, 0);
+        currentCal = Constant.getDateFromTimestamp(currentCal);
         Date currentDate = currentCal.getTime();
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
         Date previousDate;
-        if (!month.equals(null)) {
+        if (!month.equals(-1)) {
             currentCal.set(Calendar.MONTH, month);
             currentCal.set(Calendar.DAY_OF_MONTH, 1);
             currentDate = currentCal.getTime();
@@ -100,12 +97,70 @@ public class UserService {
             cal.set(Calendar.MONTH, 0);
             cal.set(Calendar.YEAR, 1050);
         }
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
+        cal = Constant.getDateFromTimestamp(cal);
         previousDate = cal.getTime();
+        currentCal.add(Calendar.DAY_OF_MONTH, 1);
+        currentDate = currentCal.getTime();
+        System.out.println("previousDate :" + previousDate);
+        System.out.println("currentDate :" + currentDate);
+        System.out.println("subscriptionType :" + subscriptionType);
         List<User> topUsers = userRepository.getUsersBySubscriptionType(previousDate, currentDate, subscriptionType);
+        return topUsers;
+    }
+
+    public List<User> getActiveUsersByMonth(Integer month) {
+        Calendar currentCal = Calendar.getInstance();
+        currentCal = Constant.getDateFromTimestamp(currentCal);
+        Date currentDate = currentCal.getTime();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(currentDate);
+        Date previousDate;
+        if (!month.equals(-1)) {
+            currentCal.set(Calendar.MONTH, month);
+            currentCal.set(Calendar.DAY_OF_MONTH, 1);
+            currentDate = currentCal.getTime();
+            currentCal.add(Calendar.MONTH, 1);
+            currentCal.add(Calendar.DAY_OF_MONTH, -1);
+            previousDate = currentCal.getTime();
+        } else {
+            cal.set(Calendar.MONTH, 0);
+            cal.set(Calendar.YEAR, 1050);
+        }
+        cal = Constant.getDateFromTimestamp(cal);
+        previousDate = cal.getTime();
+        currentCal.add(Calendar.DAY_OF_MONTH, 1);
+        currentDate = currentCal.getTime();
+        System.out.println("previousDate :" + previousDate);
+        System.out.println("currentDate :" + currentDate);
+        List<User> topUsers = userRepository.getActiveUsersByMonth(previousDate, currentDate);
+        return topUsers;
+    }
+
+    public List<User> getActiveUserPlayBackByMonth(Integer month) {
+        Calendar currentCal = Calendar.getInstance();
+        currentCal = Constant.getDateFromTimestamp(currentCal);
+        Date currentDate = currentCal.getTime();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(currentDate);
+        Date previousDate;
+        if (!month.equals(-1)) {
+            currentCal.set(Calendar.MONTH, month);
+            currentCal.set(Calendar.DAY_OF_MONTH, 1);
+            currentDate = currentCal.getTime();
+            currentCal.add(Calendar.MONTH, 1);
+            currentCal.add(Calendar.DAY_OF_MONTH, -1);
+            previousDate = currentCal.getTime();
+        } else {
+            cal.set(Calendar.MONTH, 0);
+            cal.set(Calendar.YEAR, 1050);
+        }
+        cal = Constant.getDateFromTimestamp(cal);
+        previousDate = cal.getTime();
+        currentCal.add(Calendar.DAY_OF_MONTH, 1);
+        currentDate = currentCal.getTime();
+        System.out.println("previousDate :" + previousDate);
+        System.out.println("currentDate :" + currentDate);
+        List<User> topUsers = userRepository.getActiveUserPlayBackByMonth(previousDate, currentDate);
         return topUsers;
     }
 

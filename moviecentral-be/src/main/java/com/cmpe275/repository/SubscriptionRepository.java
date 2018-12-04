@@ -32,11 +32,11 @@ public interface SubscriptionRepository extends CrudRepository<UserSubscription,
             + " UserSubscription as u where expiresOn > :currentDate  and userSubscriptionObj = :user and  movieSubscriptionObj = :movie")
     UserSubscription findByMovieId(@Param("currentDate") Date currentDate, @Param("user") User user, @Param("movie") Movie movie);
     
-     @Query(value = "SELECT COUNT(*) as income FROM UserSubscription where subscriptionType = 'M' AND createdOn <= previousDate AND createdOn >= currentDate ")
+     @Query(value = "SELECT COUNT(*) as income FROM UserSubscription where subscriptionType = 'M' AND createdOn >= :previousDate AND createdOn <= :currentDate ")
     Long getMonthlySubscriptionIncome(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
 
     @Query(value = "SELECT SUM(m.price) AS income FROM UserSubscription as sub JOIN Movie as m ON sub.movieSubscriptionObj = m.movieId "
-            + "WHERE sub.subscriptionType IN ('V' , 'P') AND sub.createdOn <= '' AND sub.createdOn >= '' ")
+            + "WHERE sub.subscriptionType IN ('V' , 'P') AND sub.createdOn >= :previousDate AND sub.createdOn <= :currentDate ")
     Long getMonthlyPayPerViewIncome(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
 
 }

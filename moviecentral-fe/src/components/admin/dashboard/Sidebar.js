@@ -5,7 +5,7 @@ class Sidebar extends Component {
 
     render() {
 
-        return(
+        return (
             <ul className="sidebar-nav">
                 <li>
                     <Link to="/admin/dashboard/addmovie">Add Movie</Link>
@@ -20,8 +20,16 @@ class Sidebar extends Component {
                     <Link to="/admin/movieactivity">Movie Acitvity Report</Link>
                 </li>
                 <li>
-                    <Link to="/admin/financereports">Financial Report</Link>
+                    <a href="javascript:void(0);">Financial Report</a>
                 </li>
+                <ul className="sub-menu-reports">
+                    <li className="sub-menu-item-reports">
+                        <Link to="/admin/subscriptionreports">Subscriptions Reports</Link>
+                    </li>
+                    <li className="sub-menu-item-reports">
+                        <Link to="/admin/incomereports">Central Income Reports</Link>
+                    </li>
+                </ul>
             </ul>
         )
     }

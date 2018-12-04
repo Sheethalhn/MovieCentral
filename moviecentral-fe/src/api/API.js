@@ -119,6 +119,81 @@ export const getTopUsersBasedOnTime = (payload) =>
         return error;
     });
 
+export const getActiveUsersByMonth = (month) =>
+    fetch(`${api}/users/active/` + month, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+export const getActiveUserPlayBackByMonth = (month) =>
+    fetch(`${api}/users/playback/` + month, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+export const getUsersBySubscriptionType = (type, month) =>
+    fetch(`${api}/users/` + type + "/" + month, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+export const getMonthlySubscriptionIncome = (payload) =>
+    fetch(`${api}/income/subscribed/` + payload, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+export const getMonthlyPayPerViewIncome = (payload) =>
+    fetch(`${api}/income/ppv/` + payload, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
 export const getUserById = (payload) =>
     fetch(`${api}/user/` + payload, {
         method: 'GET',
@@ -298,7 +373,7 @@ export const getFilterOptions = () =>
         return error;
     });
 
-export const getFilterMovies = (page,uri) =>
+export const getFilterMovies = (page, uri) =>
     fetch(`${api}/movie/filters/execute?page=${page}&size=1&${uri}`, {
         method: 'GET',
         headers: {

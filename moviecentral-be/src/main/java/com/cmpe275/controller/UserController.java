@@ -76,10 +76,38 @@ public class UserController {
     }
     
     @GetMapping(path = "/users/{type}/{month}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getUsersBySubscriptionType(@PathVariable("type") String type,@PathVariable("monrh") Integer month) {
-        List<User> allActiveUsers = userService.getUsersBySubscriptionType(Arrays.asList(type.split(",")),month);
-        if (!CollectionUtils.isEmpty(allActiveUsers)) {
-            responseObject.setData(allActiveUsers);
+    public ResponseEntity<?> getUsersBySubscriptionType(@PathVariable("type") String type,@PathVariable("month") Integer month) {
+        List<User> users = userService.getUsersBySubscriptionType(Arrays.asList(type.split(",")),month);
+        if (!CollectionUtils.isEmpty(users)) {
+            responseObject.setData(users);
+            responseObject.setMeta("Users retrieved successfully.");
+            return new ResponseEntity(responseObject, HttpStatus.OK);
+        } else {
+            responseObject.setData(null);
+            responseObject.setMeta("No Users found");
+            return new ResponseEntity(responseObject, HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @GetMapping(path = "/users/active/{month}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getActiveUsersByMonth(@PathVariable("month") Integer month) {
+        List<User> users = userService.getActiveUsersByMonth(month);
+        if (!CollectionUtils.isEmpty(users)) {
+            responseObject.setData(users);
+            responseObject.setMeta("Users retrieved successfully.");
+            return new ResponseEntity(responseObject, HttpStatus.OK);
+        } else {
+            responseObject.setData(null);
+            responseObject.setMeta("No Users found");
+            return new ResponseEntity(responseObject, HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @GetMapping(path = "/users/playback/{month}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getActiveUserPlayBackByMonth(@PathVariable("month") Integer month) {
+        List<User> users = userService.getActiveUserPlayBackByMonth(month);
+        if (!CollectionUtils.isEmpty(users)) {
+            responseObject.setData(users);
             responseObject.setMeta("Users retrieved successfully.");
             return new ResponseEntity(responseObject, HttpStatus.OK);
         } else {

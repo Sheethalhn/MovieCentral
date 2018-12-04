@@ -5,6 +5,8 @@
  */
 package com.cmpe275.utility;
 
+import java.util.Calendar;
+
 /**
  *
  * @author Shreya Shah
@@ -25,6 +27,12 @@ public class Constant {
     
     public static final Integer SUBSCRIPTION_FEES = 10;
     
-    
+    public static Calendar getDateFromTimestamp(Calendar calendar) {
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar;
+    }
     
 }
