@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CommonHeader from '../../header/CommonHeader';
-import Sidebar from "../Dashboard/Sidebar";
+import Sidebar from "../dashboard/Sidebar";
 import FullMovieForm from "./FullMovieForm";
 import { getOneMovie } from "../../../api/API";
 
