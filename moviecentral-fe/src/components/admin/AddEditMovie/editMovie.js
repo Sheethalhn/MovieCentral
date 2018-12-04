@@ -2,8 +2,27 @@ import React, { Component } from 'react';
 import CommonHeader from '../../header/CommonHeader';
 import Sidebar from "../Dashboard/Sidebar";
 import FullMovieForm from "./FullMovieForm";
+import { getOneMovie } from "../../../api/API";
+
+
+
 
 class AddMovie extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            movie: {}
+        }
+    }
+
+    componentDidMount() {
+        const { match } = this.props;
+        getOneMovie(match.params.id).then((movie) => {
+            this.setState({movie})
+        })
+    }
+
     render() {
         return (
             <div className="container-body admin-dashboard" id="outer-container">
@@ -18,9 +37,9 @@ class AddMovie extends Component {
                     <div id="page-content-wrapper">
                         <div className="container-fluid">
                             <div id="FullMovieForm" className="admin-sub-header">
-                                <h2>Edit "MovieName"</h2>
+                                <h2>Edit {this.state.movie.title}</h2>
                                 <br />
-                                <FullMovieForm />
+                                <FullMovieForm movie={this.state.movie} type="edit"/>
                             </div>
                         </div>
                     </div>

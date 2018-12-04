@@ -179,6 +179,20 @@ export const getAllMovies = () =>
         return error;
     });
 
+export const getOneMovie = (id) =>
+    fetch(`${api}/movies/${id}`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 export const addNewMovie = (payload) =>
     fetch(`${api}/movie`, {
         method: 'POST',

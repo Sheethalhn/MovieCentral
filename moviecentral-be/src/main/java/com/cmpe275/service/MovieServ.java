@@ -29,6 +29,12 @@ public class MovieServ {
         return movieRepo.save(m);
     }
 
+    
+
+    // public void deleteMovie(Long id) {
+    //     movieRepo.deleteById(id);
+    // }
+
     public Page<Movie> getAllMovies(Pageable p){
         return movieRepo.findAll(p);
     }
@@ -36,6 +42,10 @@ public class MovieServ {
     public List<Movie> getAllMovies(){
         return movieRepo.findAll();
     }
+
+    public Movie getOneMovie(Long id) {
+        return movieRepo.findByMovieId(id);
+    } 
 
 
     public FilterValues GetAllFilterValues(){

@@ -34,7 +34,6 @@ public class MovieController {
         ResponseFormat resp = new ResponseFormat();
         try {
             Movie newMovie = movieService.createMovie(movie);
-            // return ResponseEntity.ok(newMovie);
             return new ResponseEntity<Movie>(newMovie, HttpStatus.CREATED);
         } catch (Exception e) {
             resp.setData(e);
@@ -42,10 +41,38 @@ public class MovieController {
         }
     }
 
+    // @PutMapping(path = "/movie/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie, @PathVariable Long id) {
+    //     ResponseFormat resp = new ResponseFormat();
+    //     try {
+    //         Movie updatedMovie = movieService
+    //         // return ResponseEntity.ok(newMovie);
+    //         return new ResponseEntity<Movie>(newMovie, HttpStatus.CREATED);
+    //     } catch (Exception e) {
+    //         resp.setData(e);
+    //         return new ResponseEntity(resp, HttpStatus.NO_CONTENT).noContent().build();
+    //     }
+    // }
+
+    // @DeleteMapping(path="/movie/{id}")
+    // public ResponseEntity<?> deleteMovie(@PathVariable Long id) {
+    //     try {
+    //         return movieService.deleteMovie(id);
+    //     } catch(Exception e) {
+
+    //     }
+    // } 
+
     @GetMapping(path = "/allmovies", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> GetAllMovies() {
         List<Movie> movies = movieService.getAllMovies();
         return ResponseEntity.ok(movies);
+    }
+
+    @GetMapping(path="/movies/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Movie> getOneMovie(@PathVariable Long id) {
+        Movie movie = movieService.getOneMovie(id);
+        return new ResponseEntity<Movie>(movie, HttpStatus.OK);
     }
 
     @GetMapping(path = "/movie")

@@ -71,6 +71,7 @@ class FullMovieForm extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             movie: {
                 title: "",
@@ -96,6 +97,19 @@ class FullMovieForm extends Component {
 
         this.selectedActors = [];
 
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.movie.movieId !== prevState.movie.movieId) {
+            return { someState: nextProps.movie };
+        }
+        else return null;
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.movie.title !== this.props.movie.title) {
+            this.setState({ movie: this.props.movie });
+        }
     }
 
     componentDidMount() {
@@ -180,6 +194,9 @@ class FullMovieForm extends Component {
     }
 
     render() {
+        if(typeof this.props.movie === 'undefined') {
+            return null;
+        }
         return(
             <form>
                 <div className="form-row">
@@ -250,7 +267,11 @@ class FullMovieForm extends Component {
                 </div>
 
                 <button className="btn btn-secondary" onClick={this.resetForm.bind(this)}>Reset</button>
-                <button type="submit" className="btn btn-primary float-right" onClick={this.handleSubmit}>Add New Movie</button>
+                
+                <button type="submit" className="btn btn-primary float-right" onClick={this.handleSubmit}>
+                    {this.props.type === "edit" && "Edit Movie"}
+                    {this.props.type !== "edit" && "Add New Movie"} 
+                </button>
             </form>
         )
     }
