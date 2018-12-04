@@ -129,7 +129,7 @@ class All_Movies extends Component {
         if(this.state.content){
                 for(var index in this.state.content){
                     let movie = this.state.content[index];
-                    moviedata.push(<div onClick={()=>this.handleClick(movie)}><MovieItem quality = "HD" movie_id={movie.movieId}
+                    moviedata.push(<div key={index} onClick={()=>this.handleClick(movie)}><MovieItem quality = "HD" movie_id={movie.movieId}
                                                    image={movie.image}
                                                    title={movie.title}
                                                    key = {movie.movieId}
