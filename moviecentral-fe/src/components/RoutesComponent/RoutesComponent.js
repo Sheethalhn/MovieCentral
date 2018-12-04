@@ -20,7 +20,7 @@ import ViewUser from '../User/ViewUser';
 import Movie_detail_crew from "../Moviedetail/MovieCrew/MovieCrew";
 
 // Admin Routes
-import AdminDashboard from "../admin/dashboard/Dashboard";
+import AdminDashboard from "../admin/dashboard/dashboard";
 import AddMovie from "../admin/AddEditMovie/addMovie";
 import EditMovie from "../admin/AddEditMovie/editMovie";
 
