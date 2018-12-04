@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 // import { log1, pageNames } from "../../App";
 // import {selectedTrace} from '../../actions'
 import {bindActionCreators} from "redux";
-
+import MovieCrew from './MovieCrew/MovieCrew'
 
 class Movie_detail extends Component {
 
@@ -18,6 +18,9 @@ class Movie_detail extends Component {
         }
     }
 
+    handleCastClick = ()=> {
+        this.setState({...this.state,ActiveComponent: <MovieCrew/>})
+    };
 
     render() {
         let background = "//images.fandango.com/ImageRenderer/300/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/207628/fmc_mc_Rampage.jpg";
@@ -32,7 +35,7 @@ class Movie_detail extends Component {
                             <svg width="100%" height="100%">
                                 <defs>
                                     <filter id="backgroundBlur" width="150%" height="150%" x="-25%" y="-25%"
-                                        color-interpolation-filters="sRGB">
+                                            colorInterpolationFilters="sRGB">
                                         <feGaussianBlur stdDeviation="7"></feGaussianBlur>
                                         <feColorMatrix type="matrix"
                                             values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0 0 0 0 10 0"></feColorMatrix>
@@ -72,13 +75,13 @@ class Movie_detail extends Component {
                                             {/*</li>*/}
                                             <li className="movie-detail-section-subnav-item">
                                                 <Link to="/moviedetailreview" className="movie-detail-section-subnav-item-link">
-                                                    REVIEWS
+                                                    <label className="movie-detail-section-subnav-item-link">REVIEWS</label>
                                                 </Link>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <Link to={"moviedetailcrew"} className="movie-detail-section-subnav-item-link">
-                                                    CAST
-                                                </Link>
+                                                    <label className="movie-detail-section-subnav-item-link" onClick={()=>this.handleCastClick()}>
+                                                        CAST
+                                                    </label>
                                             </li>
                                         </ul>
                                     </div>

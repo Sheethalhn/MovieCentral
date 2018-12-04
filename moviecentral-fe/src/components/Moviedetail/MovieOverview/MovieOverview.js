@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 // import * as API from "../../../api/apicall_for_users"; Temporarily disabling API calls
 import YouTube from 'react-youtube';
 import MovieBox from '../MovieDetailBox/MovieDetailBox'
-
+import MovieCrew from '../MovieCrew/MovieCrew'
 
 class MovieOverview extends Component {
 

@@ -91,6 +91,21 @@ class Movie_Box extends Component{
                             readonly={true}
                         />
                     </li>
+                    <li style={
+                        {
+                            'color': '#FFF',
+                            fontSize: '1.857em',
+                        lineHeight: '1',
+                        marginBottom: '5px',
+                        marginTop: '20px',
+                        fontStyle: 'normal',
+                        fontFamily: 'alternate-gothic-no-1-d,"Futura Condensed","Arial Narrow",Arial,sans-serif',
+                        display: 'list-item',
+                        textAlign: '-webkit-match-parent'
+                        }
+                    }>
+                        {this.props.movie.studio} Studios
+                    </li>
                     {/*<li className="movie-overview-layout-left-section1-detail-rating-number">{this.state.totalrating} Fan Ratings</li>*/}
                 </ul>
                 <ul className="movie-overview-layout-left-section1-detail-seeitin">
