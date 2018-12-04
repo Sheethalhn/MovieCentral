@@ -328,6 +328,20 @@ export const getRatings = (movieId) =>
         return error;
     });
 
+export const getTopMoviesBasedOnTime = (payload) =>
+    fetch(`${api}/movies/activity/` + payload, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
 let successHandler = (res) => {
     if (res.status === 401) {
         // UserHelper.redirectToLogin();
