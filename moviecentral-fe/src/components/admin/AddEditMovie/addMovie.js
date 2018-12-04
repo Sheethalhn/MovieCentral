@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import CommonHeader from '../../header/CommonHeader';
-import { withRouter } from 'react-router-dom';
-import './dashboard.css';
+import Sidebar from "../dashboard/Sidebar";
+import FullMovieForm from "./FullMovieForm";
 
-import Sidebar from "./Sidebar";
-
-class Dashboard extends Component {
-
+class AddMovie extends Component {
     render() {
         return (
             <div className="container-body admin-dashboard" id="outer-container">
@@ -20,14 +17,17 @@ class Dashboard extends Component {
                     </div>
                     <div id="page-content-wrapper">
                         <div className="container-fluid">
-                            <h1>Admin Dashboard</h1>
+                            <div id="FullMovieForm" className="admin-sub-header">
+                                <h2>Add New Movie</h2>
+                                <br />
+                                <FullMovieForm />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-        )
+            </div>    
+        );
     }
 }
 
-export default withRouter(Dashboard);
+export default AddMovie;

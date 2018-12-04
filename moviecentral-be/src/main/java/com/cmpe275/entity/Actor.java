@@ -5,15 +5,21 @@
  */
 package com.cmpe275.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import org.springframework.lang.Nullable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -27,6 +33,7 @@ public class Actor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "actor_id")
     private Long actorId;
+    @NotNull
     private String name;
 
     @Override
@@ -52,5 +59,15 @@ public class Actor {
     public void setName(String name) {
         this.name = name;
     }
-    
+
+    // @ManyToOne
+    // @JoinColumn(name = "movie_id")
+    // @JsonBackReference
+    // private Movie actor;
+
+    // @ManyToOne
+    // @JoinColumn(name = "user_id")
+    // @JsonBackReference
+    // private User userSubscriptionObj;
+
 }

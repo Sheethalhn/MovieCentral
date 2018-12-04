@@ -14,7 +14,7 @@ class MovieOverview extends Component {
     constructor(props){
         super(props);
         this.state={
-            avgrating: 0,
+            avgrating: this.props.stars,
             totalrating: 0
         }
     }
@@ -31,7 +31,11 @@ class MovieOverview extends Component {
     }
 
     render(){
-        if(!this.props.movie.see_it_in)this.props.movie.see_it_in = "35MM";
+        let availability = this.props.movie.availability;
+        if(!this.props.movie.availability || availability === ""){
+            availability = "Paid"
+        }
+
         return(
 
             <div className="movie-overview-layout">
@@ -44,7 +48,7 @@ class MovieOverview extends Component {
                         <div id="DIV_3">
                             <div id="DIV_4">
                                 <YouTube
-                                    videoId={this.props.movie.trailer.slice(-11)}
+                                    videoId={'mBBuzHrZBro'}
                                     autoplay={true}
                                     opts={{"height": '125%',"width": '130%'}}
                                 />
