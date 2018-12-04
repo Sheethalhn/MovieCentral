@@ -26,7 +26,7 @@ class Payment extends Component {
             expiration: '',
             cvv: '',
             submitted: false,
-            subscription_months: this.props.location.state.subscription_months,
+            subscription_months:((this.props.location.state.subscription_months == undefined || this.props.location.state.subscription_months == null) ? 0 : this.props.location.state.subscription_months ),
             subscription_type: this.props.location.state.subscription_type
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,8 +39,16 @@ class Payment extends Component {
         e.preventDefault();
         this.setState({ submitted: true });
         console.log(this.state);
-        if (this.state.card_number !== undefined && this.state.card_number !== "" && this.state.name !== undefined && this.state.name !== ""  && this.state.cvv !== undefined && this.state.cvv !== "" ) {
-            let requestData ={duration : this.state.subscription_months,userSubscriptionObj :this.props.user,subscriptionType : this.state.subscription_type,movieSubscriptionObj:this.props.movie};
+        if (this.state.card_number !== undefined && this.state.card_number !== "" && this.state.name !== undefined && this.state.name !== ""  && this.state.cvv !== undefined && this.state.cvv !== ""  && CardValidator.validateCardNumber(this.state.card_number)) {
+            let requestData;
+            if(this.state.subscription_type == "M")
+            {
+                 requestData ={duration : this.state.subscription_months,userSubscriptionObj :this.props.user,subscriptionType : this.state.subscription_type};
+            }
+            else
+            {
+                requestData ={duration : this.state.subscription_months,userSubscriptionObj :this.props.user,subscriptionType : this.state.subscription_type,movieSubscriptionObj : this.state.movie};
+            }
             console.log(requestData);
             console.log(this.props.user);
             API.addSubscription(requestData)

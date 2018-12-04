@@ -23,8 +23,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 /**
  *
  * @author Shreya Shah
@@ -54,11 +52,14 @@ public class Movie {
     private String country;
     private String rating;
     private String availability;
+    private String movieURL;
+    private Double price;
     private Integer stars;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="actor_id")
     private List<Actor> actors = new ArrayList<>();
+
     @Override
     public String toString() {
         return "{" +
@@ -74,12 +75,12 @@ public class Movie {
             ", country='" + getCountry() + "'" +
             ", rating='" + getRating() + "'" +
             ", availability='" + getAvailability() + "'" +
+            ", movieURL='" + getMovieURL() + "'" +
+            ", price='" + getPrice() + "'" +
             ", stars='" + getStars() + "'" +
             ", actors='" + getActors() + "'" +
             "}";
     }
-    public Integer getStars() { return this.stars;}
-    public void setStars(Integer stars) { this.stars = stars;}
 
     public Long getMovieId() {
         return this.movieId;
@@ -175,6 +176,30 @@ public class Movie {
 
     public void setAvailability(String availability) {
         this.availability = availability;
+    }
+
+    public String getMovieURL() {
+        return this.movieURL;
+    }
+
+    public void setMovieURL(String movieURL) {
+        this.movieURL = movieURL;
+    }
+
+    public Double getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Integer getStars() {
+        return this.stars;
+    }
+
+    public void setStars(Integer stars) {
+        this.stars = stars;
     }
 
     public List<Actor> getActors() {

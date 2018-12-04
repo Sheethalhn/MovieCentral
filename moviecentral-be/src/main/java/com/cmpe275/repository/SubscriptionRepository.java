@@ -6,6 +6,7 @@
 package com.cmpe275.repository;
 
 import com.cmpe275.entity.UserSubscription;
+import com.cmpe275.entity.Movie;
 import com.cmpe275.entity.User;
 
 import java.util.Date;
@@ -27,13 +28,15 @@ public interface SubscriptionRepository extends CrudRepository<UserSubscription,
             + " UserSubscription as u where expiresOn > :currentDate  and userSubscriptionObj = :user")
     UserSubscription findByUserId(@Param("currentDate") Date currentDate, @Param("user") User user);
 
-    @Query(value = "SELECT COUNT(*) as income FROM UserSubscription where subscriptionType = 'M' AND createdOn <= previousDate AND createdOn >= currentDate ")
-    Long getMonthlySubscriptionIncome(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
+    @Query(value = "SELECT u from"
+            + " UserSubscription as u where expiresOn > :currentDate  and userSubscriptionObj = :user and  movieSubscriptionObj = :movie")
+    UserSubscription findByMovieId(@Param("currentDate") Date currentDate, @Param("user") User user, @Param("movie") Movie movie);
     
-    @Query(value = "SELECT COUNT(*) as income FROM UserSubscription where subscriptionType = 'M' AND createdOn <= previousDate AND createdOn >= currentDate ")
-    Long getMonthlyPayPerViewIncome(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
-}
+     @Query(value = "SELECT COUNT(*) as income FROM UserSubscription where subscriptionType = 'M' AND createdOn <= previousDate AND createdOn >= currentDate ")
+    Long getMonthlySubscriptionIncome(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
 
-//
-//
-//
+    @Query(value = "SELECT SUM(m.price) AS income FROM UserSubscription as sub JOIN Movie as m ON sub.movieSubscriptionObj = m.movieId "
+            + "WHERE sub.subscriptionType IN ('V' , 'P') AND sub.createdOn <= '' AND sub.createdOn >= '' ")
+    Long getMonthlyPayPerViewIncome(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
+
+}

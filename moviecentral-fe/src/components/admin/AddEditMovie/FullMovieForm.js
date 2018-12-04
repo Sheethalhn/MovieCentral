@@ -71,6 +71,7 @@ class FullMovieForm extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             movie: {
                 title: "",
@@ -79,7 +80,7 @@ class FullMovieForm extends Component {
                 studio: "",
                 synopsis: "",
                 image: "",
-                movie: "",
+                movieURL: "",
                 actors: [],
                 director: "",
                 country: "",
@@ -96,6 +97,23 @@ class FullMovieForm extends Component {
 
         this.selectedActors = [];
 
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if(nextProps.movie) {
+            if(nextProps.movie.movieId !== prevState.movie.movieId) {
+                return { someState: nextProps.movie };
+            }
+            else return null;
+        } else return null;
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.movie) {
+            if (prevProps.movie.title !== this.props.movie.title) {
+                this.setState({ movie: this.props.movie });
+            }
+        }
     }
 
     componentDidMount() {
@@ -139,7 +157,7 @@ class FullMovieForm extends Component {
             studio: "",
             synopsis: "",
             image: "",
-            movie: "",
+            movieURL: "",
             actors: [],
             director: "",
             country: "",
@@ -157,8 +175,12 @@ class FullMovieForm extends Component {
         movie.actors = formattedActors;
         
         addNewMovie(movie).then((result) => {
-            this.notify(`${result.title} Successfully Added!!`);
-            this.resetForm();
+            if(this.props.type === "edit") {
+                this.notify(`${result.title} Updated Successfully!!`);
+            } else {
+                this.notify(`${result.title} Successfully Added!!`);
+                this.resetForm();
+            }
         });
     }
 
@@ -241,7 +263,7 @@ class FullMovieForm extends Component {
                     </div>
                     <div className="form-group col-md-4">
                         <label>Movie URL</label>
-                        <input id="movie" className="form-control" placeholder="Youtube URL" onChange={this.handleChange} value={this.state.movie.movie} />
+                        <input id="movieURL" className="form-control" placeholder="Youtube URL" onChange={this.handleChange} value={this.state.movie.movieURL} />
                     </div>
                     <div className="form-group col-md-4">
                         <label>Price</label>
@@ -250,7 +272,11 @@ class FullMovieForm extends Component {
                 </div>
 
                 <button className="btn btn-secondary" onClick={this.resetForm.bind(this)}>Reset</button>
-                <button type="submit" className="btn btn-primary float-right" onClick={this.handleSubmit}>Add New Movie</button>
+                
+                <button type="submit" className="btn btn-primary float-right" onClick={this.handleSubmit}>
+                    {this.props.type === "edit" && "Edit Movie"}
+                    {this.props.type !== "edit" && "Add New Movie"} 
+                </button>
             </form>
         )
     }
