@@ -45,13 +45,14 @@ public class SubscriptionService {
     	    	cal.set(Calendar.SECOND, 0);
     	    	cal.set(Calendar.MILLISECOND, 0);
     	       	cal.add(Calendar.MONTH, userSubscription.getDuration().intValue());
+    	       	cal.add(Calendar.DAY_OF_MONTH, 1);
     			Date expiresOn = cal.getTime();
     			userSubscription.setExpiresOn(expiresOn);
     		}
     		else
     		{
     			return userSubObj;
-	    	
+	    
     		}
     	}else if(userSubscription.getSubscriptionType().equals(Constant.PAY_PER_VIEW) || userSubscription.getSubscriptionType().equals(Constant.PAID) ){
     		

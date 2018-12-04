@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './subscription.css';
-import LandingHeader from '../header/LandingHeader';
+import CommonHeader from '../header/CommonHeader';
 import {Link} from 'react-router-dom';
 
 
@@ -34,7 +34,7 @@ handleCancel(){
 
         return (
             <div className="subscription-body">
-                <LandingHeader />
+                <CommonHeader />
                 <div id="container">
                     <div className="whole">
                         <div className="type standard">
