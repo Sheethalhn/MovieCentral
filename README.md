@@ -30,7 +30,7 @@ Instance of **MariaDB 10.3** managed by Amazon RDS
  - Entity Relationships and Transactions
 		
 ### Spring HATEOAS
- * For supporting RESt representations of Page and Filtering results.
+ * For supporting RESt representations of Page and Filtering aggregates.
 
 ### Spring AOP
  * <For what?>

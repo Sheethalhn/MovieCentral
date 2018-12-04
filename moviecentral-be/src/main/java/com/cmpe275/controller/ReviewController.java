@@ -25,7 +25,7 @@ public class ReviewController {
     }
 
     @PostMapping(path = "/movie/reviews")
-    public ResponseEntity<?> addReview(Review r){
+    public ResponseEntity<?> addReview(@RequestBody Review r){
         return ResponseEntity.ok(serv.addReview(r));
     }
     

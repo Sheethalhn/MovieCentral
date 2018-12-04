@@ -25,6 +25,8 @@ public class Review {
 
     private Long movieId;
 
+    public Review(){}
+
     public Review(String text, Double rating, Long movieId) {
         this.text = text;
         this.rating = rating;

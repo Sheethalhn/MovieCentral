@@ -2,10 +2,9 @@ package com.cmpe275.service;
 
 import com.cmpe275.entity.Review;
 import com.cmpe275.repository.ReviewRepository;
+import com.cmpe275.utility.Reviews.AggregatesAndReviewsByMovieId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ReviewService {
@@ -17,8 +16,11 @@ public class ReviewService {
         this.repo = repo;
     }
 
-    public List<Review> getReviewsByMovie(Long id){
-        return repo.findAllByMovieId(id);
+    public AggregatesAndReviewsByMovieId getReviewsByMovie(Long id){
+        AggregatesAndReviewsByMovieId t = new AggregatesAndReviewsByMovieId();
+        t.setAggregates(repo.findAvgAndTotalRatingsByMovieId(id));
+        t.setData(repo.findAllByMovieId(id));
+        return t;
     }
 
     public Review addReview(Review r){
