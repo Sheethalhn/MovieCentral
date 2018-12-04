@@ -110,7 +110,7 @@ public class MovieController {
         )),HttpStatus.OK);
     }
     
-    @GetMapping(path = "/movies/{time}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/movies/activity/{time}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getTopMoviesBasedOnTime(@PathVariable String time) {
     	ResponseFormat responseObject = new ResponseFormat();
     	List<Movie> topMovies = movieService.getTopMoviesBasedOnTime(time);
