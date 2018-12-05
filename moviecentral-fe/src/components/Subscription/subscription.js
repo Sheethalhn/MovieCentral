@@ -29,7 +29,8 @@ class Subscription extends Component {
         console.log(this.props.user.userSubscriptions.length)
         for(var x=0;x<this.props.user.userSubscriptions.length;x++)
             { 
-                if(this.props.user.userSubscriptions[x].subscriptionType == "M")
+                var currentDate = new Date();
+                if(this.props.user.userSubscriptions[x].subscriptionType == "M" && new Date(this.props.user.userSubscriptions[x].expiresOn) > currentDate)
                 {
                     console.log(this.props.user.userSubscriptions[x].expiresOn);
                     return this.props.user.userSubscriptions[x].expiresOn;
@@ -56,14 +57,20 @@ class Subscription extends Component {
 //     this.props.history.push("/home");
 // }
     render() {
+        var header =this.calculateSubscription();
+        var display;
+        if(header != null)
+          display= <h4 className="my-0 font-weight-normal">Subscription ends Date: <Timestamp time={header} format='full' />  </h4>
+        else
+          display= <h4 className="my-0 font-weight-normal">Please start your subscription</h4>
 
-        return (
+          return (
             <div className="subscription-body">
                 <CommonHeader />
                 <div className="container-fluid">
                     <br /><br />
                     <div className="container col-md-4">
-                        <h4 className="my-0 font-weight-normal">Your current subscription ends on  </h4><Timestamp time={this.calculateSubscription()} format='full' />
+                        {display}
                         <br /><br />
                         <div className="card-deck mb-3 text-center">
                             <div className="card text-white mb-3">
