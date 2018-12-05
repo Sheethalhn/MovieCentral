@@ -31,7 +31,7 @@ class IncomeReport extends Component {
     }
 
     componentDidMount() {
-        this.setState({chartData:[]});
+        this.setState({ chartData: [] });
         this.getMonthlyPayPerViewIncome().then(() => {
             this.getMonthlySubscriptionIncome().then(() => {
                 console.log(this.state.chartData)
@@ -65,7 +65,7 @@ class IncomeReport extends Component {
         setTimeout(
             function () {
                 console.log(this.state.month)
-                this.setState({chartData:[]});
+                this.setState({ chartData: [] });
                 this.getMonthlyPayPerViewIncome().then(() => {
                     this.getMonthlySubscriptionIncome().then(() => {
                         console.log(this.state.chartData)
@@ -215,6 +215,8 @@ class IncomeReport extends Component {
                         <div className="col-md-12 pd-left-0">
                             <div className="col-md-6">
                                 <Pie
+                                    width={520}
+                                    height={250}
                                     data={this.state.Data}
                                     options={{
                                         maintainAspectRatio: false,
@@ -228,15 +230,15 @@ class IncomeReport extends Component {
                             </div>
                             <div className="col-12 clearfix">
                                 <a className="nav-link page-header-emphasis a-float-left"
-                                    href="javascript:void(0);"> Monthly Subscribed Income: {this.state.subscribedIncome} </a><br />
+                                    href="javascript:void(0);"> Monthly Subscribed Income: ${this.state.subscribedIncome} </a><br />
                             </div>
                             <div className="col-12 clearfix">
                                 <a className="nav-link page-header-emphasis a-float-left"
-                                    href="javascript:void(0);">Monthly Pay-Per-View Income: {this.state.payperviewIncome} </a><br />
+                                    href="javascript:void(0);">Monthly Pay-Per-View Income: ${this.state.payperviewIncome} </a><br />
                             </div>
                             <div className="col-12 clearfix">
                                 <a className="nav-link page-header-emphasis a-float-left"
-                                    href="javascript:void(0);">Monthly Total Income: {this.state.totalIncome}</a><br />
+                                    href="javascript:void(0);">Monthly Total Income: ${this.state.totalIncome}</a><br />
                             </div>
                         </div>
                     </div>

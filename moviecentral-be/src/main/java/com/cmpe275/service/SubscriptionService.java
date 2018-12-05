@@ -82,10 +82,10 @@ public class SubscriptionService {
         if (!month.equals(-1)) {
             currentCal.set(Calendar.MONTH, month);
             currentCal.set(Calendar.DAY_OF_MONTH, 1);
-            currentDate = currentCal.getTime();
+            previousDate = currentCal.getTime();
             currentCal.add(Calendar.MONTH, 1);
             currentCal.add(Calendar.DAY_OF_MONTH, -1);
-            previousDate = currentCal.getTime();
+            currentDate = currentCal.getTime();
         } else {
             cal.set(Calendar.MONTH, 0);
             cal.set(Calendar.YEAR, 1050);
@@ -110,10 +110,10 @@ public class SubscriptionService {
         if (!month.equals(-1)) {
             currentCal.set(Calendar.MONTH, month);
             currentCal.set(Calendar.DAY_OF_MONTH, 1);
-            currentDate = currentCal.getTime();
+            previousDate = currentCal.getTime();
             currentCal.add(Calendar.MONTH, 1);
             currentCal.add(Calendar.DAY_OF_MONTH, -1);
-            previousDate = currentCal.getTime();
+            currentDate = currentCal.getTime();
         } else {
             cal.set(Calendar.MONTH, 0);
             cal.set(Calendar.YEAR, 1050);

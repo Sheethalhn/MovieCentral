@@ -41,14 +41,15 @@ class CommonHeader extends Component {
                         </LinkContainer>
                         <ul id="menu" className="tabbed-primary-navigation" role="navigation">
                             <li className="navigation-tab">
-                                <Link to='/browse'>Movies</Link>
+                                <Link to='/browse'>
+                                    Movies
+                                </Link>
                             </li>
                             <li className="navigation-tab">
                                 <Link to='/subscription'>
                                     Subscriptions
                                 </Link>
                             </li>
-                            <li className="navigation-tab">Recently watched</li>
                             {/* {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">Customers</li>} */}
                             {/* {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">Reports</li>} */}
                             {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">

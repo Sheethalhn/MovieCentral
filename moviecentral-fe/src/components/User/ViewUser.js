@@ -48,7 +48,7 @@ class ViewUser extends Component {
             Cell: props =>
                 (<span className="visual-sub-title dark"
                     style={{ 'display': 'block', 'margin': 'auto' }}>
-                    {props.row._original.movieObj.title}</span>)
+                    {props.row._original != null && props.row._original !== undefined && props.row._original.movieObj.title}</span>)
         }, {
             Header: 'Genre',
             accessor: 'movieObj',
@@ -57,7 +57,7 @@ class ViewUser extends Component {
             Cell: props =>
                 (<span className="visual-sub-title dark"
                     style={{ 'display': 'block', 'margin': 'auto' }}>
-                    {props.row._original.movieObj.genre}</span>)
+                    {props.row._original !== null && props.row._original !== undefined && props.row._original.movieObj.genre}</span>)
         }, {
             Header: 'Watch Time',
             accessor: 'movieObj',
@@ -74,7 +74,7 @@ class ViewUser extends Component {
             Cell: props =>
                 (<span className="visual-sub-title dark"
                     style={{ 'display': 'block', 'margin': 'auto' }}>
-                    {props.row._original.movieSubscriptionObj.title}</span>)
+                    {props.row._original.movieSubscriptionObj != null && props.row._original.movieSubscriptionObj != undefined && props.row._original.movieSubscriptionObj.title}</span>)
         }, {
             Header: 'Subscription Type',
             accessor: 'movieObj',
@@ -83,7 +83,7 @@ class ViewUser extends Component {
             Cell: props =>
                 (<span className="visual-sub-title dark"
                     style={{ 'display': 'block', 'margin': 'auto' }}>
-                    {props.row._original.subscriptionType}</span>)
+                    {props.row._original !== null && props.row._original !== undefined && props.row._original.subscriptionType}</span>)
         }, {
             Header: 'Duration',
             accessor: 'movieObj',
@@ -92,7 +92,7 @@ class ViewUser extends Component {
             Cell: props =>
                 (<span className="visual-sub-title dark"
                     style={{ 'display': 'block', 'margin': 'auto' }}>
-                    {props.row._original.duration}</span>)
+                    {props.row._original !== null && props.row._original !== undefined && props.row._original.duration}</span>)
         }]
 
         return (
