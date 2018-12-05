@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './subscription.css';
 import CommonHeader from '../header/CommonHeader';
 import {Link} from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+const Timestamp = require('react-timestamp');
 
 
 class Subscription extends Component {
@@ -15,8 +18,30 @@ class Subscription extends Component {
             subscription_type:"M"
         };
         this.submitSubscription = this.submitSubscription.bind(this);
+        this.calculateSubscription = this.calculateSubscription.bind(this);
         // this.handleCancel = this.handleCancel.bind(this);
     }
+    componentDidMount() {
+
+    }
+
+    calculateSubscription = () => {
+        console.log(this.props.user.userSubscriptions.length)
+        for(var x=0;x<this.props.user.userSubscriptions.length;x++)
+            { 
+                if(this.props.user.userSubscriptions[x].subscriptionType == "M")
+                {
+                    console.log(this.props.user.userSubscriptions[x].expiresOn);
+                    return this.props.user.userSubscriptions[x].expiresOn;
+                }
+                else{
+                    return null;
+                }
+                
+            }
+            return null;
+    }
+
     submitSubscription = () => {
         this.props.history.push({
             pathname:"/payment",
@@ -38,7 +63,8 @@ class Subscription extends Component {
                 <div className="container-fluid">
                     <br /><br />
                     <div className="container col-md-4">
-
+                        <h4 className="my-0 font-weight-normal">Your current subscription ends on  </h4><Timestamp time={this.calculateSubscription()} format='full' />
+                        <br /><br />
                         <div className="card-deck mb-3 text-center">
                             <div className="card text-white mb-3">
                                 <div className="card-header bg-danger">
@@ -78,7 +104,7 @@ class Subscription extends Component {
                                     
                                 </div>
                                 <div class="card-footer">
-                                    <button type="button" className="btn btn-lg btn-block btn-danger" onClick={this.submitSubscription}>Buy For {this.state.total_amount}.00$</button>
+                                    <button type="button"  disabled={this.calculateSubscription() != null} className="btn btn-lg btn-block btn-danger" onClick={this.submitSubscription}>Buy For {this.state.total_amount}.00$</button>
                                 </div>
                             </div>
                         </div>
@@ -91,5 +117,15 @@ class Subscription extends Component {
         )
     }
 }
+function mapStateToProps(state) {
+    return {
+        user: state.loginUser,
+    }
+}
 
-export default Subscription;
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({}, dispatch)
+}
+
+
+export default connect(mapStateToProps, matchDispatchToProps)(Subscription);

@@ -89,10 +89,6 @@ public class MovieServ {
     
     public List<MovieActivityAggregateResults> getTopMoviesBasedOnTime(String timeDef) {
         Calendar currentCal = Calendar.getInstance();
-        currentCal.set(Calendar.HOUR_OF_DAY, 0);
-        currentCal.set(Calendar.MINUTE, 0);
-        currentCal.set(Calendar.SECOND, 0);
-        currentCal.set(Calendar.MILLISECOND, 0);
         Date currentDate = currentCal.getTime(); 
         Calendar cal = Calendar.getInstance();
         Date previousDate;
@@ -106,10 +102,6 @@ public class MovieServ {
             cal.setTime(currentDate);
             cal.add(Calendar.WEEK_OF_YEAR, -1);
         }
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
         previousDate = cal.getTime();
         List<MovieActivityAggregateResults> topMovies = movieRepo.getTopMoviesBasedOnTime(previousDate, currentDate,PageRequest.of(0, 10));
         return topMovies;
@@ -117,10 +109,6 @@ public class MovieServ {
     
     public List<MovieActivityAggregateResults> getAllMoviesBasedOnTime(String timeDef) {
         Calendar currentCal = Calendar.getInstance();
-        currentCal.set(Calendar.HOUR_OF_DAY, 0);
-        currentCal.set(Calendar.MINUTE, 0);
-        currentCal.set(Calendar.SECOND, 0);
-        currentCal.set(Calendar.MILLISECOND, 0);
         Date currentDate = currentCal.getTime(); 
         Calendar cal = Calendar.getInstance();
         Date previousDate;
@@ -134,10 +122,6 @@ public class MovieServ {
             cal.setTime(currentDate);
             cal.add(Calendar.WEEK_OF_YEAR, -1);
         }
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
         previousDate = cal.getTime();
         List<MovieActivityAggregateResults> allMovies = movieRepo.getAllMoviesBasedOnTime(previousDate, currentDate);
         return allMovies;
