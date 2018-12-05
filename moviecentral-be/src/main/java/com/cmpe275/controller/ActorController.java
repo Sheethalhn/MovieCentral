@@ -26,7 +26,7 @@ public class ActorController {
         ResponseFormat resp = new ResponseFormat();
         try {
             Actor newActor = actorService.addNewActor(actor);
-            return ResponseEntity.ok(newActor);
+            return new ResponseEntity<Actor>(newActor, HttpStatus.CREATED);
         } catch (Exception e) {
             resp.setData(e);
             return new ResponseEntity(resp, HttpStatus.NO_CONTENT).noContent().build();

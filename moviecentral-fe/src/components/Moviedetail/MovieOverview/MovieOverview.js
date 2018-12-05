@@ -17,10 +17,13 @@ class MovieOverview extends Component {
         this.state={
             avgrating: this.props.stars,
             totalrating: 0,
-            showModal: false
+            showModal: false,
+            movietype: "",
+            isSubscribed: false,
+            PaidForMovie: false,
+            PPVpaidForMovie: false
         };
 
-        this.movieStart = this.movieStart.bind(this);
         this.onReady = this.onReady.bind(this);
         this.hideModal = this.hideModal.bind(this);
     }
@@ -36,46 +39,71 @@ class MovieOverview extends Component {
         //     })
     // }
 
-   
-
     onReady() {
         var movietype = this.props.movie.availability;
-        var userSubscription = new Set();
+        var userSubscription = this.props.user.userSubscriptions;
 
-        // if (movietype === "PayPerViewOnly")
+        var payPerViewUserSub = userSubscription.filter(sub => sub.subscriptionType === "V");
+        var monthlySub = userSubscription.filter(sub => sub.subscriptionType === "M");
+        var paidSub = userSubscription.filter(sub => sub.subscriptionType === "P");
 
-        // this.props.user.userSubscriptions.forEach(sub => {
-        //     if (sub.subscriptionType === "V" && sub.movieSubscriptionObj.movieId === this.props.movie.movieId) {
+        var isSubscribed = false;
+        monthlySub.forEach((sub) => {
+            if (new Date(sub.expiresOn) > new Date()) {
+                isSubscribed = true;
+            }
+        })
 
-        //         this.setState({ showModal: false });
-        //     } else if() {
+        var PPVpaidForMovie = false;
+        payPerViewUserSub.forEach((sub) => {
+            if (sub.movieSubscriptionObj.movieId === this.props.movie.movieId && new Date(sub.expiresOn) > new Date()) {
+                PPVpaidForMovie = true;
+            }
+        });
 
-        //     }
-        // });
+        var PaidForMovie = false;
+        paidSub.forEach((sub) => {
+            if (sub.movieSubscriptionObj.movieId === this.props.movie.movieId && new Date(sub.expiresOn) > new Date()) {
+                PaidForMovie = true;
+            }
+        });
 
-        // debugger
-        // if(movietype ==)
-        
-    }
- 
-    movieStart() {
-        var movietype = this.props.movie.availability;
-        var userSubscription = this.props.user.userSubscription;
+        if ((movietype === "PayPerViewOnly" && !PPVpaidForMovie)) {
+            this.setState({ 
+                showModal: true,
+                movietype: movietype,
+                isSubscribed: isSubscribed,
+                PaidForMovie: PaidForMovie,
+                PPVpaidForMovie: PPVpaidForMovie
+            });
+        }
 
+        if ((movietype === "SubscriptionOnly" && !isSubscribed)) {
+            this.setState({ 
+                showModal: true,
+                movietype: movietype,
+                isSubscribed: isSubscribed,
+                PaidForMovie: PaidForMovie,
+                PPVpaidForMovie: PPVpaidForMovie
+            });
+        }
 
-        // debugger
+        if ((movietype === "Paid" && (isSubscribed || !PaidForMovie))) {
+            this.setState({ 
+                showModal: true,
+                movietype: movietype,
+                isSubscribed: isSubscribed,
+                PaidForMovie: PaidForMovie,
+                PPVpaidForMovie: PPVpaidForMovie
+            });
+        }
     }
 
     hideModal() {
         this.setState({ showModal: false });
-
     }
  
     render(){
-        let availability = this.props.movie.availability;
-        if(!this.props.movie.availability || availability === ""){
-            availability = "Paid"
-        }
         return(
 
             <div className="container-fluid">
@@ -104,7 +132,14 @@ class MovieOverview extends Component {
 
                 </div>
                 
-                <SubscriptionModal show={this.state.showModal} onHide={this.hideModal} />
+                <SubscriptionModal 
+                    show={this.state.showModal} 
+                    onHide={this.hideModal} 
+                    movietype={this.state.movietype}
+                    isSubscribed={this.state.isSubscribed}
+                    PPVpaidForMovie={this.state.PPVpaidForMovie}
+                    PaidForMovie={this.state.PaidForMovie}
+                />
             </div>
 
             
