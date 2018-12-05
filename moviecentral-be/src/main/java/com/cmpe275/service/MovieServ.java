@@ -1,11 +1,8 @@
 package com.cmpe275.service;
 import com.cmpe275.Specification.FilterCriteria;
 import com.cmpe275.Specification.MovieSpecification;
-import com.cmpe275.entity.PlaybackHistory;
 import com.cmpe275.repository.MovieRepository;
 import com.cmpe275.entity.Movie;
-import com.cmpe275.entity.User;
-import com.cmpe275.repository.PlaybackHistoryRepository;
 import com.cmpe275.utility.Constant;
 import com.cmpe275.utility.FilterValues;
 import com.cmpe275.utility.MovieActivity.MovieActivityAggregateResults;
@@ -44,11 +41,11 @@ public class MovieServ {
     // }
 
     public Page<Movie> getAllMovies(Pageable p){
-        return movieRepo.findAll(p);
+        return movieRepo.findAllByIsActiveTrue(p);
     }
 
     public List<Movie> getAllMovies(){
-        return movieRepo.findAll();
+        return movieRepo.findAllByIsActiveTrue();
     }
 
     public Movie getOneMovie(Long id) {
@@ -58,7 +55,7 @@ public class MovieServ {
 
     public FilterValues GetAllFilterValues(){
         return new FilterValues(movieRepo.findDistinctGenre(),movieRepo.findDistinctYear(),movieRepo.findDistinctDirector(),
-                movieRepo.findDistinctRating(),movieRepo.findDistinctStars());
+                movieRepo.findDistinctRating(),movieRepo.findDistinctStars(),movieRepo.findDistinctActors());
     }
 
     public Page<Movie> getFilteredMovies(
@@ -129,7 +126,7 @@ public class MovieServ {
     }
 
     public List<Movie> getTopRatedMovies(){
-        return movieRepo.findTop10ByOrderByAvgratingsDesc();
+        return movieRepo.findTop10ByIsActiveTrueOrderByAvgratingsDesc();
     }
 
 }

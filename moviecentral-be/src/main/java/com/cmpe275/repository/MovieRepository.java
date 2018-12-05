@@ -23,45 +23,42 @@ import java.util.List;
 public interface MovieRepository extends PagingAndSortingRepository<Movie,Long>, JpaSpecificationExecutor<Movie> {
     Movie findByMovieId(Long id);
 
-    @Override
-    Page<Movie> findAll(Pageable pageable);
+    Page<Movie> findAllByIsActiveTrue(Pageable pageable);
 
-    @Override
-    List<Movie> findAll();
+    List<Movie> findAllByIsActiveTrue();
     <S extends Movie> S save(S s);
 
     //for getting possible filter values
-    @Query("select distinct genre from Movie  where genre is not null")
+    @Query("select distinct genre from Movie  where genre is not null and isActive is not null")
     List<String> findDistinctGenre();
 
-    @Query("select distinct year from Movie  where year is not null")
+    @Query("select distinct year from Movie  where year is not null and isActive is not null")
     List<String> findDistinctYear();
 
-    /*
-TODO: Actor field with relationships
-@Query("select distinct actors from movie")
-List<Movie> findDistinctActors();
-*/
+    @Query("select distinct a.name from Actor a where a.name is not null")
+    List<String> findDistinctActors();
 
-    @Query(value = "select distinct director from Movie where director is not null")
+    @Query(value = "select distinct director from Movie where director is not null and isActive is not null")
     List<String> findDistinctDirector();
 
-    @Query(value = "select distinct rating from Movie  where rating is not null")
+    @Query(value = "select distinct rating from Movie  where rating is not null and isActive is not null")
     List<String> findDistinctRating();
 
-    @Query(value = "select distinct stars from Movie  where stars is not null")
+    @Query(value = "select distinct stars from Movie  where stars is not null and isActive is not null")
     List<Integer> findDistinctStars();
     
     @Query(value = "SELECT  new com.cmpe275.utility.MovieActivity.MovieActivityAggregateResults(m.title,m.availability,COUNT (ph.movieObj)) from"
             + " PlaybackHistory as ph  JOIN Movie m on m.movieId=ph.movieObj where ph.timestamp >= :previousDate and ph.timestamp <= :currentDate"
+            + " and m.isActive = TRUE"
             + " group by ph.movieObj order by count(ph.movieObj) desc")
     List<MovieActivityAggregateResults> getTopMoviesBasedOnTime(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate,Pageable pageable);
 
     @Query(value = "SELECT  new com.cmpe275.utility.MovieActivity.MovieActivityAggregateResults(m.title,m.availability,COUNT (ph.movieObj)) from"
             + " PlaybackHistory as ph  JOIN Movie m on m.movieId=ph.movieObj where ph.timestamp >= :previousDate and ph.timestamp <= :currentDate"
+            + " and m.isActive = TRUE"
             + " group by ph.movieObj order by m.title desc")
     List<MovieActivityAggregateResults> getAllMoviesBasedOnTime(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
 
-    List<Movie> findTop10ByOrderByAvgratingsDesc();
+    List<Movie> findTop10ByIsActiveTrueOrderByAvgratingsDesc();
 
 }

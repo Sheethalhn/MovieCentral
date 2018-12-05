@@ -8,13 +8,29 @@ public class FilterValues {
     private List<String> director;
     private List<String> rating;
     private List<Integer> stars;
+    private List<String> actors;
 
-    public FilterValues(List<String> genre, List<String> year, List<String> director, List<String> rating, List<Integer> stars){
+    public FilterValues(List<String> genre,
+                        List<String> year,
+                        List<String> director,
+                        List<String> rating,
+                        List<Integer> stars,
+                        List<String> actors
+                        ){
         this.genre = genre;
         this.year = year;
         this.director = director;
         this.rating = rating;
         this.stars = stars;
+        this.actors = actors;
+    }
+
+    public List<String> getActors() {
+        return actors;
+    }
+
+    public void setActors(List<String> actors) {
+        this.actors = actors;
     }
 
     public List<String> getGenre() {
