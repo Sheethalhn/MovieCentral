@@ -5,12 +5,15 @@
  */
 package com.cmpe275.service;
 
+import com.cmpe275.entity.Movie;
 import com.cmpe275.entity.PlaybackHistory;
 import com.cmpe275.repository.PlaybackHistoryRepository;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -38,6 +41,10 @@ public class PlaybackHistoryService {
             playbackHistoryObj = playbackHistoryRepository.save(playbackHistory);
         }
         return playbackHistoryObj;
+    }
+
+    public List<Movie> getMostWatchedMovies(){
+        return playbackHistoryRepository.getMostWatchedMovies(PageRequest.of(0,10)).getContent();
     }
 
 }

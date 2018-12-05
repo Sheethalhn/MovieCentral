@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -48,5 +49,10 @@ public class PlaybackHistoryController {
             responseObject.setData(e);
             return new ResponseEntity(responseObject, HttpStatus.NO_CONTENT);
         }
+    }
+
+    @GetMapping(path = "/movies/mostwatched")
+    public ResponseEntity<?> getMostWatched(){
+        return ResponseEntity.ok(playbackHistoryService.getMostWatchedMovies());
     }
 }
