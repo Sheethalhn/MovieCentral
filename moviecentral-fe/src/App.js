@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 import './App.css';
 import {BrowserRouter} from 'react-router-dom';
 import RoutesComponent from "./components/RoutesComponent/RoutesComponent";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 
 class App extends Component {
