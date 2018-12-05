@@ -8,9 +8,10 @@ package com.cmpe275.repository;
 import com.cmpe275.entity.Movie;
 import com.cmpe275.entity.PlaybackHistory;
 import com.cmpe275.entity.User;
-import com.cmpe275.entity.UserSubscription;
 import java.util.Date;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -34,4 +35,6 @@ public interface PlaybackHistoryRepository extends CrudRepository<PlaybackHistor
             + "and ph.timestamp <= :currentDate and ph.userObj = :userId AND ph.movieObj = :movieId")
     public List<PlaybackHistory> getAllPlayBackHistoryByUserByTime(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate, @Param("userId") User userId, @Param("movieId") Movie movieId);
 
+    @Query(value = "select p.movieObj from PlaybackHistory p group by p.movieObj order by count(p.id) desc")
+    public Page<Movie> getMostWatchedMovies(Pageable p);
 }

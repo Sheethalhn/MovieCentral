@@ -481,6 +481,36 @@ export const playbackHistory = (payload) =>
         return error;
     });
 
+export const getTopRatedMovies = () =>
+    fetch(`${api}/movies/toprated`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+export const getMostWatchedMovies = () =>
+    fetch(`${api}/movies/mostwatched`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
 export const getAllSubscriptionByUser = () =>
     fetch(`${api}/subscriptions`, {
         method: 'GET',
@@ -488,13 +518,14 @@ export const getAllSubscriptionByUser = () =>
             ...headers,
             'Content-Type': 'application/json'
         },
-        credentials: 'include'
+        credentials: 'include',
     }).then(res => {
         return successHandler(res);
     }).catch(error => {
         console.log("This is error");
         return error;
     });
+
 
 export const getAllPlaybackHistoryByUser = () =>
     fetch(`${api}/playbackhistorys`, {
@@ -503,15 +534,13 @@ export const getAllPlaybackHistoryByUser = () =>
             ...headers,
             'Content-Type': 'application/json'
         },
-        credentials: 'include'
+        credentials: 'include',
     }).then(res => {
         return successHandler(res);
     }).catch(error => {
         console.log("This is error");
         return error;
     });
-
-
 let successHandler = (res) => {
     if (res.status === 401) {
         // UserHelper.redirectToLogin();

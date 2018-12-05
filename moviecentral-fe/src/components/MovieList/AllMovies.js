@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import HomeHeader from './../header/CommonHeader'
 import MovieItem from './MovieItem/MovieItem'
 import './AllMovies.css'
-import { getAllMovies, getFilterMovies, getNewPage, getTopMoviesBasedOnTime } from "../../api/API";
+import { getAllMovies, getFilterMovies, getNewPage, getTopRatedMovies, getMostWatchedMovies } from "../../api/API";
 import Paging from './Paging/paging'
 import FilterForm from './FilterForm/FilterForm';
 import { selectedMovie } from "../../actions";
@@ -61,15 +61,25 @@ class All_Movies extends Component {
 
     handleMostWatchedScoreBoard = () => {
         this.setState({ ...this.state, "content": undefined, "totalPages": undefined, 'currentPage': 1, 'filterMode': false });
-        getTopMoviesBasedOnTime('lastmonth').then((data)=>{
+        getMostWatchedMovies().then((data)=>{
 
-
-            if(data.data){
-                this.setState({ ...this.state, "content": data.data.content, "totalPages": data.page.totalPages })
+            if(data){
+                this.setState({ ...this.state, "content": data, "totalPages": 1 })
             }else{
                 this.setState({ ...this.state, "content": [], "totalPages": 1 })
             }
 
+        })
+    };
+
+    handleTopRatedMovies = () => {
+        this.setState({ ...this.state, "content": undefined, "totalPages": undefined, 'currentPage': 1, 'filterMode': false });
+        getTopRatedMovies().then((data)=>{
+            if(data){
+                this.setState({ ...this.state, "content": data, "totalPages": 1 })
+            }else{
+                this.setState({ ...this.state, "content": [], "totalPages": 1 })
+            }
         })
     };
 
@@ -220,7 +230,9 @@ class All_Movies extends Component {
                                     {filterformelement}
 
                                 </div>
-                                <Suggestions MostWatched={this.handleMostWatchedScoreBoard} All={this.handleAllData}/>
+                                <Suggestions MostWatched={this.handleMostWatchedScoreBoard}
+                                             All={this.handleAllData}
+                                             TopRated={this.handleTopRatedMovies}/>
                                 <div className={'widget-rachit-body'}>
 
                                     {paging}

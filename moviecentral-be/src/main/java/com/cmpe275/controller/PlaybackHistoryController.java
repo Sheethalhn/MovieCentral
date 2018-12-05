@@ -81,4 +81,9 @@ public class PlaybackHistoryController {
             return new ResponseEntity(responseObject, HttpStatus.NO_CONTENT);
         }
     }
+    
+    @GetMapping(path = "/movies/mostwatched")
+    public ResponseEntity<?> getMostWatched(){
+        return ResponseEntity.ok(playbackHistoryService.getMostWatchedMovies());
+    }
 }

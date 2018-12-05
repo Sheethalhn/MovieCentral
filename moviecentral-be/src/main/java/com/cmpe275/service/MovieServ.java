@@ -1,9 +1,11 @@
 package com.cmpe275.service;
 import com.cmpe275.Specification.FilterCriteria;
 import com.cmpe275.Specification.MovieSpecification;
+import com.cmpe275.entity.PlaybackHistory;
 import com.cmpe275.repository.MovieRepository;
 import com.cmpe275.entity.Movie;
 import com.cmpe275.entity.User;
+import com.cmpe275.repository.PlaybackHistoryRepository;
 import com.cmpe275.utility.Constant;
 import com.cmpe275.utility.FilterValues;
 import com.cmpe275.utility.MovieActivity.MovieActivityAggregateResults;
@@ -25,8 +27,7 @@ import java.util.List;
  */
 @Service
 public class MovieServ {
-    final MovieRepository movieRepo;
-
+    private final MovieRepository movieRepo;
     @Autowired
     public MovieServ(MovieRepository movieRepo) {
         this.movieRepo = movieRepo;

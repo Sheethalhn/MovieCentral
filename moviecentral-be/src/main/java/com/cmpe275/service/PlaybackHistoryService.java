@@ -13,6 +13,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -45,6 +47,10 @@ public class PlaybackHistoryService {
     public List<Movie> getAllPaybackHistoryByUser(User user) {
         List<Movie> playbackHistorys = playbackHistoryRepository.getAllPaybackHistoryByUser(user);
         return playbackHistorys;
+    }
+
+    public List<Movie> getMostWatchedMovies() {
+        return playbackHistoryRepository.getMostWatchedMovies(PageRequest.of(0, 10)).getContent();
     }
 
 }
