@@ -41,7 +41,7 @@ public interface SubscriptionRepository extends CrudRepository<UserSubscription,
             + "WHERE sub.subscriptionType IN ('V' , 'P') AND sub.createdOn >= :previousDate AND sub.createdOn <= :currentDate ")
     Long getMonthlyPayPerViewIncome(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
 
-    @Query(value = "SELECT e from UserSubscription where " +
+    @Query(value = "SELECT e from UserSubscription e where " +
             "subscriptionType = :s and userSubscriptionObj = :u " +
             "and movieSubscriptionObj = :m and expiresOn >= CURRENT_DATE ")
     List<UserSubscription> getSubscriptionDetailOfUser(Movie m, String s, User u);

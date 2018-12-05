@@ -20,13 +20,20 @@ import com.cmpe275.utility.ResponseFormat;
 @CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")
 public class SubscriptionController {
 
-    @Autowired
-    private SubscriptionService subscriptionService;
-    private UserService userServ;
-    private HttpSession session;
-    private MovieServ movieServ;
+    private final SubscriptionService subscriptionService;
+    private final UserService userServ;
+    private final HttpSession session;
+    private final MovieServ movieServ;
 
     ResponseFormat responseObject = new ResponseFormat();
+
+    @Autowired
+    public SubscriptionController(SubscriptionService subscriptionService, UserService us, HttpSession s, MovieServ ms) {
+        this.subscriptionService = subscriptionService;
+        this.userServ = us;
+        this.session = s;
+        this.movieServ = ms;
+    }
 
     @PostMapping(path = "/payment", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createSubscription(@RequestBody UserSubscription us, HttpSession session) {
@@ -63,14 +70,17 @@ public class SubscriptionController {
         return new ResponseEntity(responseObject, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/user/subscriptions")
+    @GetMapping(path = "/subscriptions/validate")
     public ResponseEntity<?> getSubscriptions(@RequestParam("movieId") Long movieId,
                                               @RequestParam("availability") String a){
         Long id = (Long)session.getAttribute("userId");
+        if(id == null){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("401");
+        }
         User u = userServ.getUserById(id);
         Movie m = movieServ.getOneMovie(movieId);
 
-        if(id == null || u == null || m == null){
+        if(u == null || m == null){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("401");
         }else{
             return ResponseEntity.ok(subscriptionService.getSubscriptions(u,m,a));
