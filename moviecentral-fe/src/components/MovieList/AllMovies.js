@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import HomeHeader from './../header/CommonHeader'
 import MovieItem from './MovieItem/MovieItem'
 import './AllMovies.css'
-import { getAllMovies, getFilterMovies, getNewPage } from "../../api/API";
+import { getAllMovies, getFilterMovies, getNewPage, getTopMoviesBasedOnTime } from "../../api/API";
 import Paging from './Paging/paging'
 import FilterForm from './FilterForm/FilterForm';
 import { selectedMovie } from "../../actions";
@@ -58,6 +58,27 @@ class All_Movies extends Component {
             this.pageChange(this.state.currentPage + 1)
         }
     }
+
+    handleMostWatchedScoreBoard = () => {
+        this.setState({ ...this.state, "content": undefined, "totalPages": undefined, 'currentPage': 1, 'filterMode': false });
+        getTopMoviesBasedOnTime('lastmonth').then((data)=>{
+
+
+            if(data.data){
+                this.setState({ ...this.state, "content": data.data.content, "totalPages": data.page.totalPages })
+            }else{
+                this.setState({ ...this.state, "content": [], "totalPages": 1 })
+            }
+
+        })
+    };
+
+    handleAllData = () => {
+        this.setState({ ...this.state, "content": undefined, "totalPages": undefined, 'currentPage': 1, 'filterMode': false });
+        getAllMovies().then((data) => {
+            this.setState({ ...this.state, "content": data.content, "totalPages": data.page.totalPages })
+        })
+    };
 
     handleFilterData = () => {
         this.setState({ ...this.state, "content": undefined, "totalPages": undefined, 'currentPage': 1, 'filterMode': false });
@@ -136,14 +157,21 @@ class All_Movies extends Component {
             onNextPage={() => { this.nextPage() }}
         />;
         if (this.state.content) {
-            for (var index in this.state.content) {
-                let movie = this.state.content[index];
-                moviedata.push(<div key={index} onClick={() => this.handleClick(movie)}><MovieItem quality="HD" movie_id={movie.movieId}
-                    image={movie.image}
-                    title={movie.title}
-                    key={movie.movieId}
-                /></div>)
+            if(this.state.content.length < 1){
+                moviedata.push(
+                    <h4>No Movies Available</h4>
+                )
+            }else{
+                for (var index in this.state.content) {
+                    let movie = this.state.content[index];
+                    moviedata.push(<div key={index} onClick={() => this.handleClick(movie)}><MovieItem quality="HD" movie_id={movie.movieId}
+                                                                                                       image={movie.image}
+                                                                                                       title={movie.title}
+                                                                                                       key={movie.movieId}
+                    /></div>)
+                }
             }
+
 
         } else {
             moviedata.push(
@@ -192,7 +220,7 @@ class All_Movies extends Component {
                                     {filterformelement}
 
                                 </div>
-                                <Suggestions/>
+                                <Suggestions MostWatched={this.handleMostWatchedScoreBoard} All={this.handleAllData}/>
                                 <div className={'widget-rachit-body'}>
 
                                     {paging}
