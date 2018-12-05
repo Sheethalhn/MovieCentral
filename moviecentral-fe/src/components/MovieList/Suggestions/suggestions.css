@@ -1,0 +1,65 @@
+.suggestions-main{
+    margin-bottom: 10px;
+    position: relative;
+    text-align: left;
+    font-weight: 300;
+    font-size: 13px;
+    font-family: Roboto,sans-serif;
+
+
+}
+
+.suggestions-main-h2{
+    display: inline-block;
+    margin-bottom: 3px;
+    color: #00acc1;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 1.25rem;
+    vertical-align: middle;
+    padding: 0;
+    list-style: none;
+}
+
+.suggestions-main-tabs{
+    display: inline-block;
+    margin-left: 15px;
+    box-sizing: border-box;
+}
+
+.suggestions-main-tabs-label{
+    display: inline-block;
+    padding: 1.5px 4px;
+    position: relative;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all .1s ease-in-out 0s;
+    background-color: transparent;
+}
+
+.suggestions-main-tabs-label-active{
+    color: #eee;
+    display: inline-block;
+    padding: 1.5px 4px;
+    position: relative;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all .1s ease-in-out 0s;
+    background-color: transparent;
+}
+
+.suggestions-main-tabs-label-active:after{
+    position: absolute;
+    right: 4px;
+    bottom: -1px;
+    left: 4px;
+    height: 1px;
+    background: #eee;
+    content: "";
+}
+
+.suggestions-main-tabs-label:hover{
+    color: #eee;
+}
