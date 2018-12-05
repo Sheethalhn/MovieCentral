@@ -1,11 +1,13 @@
 package com.cmpe275.repository;
 
+import com.cmpe275.Specification.MovieSpecification;
 import com.cmpe275.entity.Movie;
 import com.cmpe275.entity.User;
 import com.cmpe275.utility.MovieActivity.MovieActivityAggregateResults;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -60,5 +62,7 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie,Long>,
     List<MovieActivityAggregateResults> getAllMoviesBasedOnTime(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
 
     List<Movie> findTop10ByIsActiveTrueOrderByAvgratingsDesc();
+
+    Page<Movie> findAll(Specification<Movie> spec, Pageable p);
 
 }
