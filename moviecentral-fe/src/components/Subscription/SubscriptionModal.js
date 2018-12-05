@@ -23,7 +23,8 @@ class SubscriptionModal extends Component {
             subscription_months: 0,
             total_amount: 10,
             subscription_type: null,
-            redirect: false,
+            redirect: "",
+            subscribeHit: false,
         }
 
         this.handleShow = this.handleShow.bind(this);
@@ -44,6 +45,7 @@ class SubscriptionModal extends Component {
     }
 
     subscribe(type) {
+
         if(type === "pay" && this.props.movietype === "PayPerViewOnly") {
             
             this.props.userSubscription({
@@ -51,11 +53,10 @@ class SubscriptionModal extends Component {
                 subscription_type: "V"
             });
             this.setState({
-                redirect:'/payment'
+                redirect:'/payment',
+                subscribeHit: true
             })
             
-            // this.props.subscription.subscription_months=this.state.subscription_months;
-            // this.props.subscription.subscription_type="V";
         } else if(this.props.movietype !== "Free" && type === "pay") {
             
             this.props.userSubscription({
@@ -63,36 +64,29 @@ class SubscriptionModal extends Component {
                 subscription_type: "P"
             });
             this.setState({
-                redirect:'/payment'
+                redirect:'/payment',
+                subscribeHit: true
+
             })
-            // this.setState({
-            //     subscription_months: this.state.subscription_months,
-            //     subscription_type: "P"
-            // })
-            // this.props.subscription.subscription_months=this.state.subscription_months;
-            // this.props.subscription.subscription_type="P";
+
         } else if(type = "sub") {
             this.props.userSubscription({
                 subscription_months: this.state.subscription_months,
                 subscription_type: "M"
             });
             this.setState({
-                redirect:'/payment'
+                redirect:'/payment',
+                subscribeHit: true
+
             })
 
-            // this.setState({
-            //     subscription_months: this.state.subscription_months,
-            //     subscription_type: "M"
-            // })
-            // this.props.subscription.subscription_months=this.state.subscription_months;
-            // this.props.subscription.subscription_type="M";
         }
     }
 
     render() {
-        if(this.state.subscription_type !== null) {
+        if(this.state.subscribeHit) {
             return (<Redirect to={this.state.redirect} />);
-        } else if (this.state.show === false && this.state.redirect === true) {
+        } else if (this.state.show === false && this.state.redirect === "/browse") {
             return (<Redirect to={this.state.redirect} />);
         }
         return (
