@@ -5,6 +5,7 @@
  */
 package com.cmpe275.entity;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,9 +20,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 import org.springframework.data.annotation.Transient;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.data.jpa.repository.Query;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -59,9 +62,23 @@ public class Movie {
     private Integer stars;
     private Boolean isActive;
 
+    @Formula("(select avg(r.rating) FROM review r where r.movie_id = movie_id)")
+    private Double avgratings;
+
+    @Formula("(select COUNT(r.review_id) FROM review r where r.movie_id = movie_id)")
+    private Double totalreviews;
+
+    public Double getAvgratings() {
+        return avgratings;
+    }
+
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "actor_id")
     private List<Actor> actors = new ArrayList<>();
+
+    public Double getTotalreviews() {
+        return totalreviews;
+    }
 
     @OneToMany(mappedBy = "movieObj", fetch = FetchType.LAZY)
     @JsonManagedReference(value = "movie-reference")

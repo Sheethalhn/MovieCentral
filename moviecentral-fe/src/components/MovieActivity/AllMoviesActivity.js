@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as API from '../../api/API';
+import Sidebar from "../admin/dashboard/Sidebar";
 
 class AllMoviesActivity extends Component {
 
@@ -64,12 +65,15 @@ class AllMoviesActivity extends Component {
         return (
             <div>
                 <CommonHeader />
+                <div id="sidebar-wrapper">
+                    <Sidebar />
+                </div>
                 <ToastContainer />
                 <div className="row justify-content-center">
                     <div className=" col-md-12 page-header-container">
                         <div className="col-md-11 pd-left-0">
                             <div className="row justify-content-center">
-                                <h4 className="top-cust-header">Select Time frame to view Movie play report  : </h4>
+                                <h4 className="top-cust-header">Select time range to view Movie play report  : </h4>
                                 <a className="nav-link page-header-emphasis link-pad-top"
                                     href="javascript:void(0);"
                                     onClick={() => { this.fetchAllMovies('last24hrs') }}>Last 24 hours </a>
