@@ -37,9 +37,10 @@ class MovieItem extends Component{
                                 Edit
                             </label>
                         </Link>
-                        <img src={this.props.image} alt={this.props.title + " | MVC"} id={this.props.movie_id}
+                        {this.props.image !== null && this.props.image !== undefined &&  this.props.image !== "" && <img src={this.props.image} alt={this.props.title + " | MVC"} id={this.props.movie_id}
                              style={{'maxWidth':'100%'}}
-                        />
+                        />}
+                        {<img  style={{'maxWidth':'100%'}} src="/default-movie.jpg" alt="Default Movie"/>}
                     </div>
 
                     <div id="MovieItemA_6">

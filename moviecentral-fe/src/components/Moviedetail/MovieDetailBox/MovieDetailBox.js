@@ -36,7 +36,7 @@ class Movie_Box extends Component{
         }
         return <div>
             <section className="movie-overview-layout-left-section1">
-                <a className="movie-overview-layout-left-section1-poster" href="/">
+                <a className="movie-overview-layout-left-section1-poster" href="javascript:void(0);">
                     <img className="movie-overview-layout-left-section1-poster-image"
                          src={this.props.movie.image}
                          alt={this.props.movie.title +" Movie Poster"}/>
