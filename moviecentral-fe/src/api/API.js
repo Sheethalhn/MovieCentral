@@ -298,15 +298,14 @@ export const updateMovie = (payload) =>
         return error;
     });
 
-export const deleteMovie = (payload) =>
-    fetch(`${api}/movie/:id`, {
-        method: 'DELETE',
+export const setMovieInactive = (movieId) =>
+    fetch(`${api}/movie/${movieId}`, {
+        method: 'PUT',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
         },
         credentials: 'include',
-        // body: JSON.stringify(payload)
     }).then(res => {
         return successHandler(res);
     }).catch(error => {

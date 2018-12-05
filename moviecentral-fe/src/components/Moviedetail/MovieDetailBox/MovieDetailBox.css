@@ -224,3 +224,12 @@
     font-family: proxima-nova,Helvetica,Arial,sans-serif;
 
 }
+
+.movie-overview-layout-left-section1 ul {
+    padding: 0px;
+    list-style-type: none;
+}
+
+.btn-group .edit-delete button{
+    border-radius: 0px;
+}

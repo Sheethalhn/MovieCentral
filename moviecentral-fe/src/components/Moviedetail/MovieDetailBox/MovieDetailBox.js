@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import './MovieDetailBox.css'
 import {connect} from "react-redux";
+import { Link } from "react-router-dom";
 //import {bindActionCreators} from "redux/index";
 import Rating from 'react-rating';
 import stargrey from '../MovieOverview/star-grey.png'
 import staryellow from '../MovieOverview/staryellow.png'
+import { setMovieInactive } from "../../../api/API";
+import { toast } from 'react-toastify';
 // import * as API from "../../api/apicall_for_users"; Temporarily disabling API
 
 class Movie_Box extends Component{
+
+    notify = (message) => toast(message);
 
     constructor(props){
         super(props);
@@ -16,9 +21,10 @@ class Movie_Box extends Component{
             totalrating: this.props.movie.totalreviews,
             movie_id: this.props.movie.movieId
         }
+        this.delete = this.delete.bind(this);
     }
 
-    componentDidMount(){
+    // componentDidMount(){
         // Temporarily disabling API calls
         // API.getRatings(this.state)
         //     .then((result) => {
@@ -27,11 +33,20 @@ class Movie_Box extends Component{
         //             "totalrating":result.data.aggregates.totalrating,
         //         });
         //     })
+    // }
+
+    delete() {
+        var confirm = window.confirm("Are you sure??");
+        if(confirm) {
+            setMovieInactive(this.state.movie_id).then((result) => {
+                this.notify(`${result.title} Deleted Successfully !!`)
+            });
+        }
     }
 
     render(){
         let image = <img  className="movie-overview-layout-left-section1-poster-image" src="/default-movie.jpg" alt="Default Movie"/>
-
+        var movieLink = `/admin/dashboard/editmovie/${this.state.movie_id}`;
 
         if(this.props.movie.image !== null
             && this.props.movie.image !== undefined
@@ -39,7 +54,6 @@ class Movie_Box extends Component{
             image = <img className="movie-overview-layout-left-section1-poster-image"
                  src={this.props.movie.image}
                  alt={this.props.movie.title +" Movie Poster"}/>}
-
 
 
         let availability = this.props.movie.availability;
@@ -107,13 +121,13 @@ class Movie_Box extends Component{
                         {
                             'color': '#FFF',
                             fontSize: '1.857em',
-                        lineHeight: '1',
-                        marginBottom: '5px',
-                        marginTop: '20px',
-                        fontStyle: 'normal',
-                        fontFamily: 'alternate-gothic-no-1-d,"Futura Condensed","Arial Narrow",Arial,sans-serif',
-                        display: 'list-item',
-                        textAlign: '-webkit-match-parent'
+                            lineHeight: '1',
+                            marginBottom: '5px',
+                            marginTop: '20px',
+                            fontStyle: 'normal',
+                            fontFamily: 'alternate-gothic-no-1-d,"Futura Condensed","Arial Narrow",Arial,sans-serif',
+                            display: 'list-item',
+                            textAlign: '-webkit-match-parent'
                         }
                     }>
                         {this.props.movie.studio} Studios
@@ -131,6 +145,16 @@ class Movie_Box extends Component{
                     {/*<li className="movie-overview-layout-left-section1-detail-seeitin-header-format"><span*/}
                     {/*className="movie-overview-layout-left-section1-detail-seeitin-header-format-span">IMAX 3D</span></li>*/}
                 </ul>
+                <ul>
+                    <br/>
+                    {this.props.user.role === "admin" &&
+                    <li>
+                        <div className="btn-group d-flex" role="group">
+                            <Link to={movieLink} className="btn btn-info w-100">Edit</Link>
+                            <button className="btn btn-danger w-100" onClick={this.delete}>Delete</button>
+                        </div>
+                    </li>}
+                </ul>
             </section>
         </div>
     }
@@ -138,7 +162,8 @@ class Movie_Box extends Component{
 
 function mapStateToProps(state){
     return{
-        movie: state.selectedMovie
+        movie: state.selectedMovie,
+        user: state.loginUser
     }
 }
 

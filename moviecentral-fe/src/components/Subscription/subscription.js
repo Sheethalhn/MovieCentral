@@ -110,7 +110,7 @@ handleCancel(){
                                     </ul>
                                     
                                 </div>
-                                <div class="card-footer">
+                                <div className="card-footer">
                                     <button type="button"  disabled={this.calculateSubscription() != null} className="btn btn-lg btn-block btn-danger" onClick={this.submitSubscription}>Buy For {this.state.total_amount}.00$</button>
                                 </div>
                             </div>

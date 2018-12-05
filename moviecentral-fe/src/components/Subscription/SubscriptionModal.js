@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import "./subscription.css";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -23,18 +23,24 @@ class SubscriptionModal extends Component {
             subscription_months: 0,
             total_amount: 10,
             subscription_type: null,
+            redirect: false,
         }
 
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
     }
 
+    
     handleClose() {
-        this.setState({ show: false });
+        this.setState({ 
+            show: false ,
+            redirect: true
+        });
     }
-
     handleShow() {
-        this.setState({ show: true });
+        this.setState({ 
+            show: true 
+        });
     }
 
     subscribe(type) {
@@ -84,12 +90,15 @@ class SubscriptionModal extends Component {
     }
 
     render() {
-        if(this.state.redirect) {
-            return <Redirect to="/payment" />;
+        if(this.state.subscription_type !== null) {
+            return (<Redirect to="/payment" />);
+        } else if (this.state.show === false && this.state.redirect === true) {
+            return (<Redirect to="/browse" />);
         }
         return (
             <Modal
                 {...this.props}
+                onHide={this.handleClose}
                 dialogClassName="custom-modal-class text-center bg-dark"
             >
                 <Modal.Header closeButton>
