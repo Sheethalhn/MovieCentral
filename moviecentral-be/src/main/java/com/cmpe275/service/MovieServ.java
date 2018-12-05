@@ -34,11 +34,9 @@ public class MovieServ {
         return movieRepo.save(m);
     }
 
-    
-
-    // public void deleteMovie(Long id) {
-    //     movieRepo.deleteById(id);
-    // }
+    public Movie updateMovie(Movie m) {
+        return movieRepo.save(m);
+    }
 
     public Page<Movie> getAllMovies(Pageable p){
         return movieRepo.findAllByIsActiveTrue(p);

@@ -2,7 +2,6 @@ package com.cmpe275.controller;
 
 import com.cmpe275.service.MovieServ;
 import com.cmpe275.entity.Movie;
-import com.cmpe275.entity.User;
 import com.cmpe275.utility.ResponseFormat;
 import com.cmpe275.utility.MovieActivity.MovieActivityAggregateResults;
 
@@ -58,14 +57,17 @@ public class MovieController {
     //     }
     // }
 
-    // @DeleteMapping(path="/movie/{id}")
-    // public ResponseEntity<?> deleteMovie(@PathVariable Long id) {
-    //     try {
-    //         return movieService.deleteMovie(id);
-    //     } catch(Exception e) {
-
-    //     }
-    // } 
+    @PutMapping(path="/movie/{id}")
+    public ResponseEntity<?> updateIsActive(@PathVariable Long id) {
+        try {
+            Movie m = movieService.getOneMovie(id);
+            m.setIsActive(false);
+            Movie updatedMovie = movieService.updateMovie(m);
+            return new ResponseEntity<Movie>(updatedMovie, HttpStatus.OK);
+        } catch(Exception e) {
+            return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @GetMapping(path = "/allmovies", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> GetAllMovies() {
