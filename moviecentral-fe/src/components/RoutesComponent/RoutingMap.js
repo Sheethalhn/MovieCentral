@@ -4,9 +4,9 @@
  */
 
 let routingMap = {
-    "2": [],
-    "1": [],
-    "3": []
+    "customer": ["/browse","/subscription","/payment","/moviedetail"],
+    "admin": ["/admin/useractivity","/admin/subscriptionreports","/admin/incomereports","/admin/movieactivity","/admin/dashboard",
+    "/admin/dashboard/addmovie"]
 };
 
 module.exports = routingMap;

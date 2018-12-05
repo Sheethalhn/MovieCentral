@@ -126,10 +126,12 @@ public class AuthenticationController {
     public @ResponseBody
     ResponseEntity<?> checkSession() {
         if (session.getAttribute("userId") == null) {
-            return new ResponseEntity(false, HttpStatus.FOUND);
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
         Long uid = Long.parseLong(session.getAttribute("userId").toString());
         User userObj = userService.getUserById(uid);
-        return new ResponseEntity(userObj, HttpStatus.FOUND);
+        responseObject.setData(userObj);
+        responseObject.setMeta("Session Valid");
+        return new ResponseEntity(responseObject, HttpStatus.FOUND);
     }
 }

@@ -433,6 +433,24 @@ export const addRating = (payload) =>
         console.log("This is error");
         return error;
     });
+
+export const checkLogin = () =>
+    fetch(`${api}/checksession`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => res.json())
+        .then(res => {
+            return res;
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
 let successHandler = (res) => {
     if (res.status === 401) {
         // UserHelper.redirectToLogin();
