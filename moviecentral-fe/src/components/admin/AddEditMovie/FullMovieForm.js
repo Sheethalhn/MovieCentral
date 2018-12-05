@@ -10,12 +10,6 @@ const mapDispatchToProps = dispatch => {
     return bindActionCreators({}, dispatch)
 }
 
-// const mapStateToProps = (state) => {
-//     return {
-//         // currentUser: state.loginReducer.currentUser,
-//     };
-// }
-
 const colourStyles = {
     control: styles => ({ ...styles, backgroundColor: 'white', color: 'black' }),
     option: (styles) => {
@@ -185,12 +179,17 @@ class FullMovieForm extends Component {
     }
 
     handleActor(newValue) {
-        this.selectedActors = newValue;
+        this.selectedActors = newValue.filter((actor) => actor.id);
         newValue.forEach((actor) => {
             if (actor.__isNew__) {
                 addNewActor({ name: actor.label }).then((result) => {
                     let newActors = [...this.state.actors];
                     newActors.push({
+                        value: result.name,
+                        label: result.name,
+                        id: result.actorId
+                    });
+                    this.selectedActors.push({
                         value: result.name,
                         label: result.name,
                         id: result.actorId
