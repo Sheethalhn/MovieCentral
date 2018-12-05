@@ -481,6 +481,37 @@ export const playbackHistory = (payload) =>
         return error;
     });
 
+export const getAllSubscriptionByUser = () =>
+    fetch(`${api}/subscriptions`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+export const getAllPlaybackHistoryByUser = () =>
+    fetch(`${api}/playbackhistorys`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+
 let successHandler = (res) => {
     if (res.status === 401) {
         // UserHelper.redirectToLogin();

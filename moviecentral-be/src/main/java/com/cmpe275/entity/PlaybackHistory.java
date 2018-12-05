@@ -15,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.CreationTimestamp;
 
 /**
  *
@@ -38,7 +41,10 @@ public class PlaybackHistory {
     @JoinColumn(name = "movie_id")
     @JsonBackReference(value = "movie-reference")
     private Movie movieObj;
-
+    
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "timestamp")
     private Date timestamp;
 
     public PlaybackHistory() {

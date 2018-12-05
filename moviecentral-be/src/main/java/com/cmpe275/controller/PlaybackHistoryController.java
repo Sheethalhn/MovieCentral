@@ -5,16 +5,21 @@
  */
 package com.cmpe275.controller;
 
+import com.cmpe275.entity.Movie;
 import com.cmpe275.entity.PlaybackHistory;
+import com.cmpe275.entity.User;
 import com.cmpe275.service.PlaybackHistoryService;
 import com.cmpe275.utility.ResponseFormat;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -34,6 +39,10 @@ public class PlaybackHistoryController {
     @PostMapping(path = "/playbackhistory", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createPlaybackHistory(@RequestBody PlaybackHistory playbackHistory, HttpSession session) {
         try {
+            Long userId = (Long) session.getAttribute("userId");
+            User userObj = new User();
+            userObj.setUserId(userId);
+            playbackHistory.setUserObj(userObj);
             PlaybackHistory playbackHistoryObj = playbackHistoryService.addPlaybackHistory(playbackHistory);
             if (playbackHistoryObj != null) {
                 responseObject.setData(playbackHistoryObj);
@@ -45,6 +54,29 @@ public class PlaybackHistoryController {
                 return new ResponseEntity(responseObject, HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
+            responseObject.setData(e);
+            return new ResponseEntity(responseObject, HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @GetMapping(path = "/playbackhistorys", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllPlaybackHistoryByUser(HttpSession session) {
+        try {
+            Long sessionUserId = (Long) session.getAttribute("userId");
+            User user = new User();
+            user.setUserId(sessionUserId);
+            List<Movie> playbackHistorys = playbackHistoryService.getAllPaybackHistoryByUser(user);
+            if (!CollectionUtils.isEmpty(playbackHistorys)) {
+                responseObject.setData(playbackHistorys);
+                responseObject.setMeta("Playback History retrieved succesfully");
+                return new ResponseEntity(responseObject, HttpStatus.OK);
+            } else {
+                responseObject.setData(null);
+                responseObject.setMeta("No Playback History exists");
+                return new ResponseEntity(responseObject, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             responseObject.setData(e);
             return new ResponseEntity(responseObject, HttpStatus.NO_CONTENT);
         }

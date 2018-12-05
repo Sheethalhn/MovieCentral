@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import com.cmpe275.entity.UserSubscription;
 import com.cmpe275.service.SubscriptionService;
 import com.cmpe275.utility.ResponseFormat;
+import java.util.List;
+import org.springframework.util.CollectionUtils;
 
 @Controller
 @CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")
@@ -61,7 +63,7 @@ public class SubscriptionController {
         responseObject.setMeta("Subscribed Income retrieved successfully.");
         return new ResponseEntity(responseObject, HttpStatus.OK);
     }
-    
+
     @GetMapping(path = "/income/ppv/{month}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getMonthlyPayPerViewIncome(@PathVariable("month") Integer month) {
         Long monthlyPayPerViewIncome = subscriptionService.getMonthlyPayPerViewIncome(month);
@@ -72,18 +74,40 @@ public class SubscriptionController {
 
     @GetMapping(path = "/subscriptions/validate")
     public ResponseEntity<?> getSubscriptions(@RequestParam("movieId") Long movieId,
-                                              @RequestParam("availability") String a){
-        Long id = (Long)session.getAttribute("userId");
-        if(id == null){
+            @RequestParam("availability") String a) {
+        Long id = (Long) session.getAttribute("userId");
+        if (id == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("401");
         }
         User u = userServ.getUserById(id);
         Movie m = movieServ.getOneMovie(movieId);
 
-        if(u == null || m == null){
+        if (u == null || m == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("401");
-        }else{
-            return ResponseEntity.ok(subscriptionService.getSubscriptions(u,m,a));
+        } else {
+            return ResponseEntity.ok(subscriptionService.getSubscriptions(u, m, a));
+        }
+    }
+
+    @GetMapping(path = "/subscriptions", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllSubscriptionByUser(HttpSession session) {
+        try {
+            Long sessionUserId = (Long) session.getAttribute("userId");
+            User user = new User();
+            user.setUserId(sessionUserId);
+            List<UserSubscription> userSubscriptions = subscriptionService.getAllUserSubscriptionByUserId(user);
+            if (!CollectionUtils.isEmpty(userSubscriptions)) {
+                responseObject.setData(userSubscriptions);
+                responseObject.setMeta("Subscription retrieved succesfully");
+                return new ResponseEntity(responseObject, HttpStatus.OK);
+            } else {
+                responseObject.setData(null);
+                responseObject.setMeta("No Subscription exists");
+                return new ResponseEntity(responseObject, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e) {
+            responseObject.setData(e);
+            return new ResponseEntity(responseObject, HttpStatus.NO_CONTENT);
         }
     }
 

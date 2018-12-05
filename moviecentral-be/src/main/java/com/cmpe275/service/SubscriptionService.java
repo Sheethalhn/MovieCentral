@@ -6,6 +6,7 @@
 package com.cmpe275.service;
 
 import com.cmpe275.entity.Movie;
+import com.cmpe275.entity.PlaybackHistory;
 import com.cmpe275.entity.User;
 import com.cmpe275.entity.UserSubscription;
 import com.cmpe275.repository.SubscriptionRepository;
@@ -127,6 +128,11 @@ public class SubscriptionService {
 
     public List<UserSubscription> getSubscriptions(User u, Movie m, String a){
         return subscriptionRepository.getSubscriptionDetailOfUser(m,a,u);
+    }
+    
+     public List<UserSubscription> getAllUserSubscriptionByUserId(User user) {
+        List<UserSubscription> userSubscriptions = subscriptionRepository.getAllSubscriptionByUserId(user);
+        return userSubscriptions;
     }
 
 }

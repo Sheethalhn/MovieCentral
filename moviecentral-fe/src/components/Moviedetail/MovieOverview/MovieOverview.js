@@ -1,9 +1,9 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import './MovieOverview.css';
 import Rating from 'react-rating';
 import stargrey from './star-grey.png'
 import staryellow from './staryellow.png'
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 // import * as API from "../../../api/apicall_for_users"; Temporarily disabling API calls
 import { playbackHistory } from "../../../api/API";
 import MovieBox from '../MovieDetailBox/MovieDetailBox';
@@ -13,9 +13,9 @@ import SubscriptionModal from "../../Subscription/SubscriptionModal";
 
 class MovieOverview extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             avgrating: this.props.stars,
             totalrating: 0,
             showModal: false,
@@ -31,14 +31,14 @@ class MovieOverview extends Component {
     }
 
     // componentDidMount(){
-        // Disabling API calls
-        // API.getRatings(this.state)
-        //     .then((result) => {
-        //         this.setState({
-        //             "avgrating":result.data.aggregates.avgrating,
-        //             "totalrating":result.data.aggregates.totalrating,
-        //         });
-        //     })
+    // Disabling API calls
+    // API.getRatings(this.state)
+    //     .then((result) => {
+    //         this.setState({
+    //             "avgrating":result.data.aggregates.avgrating,
+    //             "totalrating":result.data.aggregates.totalrating,
+    //         });
+    //     })
     // }
 
     onReady() {
@@ -71,7 +71,7 @@ class MovieOverview extends Component {
         });
 
         if ((movietype === "PayPerViewOnly" && !PPVpaidForMovie)) {
-            this.setState({ 
+            this.setState({
                 showModal: true,
                 movietype: movietype,
                 isSubscribed: isSubscribed,
@@ -81,7 +81,7 @@ class MovieOverview extends Component {
         }
 
         if ((movietype === "SubscriptionOnly" && !isSubscribed)) {
-            this.setState({ 
+            this.setState({
                 showModal: true,
                 movietype: movietype,
                 isSubscribed: isSubscribed,
@@ -91,7 +91,7 @@ class MovieOverview extends Component {
         }
 
         if ((movietype === "Paid" && (isSubscribed || !PaidForMovie))) {
-            this.setState({ 
+            this.setState({
                 showModal: true,
                 movietype: movietype,
                 isSubscribed: isSubscribed,
@@ -103,10 +103,8 @@ class MovieOverview extends Component {
 
     movieStart() {
         var movieObj = this.props.movie;
-        var userObj = this.props.user;
         playbackHistory({
-            userObj: userObj,
-            movieObj: movieObj
+            movieObj: { movieId: movieObj.movieId }
         }).then((result) => {
             console.error(result);
         })
@@ -116,9 +114,9 @@ class MovieOverview extends Component {
     hideModal() {
         this.setState({ showModal: false });
     }
- 
-    render(){
-        return(
+
+    render() {
+        return (
 
             <div className="container-fluid">
                 <div className="movie-overview-layout">
@@ -130,8 +128,8 @@ class MovieOverview extends Component {
                         <div id="DIV_2">
                             <div id="DIV_3">
                                 <div id="DIV_4">
-                                    <ReactPlayer 
-                                        url={this.props.movie.movieURL} 
+                                    <ReactPlayer
+                                        url={this.props.movie.movieURL}
                                         height="125%"
                                         width="130%"
                                         onStart={this.movieStart}
@@ -145,10 +143,10 @@ class MovieOverview extends Component {
 
 
                 </div>
-                
-                <SubscriptionModal 
-                    show={this.state.showModal} 
-                    onHide={this.hideModal} 
+
+                <SubscriptionModal
+                    show={this.state.showModal}
+                    onHide={this.hideModal}
                     movietype={this.state.movietype}
                     isSubscribed={this.state.isSubscribed}
                     PPVpaidForMovie={this.state.PPVpaidForMovie}
@@ -156,13 +154,13 @@ class MovieOverview extends Component {
                 />
             </div>
 
-            
+
         );
     }
 }
 
-function mapStateToProps(state){
-    return{
+function mapStateToProps(state) {
+    return {
         movie: state.selectedMovie,
         user: state.loginUser
     }
