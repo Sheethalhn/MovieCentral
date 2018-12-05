@@ -9,6 +9,7 @@ import { selectedMovie } from "../../actions";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect} from 'react-router-dom';
+import Suggestions from './Suggestions/suggestions';
 
 let Filter = () => (<svg aria-hidden="true" data-prefix="fas" data-icon="filter" className="svg-inline--fa fa-filter fa-w-16" role="img"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style={{ height: '8px' }}>
@@ -191,6 +192,7 @@ class All_Movies extends Component {
                                     {filterformelement}
 
                                 </div>
+                                <Suggestions/>
                                 <div className={'widget-rachit-body'}>
 
                                     {paging}

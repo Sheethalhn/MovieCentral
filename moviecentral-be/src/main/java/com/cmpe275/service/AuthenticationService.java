@@ -7,7 +7,6 @@ package com.cmpe275.service;
 
 import com.cmpe275.entity.User;
 import com.cmpe275.repository.UserRepository;
-import static java.util.Base64.getEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;

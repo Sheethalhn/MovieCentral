@@ -12,8 +12,8 @@ class Movie_Box extends Component{
     constructor(props){
         super(props);
         this.state={
-            avgrating: this.props.movie.stars,
-            totalrating: 0,
+            avgrating: this.props.movie.avgratings,
+            totalrating: this.props.movie.totalreviews,
             movie_id: this.props.movie.movieId
         }
     }
@@ -30,6 +30,18 @@ class Movie_Box extends Component{
     }
 
     render(){
+        let image = <img  className="movie-overview-layout-left-section1-poster-image" src="/default-movie.jpg" alt="Default Movie"/>
+
+
+        if(this.props.movie.image !== null
+            && this.props.movie.image !== undefined
+            &&  this.props.movie.image !== ""){
+            image = <img className="movie-overview-layout-left-section1-poster-image"
+                 src={this.props.movie.image}
+                 alt={this.props.movie.title +" Movie Poster"}/>}
+
+
+
         let availability = this.props.movie.availability;
         if(!this.props.movie.availability || availability === ""){
             availability = "Paid"
@@ -37,9 +49,9 @@ class Movie_Box extends Component{
         return <div>
             <section className="movie-overview-layout-left-section1">
                 <a className="movie-overview-layout-left-section1-poster" href="javascript:void(0);">
-                    <img className="movie-overview-layout-left-section1-poster-image"
-                         src={this.props.movie.image}
-                         alt={this.props.movie.title +" Movie Poster"}/>
+
+                    {image}
+
                 </a>
                 <ul className="movie-overview-layout-left-section1-detail">
                     <li>Released</li>

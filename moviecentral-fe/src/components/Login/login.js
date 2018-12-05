@@ -36,7 +36,6 @@ class Login extends Component {
         e.preventDefault();
         this.setState({ submitted: true });
         if (this.state.email !== undefined && this.state.email !== "" && this.state.password !== undefined && this.state.password !== "") {
-            console.log("state :",this.state);
             API.login(this.state)
                 .then((resultData) => {
                     if (resultData.data !== undefined && resultData.data !== null) {
@@ -45,7 +44,11 @@ class Login extends Component {
                             message: resultData.meta.message
                         });
                         this.props.loginUser(resultData.data);
-                        this.props.history.push("/browse");
+                        if (resultData.data.role === 'admin') {
+                            this.props.history.push("/admin/dashboard");
+                        } else {
+                            this.props.history.push("/browse");
+                        }
                     } else {
                         this.setState({
                             isLoggedIn: false,

@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 import * as API from '../../../api/API';
 import {selectedReview} from "../../../actions";
 import MovieHallsBox from '../MovieDetailBox/MovieDetailBox';
-
+import loading from '../../RoutesComponent/loading.gif'
 class MovieReview extends Component {
 
     constructor(props){
@@ -16,11 +16,6 @@ class MovieReview extends Component {
 
         this.state={
             movie_id: this.props.movie.movieId.toString(),
-            reviews: [],
-            ratings: {
-                "totalreviews": 2,
-                "avgratings": 5
-            },
             display: ''
         }
     }
@@ -180,6 +175,9 @@ class MovieReview extends Component {
 
 
     render(){
+        if(!this.state.ratings){
+            return <img src={loading}/> ;
+        }
         return(
 
             <div className="movie-overview-layout">

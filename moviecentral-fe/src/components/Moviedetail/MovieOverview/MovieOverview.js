@@ -44,16 +44,16 @@ class MovieOverview extends Component {
 
         // if (movietype === "PayPerViewOnly")
 
-        this.props.user.userSubscriptions.forEach(sub => {
-            if (sub.subscriptionType === "V" && sub.movieSubscriptionObj.movieId === this.props.movie.movieId) {
+        // this.props.user.userSubscriptions.forEach(sub => {
+        //     if (sub.subscriptionType === "V" && sub.movieSubscriptionObj.movieId === this.props.movie.movieId) {
 
-                this.setState({ showModal: false });
-            } else if() {
+        //         this.setState({ showModal: false });
+        //     } else if() {
 
-            }
-        });
+        //     }
+        // });
 
-        debugger
+        // debugger
         // if(movietype ==)
         
     }
@@ -62,7 +62,7 @@ class MovieOverview extends Component {
         var movietype = this.props.movie.availability;
         var userSubscription = this.props.user.userSubscription;
 
-        
+
         // debugger
     }
 

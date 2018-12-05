@@ -53,10 +53,6 @@ public class UserService {
 
     public List<User> getTopUsersBasedOnTime(String timeDef) {
         Calendar currentCal = Calendar.getInstance();
-        currentCal.set(Calendar.HOUR_OF_DAY, 0);
-        currentCal.set(Calendar.MINUTE, 0);
-        currentCal.set(Calendar.SECOND, 0);
-        currentCal.set(Calendar.MILLISECOND, 0);
         Date currentDate = currentCal.getTime();
         Calendar cal = Calendar.getInstance();
         Date previousDate;
@@ -70,10 +66,6 @@ public class UserService {
             cal.setTime(currentDate);
             cal.add(Calendar.WEEK_OF_YEAR, -1);
         }
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
         previousDate = cal.getTime();
         List<User> topUsers = userRepository.getTopUsersBasedOnTime(previousDate, currentDate, new PageRequest(0, 10));
         return topUsers;

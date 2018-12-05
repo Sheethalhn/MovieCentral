@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './subscription.css';
 import CommonHeader from '../header/CommonHeader';
 import {Link} from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+const Timestamp = require('react-timestamp');
 
 
 class Subscription extends Component {
@@ -15,14 +18,36 @@ class Subscription extends Component {
             subscription_type:"M"
         };
         this.submitSubscription = this.submitSubscription.bind(this);
-        this.handleCancel = this.handleCancel.bind(this);
+        this.calculateSubscription = this.calculateSubscription.bind(this);
+        // this.handleCancel = this.handleCancel.bind(this);
     }
-submitSubscription = () => {
-    this.props.history.push({
-         pathname:"/payment",
-        state : {
-            subscription_months : this.state.subscription_months,
-            subscription_type : this.state.subscription_type
+    componentDidMount() {
+
+    }
+
+    calculateSubscription = () => {
+        console.log(this.props.user.userSubscriptions.length)
+        for(var x=0;x<this.props.user.userSubscriptions.length;x++)
+            { 
+                if(this.props.user.userSubscriptions[x].subscriptionType == "M")
+                {
+                    console.log(this.props.user.userSubscriptions[x].expiresOn);
+                    return this.props.user.userSubscriptions[x].expiresOn;
+                }
+                else{
+                    return null;
+                }
+                
+            }
+            return null;
+    }
+
+    submitSubscription = () => {
+        this.props.history.push({
+            pathname:"/payment",
+            state : {
+                subscription_months : this.state.subscription_months,
+                subscription_type : this.state.subscription_type
 
         }
     })
@@ -96,5 +121,15 @@ handleCancel(){
         )
     }
 }
+function mapStateToProps(state) {
+    return {
+        user: state.loginUser,
+    }
+}
 
-export default Subscription;
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({}, dispatch)
+}
+
+
+export default connect(mapStateToProps, matchDispatchToProps)(Subscription);
