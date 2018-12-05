@@ -44,8 +44,8 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie,Long>,
     @Query(value = "select distinct rating from Movie  where rating is not null and isActive is not null")
     List<String> findDistinctRating();
 
-    @Query(value = "select distinct stars from Movie  where stars is not null and isActive is not null")
-    List<Integer> findDistinctStars();
+    @Query(value = "select MAX(avgratings) from Movie  where avgratings is not null and isActive is not null")
+    Double findDistinctStars();
     
     @Query(value = "SELECT  new com.cmpe275.utility.MovieActivity.MovieActivityAggregateResults(m.title,m.availability,COUNT (ph.movieObj)) from"
             + " PlaybackHistory as ph  JOIN Movie m on m.movieId=ph.movieObj where ph.timestamp >= :previousDate and ph.timestamp <= :currentDate"

@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as API from '../../api/API';
+import Sidebar from "../admin/dashboard/Sidebar";
 
 class TopMovies extends Component {
 
@@ -51,52 +52,62 @@ class TopMovies extends Component {
             Header: 'Movie Name',
             accessor: 'title',
             width: 250,
-            style: { 'whiteSpace': 'unset' }
+            style: { 'whiteSpace': 'unset','fontSize': '20px','textAlign' : 'center' }
         }, {
             Header: 'Availability Type',
             accessor: 'availability',
-            style: { 'whiteSpace': 'unset', 'fontSize': '20px' }
+            style: { 'whiteSpace': 'unset', 'fontSize': '20px' ,'textAlign' : 'center'}
         }, {
             Header: '# of times Played',
             accessor: 'playCount',
-            style: { 'whiteSpace': 'unset', 'fontSize': '20px' }
+            style: { 'whiteSpace': 'unset', 'fontSize': '20px' ,'textAlign' : 'center'}
 
         }]
 
         return (
             <div>
                 <CommonHeader />
-                <div className="row justify-content-center">
-                    <div className=" col-md-12 page-header-container">
-                        <div className="col-md-11 pd-left-0">
-                            <div className="row justify-content-center">
-                                <h4 className="top-cust-header">Top 10 movies  : </h4>
-                                <a className="nav-link page-header-emphasis link-pad-top"
-                                    href="javascript:void(0);"
-                                    onClick={() => { this.fetchTopMovies('last24hrs') }}>Last 24 hours </a>
-                                <a className="nav-link page-header-emphasis link-pad-top"
-                                    href="javascript:void(0);"
-                                    onClick={() => { this.fetchTopMovies('lastweek') }}>Last week</a>
-                                <a className="nav-link page-header-emphasis link-pad-top"
-                                    href="javascript:void(0);"
-                                    onClick={() => { this.fetchTopMovies('lastmonth') }}>Last Month</a>
+                <div id="wrapper" className="toggled">
+                    <div id="sidebar-wrapper">
+                        <Sidebar />
+                    </div>
+                <div id="page-content-wrapper">
+                    <div className="container-fluid">
+                        <div className="row justify-content-center">
+                            <div className=" col-md-12 page-header-container">
+                                <div className="col-md-11 pd-left-0">
+                                    <div className="row justify-content-center">
+                                        <h4 className="top-cust-header">Top 10 movies  : </h4>
+                                        <a className="nav-link page-header-emphasis link-pad-top"
+                                            href="javascript:void(0);"
+                                            onClick={() => { this.fetchTopMovies('last24hrs') }}>Last 24 hours </a>
+                                        <a className="nav-link page-header-emphasis link-pad-top"
+                                            href="javascript:void(0);"
+                                            onClick={() => { this.fetchTopMovies('lastweek') }}>Last week</a>
+                                        <a className="nav-link page-header-emphasis link-pad-top"
+                                            href="javascript:void(0);"
+                                            onClick={() => { this.fetchTopMovies('lastmonth') }}>Last Month</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-9 pd-left-0">
+                                <div className="col-md-12 pd-left-0">
+                                    < ReactTable
+                                        minRows={2}
+                                        defaultPageSize={5}
+                                        noDataText="No Movies Found"
+                                        pagination={true}
+                                        data={this.state.movieList}
+                                        columns={columns} />
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-9 pd-left-0">
-                        <div className="col-md-12 pd-left-0">
-                            < ReactTable
-                                minRows={2}
-                                defaultPageSize={5}
-                                noDataText="No Movies Found"
-                                pagination={true}
-                                data={this.state.movieList}
-                                columns={columns} />
-                        </div>
-                    </div>
                 </div>
+                </div>
+                </div>
+                
 
-            </div>
         )
     }
 }

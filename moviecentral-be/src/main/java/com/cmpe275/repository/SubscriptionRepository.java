@@ -31,12 +31,12 @@ public interface SubscriptionRepository extends CrudRepository<UserSubscription,
     List<UserSubscription> getAllSubscriptionByUserId(@Param("user") User user);
 
     @Query(value = "SELECT u from"
-            + " UserSubscription as u where expiresOn > :currentDate  and userSubscriptionObj = :user")
-    UserSubscription findByUserId(@Param("currentDate") Date currentDate, @Param("user") User user);
+            + " UserSubscription as u where expiresOn > :currentDate  and userSubscriptionObj = :user and subscriptionType = :subscriptionType")
+    UserSubscription findByUserId(@Param("currentDate") Date currentDate, @Param("user") User user,@Param("subscriptionType") String subscriptionType );
 
     @Query(value = "SELECT u from"
-            + " UserSubscription as u where expiresOn > :currentDate  and userSubscriptionObj = :user and  movieSubscriptionObj = :movie")
-    UserSubscription findByMovieId(@Param("currentDate") Date currentDate, @Param("user") User user, @Param("movie") Movie movie);
+            + " UserSubscription as u where expiresOn > :currentDate  and userSubscriptionObj = :user and  movieSubscriptionObj = :movie and subscriptionType = :subscriptionType")
+    UserSubscription findByMovieId(@Param("currentDate") Date currentDate, @Param("user") User user, @Param("movie") Movie movie,@Param("subscriptionType") String subscriptionType);
 
     @Query(value = "SELECT COUNT(*) as income FROM UserSubscription where subscriptionType = 'M' AND createdOn >= :previousDate AND createdOn <= :currentDate ")
     Long getMonthlySubscriptionIncome(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);

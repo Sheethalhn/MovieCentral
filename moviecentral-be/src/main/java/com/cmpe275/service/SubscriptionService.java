@@ -34,7 +34,7 @@ public class SubscriptionService {
         Calendar currentTime = Calendar.getInstance();
 
         if (userSubscription.getSubscriptionType().equals(Constant.MONTHLY_SUBSCRIPTION)) {
-            UserSubscription checkObj = subscriptionRepository.findByUserId(currentTime.getTime(), userSubscription.getUserSubscriptionObj());
+            UserSubscription checkObj = subscriptionRepository.findByUserId(currentTime.getTime(), userSubscription.getUserSubscriptionObj(),userSubscription.getSubscriptionType());
             if (checkObj == null) {
                 Calendar cal = Calendar.getInstance();
                 cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -51,7 +51,7 @@ public class SubscriptionService {
 
             }
         } else if (userSubscription.getSubscriptionType().equals(Constant.PAY_PER_VIEW) || userSubscription.getSubscriptionType().equals(Constant.PAID)) {
-            UserSubscription checkObjMovie = subscriptionRepository.findByMovieId(currentTime.getTime(), userSubscription.getUserSubscriptionObj(), userSubscription.getMovieSubscriptionObj());
+            UserSubscription checkObjMovie = subscriptionRepository.findByMovieId(currentTime.getTime(), userSubscription.getUserSubscriptionObj(), userSubscription.getMovieSubscriptionObj(),userSubscription.getSubscriptionType());
             if (checkObjMovie == null) {
                 Calendar cal = Calendar.getInstance();
                 cal.set(Calendar.HOUR_OF_DAY, 0);
