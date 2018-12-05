@@ -8,6 +8,11 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 const Timestamp = require('react-timestamp');
 
+const subscriptionMapping = {
+    'M': 'Monthly',
+    'V': 'Pay Per View',
+    'P': 'Paid'
+}
 
 class ViewUser extends Component {
 
@@ -83,7 +88,7 @@ class ViewUser extends Component {
             Cell: props =>
                 (<span className="visual-sub-title dark"
                     style={{ 'display': 'block', 'margin': 'auto' }}>
-                    {props.row._original !== null && props.row._original !== undefined && props.row._original.subscriptionType}</span>)
+                    {props.row._original !== null && props.row._original !== undefined && subscriptionMapping[props.row._original.subscriptionType]}</span>)
         }, {
             Header: 'Duration',
             accessor: 'movieObj',

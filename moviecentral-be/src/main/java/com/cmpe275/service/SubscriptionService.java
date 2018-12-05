@@ -5,18 +5,11 @@
  */
 package com.cmpe275.service;
 
-import com.cmpe275.entity.User;
 import com.cmpe275.entity.UserSubscription;
 import com.cmpe275.repository.SubscriptionRepository;
-
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Optional;
-
 import com.cmpe275.utility.Constant;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
