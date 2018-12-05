@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as API from '../../api/API';
 
-class MovieActivity extends Component {
+class TopMovies extends Component {
 
     notify = (message) => toast(message);
 
@@ -27,6 +27,7 @@ class MovieActivity extends Component {
     }
 
     fetchTopMovies(time) {
+        console.log(this.state.movieList)
         API.getTopMoviesBasedOnTime(time)
             .then((resultData) => {
                 if (!!resultData.data) {
@@ -57,8 +58,9 @@ class MovieActivity extends Component {
             style: { 'whiteSpace': 'unset', 'fontSize': '20px' }
         }, {
             Header: '# of times Played',
-            accessor: 'createdOn',
+            accessor: 'playCount',
             style: { 'whiteSpace': 'unset', 'fontSize': '20px' }
+
         }]
 
         return (
@@ -101,13 +103,11 @@ class MovieActivity extends Component {
 }
 
 function mapStateToProps(state) {
-    return {
-        user: state.loginUser
-    }
+
 }
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({}, dispatch)
 }
 
 
-export default connect(mapStateToProps, matchDispatchToProps)(MovieActivity);
+export default connect(mapStateToProps, matchDispatchToProps)(TopMovies);

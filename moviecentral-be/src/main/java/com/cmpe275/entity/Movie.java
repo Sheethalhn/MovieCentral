@@ -20,6 +20,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.Transient;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -56,9 +60,14 @@ public class Movie {
     private Double price;
     private Integer stars;
 
+   
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="actor_id")
     private List<Actor> actors = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "movieObj", fetch = FetchType.LAZY)
+    @JsonManagedReference(value = "movie-reference")
+    private List<PlaybackHistory> moviePlaybackHistory = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -209,6 +218,14 @@ public class Movie {
     public void setActors(List<Actor> actors) {
         this.actors = actors;
     }
+    public List<PlaybackHistory> getMoviePlaybackHistory() {
+        return moviePlaybackHistory;
+    }
+
+    public void setMoviePlaybackHistory(List<PlaybackHistory> moviePlaybackHistory) {
+        this.moviePlaybackHistory = moviePlaybackHistory;
+    }
+    
 
     
 }

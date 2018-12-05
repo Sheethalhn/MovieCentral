@@ -18,8 +18,11 @@ import AllMovies from '../MovieList/AllMovies'
 import UserActivity from '../UserActivity/UserActivity';
 import SubscriptionReport from '../FinancialReports/SubscriptionReport';
 import IncomeReport from '../FinancialReports/IncomeReport';
-import MovieActivity from '../MovieActivity/MovieActivity';
+import TopMovies from '../MovieActivity/TopMovies';
 import ViewUser from '../User/ViewUser';
+import AllMoviesActivity from '../MovieActivity/AllMoviesActivity';
+
+// import Movie_detail_crew from "../Moviedetail/MovieCrew/MovieCrew";
 
 // Admin Routes
 import AdminDashboard from "../admin/dashboard/dashboard";
@@ -57,7 +60,10 @@ class RoutesComponent extends Component {
                 <Route exact path="/admin/useractivity" component={UserActivity} />
                 <Route exact path="/admin/subscriptionreports" component={SubscriptionReport} />
                 <Route exact path="/admin/incomereports" component={IncomeReport} />
-                <Route exact path="/admin/movieactivity" component={MovieActivity} />
+                <Route exact path="/admin/topactivity" component={TopMovies} />
+                <Route exact path="/admin/allactivity" component={AllMoviesActivity} />
+
+    
 	        	<Route exact path="/admin/dashboard" component={AdminDashboard} />
                 <Route exact path="/admin/dashboard/addmovie" component={AddMovie} />
                 <Route exact path="/admin/dashboard/editmovie/:id" component={EditMovie} />
