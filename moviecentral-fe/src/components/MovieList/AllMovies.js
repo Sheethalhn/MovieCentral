@@ -63,9 +63,9 @@ class All_Movies extends Component {
         this.setState({ ...this.state, "content": undefined, "totalPages": undefined, 'currentPage': 1, 'filterMode': false });
         getTopMoviesBasedOnTime('lastmonth').then((data)=>{
 
-            data = data.data;
-            if(data){
-                this.setState({ ...this.state, "content": data.content, "totalPages": data.page.totalPages })
+
+            if(data.data){
+                this.setState({ ...this.state, "content": data.data.content, "totalPages": data.page.totalPages })
             }else{
                 this.setState({ ...this.state, "content": [], "totalPages": 1 })
             }
