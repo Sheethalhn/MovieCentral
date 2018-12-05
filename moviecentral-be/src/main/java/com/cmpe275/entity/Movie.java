@@ -46,7 +46,6 @@ public class Movie {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_on")
     private Date createdOn;
-
     private String title;
     private String genre;
     private String year;
@@ -61,6 +60,7 @@ public class Movie {
     private String movieURL;
     private Double price;
     private Integer stars;
+    private Boolean isActive;
 
     @Formula("(select avg(r.rating) FROM review r where r.movie_id = movie_id)")
     private Double avgratings;
@@ -73,7 +73,7 @@ public class Movie {
     }
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name="actor_id")
+    @JoinColumn(name = "actor_id")
     private List<Actor> actors = new ArrayList<>();
 
     public Double getTotalreviews() {
@@ -86,24 +86,25 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "{" +
-            " movieId='" + getMovieId() + "'" +
-            ", createdOn='" + getCreatedOn() + "'" +
-            ", title='" + getTitle() + "'" +
-            ", genre='" + getGenre() + "'" +
-            ", year='" + getYear() + "'" +
-            ", studio='" + getStudio() + "'" +
-            ", synopsis='" + getSynopsis() + "'" +
-            ", image='" + getImage() + "'" +
-            ", director='" + getDirector() + "'" +
-            ", country='" + getCountry() + "'" +
-            ", rating='" + getRating() + "'" +
-            ", availability='" + getAvailability() + "'" +
-            ", movieURL='" + getMovieURL() + "'" +
-            ", price='" + getPrice() + "'" +
-            ", stars='" + getStars() + "'" +
-            ", actors='" + getActors() + "'" +
-            "}";
+        return "{"
+                + " movieId='" + getMovieId() + "'"
+                + ", createdOn='" + getCreatedOn() + "'"
+                + ", title='" + getTitle() + "'"
+                + ", genre='" + getGenre() + "'"
+                + ", year='" + getYear() + "'"
+                + ", studio='" + getStudio() + "'"
+                + ", synopsis='" + getSynopsis() + "'"
+                + ", image='" + getImage() + "'"
+                + ", director='" + getDirector() + "'"
+                + ", country='" + getCountry() + "'"
+                + ", rating='" + getRating() + "'"
+                + ", availability='" + getAvailability() + "'"
+                + ", movieURL='" + getMovieURL() + "'"
+                + ", price='" + getPrice() + "'"
+                + ", stars='" + getStars() + "'"
+                + ", actors='" + getActors() + "'"
+                + ", active='" + getIsActive() + "'"
+                + "}";
     }
 
     public Long getMovieId() {
@@ -233,6 +234,7 @@ public class Movie {
     public void setActors(List<Actor> actors) {
         this.actors = actors;
     }
+
     public List<PlaybackHistory> getMoviePlaybackHistory() {
         return moviePlaybackHistory;
     }
@@ -240,7 +242,13 @@ public class Movie {
     public void setMoviePlaybackHistory(List<PlaybackHistory> moviePlaybackHistory) {
         this.moviePlaybackHistory = moviePlaybackHistory;
     }
-    
 
-    
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
+    }
+
 }

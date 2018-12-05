@@ -17,8 +17,17 @@ class Sidebar extends Component {
                     <Link to="/admin/useractivity">User Activity</Link>
                 </li>
                 <li>
-                    <Link to="/admin/movieactivity">Movie Acitvity Report</Link>
+                    <a href="javascript:void(0);">Movie Activity Report</a>
                 </li>
+                <ul className="sub-menu-reports">
+                    <li className="sub-menu-item-reports">
+                        <Link to="/admin/topactivity">Top 10 Movies Report</Link>
+                    </li>
+                    <li className="sub-menu-item-reports">
+                        <Link to="/admin/allactivity">Movies play Report</Link>
+                    </li>
+                </ul>
+                
                 <li>
                     <a href="javascript:void(0);">Financial Report</a>
                 </li>
