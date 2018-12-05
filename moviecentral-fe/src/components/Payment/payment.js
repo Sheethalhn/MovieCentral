@@ -54,7 +54,7 @@ class Payment extends Component {
             API.addSubscription(requestData)
                 .then((resultData) => {
                     this.notify(resultData.meta.message);
-                    this.props.history.push("/home");
+                    this.props.history.push("/browse");
                     console.log("Payment is done");
                 }).catch(error => {
                     console.log("error :", error);
