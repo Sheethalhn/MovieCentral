@@ -35,9 +35,6 @@ class Subscription extends Component {
                     console.log(this.props.user.userSubscriptions[x].expiresOn);
                     return this.props.user.userSubscriptions[x].expiresOn;
                 }
-                else{
-                    return null;
-                }
                 
             }
             return null;

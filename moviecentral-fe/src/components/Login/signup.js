@@ -8,6 +8,7 @@ import Message from '../Message/Message';
 import * as API from '../../api/API';
 import * as _ from 'lodash';
 import { ToastContainer, toast } from 'react-toastify';
+import EmailRegex from '../Helper/EmailRegex';
 
 class Signup extends Component {
 
@@ -35,7 +36,11 @@ class Signup extends Component {
         e.preventDefault();
         this.setState({ submitted: true });
         this.emailSplit = this.state.email.split("@");
-        if (this.state.role !== undefined && this.state.role !== "" && ((this.state.role === 'admin' && this.emailSplit[1] === 'sjsu.edu') || this.state.role === 'customer')) {
+        if (this.state.firstName !== undefined && this.state.lastName != undefined &&
+            this.state.email != null && this.state.password != null && this.state.screenName != undefined &&
+            this.state.confirmPassword != undefined && this.state.password === this.state.confirmPassword && EmailRegex.test(this.state.email) &&
+            this.state.role !== undefined && this.state.role !== "" &&
+            ((this.state.role === 'admin' && this.emailSplit[1] === 'sjsu.edu') || this.state.role === 'customer')) {
             let requestData = _.cloneDeep(this.state);;
             delete requestData.submitted;
             delete requestData.confirmPassword;
@@ -108,6 +113,9 @@ class Signup extends Component {
                                                 screenName: event.target.value
                                             });
                                         }} />
+                                    {this.state.submitted && !this.state.screenName &&
+                                        <Message message={"Screen Name is required"} />
+                                    }
                                 </div>
                                 <div className="form-group">
                                     <input type="email"
@@ -122,6 +130,9 @@ class Signup extends Component {
                                         }} required />
                                     {this.state.submitted && !this.state.email &&
                                         <Message message={"Email is required"} />
+                                    }
+                                    {this.state.submitted && this.state.email && !EmailRegex.test(this.state.email) &&
+                                        <Message message={"Email is not Valid"} />
                                     }
                                     {this.state.submitted && this.state.role === 'admin' && this.emailSplit[1] !== 'sjsu.edu' &&
                                         <Message message={"For Admin Role Sjsu email is required"} />
@@ -155,6 +166,10 @@ class Signup extends Component {
                                         }} required />
                                     {this.state.submitted && !this.state.confirmPassword &&
                                         <Message message={"Confirm Password is required"} />
+                                    }
+                                    {this.state.submitted && this.state.password && this.state.confirmPassword &&
+                                        this.state.password !== this.state.confirmPassword &&
+                                        <Message message={"Password and Confirm Password doesn't match"} />
                                     }
                                 </div>
                                 <div className="form-group row">
