@@ -69,7 +69,7 @@ class MovieOverview extends Component {
                 PaidForMovie = true;
             }
         });
-
+        
         if ((movietype === "PayPerViewOnly" && !PPVpaidForMovie)) {
             this.setState({
                 showModal: true,
