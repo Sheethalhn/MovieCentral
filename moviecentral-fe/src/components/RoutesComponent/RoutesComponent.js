@@ -20,6 +20,7 @@ import SubscriptionReport from '../FinancialReports/SubscriptionReport';
 import IncomeReport from '../FinancialReports/IncomeReport';
 import TopMovies from '../MovieActivity/TopMovies';
 import ViewUser from '../User/ViewUser';
+import PrivateRoute from './PrivateRoute'
 import AllMoviesActivity from '../MovieActivity/AllMoviesActivity';
 
 // import Movie_detail_crew from "../Moviedetail/MovieCrew/MovieCrew";
@@ -41,33 +42,26 @@ class RoutesComponent extends Component {
     render() {
         return (
             <div>
-                <Route exact path="/" component={Landing} />
-                <Route exact path="/login" component={Login} />
+                <PrivateRoute exact path="/" component={Landing} />
+                <PrivateRoute exact path="/login" component={Login} />
                 <Route exact path="/signup" component={SignUp} />
-                <Route exact path="/home" component={Home} />
+                {/*<Route exact path="/home" component={Home} />*/}
                 <Route exact path="/verify/:code" component={Verify} />
-                <Route exact path="/moviedetail" component={Movie_detail} />
+                <PrivateRoute exact path="/moviedetail" component={Movie_detail} />
                 <Route exact path="/pagenotfound" component={PageNotFound} />
-                <Route exact path="/payment" component={Payment} />
-                <Route exact path="/subscription" component={Subscription} />
-                <Route exact path="/browse" render={() => (
-                    <div>
-
-                        <AllMovies redirectURL={this.redirectURL} />
-                    </div>
-                )}/>
+                <PrivateRoute exact path="/payment" component={Payment} />
+                <PrivateRoute exact path="/subscription" component={Subscription} />
+                <PrivateRoute exact path="/browse" component={AllMovies}/>
                 <Route exact path="/viewuser/:userId" component={ViewUser} />
-                <Route exact path="/admin/useractivity" component={UserActivity} />
-                <Route exact path="/admin/subscriptionreports" component={SubscriptionReport} />
-                <Route exact path="/admin/incomereports" component={IncomeReport} />
-                <Route exact path="/admin/topactivity" component={TopMovies} />
-                <Route exact path="/admin/allactivity" component={AllMoviesActivity} />
+                <PrivateRoute exact path="/admin/useractivity" component={UserActivity} />
+                <PrivateRoute exact path="/admin/subscriptionreports" component={SubscriptionReport} />
+                <PrivateRoute exact path="/admin/incomereports" component={IncomeReport} />
+	        	<PrivateRoute exact path="/admin/dashboard" component={AdminDashboard} />
+                <PrivateRoute exact path="/admin/dashboard/addmovie" component={AddMovie} />
 
-    
-	        	<Route exact path="/admin/dashboard" component={AdminDashboard} />
-                <Route exact path="/admin/dashboard/addmovie" component={AddMovie} />
+                <PrivateRoute exact path="/admin/topactivity" component={TopMovies} />
+                <PrivateRoute exact path="/admin/allactivity" component={AllMoviesActivity} />
                 <Route exact path="/admin/dashboard/editmovie/:id" component={EditMovie} />
-                
             </div>
         );
     }

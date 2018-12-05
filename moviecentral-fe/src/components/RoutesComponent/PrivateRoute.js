@@ -29,11 +29,11 @@ class PrivateRoute extends Component {
             console.log("response :", response["data"]);
             if (typeof response["data"] === "object") {
                 console.log("insdie if");
-                if (this.props.dataprops.location.pathname === '/login') {
+                if (this.props.dataprops.location.pathname === '/login'  || this.props.dataprops.location.pathname === '/') {
                     if (response["data"].role === "customer") {
                         this.props.SetSession(response["data"]);
                         return <Redirect to={{
-                            pathname: '/home',
+                            pathname: '/browse',
                         }} />;
                     } else if (response["data"].role === "admin") {
                         this.props.SetSession(response["data"]);
@@ -58,7 +58,7 @@ class PrivateRoute extends Component {
                     }} />;
                 }
             } else {
-                if (this.props.dataprops.location.pathname === '/login') {
+                if (this.props.dataprops.location.pathname === '/login' || this.props.dataprops.location.pathname === '/') {
                     return <this.props.componentname {...this.props.dataprops} redirectURL={this.redirectURL} />
                 } else {
                     return <Redirect to={{

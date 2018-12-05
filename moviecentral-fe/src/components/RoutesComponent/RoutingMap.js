@@ -5,8 +5,8 @@
 
 let routingMap = {
     "customer": ["/browse","/subscription","/payment","/moviedetail"],
-    "admin": ["/admin/useractivity","/admin/subscriptionreports","/admin/incomereports","/admin/topactivity","/admin/allactivity","/admin/dashboard",
-    "/admin/dashboard/addmovie"]
+    "admin": ["/admin/useractivity","/admin/subscriptionreports","/admin/incomereports","/admin/movieactivity","/admin/dashboard",
+    "/admin/dashboard/addmovie","/browse","/moviedetail","/admin/topactivity","/admin/allactivity"]
 };
 
 module.exports = routingMap;

@@ -8,6 +8,7 @@ import FilterForm from './FilterForm/FilterForm';
 import { selectedMovie } from "../../actions";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Redirect} from 'react-router-dom';
 
 let Filter = () => (<svg aria-hidden="true" data-prefix="fas" data-icon="filter" className="svg-inline--fa fa-filter fa-w-16" role="img"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style={{ height: '8px' }}>
@@ -114,12 +115,19 @@ class All_Movies extends Component {
         return uri
     };
 
-    handleClick = (movie) => {
+    handleClick = (movie)=>{
         this.props.selectedMovie(movie);
-        this.props.redirectURL('/moviedetail')
+        // this.props.redirectURL('/moviedetail')
+        this.setState({...this.state,'redirect':'/moviedetail'})
     };
 
-    render() {
+    render(){
+        if(this.state.redirect){
+            return <Redirect to={{
+                pathname: this.state.redirect,
+            }}/>
+        }
+
         let moviedata = [];
         let paging = <Paging size={this.state.totalPages} current={this.state.currentPage}
             onPageChange={(page) => { this.pageChange(page) }}
