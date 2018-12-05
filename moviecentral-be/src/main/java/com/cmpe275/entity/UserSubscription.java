@@ -107,7 +107,7 @@ public class UserSubscription {
     }
     
     public Date getExpiresOn() {
-        return createdOn;
+        return expiresOn;
     }
 
     public void setExpiresOn(Date expiresOn) {
