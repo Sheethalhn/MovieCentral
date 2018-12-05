@@ -240,7 +240,7 @@ export const addSubscription = (payload) =>
     });
 
 export const getAllMovies = () =>
-    fetch(`${api}/movie?size=1`, {
+    fetch(`${api}/movie?size=10`, {
         method: 'GET',
         headers: {
             ...headers,
@@ -344,7 +344,7 @@ export const getActors = () =>
     });
 
 export const getNewPage = (page) =>
-    fetch(`${api}/movie?page=${page}&size=1`, {
+    fetch(`${api}/movie?page=${page}&size=10`, {
         method: 'GET',
         headers: {
             ...headers,
@@ -374,7 +374,7 @@ export const getFilterOptions = () =>
     });
 
 export const getFilterMovies = (page, uri) =>
-    fetch(`${api}/movie/filters/execute?page=${page}&size=1&${uri}`, {
+    fetch(`${api}/movie/filters/execute?page=${page}&size=10&${uri}`, {
         method: 'GET',
         headers: {
             ...headers,
