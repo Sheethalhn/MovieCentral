@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import HomeHeader from './../header/CommonHeader'
 import './moviedetail.css'
 import MoveOverview from './MovieOverview/MovieOverview'
-import { Link } from 'react-router-dom'
 import { connect } from "react-redux";
-// import { log1, pageNames } from "../../App";
-// import {selectedTrace} from '../../actions'
 import {bindActionCreators} from "redux";
 import MovieCrew from './MovieCrew/MovieCrew'
 import MovieReview from "./MovieOverview/MovieReview";
@@ -64,13 +61,7 @@ class Movie_detail extends Component {
                                     <div className="movie-detail-section-row-100">
                                         <h1 className="movie-detail-section-row-title">
 
-
-
                                             {this.props.movie.title}
-
-
-
-
 
                                         </h1>
                                         <ul className="movie-detail-section-subnav">
@@ -79,20 +70,14 @@ class Movie_detail extends Component {
                                                     Overview
                                                 </label>
                                             </li>
-                                            {/*<li className="movie-detail-section-subnav-item">*/}
-                                                {/*<Link to="/movietickets" className="movie-detail-section-subnav-item-link">*/}
-                                                    {/*Movie Times + tickets*/}
-                                                {/*</Link>*/}
-                                            {/*</li>*/}
                                             <li className="movie-detail-section-subnav-item">
-                                                {/*<Link to="/moviedetailreview" className="movie-detail-section-subnav-item-link">*/}
-                                                    <label className="movie-detail-section-subnav-item-link" onClick={()=>this.handleReviews()} >REVIEWS</label>
+                                                <label className="movie-detail-section-subnav-item-link" onClick={()=>this.handleReviews()} >REVIEWS</label>
 
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                    <label className="movie-detail-section-subnav-item-link" onClick={()=>this.handleCastClick()}>
-                                                        CAST
-                                                    </label>
+                                                <label className="movie-detail-section-subnav-item-link" onClick={()=>this.handleCastClick()}>
+                                                    CAST
+                                                </label>
                                             </li>
                                         </ul>
                                     </div>
@@ -106,7 +91,6 @@ class Movie_detail extends Component {
                             </div>
                             {this.state.ActiveComponent}
                         </div>
-                        {/*<MovieCrew/>*/}
                     </div>
 
                 </div>

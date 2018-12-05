@@ -29,7 +29,8 @@ class Subscription extends Component {
         console.log(this.props.user.userSubscriptions.length)
         for(var x=0;x<this.props.user.userSubscriptions.length;x++)
             { 
-                if(this.props.user.userSubscriptions[x].subscriptionType == "M")
+                var currentDate = new Date();
+                if(this.props.user.userSubscriptions[x].subscriptionType == "M" && new Date(this.props.user.userSubscriptions[x].expiresOn) > currentDate)
                 {
                     console.log(this.props.user.userSubscriptions[x].expiresOn);
                     return this.props.user.userSubscriptions[x].expiresOn;
@@ -49,21 +50,27 @@ class Subscription extends Component {
                 subscription_months : this.state.subscription_months,
                 subscription_type : this.state.subscription_type
 
-            }
-        })
-    }
-// handleCancel(){
-//     this.props.history.push("/home");
-// }
+        }
+    })
+}
+handleCancel(){
+    this.props.history.push("/home");
+}
     render() {
+        var header =this.calculateSubscription();
+        var display;
+        if(header != null)
+          display= <h4 className="my-0 font-weight-normal">Subscription ends Date: <Timestamp time={header} format='full' />  </h4>
+        else
+          display= <h4 className="my-0 font-weight-normal">Please start your subscription</h4>
 
-        return (
+          return (
             <div className="subscription-body">
                 <CommonHeader />
                 <div className="container-fluid">
                     <br /><br />
                     <div className="container col-md-4">
-                        <h4 className="my-0 font-weight-normal">Your current subscription ends on  </h4><Timestamp time={this.calculateSubscription()} format='full' />
+                        {display}
                         <br /><br />
                         <div className="card-deck mb-3 text-center">
                             <div className="card text-white mb-3">
@@ -108,10 +115,57 @@ class Subscription extends Component {
                                 </div>
                             </div>
                         </div>
+                        <div className="plan">
 
+                            <div className="header">
+                                <span>$</span>10<sup>00</sup>
+                                <p className="month">per month</p>
+                            </div>
+                            <div className="content">
+                                <ul>
+                                    <li>Unlimited Movie Streaming</li>
+                                    <li>50% Discounts on Premium Movies </li>
+                                    <li
+                                        value={this.state.subscription_months}
+                                        onChange={(event) => {
+                                            this.setState({
+                                                subscription_months: event.target.value,
+                                                total_amount: 10 * event.target.value
+                                            });
+                                        }}>
+                                        <label>Select Months : <select>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select></label>
+                                    </li>
+                                    <li>
+                                        Total Amount : $ {this.state.total_amount}
+                                    </li>
+                                    <li>
+                                        <div className="form-group" id="pay-now">
+                                         {/* <Link to="/payment">  */}
+                                            <button type="submit" className="btn btn-default" id="confirm-purchase" onClick={this.submitSubscription}>Purchase</button>
+                                         {/* </Link>  */}
+                                        <button type="button" onClick ={this.handleCancel} className="btn btn-default" id="cancel-purchase">Back</button>
+                                        </div>
+                                    </li>
+                                </ul>
 
+                            </div>
+
+                        </div>
                     </div>
-                </div>    
+                </div>
             </div>
 
         )
