@@ -51,9 +51,15 @@ class Payment extends Component {
             console.log(this.props.user);
             API.addSubscription(requestData)
                 .then((resultData) => {
+                    console.log(resultData);
                     this.notify(resultData.meta.message);
                     setTimeout(() => {
-                        this.props.history.push("/browse");
+                        if (resultData.data.subscriptionType == "M") {
+                            this.props.history.push("/subscription");
+                        }
+                        else {
+                            this.props.history.push("/moviedetail");
+                        }
                     }, 1000);
                     console.log("Payment is done");
                 }).catch(error => {
@@ -68,8 +74,9 @@ class Payment extends Component {
     render() {
         return (
             <div className="outerBody">
+                <ToastContainer />
                 <CommonHeader />
-                <ToastContainer/>
+                <ToastContainer />
                 <div className="row justify-content-center">
                     <div className="creditCardForm">
                         <div className="heading">

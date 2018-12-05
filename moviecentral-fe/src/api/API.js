@@ -380,8 +380,7 @@ export const getFilterMovies = (page, uri) =>
             ...headers,
             'Content-Type': 'application/json'
         },
-        credentials: 'include',
-        body: JSON.stringify()
+        credentials: 'include'
     }).then(res => {
         return successHandler(res);
     }).catch(error => {

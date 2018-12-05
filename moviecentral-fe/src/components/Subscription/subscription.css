@@ -1,4 +1,4 @@
-/* .subscription-body .whole .plan .header sup{
+.subscription-body .whole .plan .header sup{
 	font-size: 40px;
 }
 
@@ -14,12 +14,12 @@
 }
 
 .subscription-body .whole .plan .content li{
-border-bottom: 1px solid #494a5a;
-padding: 0px;
-margin: 0px;
-text-align: center;
-height: 52px;
-line-height: 52px;
+	border-bottom: 1px solid #494a5a;
+	padding: 0px;
+	margin: 0px;
+	text-align: center;
+	height: 52px;
+	line-height: 52px;
 }
 
 
@@ -86,7 +86,7 @@ line-height: 52px;
 	color: #575757;
 	padding: 0px;
 	margin: -10px;
-} */
+}
 
 .subscription-body .whole .plan .content .form-group .btn{
 	background: #e50914;
@@ -104,6 +104,15 @@ line-height: 52px;
 }
 
 .card-deck button {
+	border-radius: 0px;
+}
+
+.modal-content {
+	background-color: #343a40!important;
+	color: white!important;
+}
+
+.modal-content button {
 	border-radius: 0px;
 }
 

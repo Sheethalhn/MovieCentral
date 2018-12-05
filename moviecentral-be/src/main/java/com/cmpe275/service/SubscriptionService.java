@@ -5,10 +5,14 @@
  */
 package com.cmpe275.service;
 
+import com.cmpe275.entity.Movie;
+import com.cmpe275.entity.User;
 import com.cmpe275.entity.UserSubscription;
 import com.cmpe275.repository.SubscriptionRepository;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
 import com.cmpe275.utility.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -119,6 +123,10 @@ public class SubscriptionService {
         System.out.println("currentDate :" + currentDate);
         Long monthlyPayPerViewIncome = subscriptionRepository.getMonthlyPayPerViewIncome(previousDate, currentDate);
         return monthlyPayPerViewIncome;
+    }
+
+    public List<UserSubscription> getSubscriptions(User u, Movie m, String a){
+        return subscriptionRepository.getSubscriptionDetailOfUser(m,a,u);
     }
 
 }
