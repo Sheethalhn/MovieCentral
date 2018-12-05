@@ -16,6 +16,8 @@ class Suggestions extends Component{
                 this.props.MostWatched();
             }else if(val === 3){
                 this.props.All();
+            }else if(val === 1){
+                this.props.TopRated();
             }
         }
     };
