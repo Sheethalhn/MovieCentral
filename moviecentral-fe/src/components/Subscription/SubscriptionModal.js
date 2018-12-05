@@ -34,7 +34,7 @@ class SubscriptionModal extends Component {
     handleClose() {
         this.setState({ 
             show: false ,
-            redirect: true
+            redirect: "/browse"
         });
     }
     handleShow() {
@@ -91,9 +91,9 @@ class SubscriptionModal extends Component {
 
     render() {
         if(this.state.subscription_type !== null) {
-            return (<Redirect to="/payment" />);
+            return (<Redirect to={this.state.redirect} />);
         } else if (this.state.show === false && this.state.redirect === true) {
-            return (<Redirect to="/browse" />);
+            return (<Redirect to={this.state.redirect} />);
         }
         return (
             <Modal
