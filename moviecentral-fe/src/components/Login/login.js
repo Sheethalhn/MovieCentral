@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import './login.css';
 import LandingHeader from '../header/LandingHeader';
 import Message from '../Message/Message';
@@ -66,7 +66,6 @@ class Login extends Component {
     render() {
         return (
             <div className="login-background">
-                <ToastContainer />
                 <LandingHeader iconRequired={false} />
                 <div className="login-body">
                     <div className="login-content login-form hybrid-login-form hybrid-login-form-signup">

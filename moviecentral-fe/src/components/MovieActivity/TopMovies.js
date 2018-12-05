@@ -3,7 +3,7 @@ import CommonHeader from '../header/CommonHeader';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import './MovieActivity.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as API from '../../api/API';
@@ -66,7 +66,6 @@ class TopMovies extends Component {
         return (
             <div>
                 <CommonHeader />
-                <ToastContainer />
                 <div className="row justify-content-center">
                     <div className=" col-md-12 page-header-container">
                         <div className="col-md-11 pd-left-0">

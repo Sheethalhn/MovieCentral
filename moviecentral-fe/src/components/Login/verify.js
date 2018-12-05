@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import './login.css';
 import LandingHeader from '../header/LandingHeader';
 import Message from '../Message/Message';
@@ -63,7 +63,6 @@ class VerifyPage extends Component {
     render() {
         return (
             <div className="login-background">
-                <ToastContainer />
                 <LandingHeader iconRequired={false} />
                 <div className="login-body">
                     {this.state.userObj !== null && !this.state.userObj.emailVerified && <div className="login-content login-form hybrid-login-form hybrid-login-form-signup">

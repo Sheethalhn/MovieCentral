@@ -11,7 +11,7 @@ import * as API from '../../api/API';
 import { userSubscription } from "../../actions";
 import { loginUser } from "../../actions";
 import CommonHeader from '../header/CommonHeader';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 class Payment extends Component {
@@ -78,9 +78,7 @@ class Payment extends Component {
         console.log(this.state)
         return (
             <div className="outerBody">
-                <ToastContainer />
                 <CommonHeader />
-                <ToastContainer />
                 <div className="row justify-content-center">
                     <div className="creditCardForm">
                         <div className="heading">

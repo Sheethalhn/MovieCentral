@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import Message from '../Message/Message';
 import * as API from '../../api/API';
 import * as _ from 'lodash';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import EmailRegex from '../Helper/EmailRegex';
 
 class Signup extends Component {
@@ -63,7 +63,6 @@ class Signup extends Component {
     render() {
         return (
             <div className="login-background">
-                <ToastContainer />
                 <LandingHeader iconRequired={false} />
                 <div className="signup-body">
                     {!this.state.signedUp && <div className="login-content login-form hybrid-login-form signup-form hybrid-login-form-signup">
