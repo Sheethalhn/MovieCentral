@@ -10,15 +10,23 @@ class Suggestions extends Component{
     }
 
     activate = (val)=>{
-        this.setState({...this.state,active:val})
+        this.setState({...this.state,active:val});
+        if(this.state.active !== val){
+            if(val === 2){
+                this.props.MostWatched();
+            }else if(val === 3){
+                this.props.All();
+            }
+        }
     };
 
     render(){
         let first = {};
         let firstStyle = "tab active suggestions-main-tabs-label";
         let second = {};
-        let secondStyle = "tab active suggestions-main-tabs-label"
-
+        let secondStyle = "tab active suggestions-main-tabs-label";
+        let third = {};
+        let thirdStyle = "tab active suggestions-main-tabs-label";
 
         if(this.state.active === 1){
             first = {
@@ -32,11 +40,21 @@ class Suggestions extends Component{
             };
             secondStyle = "suggestions-main-tabs-label-active"
 
+        }else if(this.state.active === 3){
+            third = {
+                color: '#eee'
+            };
+            thirdStyle = "suggestions-main-tabs-label-active"
         }
+
         return(
             <div className="suggestions-main">
                 <h2 className="suggestions-main-h2">Suggestions</h2>
                 <div className="tabs floating suggestions-main-tabs">
+                    <label className={thirdStyle}
+                           style={third} onClick={()=>this.activate(3)}>
+                        All
+                    </label>
                     <label className={firstStyle}
                            style={first} onClick={()=>this.activate(1)}>
                         Top rated
