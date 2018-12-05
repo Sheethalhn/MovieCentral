@@ -4,6 +4,8 @@ import com.cmpe275.service.MovieServ;
 import com.cmpe275.entity.Movie;
 import com.cmpe275.entity.User;
 import com.cmpe275.utility.ResponseFormat;
+import com.cmpe275.utility.MovieActivity.MovieActivityAggregateResults;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -110,12 +112,29 @@ public class MovieController {
         )),HttpStatus.OK);
     }
     
-    @GetMapping(path = "/movies/activity/{time}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/movies/topactivity/{time}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getTopMoviesBasedOnTime(@PathVariable String time) {
     	ResponseFormat responseObject = new ResponseFormat();
-    	List<Movie> topMovies = movieService.getTopMoviesBasedOnTime(time);
+    	List<MovieActivityAggregateResults> topMovies = movieService.getTopMoviesBasedOnTime(time);
         if (!CollectionUtils.isEmpty(topMovies)) {
+        	System.out.println(topMovies);
             responseObject.setData(topMovies);
+            responseObject.setMeta("Movies retrieved successfully.");
+            return new ResponseEntity(responseObject, HttpStatus.OK);
+        } else {
+            responseObject.setData(null);
+            responseObject.setMeta("No Movies found");
+            return new ResponseEntity(responseObject, HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @GetMapping(path = "/movies/allactivity/{time}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllMoviesBasedOnTime(@PathVariable String time) {
+    	ResponseFormat responseObject = new ResponseFormat();
+    	List<MovieActivityAggregateResults> allMovies = movieService.getAllMoviesBasedOnTime(time);
+        if (!CollectionUtils.isEmpty(allMovies)) {
+        	System.out.println(allMovies);
+            responseObject.setData(allMovies);
             responseObject.setMeta("Movies retrieved successfully.");
             return new ResponseEntity(responseObject, HttpStatus.OK);
         } else {

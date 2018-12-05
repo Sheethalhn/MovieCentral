@@ -1,4 +1,4 @@
-.subscription-body .whole .plan .header sup{
+/* .subscription-body .whole .plan .header sup{
 	font-size: 40px;
 }
 
@@ -86,16 +86,25 @@ line-height: 52px;
 	color: #575757;
 	padding: 0px;
 	margin: -10px;
-}
+} */
 
 .subscription-body .whole .plan .content .form-group .btn{
-background: #e50914;
-color:white;
-font-size: 16px;
-font-weight: 500;
-margin-left: 20px;
-margin-right: 20px;
-width:28%;
+	background: #e50914;
+	color:white;
+	font-size: 16px;
+	font-weight: 500;
+	margin-left: 20px;
+	margin-right: 20px;
+	width:28%;
+}
+
+.card-deck .card {
+	background: rgb(20, 20, 20);
+	border-radius: 0px;
+}
+
+.card-deck button {
+	border-radius: 0px;
 }
 
 

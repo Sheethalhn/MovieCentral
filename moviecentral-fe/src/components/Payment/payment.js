@@ -54,7 +54,7 @@ class Payment extends Component {
             API.addSubscription(requestData)
                 .then((resultData) => {
                     this.notify(resultData.meta.message);
-                    this.props.history.push("/home");
+                    this.props.history.push("/browse");
                     console.log("Payment is done");
                 }).catch(error => {
                     console.log("error :", error);
@@ -165,8 +165,8 @@ class Payment extends Component {
                                     <img src={amexlogo} id="amex" />
                                 </div>
                                 <div className="form-group" id="pay-now">
-                                    <button type="submit" className="btn btn-default" id="confirm-purchase">Pay Now</button>
-                                    <button type="button" onClick ={this.handleCancel} className="btn btn-default" id="cancel-purchase">Cancel</button>
+                                    <button type="submit" className="btn btn-danger" id="confirm-purchase">Pay Now</button>
+                                    <button type="button" onClick ={this.handleCancel} className="btn btn-danger" id="cancel-purchase">Cancel</button>
                                 </div>
                             </form>
                         </div>

@@ -36,6 +36,7 @@ public class PlaybackHistory {
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
+    @JsonBackReference(value = "movie-reference")
     private Movie movieObj;
 
     private Date timestamp;
