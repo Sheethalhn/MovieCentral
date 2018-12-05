@@ -81,6 +81,7 @@ class FullMovieForm extends Component {
                 rating: "",
                 availability: "",
                 price: "",
+                isActive: true
             },
             actors: []
         };
@@ -158,6 +159,7 @@ class FullMovieForm extends Component {
             rating: "",
             availability: "",
             price: "",
+            isActive: true
         }
         this.setState({ movie });
     }

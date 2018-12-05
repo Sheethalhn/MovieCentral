@@ -37,6 +37,7 @@ class MovieItem extends Component{
                     </div>
 
                     <div id="MovieItemA_4">
+                        {image}
                         <Link to={movieLink}>
                             <label id="FilterSPAN_100">
                                 <svg aria-hidden="true" data-prefix="far" data-icon="edit" style={{height: '9px','paddingRight': '2px'}}
@@ -47,7 +48,7 @@ class MovieItem extends Component{
                                 Edit
                             </label>
                         </Link>
-                        {image}
+                        
                     </div>
 
                     <div id="MovieItemA_6">

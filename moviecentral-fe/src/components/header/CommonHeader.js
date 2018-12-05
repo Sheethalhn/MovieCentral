@@ -45,16 +45,9 @@ class CommonHeader extends Component {
                                     Movies
                                 </Link>
                             </li>
-                            <li className="navigation-tab">
+                            {this.props.user !== undefined && this.props.user !== null && this.props.user.role !== 'admin' && <li className="navigation-tab">
                                 <Link to='/subscription'>
                                     Subscriptions
-                                </Link>
-                            </li>
-                            {/* {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">Customers</li>} */}
-                            {/* {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">Reports</li>} */}
-                            {this.props.user !== undefined && this.props.user !== null && this.props.user.role === 'admin' && <li className="navigation-tab">
-                                <Link to='/admin/dashboard/addMovie'>
-                                    Admin Dashboard
                                 </Link>
                             </li>}
                             <li className="navigation-tab nav-drop">
