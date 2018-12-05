@@ -90,14 +90,13 @@ class ViewUser extends Component {
                     style={{ 'display': 'block', 'margin': 'auto' }}>
                     {props.row._original !== null && props.row._original !== undefined && subscriptionMapping[props.row._original.subscriptionType]}</span>)
         }, {
-            Header: 'Duration',
+            Header: 'Expires On',
             accessor: 'movieObj',
             width: 250,
             style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
-            Cell: props =>
-                (<span className="visual-sub-title dark"
-                    style={{ 'display': 'block', 'margin': 'auto' }}>
-                    {props.row._original !== null && props.row._original !== undefined && props.row._original.duration}</span>)
+            Cell: props => <span className='number'>
+                {props.row._original !== null && props.row._original !== undefined && <Timestamp time={props.row._original.expiresOn} format='full' />}
+            </span>
         }]
 
         return (
