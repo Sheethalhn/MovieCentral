@@ -26,12 +26,12 @@ class Payment extends Component {
             expiration: '',
             cvv: '',
             submitted: false,
-            subscription_months:((this.props.location.state.subscription_months == undefined || this.props.location.state.subscription_months == null) ? 0 : this.props.location.state.subscription_months ),
+            subscription_months: ((this.props.location.state.subscription_months == undefined || this.props.location.state.subscription_months == null) ? 0 : this.props.location.state.subscription_months),
             subscription_type: this.props.location.state.subscription_type
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
-        
+
 
     }
 
@@ -39,22 +39,22 @@ class Payment extends Component {
         e.preventDefault();
         this.setState({ submitted: true });
         console.log(this.state);
-        if (this.state.card_number !== undefined && this.state.card_number !== "" && this.state.name !== undefined && this.state.name !== ""  && this.state.cvv !== undefined && this.state.cvv !== ""  && CardValidator.validateCardNumber(this.state.card_number)) {
+        if (this.state.card_number !== undefined && this.state.card_number !== "" && this.state.name !== undefined && this.state.name !== "" && this.state.cvv !== undefined && this.state.cvv !== "" && CardValidator.validateCardNumber(this.state.card_number)) {
             let requestData;
-            if(this.state.subscription_type == "M")
-            {
-                 requestData ={duration : this.state.subscription_months,userSubscriptionObj :this.props.user,subscriptionType : this.state.subscription_type};
+            if (this.state.subscription_type == "M") {
+                requestData = { duration: this.state.subscription_months, userSubscriptionObj: this.props.user, subscriptionType: this.state.subscription_type };
             }
-            else
-            {
-                requestData ={duration : this.state.subscription_months,userSubscriptionObj :this.props.user,subscriptionType : this.state.subscription_type,movieSubscriptionObj : this.state.movie};
+            else {
+                requestData = { duration: this.state.subscription_months, userSubscriptionObj: this.props.user, subscriptionType: this.state.subscription_type, movieSubscriptionObj: this.state.movie };
             }
             console.log(requestData);
             console.log(this.props.user);
             API.addSubscription(requestData)
                 .then((resultData) => {
                     this.notify(resultData.meta.message);
-                    this.props.history.push("/browse");
+                    setTimeout(() => {
+                        this.props.history.push("/browse");
+                    }, 1000);
                     console.log("Payment is done");
                 }).catch(error => {
                     console.log("error :", error);
@@ -62,13 +62,14 @@ class Payment extends Component {
                 });
         }
     }
-    handleCancel(){
+    handleCancel() {
         this.props.history.push("/home");
     }
     render() {
         return (
             <div className="outerBody">
                 <CommonHeader />
+                <ToastContainer/>
                 <div className="row justify-content-center">
                     <div className="creditCardForm">
                         <div className="heading">
@@ -166,7 +167,7 @@ class Payment extends Component {
                                 </div>
                                 <div className="form-group" id="pay-now">
                                     <button type="submit" className="btn btn-danger" id="confirm-purchase">Pay Now</button>
-                                    <button type="button" onClick ={this.handleCancel} className="btn btn-danger" id="cancel-purchase">Cancel</button>
+                                    <button type="button" onClick={this.handleCancel} className="btn btn-danger" id="cancel-purchase">Cancel</button>
                                 </div>
                             </form>
                         </div>
@@ -181,7 +182,7 @@ function mapStateToProps(state) {
     return {
         userSubscription: state.userSubscription,
         user: state.loginUser,
-        movie:state.selectedMovie
+        movie: state.selectedMovie
     }
 }
 
