@@ -3,11 +3,14 @@ import { Modal, Button } from "react-bootstrap";
 import "./subscription.css";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { userSubscription } from "../../actions";
+import { bindActionCreators } from 'redux';
 
 function mapStateToProps(state) {
     return {
         user: state.loginUser,
-        movie: state.selectedMovie
+        movie: state.selectedMovie,
+        subscription: state.userSubscription
     }
 }
 
@@ -36,26 +39,53 @@ class SubscriptionModal extends Component {
 
     subscribe(type) {
         if(type === "pay" && this.props.movietype === "PayPerViewOnly") {
-            this.setState({
+            
+            this.props.userSubscription({
                 subscription_months: this.state.subscription_months,
                 subscription_type: "V"
-            })
-        } else if(this.props.movietype !== "Free" && type === "pay") {
+            });
             this.setState({
+                redirect:'/payment'
+            })
+            
+            // this.props.subscription.subscription_months=this.state.subscription_months;
+            // this.props.subscription.subscription_type="V";
+        } else if(this.props.movietype !== "Free" && type === "pay") {
+            
+            this.props.userSubscription({
                 subscription_months: this.state.subscription_months,
                 subscription_type: "P"
-            })
-        } else if(type = "sub") {
+            });
             this.setState({
+                redirect:'/payment'
+            })
+            // this.setState({
+            //     subscription_months: this.state.subscription_months,
+            //     subscription_type: "P"
+            // })
+            // this.props.subscription.subscription_months=this.state.subscription_months;
+            // this.props.subscription.subscription_type="P";
+        } else if(type = "sub") {
+            this.props.userSubscription({
                 subscription_months: this.state.subscription_months,
                 subscription_type: "M"
+            });
+            this.setState({
+                redirect:'/payment'
             })
+
+            // this.setState({
+            //     subscription_months: this.state.subscription_months,
+            //     subscription_type: "M"
+            // })
+            // this.props.subscription.subscription_months=this.state.subscription_months;
+            // this.props.subscription.subscription_type="M";
         }
     }
 
     render() {
-        if(this.state.subscription_type !== null) {
-            return (<Redirect to="/payment" />);
+        if(this.state.redirect) {
+            return <Redirect to="/payment" />;
         }
         return (
             <Modal
@@ -131,4 +161,8 @@ class SubscriptionModal extends Component {
 
 }
 
-export default connect(mapStateToProps)(SubscriptionModal)
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({userSubscription: userSubscription}, dispatch)
+}
+
+export default connect(mapStateToProps,matchDispatchToProps)(SubscriptionModal)

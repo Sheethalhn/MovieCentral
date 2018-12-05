@@ -21,20 +21,36 @@ class ViewUser extends Component {
 
         this.state = {
             userObj: {},
-            userId: ''
+            userId: '',
+            userSubscriptions: [],
+            userPlayback: []
         };
     }
 
     componentDidMount() {
         this.setState({
-            userId: this.props.match.params.userId
+            userObj: this.props.user
         })
-        API.getUserById(this.props.match.params.userId)
+        API.getAllPlaybackHistoryByUser()
             .then((resultData) => {
                 console.log("resultData :", resultData);
                 if (!!resultData.data) {
                     this.setState({
-                        userObj: resultData.data
+                        userPlayback: resultData.data
+                    });
+                } else {
+                    console.log("No such User Available");
+                }
+            }).catch(error => {
+                this.notify(error);
+            });
+
+        API.getAllSubscriptionByUser()
+            .then((resultData) => {
+                console.log("resultData :", resultData);
+                if (!!resultData.data) {
+                    this.setState({
+                        userSubscriptions: resultData.data
                     });
                 } else {
                     console.log("No such User Available");
@@ -53,7 +69,7 @@ class ViewUser extends Component {
             Cell: props =>
                 (<span className="visual-sub-title dark"
                     style={{ 'display': 'block', 'margin': 'auto' }}>
-                    {props.row._original != null && props.row._original !== undefined && props.row._original.movieObj.title}</span>)
+                    {props.row._original != null && props.row._original !== undefined && props.row._original.title}</span>)
         }, {
             Header: 'Genre',
             accessor: 'movieObj',
@@ -62,13 +78,13 @@ class ViewUser extends Component {
             Cell: props =>
                 (<span className="visual-sub-title dark"
                     style={{ 'display': 'block', 'margin': 'auto' }}>
-                    {props.row._original !== null && props.row._original !== undefined && props.row._original.movieObj.genre}</span>)
+                    {props.row._original !== null && props.row._original !== undefined && props.row._original.genre}</span>)
         }, {
             Header: 'Watch Time',
             accessor: 'movieObj',
             width: 250,
             style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
-            Cell: props => <span className='number'><Timestamp time={props.row._original.movieObj.timestamp} format='full' /></span>
+            Cell: props => <span className='number'><Timestamp time={props.row._original.timestamp} format='full' /></span>
         }]
 
         const subscriptioncolumns = [{
@@ -150,7 +166,7 @@ class ViewUser extends Component {
                                                 noDataText="No Playback History Found"
                                                 filterable={true}
                                                 pagination={true}
-                                                data={this.state.userObj.userPlaybackHistory}
+                                                data={this.state.userPlayback}
                                                 columns={playBackcolumns} />
                                             {/* </div> */}
                                         </div>
@@ -170,7 +186,7 @@ class ViewUser extends Component {
                                                 noDataText="No Subscriptions Found"
                                                 filterable={true}
                                                 pagination={true}
-                                                data={this.state.userObj.userSubscriptions}
+                                                data={this.state.userSubscriptions}
                                                 columns={subscriptioncolumns} />
                                         </div>
                                     </div>

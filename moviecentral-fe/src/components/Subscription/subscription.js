@@ -4,7 +4,9 @@ import CommonHeader from '../header/CommonHeader';
 import {Link} from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { userSubscription } from "../../actions";
 const Timestamp = require('react-timestamp');
+
 
 
 class Subscription extends Component {
@@ -20,9 +22,6 @@ class Subscription extends Component {
         this.submitSubscription = this.submitSubscription.bind(this);
         this.calculateSubscription = this.calculateSubscription.bind(this);
         // this.handleCancel = this.handleCancel.bind(this);
-    }
-    componentDidMount() {
-
     }
 
     calculateSubscription = () => {
@@ -42,13 +41,17 @@ class Subscription extends Component {
 
     submitSubscription = () => {
         this.props.history.push({
-            pathname:"/payment",
-            state : {
-                subscription_months : this.state.subscription_months,
-                subscription_type : this.state.subscription_type
+            pathname:"/payment"
+        //     state : {
+        //         subscription_months : this.state.subscription_months,
+        //         subscription_type : this.state.subscription_type
 
-        }
+        // }
     })
+    //this.props.userSubscription(this.state.subscription_months,this.state.subscription_type);
+    this.props.userSubscription(this.state);
+    console.log(this.props.userSubscription)
+
 }
 handleCancel(){
     this.props.history.push("/home");
@@ -122,11 +125,12 @@ handleCancel(){
 function mapStateToProps(state) {
     return {
         user: state.loginUser,
+        subscription : state.userSubscription
     }
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({}, dispatch)
+    return bindActionCreators({userSubscription: userSubscription}, dispatch)
 }
 
 

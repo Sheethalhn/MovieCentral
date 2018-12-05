@@ -26,8 +26,11 @@ class Payment extends Component {
             expiration: '',
             cvv: '',
             submitted: false,
-            subscription_months: ((this.props.location.state.subscription_months == undefined || this.props.location.state.subscription_months == null) ? 0 : this.props.location.state.subscription_months),
-            subscription_type: this.props.location.state.subscription_type
+            // subscription_months: ((this.props.location.state.subscription_months == undefined || this.props.location.state.subscription_months == null) ? 0 : this.props.location.state.subscription_months),
+            // subscription_type: this.props.location.state.subscription_type
+            subscription_months:this.props.subscription.subscription_months,
+            subscription_type:this.props.subscription.subscription_type
+
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
@@ -45,7 +48,7 @@ class Payment extends Component {
                 requestData = { duration: this.state.subscription_months, userSubscriptionObj: this.props.user, subscriptionType: this.state.subscription_type };
             }
             else {
-                requestData = { duration: this.state.subscription_months, userSubscriptionObj: this.props.user, subscriptionType: this.state.subscription_type, movieSubscriptionObj: this.state.movie };
+                requestData = { duration: this.state.subscription_months, userSubscriptionObj: this.props.user, subscriptionType: this.state.subscription_type, movieSubscriptionObj: this.props.movie };
             }
             console.log(requestData);
             console.log(this.props.user);
@@ -69,9 +72,10 @@ class Payment extends Component {
         }
     }
     handleCancel() {
-        this.props.history.push("/home");
+        this.props.history.push("/browse");
     }
     render() {
+        console.log(this.state)
         return (
             <div className="outerBody">
                 <ToastContainer />
@@ -187,14 +191,14 @@ class Payment extends Component {
 }
 function mapStateToProps(state) {
     return {
-        userSubscription: state.userSubscription,
+        subscription: state.userSubscription,
         user: state.loginUser,
         movie: state.selectedMovie
     }
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({ userSubscription: userSubscription }, dispatch)
+    return bindActionCreators({}, dispatch)
 }
 
 

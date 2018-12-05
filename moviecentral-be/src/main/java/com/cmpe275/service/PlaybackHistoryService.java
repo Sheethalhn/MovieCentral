@@ -7,6 +7,7 @@ package com.cmpe275.service;
 
 import com.cmpe275.entity.Movie;
 import com.cmpe275.entity.PlaybackHistory;
+import com.cmpe275.entity.User;
 import com.cmpe275.repository.PlaybackHistoryRepository;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,15 +37,20 @@ public class PlaybackHistoryService {
         cal.setTime(currentDate);
         cal.add(Calendar.HOUR, -24);
         Date previousDate = cal.getTime();
-        List<PlaybackHistory> playbackHistorys = playbackHistoryRepository.getAllPlayBackHistoryByUserByTime(previousDate, currentDate, playbackHistory.getUserObj().getUserId(),playbackHistory.getMovieObj().getMovieId());
+        List<PlaybackHistory> playbackHistorys = playbackHistoryRepository.getAllPlayBackHistoryByUserByTime(previousDate, currentDate, playbackHistory.getUserObj(), playbackHistory.getMovieObj());
         if (CollectionUtils.isEmpty(playbackHistorys)) {
             playbackHistoryObj = playbackHistoryRepository.save(playbackHistory);
         }
         return playbackHistoryObj;
     }
 
-    public List<Movie> getMostWatchedMovies(){
-        return playbackHistoryRepository.getMostWatchedMovies(PageRequest.of(0,10)).getContent();
+    public List<Movie> getAllPaybackHistoryByUser(User user) {
+        List<Movie> playbackHistorys = playbackHistoryRepository.getAllPaybackHistoryByUser(user);
+        return playbackHistorys;
+    }
+
+    public List<Movie> getMostWatchedMovies() {
+        return playbackHistoryRepository.getMostWatchedMovies(PageRequest.of(0, 10)).getContent();
     }
 
 }
