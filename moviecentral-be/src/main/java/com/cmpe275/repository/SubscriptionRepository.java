@@ -10,6 +10,8 @@ import com.cmpe275.entity.Movie;
 import com.cmpe275.entity.User;
 
 import java.util.Date;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -38,5 +40,10 @@ public interface SubscriptionRepository extends CrudRepository<UserSubscription,
     @Query(value = "SELECT SUM(m.price) AS income FROM UserSubscription as sub JOIN Movie as m ON sub.movieSubscriptionObj = m.movieId "
             + "WHERE sub.subscriptionType IN ('V' , 'P') AND sub.createdOn >= :previousDate AND sub.createdOn <= :currentDate ")
     Long getMonthlyPayPerViewIncome(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
+
+    @Query(value = "SELECT e from UserSubscription where " +
+            "subscriptionType = :s and userSubscriptionObj = :u " +
+            "and movieSubscriptionObj = :m and expiresOn >= CURRENT_DATE ")
+    List<UserSubscription> getSubscriptionDetailOfUser(Movie m, String s, User u);
 
 }

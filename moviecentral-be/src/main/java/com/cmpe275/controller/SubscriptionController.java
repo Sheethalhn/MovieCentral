@@ -2,19 +2,19 @@ package com.cmpe275.controller;
 
 import javax.servlet.http.HttpSession;
 
+import com.cmpe275.entity.Movie;
+import com.cmpe275.entity.User;
+import com.cmpe275.service.MovieServ;
+import com.cmpe275.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import com.cmpe275.entity.UserSubscription;
 import com.cmpe275.service.SubscriptionService;
 import com.cmpe275.utility.ResponseFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")
@@ -22,6 +22,9 @@ public class SubscriptionController {
 
     @Autowired
     private SubscriptionService subscriptionService;
+    private UserService userServ;
+    private HttpSession session;
+    private MovieServ movieServ;
 
     ResponseFormat responseObject = new ResponseFormat();
 
@@ -58,6 +61,20 @@ public class SubscriptionController {
         responseObject.setData(monthlyPayPerViewIncome);
         responseObject.setMeta("Pay per view Income retrieved successfully.");
         return new ResponseEntity(responseObject, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/user/subscriptions")
+    public ResponseEntity<?> getSubscriptions(@RequestParam("movieId") Long movieId,
+                                              @RequestParam("availability") String a){
+        Long id = (Long)session.getAttribute("userId");
+        User u = userServ.getUserById(id);
+        Movie m = movieServ.getOneMovie(movieId);
+
+        if(id == null || u == null || m == null){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("401");
+        }else{
+            return ResponseEntity.ok(subscriptionService.getSubscriptions(u,m,a));
+        }
     }
 
 }
