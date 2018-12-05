@@ -215,8 +215,6 @@ class IncomeReport extends Component {
                         <div className="col-md-12 pd-left-0">
                             <div className="col-md-6">
                                 <Pie
-                                    width={520}
-                                    height={250}
                                     data={this.state.Data}
                                     options={{
                                         maintainAspectRatio: false,

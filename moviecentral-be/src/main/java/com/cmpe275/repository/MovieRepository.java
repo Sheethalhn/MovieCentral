@@ -62,4 +62,6 @@ List<Movie> findDistinctActors();
             + " group by ph.movieObj order by m.title desc")
     List<MovieActivityAggregateResults> getAllMoviesBasedOnTime(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
 
+    List<Movie> findTop10ByOrderByAvgratingsDesc();
+
 }

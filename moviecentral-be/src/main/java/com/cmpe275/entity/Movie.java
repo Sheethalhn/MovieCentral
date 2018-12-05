@@ -21,11 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Formula;
-import org.springframework.data.annotation.Transient;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.springframework.data.jpa.repository.Query;
-
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
