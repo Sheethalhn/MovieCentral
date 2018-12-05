@@ -5,7 +5,7 @@
 
 let routingMap = {
     "customer": ["/browse","/subscription","/payment","/moviedetail"],
-    "admin": ["/admin/useractivity","/admin/subscriptionreports","/admin/incomereports","/admin/movieactivity","/admin/dashboard",
+    "admin": ["/admin/useractivity","/admin/subscriptionreports","/admin/incomereports","/admin/topactivity","/admin/allactivity","/admin/dashboard",
     "/admin/dashboard/addmovie"]
 };
 
