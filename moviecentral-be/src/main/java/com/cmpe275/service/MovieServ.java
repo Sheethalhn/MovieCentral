@@ -127,4 +127,8 @@ public class MovieServ {
         return allMovies;
     }
 
+    public List<Movie> getTopRatedMovies(){
+        return movieRepo.findTop10ByOrderByAvgratingsDesc();
+    }
+
 }

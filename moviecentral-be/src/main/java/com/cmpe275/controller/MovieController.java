@@ -143,4 +143,9 @@ public class MovieController {
             return new ResponseEntity(responseObject, HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping(path = "/movies/toprated")
+    public ResponseEntity<?> getToprated(){
+        return ResponseEntity.ok(movieService.getTopRatedMovies());
+    }
 }
