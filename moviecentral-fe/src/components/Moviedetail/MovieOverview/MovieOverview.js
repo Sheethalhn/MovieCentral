@@ -5,6 +5,7 @@ import stargrey from './star-grey.png'
 import staryellow from './staryellow.png'
 import {connect} from "react-redux";
 // import * as API from "../../../api/apicall_for_users"; Temporarily disabling API calls
+import { playbackHistory } from "../../../api/API";
 import MovieBox from '../MovieDetailBox/MovieDetailBox';
 import MovieCrew from '../MovieCrew/MovieCrew';
 import ReactPlayer from 'react-player'
@@ -26,6 +27,7 @@ class MovieOverview extends Component {
 
         this.onReady = this.onReady.bind(this);
         this.hideModal = this.hideModal.bind(this);
+        this.movieStart = this.movieStart.bind(this);
     }
 
     // componentDidMount(){
@@ -97,6 +99,18 @@ class MovieOverview extends Component {
                 PPVpaidForMovie: PPVpaidForMovie
             });
         }
+    }
+
+    movieStart() {
+        var movieObj = this.props.movie;
+        var userObj = this.props.user;
+        playbackHistory({
+            userObj: userObj,
+            movieObj: movieObj
+        }).then((result) => {
+            console.error(result);
+        })
+
     }
 
     hideModal() {
