@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import Select from 'react-select';
 import CreatableSelect from 'react-select/lib/Creatable';
-import { getActors, addNewActor, addNewMovie } from "../../../api/API";
+import { getActors, addNewActor, addNewMovie, updateMovie } from "../../../api/API";
 import { toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -200,14 +200,16 @@ class FullMovieForm extends Component {
             let movie = { ...this.state.movie };
             movie.actors = formattedActors;
 
-            addNewMovie(movie).then((result) => {
-                if(this.props.type === "edit") {
-                    this.notify(`Movie Updated Successfully!!`);
-                } else {
+            if (this.props.type === "edit") {
+                updateMovie(movie, movie.movieId).then((result) => {
+                    this.notify(`Movie Successfully Added!!`);
+                })
+            } else {
+                addNewMovie(movie).then((result) => {
                     this.notify(`Movie Successfully Added!!`);
                     this.resetForm();
-                }
-            });
+                })
+            }
         }
     }
 

@@ -44,18 +44,17 @@ public class MovieController {
         }
     }
 
-    // @PutMapping(path = "/movie/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie, @PathVariable Long id) {
-    //     ResponseFormat resp = new ResponseFormat();
-    //     try {
-    //         Movie updatedMovie = movieService
-    //         // return ResponseEntity.ok(newMovie);
-    //         return new ResponseEntity<Movie>(newMovie, HttpStatus.CREATED);
-    //     } catch (Exception e) {
-    //         resp.setData(e);
-    //         return new ResponseEntity(resp, HttpStatus.NO_CONTENT).noContent().build();
-    //     }
-    // }
+    @PutMapping(path = "/movie/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateMovie(@RequestBody Movie movie, @PathVariable Long id) {
+        ResponseFormat resp = new ResponseFormat();
+        try {
+            Movie updatedMovie = movieService.updateMovie(movie);
+            return new ResponseEntity<Movie>(updatedMovie, HttpStatus.OK);
+        } catch (Exception e) {
+            resp.setData(e);
+            return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PutMapping(path="/movie/{id}")
     public ResponseEntity<?> updateIsActive(@PathVariable Long id) {
