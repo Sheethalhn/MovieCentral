@@ -48,6 +48,6 @@ public interface SubscriptionRepository extends CrudRepository<UserSubscription,
     @Query(value = "SELECT e from UserSubscription e where "
             + "subscriptionType = :s and userSubscriptionObj = :u "
             + "and (movieSubscriptionObj = :m OR :m IS NULL) and expiresOn >= CURRENT_DATE ")
-    List<UserSubscription> getSubscriptionDetailOfUser(Movie m, String s, User u);
+    List<UserSubscription> getSubscriptionDetailOfUser(@Param("m") Movie m,@Param("s") String s,@Param("u") User u);
 
 }

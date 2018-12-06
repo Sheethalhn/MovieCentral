@@ -51,6 +51,7 @@ public class SubscriptionController {
                 return new ResponseEntity(responseObject, HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             responseObject.setData(e);
             return new ResponseEntity(responseObject, HttpStatus.NO_CONTENT);
         }
