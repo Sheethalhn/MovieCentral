@@ -38,16 +38,16 @@ public interface SubscriptionRepository extends CrudRepository<UserSubscription,
             + " UserSubscription as u where expiresOn > :currentDate  and userSubscriptionObj = :user and  movieSubscriptionObj = :movie and subscriptionType = :subscriptionType")
     UserSubscription findByMovieId(@Param("currentDate") Date currentDate, @Param("user") User user, @Param("movie") Movie movie,@Param("subscriptionType") String subscriptionType);
 
-    @Query(value = "SELECT COUNT(*) as income FROM UserSubscription where subscriptionType = 'M' AND createdOn >= :previousDate AND createdOn <= :currentDate ")
+    @Query(value = "SELECT SUM(duration) as income FROM UserSubscription where subscriptionType = 'M' AND createdOn >= :previousDate AND createdOn <= :currentDate ")
     Long getMonthlySubscriptionIncome(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
 
-    @Query(value = "SELECT SUM(m.price) AS income FROM UserSubscription as sub JOIN Movie as m ON sub.movieSubscriptionObj = m.movieId "
+    @Query(value = "SELECT SUM(sub.subscriptionPrice) AS income FROM UserSubscription as sub JOIN Movie as m ON sub.movieSubscriptionObj = m.movieId "
             + "WHERE sub.subscriptionType IN ('V' , 'P') AND sub.createdOn >= :previousDate AND sub.createdOn <= :currentDate ")
     Long getMonthlyPayPerViewIncome(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
 
     @Query(value = "SELECT e from UserSubscription e where "
             + "subscriptionType = :s and userSubscriptionObj = :u "
-            + "and movieSubscriptionObj = :m and expiresOn >= CURRENT_DATE ")
+            + "and (movieSubscriptionObj = :m OR :m IS NULL) and expiresOn >= CURRENT_DATE ")
     List<UserSubscription> getSubscriptionDetailOfUser(Movie m, String s, User u);
 
 }

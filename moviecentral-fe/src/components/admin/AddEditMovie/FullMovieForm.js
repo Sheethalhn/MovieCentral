@@ -166,6 +166,10 @@ class FullMovieForm extends Component {
     }
 
     resetForm() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9dda352be3d6a6198464a316edb1632905319baa
         let movie = {
             title: "",
             genre: "",
