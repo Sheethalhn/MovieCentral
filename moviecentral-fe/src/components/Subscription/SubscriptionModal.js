@@ -90,16 +90,7 @@ class SubscriptionModal extends Component {
             return (<Redirect to={this.state.redirect} />);
         }
 
-        if(this.props.isSubscribed && this.props.movietype === "Paid") {
-            var openModel = false;
-        } else {
-            var openModel = true;
-        }
-
-        return (
-
-            // {openModel && "Hello"}
-            
+        return (            
             <div>
                 {!this.props.isSubscribed && this.props.movietype !== "Paid" &&
                 <Modal
@@ -162,10 +153,10 @@ class SubscriptionModal extends Component {
                             </div>
                         </Modal.Body>
                     }
-                    {this.props.movietype === "PayPerViewOnly" && this.props.movietype !== "Paid" &&
+                    {this.props.movietype === "PayPerViewOnly" && this.props.movietype === "Paid" &&
                         <Modal.Footer>
                             <button type="button" className="btn btn-lg btn-block btn-warning text-dark" onClick={this.subscribe.bind(this, "pay")}>
-                                Watch {this.props.movie.title} for {this.props.movie.price}$ One Time Only
+                            Watch {this.props.movie.title} for {this.props.isSubscribed ? this.props.movie.price/2 : this.props.movie.price}$ One Time Only
                             </button>
                         </Modal.Footer>
                     }
