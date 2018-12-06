@@ -68,8 +68,10 @@ public class FilterValues {
 
     public List<String> getStars() {
         List<String> res = new ArrayList<>();
-        for(Double i=1.0;i<=stars;i++){
-            res.add((Integer.toString(i.intValue())));
+        if(stars != null){
+            for(Double i=1.0;i<=stars;i++){
+                res.add((Integer.toString(i.intValue())));
+            }
         }
         return res;
     }
