@@ -108,11 +108,15 @@ public class MovieController {
             @RequestParam(value = "keyword", required = false) List<String> keywords,
             @RequestParam(value = "actors", required = false) List<String> actors)
     {
+
         List<Actor> a = new ArrayList<>();
 
-        for(String actor: actors){
-            a.addAll(actorService.getActorByName(actor));
+        if(actors != null){
+            for(String actor: actors){
+                a.addAll(actorService.getActorByName(actor));
+            }
         }
+
         return new ResponseEntity<>(assembler.toResource(movieService.getFilteredMovies(
                 genres,
                 stars,
