@@ -70,7 +70,6 @@ class MovieOverview extends Component {
             }
         });
 
-        debugger
         
         if ((movietype === "PayPerViewOnly" && !PPVpaidForMovie)) {
             this.setState({

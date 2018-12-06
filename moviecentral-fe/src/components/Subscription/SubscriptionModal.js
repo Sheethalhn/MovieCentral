@@ -90,9 +90,17 @@ class SubscriptionModal extends Component {
             return (<Redirect to={this.state.redirect} />);
         }
 
+        if (this.props.movietype === "PayPerViewOnly") {
+            var openModal = true;
+        } else if (!this.props.isSubscribed && (this.props.movietype === "Paid" || this.props.movietype === "SubscriptionOnly" || this.props.movietype === "PayPerViewOnly")) {
+            var openModal = true;
+        } else {
+            var openModal = false;
+        }
+
         return (            
             <div>
-                {!this.props.isSubscribed && this.props.movietype === "Paid" &&
+                {openModal &&
                 <Modal
                     {...this.props}
                     onHide={this.handleClose}
@@ -153,7 +161,7 @@ class SubscriptionModal extends Component {
                             </div>
                         </Modal.Body>
                     }
-                    {this.props.movietype === "PayPerViewOnly" || this.props.movietype === "Paid" &&
+                    {(this.props.movietype === "PayPerViewOnly" || this.props.movietype === "Paid") &&
                         <Modal.Footer>
                             <button type="button" className="btn btn-lg btn-block btn-warning text-dark" onClick={this.subscribe.bind(this, "pay")}>
                             Watch {this.props.movie.title} for {this.props.isSubscribed ? this.props.movie.price/2 : this.props.movie.price}$ One Time Only

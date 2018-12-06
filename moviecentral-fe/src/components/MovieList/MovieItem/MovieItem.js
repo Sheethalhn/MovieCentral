@@ -36,9 +36,9 @@ class MovieItem extends Component{
                         {this.state.quality}
                     </div>
 
-                    <div id="MovieItemA_4">
+                    <div id="MovieItemA_4" style={{cursor: 'pointer' }}>
                         {image}
-                        <Link to={movieLink}>
+                        {/* <Link to={movieLink}>
                             <label id="FilterSPAN_100">
                                 <svg aria-hidden="true" data-prefix="far" data-icon="edit" style={{height: '9px','paddingRight': '2px'}}
                                      className="svg-inline--fa fa-edit fa-w-18" role="img"
@@ -47,7 +47,7 @@ class MovieItem extends Component{
                                 </svg>
                                 Edit
                             </label>
-                        </Link>
+                        </Link> */}
                         
                     </div>
 
