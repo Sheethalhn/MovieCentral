@@ -52,6 +52,9 @@ public class UserSubscription {
 
     private Long duration;
     
+    @Column(name = "subscription_price")
+    private Double subscriptionPrice;
+    
     @Column(name = "expires_on")
     private Date expiresOn;
 
@@ -113,4 +116,13 @@ public class UserSubscription {
     public void setExpiresOn(Date expiresOn) {
         this.expiresOn = expiresOn;
     }
+
+    public Double getSubscriptionPrice() {
+        return subscriptionPrice;
+    }
+
+    public void setSubscriptionPrice(Double subscriptionPrice) {
+        this.subscriptionPrice = subscriptionPrice;
+    }
+    
 }

@@ -96,8 +96,8 @@ class FullMovieForm extends Component {
                 actors: [],
                 director: "",
                 country: "",
-                rating: { value: 'G', label: 'G' },
-                availability: { value: "Free", label: "Free" },
+                rating: "G",
+                availability: "Free",
                 price: 0,
                 isActive: true
             },
@@ -166,7 +166,6 @@ class FullMovieForm extends Component {
     }
 
     resetForm() {
-        debugger
         let movie = {
             title: "",
             genre: "",
@@ -201,15 +200,14 @@ class FullMovieForm extends Component {
             let movie = { ...this.state.movie };
             movie.actors = formattedActors;
 
-            debugger
-            // addNewMovie(movie).then((result) => {
-            //     if(this.props.type === "edit") {
-            //         this.notify(`Movie Updated Successfully!!`);
-            //     } else {
-            //         this.notify(`Movie Successfully Added!!`);
-                    // this.resetForm();
-            //     }
-            // });
+            addNewMovie(movie).then((result) => {
+                if(this.props.type === "edit") {
+                    this.notify(`Movie Updated Successfully!!`);
+                } else {
+                    this.notify(`Movie Successfully Added!!`);
+                    this.resetForm();
+                }
+            });
         }
     }
 
@@ -294,7 +292,7 @@ class FullMovieForm extends Component {
                             options={ratings} 
                             styles={colourStyles} 
                             onChange={this.handleRating.bind(this)} 
-                            value={this.state.rating}/>
+                            defaultValue={ratings[0]}/>
                     </div>
                     <div className="form-group col-md-4">
                         <label>Availability</label>
@@ -303,7 +301,7 @@ class FullMovieForm extends Component {
                             options={availability} 
                             styles={colourStyles} 
                             onChange={this.handleAvailability.bind(this)} 
-                            value={this.state.availability}/>
+                            defaultValue={availability[0]}/>
                     </div>
                 </div>
                 <div className="form-row">
