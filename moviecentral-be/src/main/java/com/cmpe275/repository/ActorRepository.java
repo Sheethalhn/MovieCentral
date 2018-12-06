@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface ActorRepository extends CrudRepository<Actor, Long> {
     List<Actor> findAll();
+    List<Actor> findAllByNameEquals(String name);
 }

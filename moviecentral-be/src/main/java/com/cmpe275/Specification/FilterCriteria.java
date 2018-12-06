@@ -1,5 +1,7 @@
 package com.cmpe275.Specification;
 
+import com.cmpe275.entity.Actor;
+
 import java.util.List;
 
 public class FilterCriteria {
@@ -9,6 +11,7 @@ public class FilterCriteria {
     List<String> directors;
     List<String> ratings;
     List<String> keywords;
+    List<Actor> actors;
 
     public FilterCriteria(
             List<String> genres,
@@ -16,7 +19,8 @@ public class FilterCriteria {
             List<String> years,
             List<String> directors,
             List<String> ratings,
-            List<String> keywords
+            List<String> keywords,
+            List<Actor> actors
     ){
         this.genres = genres;
         this.stars = stars;
@@ -24,6 +28,11 @@ public class FilterCriteria {
         this.directors = directors;
         this.ratings = ratings;
         this.keywords = keywords;
+        this.actors = actors;
+    }
+
+    public List<Actor> getActors() {
+        return actors;
     }
 
     public List<String> getGenres() {

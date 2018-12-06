@@ -1,5 +1,6 @@
 package com.cmpe275.Specification;
 
+import com.cmpe275.entity.Actor;
 import com.cmpe275.entity.Movie;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -8,6 +9,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class MovieSpecification implements Specification<Movie> {
@@ -67,6 +70,14 @@ public class MovieSpecification implements Specification<Movie> {
             }
             pres.add(in);
         }
+
+//        if (criteria.getActors() != null && !criteria.getActors().isEmpty()) {
+//            CriteriaBuilder.In<Actor> in = builder.in(root.get("actors").as(Actor.class));
+//            for (Actor actor : criteria.getActors()) {
+//                in.value(actor);
+//            }
+//            pres.add(in);
+//        }
 
         //If a movie is returned in the search result, every word is the keywords must match at least one attribute of this movie
         if (criteria.getKeywords() != null && !criteria.getKeywords().isEmpty()) {

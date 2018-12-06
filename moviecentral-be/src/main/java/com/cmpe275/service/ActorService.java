@@ -22,4 +22,8 @@ public class ActorService {
     public List<Actor> getAllActors() {
         return actorRepo.findAll();
     }
+
+    public List<Actor> getActorByName(String name){
+        return actorRepo.findAllByNameEquals(name);
+    }
 }
