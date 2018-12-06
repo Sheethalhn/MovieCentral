@@ -283,8 +283,8 @@ export const addNewMovie = (payload) =>
         return error;
     });
 
-export const updateMovie = (payload) =>
-    fetch(`${api}/movie`, {
+export const updateMovie = (payload, movieId) =>
+    fetch(`${api}/movie/${movieId}`, {
         method: 'PUT',
         headers: {
             ...headers,
