@@ -31,7 +31,8 @@
     "react-table": "^6.8.6",
     "react-timestamp": "^4.4.0",
     "react-toastify": "^3.3.4",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "validator": "^10.9.0"
   },
   "scripts": {
     "start": "react-scripts start",

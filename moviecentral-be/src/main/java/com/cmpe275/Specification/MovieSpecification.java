@@ -51,7 +51,7 @@ public class MovieSpecification implements Specification<Movie> {
         }
 
         if (criteria.getStars() != null && !criteria.getStars().isEmpty()) {
-            CriteriaBuilder.In<Integer> in = builder.in(root.get("stars").as(
+            CriteriaBuilder.In<Integer> in = builder.in(root.get("avgratings").as(
                     Integer.class));
             for (Integer star : criteria.getStars()) {
                 in.value(star);
@@ -104,7 +104,7 @@ public class MovieSpecification implements Specification<Movie> {
                 );
             }
         }
-
+        pres.add(builder.isTrue(root.get("isActive")));
         Predicate[] p = new Predicate[pres.size()];
         return builder.and(pres.toArray(p));
     }

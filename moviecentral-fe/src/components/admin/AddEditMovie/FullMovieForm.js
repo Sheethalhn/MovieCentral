@@ -1,3 +1,4 @@
+// Validations from React-Validation-Tutorial <https://github.com/mikeries/react-validation-tutorial>
 import React, { Component } from "react";
 import Select from 'react-select';
 import CreatableSelect from 'react-select/lib/Creatable';
@@ -5,6 +6,7 @@ import { getActors, addNewActor, addNewMovie } from "../../../api/API";
 import { toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import FormValidator from './FormValidator';
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({}, dispatch)
@@ -65,6 +67,22 @@ class FullMovieForm extends Component {
 
     constructor(props) {
         super(props);
+        //Validations
+        this.validator = new FormValidator([
+            {
+                field: 'title',
+                method: 'isEmpty',
+                validWhen: false,
+                message: 'Movie Title is Required!!'
+            },
+            {
+                field: 'movieURL',
+                method: 'isURL',
+                validWhen: true,
+                message: 'Movie URL is Required!!'
+            },   
+        ]);
+
 
         this.state = {
             movie: {
@@ -78,13 +96,16 @@ class FullMovieForm extends Component {
                 actors: [],
                 director: "",
                 country: "",
-                rating: "",
-                availability: "",
-                price: "",
+                rating: { value: 'G', label: 'G' },
+                availability: { value: "Free", label: "Free" },
+                price: 0,
                 isActive: true
             },
-            actors: []
+            actors: [],
+            validation: this.validator.valid(),
         };
+
+        this.submitted = false;
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -145,6 +166,7 @@ class FullMovieForm extends Component {
     }
 
     resetForm() {
+
         let movie = {
             title: "",
             genre: "",
@@ -158,26 +180,37 @@ class FullMovieForm extends Component {
             country: "",
             rating: "",
             availability: "",
-            price: "",
+            price: 0,
             isActive: true
         }
-        this.setState({ movie });
+        this.setState({ 
+            movie: movie,
+            selectedActors: []
+        });
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        let formattedActors = mapActorsFromSelect(this.selectedActors);
-        let movie = { ...this.state.movie };
-        movie.actors = formattedActors;
-        
-        addNewMovie(movie).then((result) => {
-            if(this.props.type === "edit") {
-                this.notify(`${result.title} Updated Successfully!!`);
-            } else {
-                this.notify(`${result.title} Successfully Added!!`);
-                this.resetForm();
-            }
-        });
+
+        const validation = this.validator.validate(this.state.movie);
+        this.setState({ validation });
+
+        this.submitted = true;
+        if (validation.isValid) {
+            let formattedActors = mapActorsFromSelect(this.selectedActors);
+            let movie = { ...this.state.movie };
+            movie.actors = formattedActors;
+
+
+            addNewMovie(movie).then((result) => {
+                if(this.props.type === "edit") {
+                    this.notify(`Movie Updated Successfully!!`);
+                } else {
+                    this.notify(`Movie Successfully Added!!`);
+                    this.resetForm();
+                }
+            });
+        }
     }
 
     handleActor(newValue) {
@@ -203,12 +236,17 @@ class FullMovieForm extends Component {
     }
 
     render() {
+        let validation = this.submitted ?                 // if the form has been submitted at least once
+            this.validator.validate(this.state.movie) :   // then check validity every time we render
+            this.state.validation                         // otherwise just use what's in state
+
         return(
             <form>
                 <div className="form-row">
                     <div className="form-group col-md-4">
                         <label>Title</label>
                         <input id="title" className="form-control" placeholder="Movie Name" onChange={this.handleChange} value={this.state.movie.title} />
+                        <span className="help-block">{validation.title.message}</span>
                     </div>
                     <div className="form-group col-md-4">
                         <label>Studio</label>
@@ -232,6 +270,7 @@ class FullMovieForm extends Component {
                             onChange={this.handleActor}
                             options={this.state.actors}
                             styles={colourStyles}
+                            value={this.state.selectedActors}
                         />
                     </div>
                     <div className="form-group col-md-4">
@@ -250,11 +289,21 @@ class FullMovieForm extends Component {
                     </div>
                     <div className="form-group col-md-4">
                         <label>Rating</label>
-                        <Select id="rating" options={ratings} styles={colourStyles} onChange={this.handleRating.bind(this)} />
+                        <Select 
+                            id="rating" 
+                            options={ratings} 
+                            styles={colourStyles} 
+                            onChange={this.handleRating.bind(this)} 
+                            value={this.state.rating}/>
                     </div>
                     <div className="form-group col-md-4">
                         <label>Availability</label>
-                        <Select id="rating" options={availability} styles={colourStyles} onChange={this.handleAvailability.bind(this)} />
+                        <Select 
+                            id="availability" 
+                            options={availability} 
+                            styles={colourStyles} 
+                            onChange={this.handleAvailability.bind(this)} 
+                            value={this.state.availability}/>
                     </div>
                 </div>
                 <div className="form-row">
@@ -265,6 +314,7 @@ class FullMovieForm extends Component {
                     <div className="form-group col-md-4">
                         <label>Movie URL</label>
                         <input id="movieURL" className="form-control" placeholder="Youtube URL" onChange={this.handleChange} value={this.state.movie.movieURL} />
+                        <span className="help-block">{validation.movieURL.message}</span>
                     </div>
                     <div className="form-group col-md-4">
                         <label>Price</label>

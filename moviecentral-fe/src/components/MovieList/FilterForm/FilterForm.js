@@ -78,7 +78,7 @@ class FilterForm extends Component{
             <div className="row filter-items">
                 {jsx}
                 <p id="MessageP_1">
-                    Leave an option empty means choose "all"
+                    {/*Leave an option empty means choose "all"*/}
                 </p>
                 <div id="MessageDIV_1">
 

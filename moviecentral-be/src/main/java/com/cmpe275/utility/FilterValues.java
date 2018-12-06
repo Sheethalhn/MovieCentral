@@ -1,5 +1,6 @@
 package com.cmpe275.utility;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FilterValues {
@@ -7,14 +8,14 @@ public class FilterValues {
     private List<String> year;
     private List<String> director;
     private List<String> rating;
-    private List<Integer> stars;
+    private Double stars;
     private List<String> actors;
 
     public FilterValues(List<String> genre,
                         List<String> year,
                         List<String> director,
                         List<String> rating,
-                        List<Integer> stars,
+                        Double stars,
                         List<String> actors
                         ){
         this.genre = genre;
@@ -65,11 +66,15 @@ public class FilterValues {
         this.rating = rating;
     }
 
-    public List<Integer> getStars() {
-        return stars;
+    public List<String> getStars() {
+        List<String> res = new ArrayList<>();
+        for(Double i=1.0;i<=stars;i++){
+            res.add((Integer.toString(i.intValue())));
+        }
+        return res;
     }
 
-    public void setStars(List<Integer> stars) {
+    public void setStars(Double stars) {
         this.stars = stars;
     }
 }
