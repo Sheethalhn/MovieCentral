@@ -34,7 +34,7 @@ public class SubscriptionService {
         Calendar currentTime = Calendar.getInstance();
 
         if (userSubscription.getSubscriptionType().equals(Constant.MONTHLY_SUBSCRIPTION)) {
-            UserSubscription checkObj = subscriptionRepository.findByUserId(currentTime.getTime(), userSubscription.getUserSubscriptionObj(),userSubscription.getSubscriptionType());
+            UserSubscription checkObj = subscriptionRepository.findByUserId(currentTime.getTime(), userSubscription.getUserSubscriptionObj(), userSubscription.getSubscriptionType());
             if (checkObj == null) {
                 Calendar cal = Calendar.getInstance();
                 cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -51,7 +51,7 @@ public class SubscriptionService {
 
             }
         } else if (userSubscription.getSubscriptionType().equals(Constant.PAY_PER_VIEW) || userSubscription.getSubscriptionType().equals(Constant.PAID)) {
-            UserSubscription checkObjMovie = subscriptionRepository.findByMovieId(currentTime.getTime(), userSubscription.getUserSubscriptionObj(), userSubscription.getMovieSubscriptionObj(),userSubscription.getSubscriptionType());
+            UserSubscription checkObjMovie = subscriptionRepository.findByMovieId(currentTime.getTime(), userSubscription.getUserSubscriptionObj(), userSubscription.getMovieSubscriptionObj(), userSubscription.getSubscriptionType());
             if (checkObjMovie == null) {
                 Calendar cal = Calendar.getInstance();
                 cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -65,7 +65,21 @@ public class SubscriptionService {
                 return userSubObj;
             }
         }
-
+        if (userSubscription.getMovieSubscriptionObj() != null) {
+            if (userSubscription.getSubscriptionType().equals(Constant.PAY_PER_VIEW)) {
+                List<UserSubscription> subscriptionDetailOfUser = subscriptionRepository.getSubscriptionDetailOfUser(null, Constant.MONTHLY_SUBSCRIPTION, userSubscription.getUserSubscriptionObj());
+                System.out.println("subscriptionDetailOfUser :" + subscriptionDetailOfUser);
+                if (subscriptionDetailOfUser.size() > 0) {
+                    userSubscription.setSubscriptionPrice(userSubscription.getMovieSubscriptionObj().getPrice() / 2);
+                } else {
+                    userSubscription.setSubscriptionPrice(userSubscription.getMovieSubscriptionObj().getPrice());
+                }
+            }else{
+                userSubscription.setSubscriptionPrice(userSubscription.getMovieSubscriptionObj().getPrice());
+            }
+        } else {
+            userSubscription.setSubscriptionPrice(10d);
+        }
         userSubObj = subscriptionRepository.save(userSubscription);
         return userSubObj;
     }
@@ -126,11 +140,11 @@ public class SubscriptionService {
         return monthlyPayPerViewIncome;
     }
 
-    public List<UserSubscription> getSubscriptions(User u, Movie m, String a){
-        return subscriptionRepository.getSubscriptionDetailOfUser(m,a,u);
+    public List<UserSubscription> getSubscriptions(User u, Movie m, String a) {
+        return subscriptionRepository.getSubscriptionDetailOfUser(m, a, u);
     }
-    
-     public List<UserSubscription> getAllUserSubscriptionByUserId(User user) {
+
+    public List<UserSubscription> getAllUserSubscriptionByUserId(User user) {
         List<UserSubscription> userSubscriptions = subscriptionRepository.getAllSubscriptionByUserId(user);
         return userSubscriptions;
     }
