@@ -44,14 +44,19 @@ class MovieReview extends Component {
             </div>
         ];
 
-        let arr = this.props.user.userPlaybackHistory;
-        for(let i=0; i<arr.length;i++){
-            if(arr[i]['movieSubscriptionObj']['movieId'] === this.props.movie.movieId){
-                data = [<div className="submit-review">
-                    <label className="submit-review-button" style={{display:"block"}} onClick={this.props.onAdd}>TELL US WHAT YOU THINK!!</label>
-                </div>]
-            }
-        }
+        // let arr = this.props.user.userPlaybackHistory;
+        // for(let i=0; i<arr.length;i++){
+        //     debugger;
+        //     if(arr[i]['movieSubscriptionObj']['movieId'] === this.props.movie.movieId){
+        //         data = [<div className="submit-review">
+        //             <label className="submit-review-button" style={{display:"block"}} onClick={this.props.onAdd}>TELL US WHAT YOU THINK!!</label>
+        //         </div>]
+        //     }
+        // }
+        data = [<div className="submit-review">
+            <label className="submit-review-button" style={{display:"block"}} onClick={this.props.onAdd}>TELL US WHAT YOU THINK!!</label>
+        </div>];
+
 
         if (this.props.user === undefined || this.props.user === null) {
             display = "semi"
@@ -62,7 +67,6 @@ class MovieReview extends Component {
                 if (review.user.userId === this.props.user.userId) {
                     display = "no";
                 }
-
             })
         }
 

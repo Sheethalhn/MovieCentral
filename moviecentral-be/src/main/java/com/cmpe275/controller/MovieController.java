@@ -1,5 +1,7 @@
 package com.cmpe275.controller;
 
+import com.cmpe275.entity.Actor;
+import com.cmpe275.service.ActorService;
 import com.cmpe275.service.MovieServ;
 import com.cmpe275.entity.Movie;
 import com.cmpe275.utility.ResponseFormat;
@@ -16,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,10 +30,11 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")
 public class MovieController {
     private final MovieServ movieService;
+    private final ActorService actorService;
 
     @Autowired
-    public MovieController(MovieServ movieService) {
-        this.movieService = movieService;
+    public MovieController(MovieServ movieService, ActorService a) {
+        this.movieService = movieService; this.actorService = a;
     }
 
     @PostMapping(path = "/movie", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -100,8 +105,14 @@ public class MovieController {
             @RequestParam(value = "year", required = false) List<String> years,
             @RequestParam(value = "director", required = false) List<String> directors,
             @RequestParam(value = "rating", required = false) List<String> ratings,
-            @RequestParam(value = "keyword", required = false) List<String> keywords)
+            @RequestParam(value = "keyword", required = false) List<String> keywords,
+            @RequestParam(value = "actors", required = false) List<String> actors)
     {
+        List<Actor> a = new ArrayList<>();
+
+        for(String actor: actors){
+            a.addAll(actorService.getActorByName(actor));
+        }
         return new ResponseEntity<>(assembler.toResource(movieService.getFilteredMovies(
                 genres,
                 stars,
@@ -109,6 +120,7 @@ public class MovieController {
                 directors,
                 ratings,
                 keywords,
+                a,
                 p
         )),HttpStatus.OK);
     }
