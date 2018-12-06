@@ -166,7 +166,7 @@ class FullMovieForm extends Component {
     }
 
     resetForm() {
-        debugger
+
         let movie = {
             title: "",
             genre: "",
@@ -201,15 +201,15 @@ class FullMovieForm extends Component {
             let movie = { ...this.state.movie };
             movie.actors = formattedActors;
 
-            debugger
-            // addNewMovie(movie).then((result) => {
-            //     if(this.props.type === "edit") {
-            //         this.notify(`Movie Updated Successfully!!`);
-            //     } else {
-            //         this.notify(`Movie Successfully Added!!`);
-                    // this.resetForm();
-            //     }
-            // });
+
+            addNewMovie(movie).then((result) => {
+                if(this.props.type === "edit") {
+                    this.notify(`Movie Updated Successfully!!`);
+                } else {
+                    this.notify(`Movie Successfully Added!!`);
+                    this.resetForm();
+                }
+            });
         }
     }
 
