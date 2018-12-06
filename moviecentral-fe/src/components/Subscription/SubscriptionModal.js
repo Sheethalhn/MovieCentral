@@ -71,7 +71,7 @@ class SubscriptionModal extends Component {
 
         } else if(type = "sub") {
             this.props.userSubscription({
-                subscription_months: this.state.subscription_months,
+                subscription_months: (this.state.subscription_months == 0 ) ? 1 :this.state.subscription_months,
                 subscription_type: "M"
             });
             this.setState({
