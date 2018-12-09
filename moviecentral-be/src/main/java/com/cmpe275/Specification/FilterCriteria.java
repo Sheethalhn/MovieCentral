@@ -11,7 +11,7 @@ public class FilterCriteria {
     List<String> directors;
     List<String> ratings;
     List<String> keywords;
-    List<Actor> actors;
+    List<String> actors;
 
     public FilterCriteria(
             List<String> genres,
@@ -20,7 +20,7 @@ public class FilterCriteria {
             List<String> directors,
             List<String> ratings,
             List<String> keywords,
-            List<Actor> actors
+            List<String> actors
     ){
         this.genres = genres;
         this.stars = stars;
@@ -31,7 +31,7 @@ public class FilterCriteria {
         this.actors = actors;
     }
 
-    public List<Actor> getActors() {
+    public List<String> getActors() {
         return actors;
     }
 

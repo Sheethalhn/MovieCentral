@@ -64,11 +64,11 @@ public class MovieServ {
             List<String> directors,
             List<String> ratings,
             List<String> keywords,
-            List<Actor> actors,
+            List<String> actors,
             Pageable p
     ){
 
-        if(genres == null && stars == null && years == null && directors == null && ratings == null && keywords == null){
+        if(genres == null && stars == null && years == null && directors == null && ratings == null && keywords == null && actors == null){
             return new PageImpl<>(Collections.emptyList());
         }
         MovieSpecification spec = new MovieSpecification(
