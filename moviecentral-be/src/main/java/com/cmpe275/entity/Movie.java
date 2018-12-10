@@ -71,8 +71,7 @@ public class Movie {
     }
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "actor_id")
-    private List<Actor> actors = new ArrayList<>();
+    private List<Actor> actors;
 
     public Double getTotalreviews() {
         return totalreviews;
