@@ -21,11 +21,17 @@ class AllMoviesActivity extends Component {
         };
 
         this.fetchAllMovies = this.fetchAllMovies.bind(this);
+        this.handleDefault = this.handleDefault.bind(this);
     }
 
     componentDidMount() {
-
+        this.handleDefault()
     }
+
+    handleDefault(){
+        this.fetchAllMovies('last24hrs') 
+    }
+    
 
     fetchAllMovies(time) {
         API.getAllMoviesBasedOnTime(time)

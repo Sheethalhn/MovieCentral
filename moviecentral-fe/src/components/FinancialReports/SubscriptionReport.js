@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import * as API from '../../api/API';
 import { Link } from 'react-router-dom';
 import { Tabs, Tab } from 'react-bootstrap';
+import Sidebar from "../admin/dashboard/Sidebar";
 
 class SubscriptionReport extends Component {
 
@@ -112,8 +113,8 @@ class SubscriptionReport extends Component {
         const columns = [{
             Header: 'Customer Name',
             accessor: 'firstName',
-            width: 250,
-            style: { 'whiteSpace': 'unset' },
+            width: 200,
+            style: { 'whiteSpace': 'unset', 'fontSize': '20px', 'textAlign': 'center' },
             Cell: props =>
 
                 (<div className="user-name"><Link to={'/viewuser/' + props.row._original.userId}>
@@ -126,7 +127,8 @@ class SubscriptionReport extends Component {
         }, {
             Header: 'Customer Email',
             accessor: 'email',
-            style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
+            width: 280,
+            style: { 'whiteSpace': 'unset', 'fontSize': '20px', 'textAlign': 'center' },
             Cell: props => (
                 <span className="visual-sub-title dark"
                     style={{ 'display': 'block', 'margin': 'auto' }}>
@@ -134,7 +136,7 @@ class SubscriptionReport extends Component {
         }, {
             Header: '# of Movie Played',
             accessor: 'createdOn',
-            style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
+            style: { 'whiteSpace': 'unset', 'fontSize': '20px', 'textAlign': 'center' },
             Cell: props => (
                 <span className="visual-sub-title dark"
                     style={{ 'display': 'block', 'margin': 'auto' }}>
@@ -144,64 +146,72 @@ class SubscriptionReport extends Component {
         return (
             <div>
                 <CommonHeader />
-
-                <div className="row justify-content-center">
-                    <div className=" col-md-12 page-header-container">
-                        <div className="col-md-11 pd-left-0">
-                            <div className="row justify-content-center">
-                                <h4 className="top-cust-header">User Categories : </h4>
-                                <a className="nav-link page-header-emphasis link-pad-top"
-                                    href="javascript:void(0);"
-                                    onClick={() => { this.getActiveUsersByMonth('Registered') }}>Registered Users </a>
-                                <a className="nav-link page-header-emphasis link-pad-top"
-                                    href="javascript:void(0);"
-                                    onClick={() => { this.getActiveUserPlayBackByMonth('Active') }}>Active Users </a>
-                                <a className="nav-link page-header-emphasis link-pad-top"
-                                    href="javascript:void(0);"
-                                    onClick={() => { this.getUsersBySubscriptionType('M', 'Subscribed') }}>Subscribed Users</a>
-                                <a className="nav-link page-header-emphasis link-pad-top"
-                                    href="javascript:void(0);"
-                                    onClick={() => { this.getUsersBySubscriptionType('V,P', 'Pay-Per-View') }}>Pay Per View</a>
-                            </div>
-                            <div className="row justify-content-center">
-                                <h2 className="schedule-page-header"> {this.state.category} <span className="page-header-emphasis"> Customers</span></h2>
-                                <select className="col-2 custom-select month-select"
-                                    value={this.state.month}
-                                    onChange={(event) => {
-                                        this.changeCustomer(event);
-                                    }}>>
-                                    <option value="-1">All</option>
-                                    <option value="0">January</option>
-                                    <option value="1">February</option>
-                                    <option value="2">March</option>
-                                    <option value="3">April</option>
-                                    <option value="4">May</option>
-                                    <option value="5">June</option>
-                                    <option value="6">July</option>
-                                    <option value="7">August</option>
-                                    <option value="8">September</option>
-                                    <option value="9">October</option>
-                                    <option value="10">November</option>
-                                    <option value="11">December</option>
-                                </select>
-                            </div>
-
-                        </div>
+                <div id="wrapper" className="toggled">
+                    <div id="sidebar-wrapper">
+                        <Sidebar />
                     </div>
-                    <div className="col-md-9 pd-left-0">
-                        <div className="col-md-12 pd-left-0">
-                            < ReactTable
-                                minRows={0}
-                                defaultPageSize={5}
-                                noDataText="No Customers Found"
-                                filterable={true}
-                                pagination={true}
-                                data={this.state.customerList}
-                                columns={columns} />
+                    <div id="page-content-wrapper">
+                        <div className="container-fluid">
+                            <div className="row justify-content-center">
+                                <div className=" col-md-12 page-header-container">
+                                    <div className="col-md-11 pd-left-0">
+                                        <div className="row justify-content-center">
+                                            <h4 className="top-cust-header">User Categories : </h4>
+                                            <a className="nav-link page-header-emphasis link-pad-top"
+                                                href="javascript:void(0);"
+                                                onClick={() => { this.getActiveUsersByMonth('Registered') }}>Registered Users </a>
+                                            <a className="nav-link page-header-emphasis link-pad-top"
+                                                href="javascript:void(0);"
+                                                onClick={() => { this.getActiveUserPlayBackByMonth('Active') }}>Active Users </a>
+                                            <a className="nav-link page-header-emphasis link-pad-top"
+                                                href="javascript:void(0);"
+                                                onClick={() => { this.getUsersBySubscriptionType('M', 'Subscribed') }}>Subscribed Users</a>
+                                            <a className="nav-link page-header-emphasis link-pad-top"
+                                                href="javascript:void(0);"
+                                                onClick={() => { this.getUsersBySubscriptionType('V,P', 'Pay-Per-View') }}>Pay Per View</a>
+                                        </div>
+                                        <div className="row justify-content-center">
+                                            <h2 className="schedule-page-header"> {this.state.category} <span className="page-header-emphasis"> Customers</span></h2>
+                                            <select className="col-2 custom-select month-select"
+                                                value={this.state.month}
+                                                onChange={(event) => {
+                                                    this.changeCustomer(event);
+                                                }}>>
+                                    <option value="-1">All</option>
+                                                <option value="0">January</option>
+                                                <option value="1">February</option>
+                                                <option value="2">March</option>
+                                                <option value="3">April</option>
+                                                <option value="4">May</option>
+                                                <option value="5">June</option>
+                                                <option value="6">July</option>
+                                                <option value="7">August</option>
+                                                <option value="8">September</option>
+                                                <option value="9">October</option>
+                                                <option value="10">November</option>
+                                                <option value="11">December</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div className="col-md-9 pd-left-0">
+                                    <div className="col-md-12 pd-left-0">
+                                        < ReactTable
+                                            minRows={0}
+                                            defaultPageSize={5}
+                                            noDataText="No Customers Found"
+                                            filterable={true}
+                                            pagination={true}
+                                            data={this.state.customerList}
+                                            columns={columns}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         )
     }

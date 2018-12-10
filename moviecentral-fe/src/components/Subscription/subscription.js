@@ -84,7 +84,7 @@ handleCancel(){
                                         <li>50% Discounts on Premium Movies </li>
                                         <li>24/7 Customer Support</li>
                                         <br/>
-                                        <li
+                                        <li disabled={this.calculateSubscription() != null}
                                             value={this.state.subscription_months}
                                             onChange={(event) => {
                                                 this.setState({

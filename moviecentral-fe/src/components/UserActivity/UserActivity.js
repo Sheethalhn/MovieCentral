@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as API from '../../api/API';
 import { Link } from 'react-router-dom';
+import Sidebar from "../admin/dashboard/Sidebar";
 
 class UserActivity extends Component {
 
@@ -66,8 +67,7 @@ class UserActivity extends Component {
         const columns = [{
             Header: 'Customer Name',
             accessor: 'firstName',
-            width: 250,
-            style: { 'whiteSpace': 'unset' },
+            style: { 'whiteSpace': 'unset','fontSize': '20px', 'textAlign': 'center' },
             Cell: props =>
 
                 (<div className="user-name"><Link to={'/viewuser/' + props.row._original.userId}>
@@ -80,7 +80,8 @@ class UserActivity extends Component {
         }, {
             Header: 'Customer Email',
             accessor: 'email',
-            style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
+            width: 280,
+            style: { 'whiteSpace': 'unset', 'fontSize': '20px','textAlign': 'center' },
             Cell: props => (
                 <span className="visual-sub-title dark"
                     style={{ 'display': 'block', 'margin': 'auto' }}>
@@ -88,7 +89,7 @@ class UserActivity extends Component {
         }, {
             Header: '# of Movie Played',
             accessor: 'createdOn',
-            style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
+            style: { 'whiteSpace': 'unset', 'fontSize': '20px','textAlign': 'center' },
             Cell: props => (
                 <span className="visual-sub-title dark"
                     style={{ 'display': 'block', 'margin': 'auto' }}>
@@ -98,41 +99,51 @@ class UserActivity extends Component {
         return (
             <div>
                 <CommonHeader />
-                <div className="row justify-content-center">
-                    <div className=" col-md-12 page-header-container">
-                        <div className="col-md-11 pd-left-0">
-                            <div className="row justify-content-center">
-                                <h4 className="top-cust-header">Most Played Movie Top 10 Customers : </h4>
-                                <a className="nav-link page-header-emphasis link-pad-top"
-                                    href="javascript:void(0);"
-                                    onClick={() => { this.getAllCustomers() }}>All </a>
-                                <a className="nav-link page-header-emphasis link-pad-top"
-                                    href="javascript:void(0);"
-                                    onClick={() => { this.fetchTopUsers('last24hrs') }}>Last 24 hours </a>
-                                <a className="nav-link page-header-emphasis link-pad-top"
-                                    href="javascript:void(0);"
-                                    onClick={() => { this.fetchTopUsers('lastweek') }}>Last week</a>
-                                <a className="nav-link page-header-emphasis link-pad-top"
-                                    href="javascript:void(0);"
-                                    onClick={() => { this.fetchTopUsers('lastmonth') }}>Last Month</a>
-                            </div>
-                            <h2 className="schedule-page-header">Valuable All <span className="page-header-emphasis"> Customers</span></h2>
-                        </div>
+                <div id="wrapper" className="toggled">
+                    <div id="sidebar-wrapper">
+                        <Sidebar />
                     </div>
-                    <div className="col-md-9 pd-left-0">
-                        <div className="col-md-12 pd-left-0">
-                            < ReactTable
-                                minRows={0}
-                                defaultPageSize={5}
-                                noDataText="No Customers Found"
-                                filterable={true}
-                                pagination={true}
-                                data={this.state.customerList}
-                                columns={columns} />
+                    <div id="page-content-wrapper">
+                        <div className="container-fluid">
+                            <div className="row justify-content-center">
+                                <div className=" col-md-12 page-header-container">
+                                    <div className="col-md-11 pd-left-0">
+                                        <div className="row justify-content-center">
+                                            <h4 className="top-cust-header">Most Played Movie Top 10 Customers : </h4>
+                                            <a className="nav-link page-header-emphasis link-pad-top"
+                                                href="javascript:void(0);"
+                                                onClick={() => { this.getAllCustomers() }}>All </a>
+                                            <a className="nav-link page-header-emphasis link-pad-top"
+                                                href="javascript:void(0);"
+                                                onClick={() => { this.fetchTopUsers('last24hrs') }}>Last 24 hours </a>
+                                            <a className="nav-link page-header-emphasis link-pad-top"
+                                                href="javascript:void(0);"
+                                                onClick={() => { this.fetchTopUsers('lastweek') }}>Last week</a>
+                                            <a className="nav-link page-header-emphasis link-pad-top"
+                                                href="javascript:void(0);"
+                                                onClick={() => { this.fetchTopUsers('lastmonth') }}>Last Month</a>
+                                        </div>
+                                        <div className="row justify-content-center">
+                                        <h2 className="schedule-page-header">Valuable All <span className="page-header-emphasis"> Customers</span></h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-9 pd-left-0">
+                                    <div className="col-md-12 pd-left-0">
+                                        < ReactTable
+                                            minRows={0}
+                                            defaultPageSize={5}
+                                            noDataText="No Customers Found"
+                                            filterable={true}
+                                            pagination={true}
+                                            data={this.state.customerList}
+                                            columns={columns} />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         )
     }

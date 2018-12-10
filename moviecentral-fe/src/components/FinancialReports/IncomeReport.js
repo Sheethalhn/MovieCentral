@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import * as API from '../../api/API';
 import { Link } from 'react-router-dom';
 import { Pie } from 'react-chartjs-2';
+import Sidebar from "../admin/dashboard/Sidebar";
 
 class IncomeReport extends Component {
 
@@ -179,68 +180,75 @@ class IncomeReport extends Component {
         return (
             <div>
                 <CommonHeader />
-
-                <div className="row justify-content-center">
-                    <div className=" col-md-12 page-header-container">
-                        <div className="col-md-11 pd-left-0">
-                            <div className="row justify-content-center">
-                                <h2 className="schedule-page-header">
-                                    <span className="page-header-emphasis"> Income </span>
-                                </h2>
-                                <select className="col-2 custom-select month-select"
-                                    value={this.state.month}
-                                    onChange={(event) => {
-                                        this.changeCustomer(event);
-                                    }}>>
-                                    <option value="-1">All</option>
-                                    <option value="0">January</option>
-                                    <option value="1">February</option>
-                                    <option value="2">March</option>
-                                    <option value="3">April</option>
-                                    <option value="4">May</option>
-                                    <option value="5">June</option>
-                                    <option value="6">July</option>
-                                    <option value="7">August</option>
-                                    <option value="8">September</option>
-                                    <option value="9">October</option>
-                                    <option value="10">November</option>
-                                    <option value="11">December</option>
-                                </select>
-                            </div>
-
-                        </div>
+                <div id="wrapper" className="toggled">
+                    <div id="sidebar-wrapper">
+                        <Sidebar />
                     </div>
-                    <div className="col-md-9 pd-left-0">
-                        <div className="col-md-12 pd-left-0">
-                            <div className="col-md-6">
-                                <Pie
-                                    data={this.state.Data}
-                                    options={{
-                                        maintainAspectRatio: false,
-                                        legend: {
-                                            position: 'left',
-                                            labels: {
-                                                boxWidth: 10
-                                            }
-                                        }
-                                    }} />
-                            </div>
-                            <div className="col-12 clearfix">
-                                <a className="nav-link page-header-emphasis a-float-left"
-                                    href="javascript:void(0);"> Monthly Subscribed Income: ${this.state.subscribedIncome} </a><br />
-                            </div>
-                            <div className="col-12 clearfix">
-                                <a className="nav-link page-header-emphasis a-float-left"
-                                    href="javascript:void(0);">Monthly Pay-Per-View Income: ${this.state.payperviewIncome} </a><br />
-                            </div>
-                            <div className="col-12 clearfix">
-                                <a className="nav-link page-header-emphasis a-float-left"
-                                    href="javascript:void(0);">Monthly Total Income: ${this.state.totalIncome}</a><br />
+                    <div id="page-content-wrapper">
+                        <div className="container-fluid">
+                            <div className="row justify-content-center">
+                                <div className=" col-md-12 page-header-container">
+                                    <div className="col-md-11 pd-left-0">
+                                        <div className="row justify-content-center">
+                                            <h2 className="schedule-page-header">
+                                                <span className="page-header-emphasis"> Income </span>
+                                            </h2>
+                                            <select className="col-2 custom-select month-select"
+                                                value={this.state.month}
+                                                onChange={(event) => {
+                                                    this.changeCustomer(event);
+                                                }}>>
+                                    <option value="-1">All</option>
+                                                <option value="0">January</option>
+                                                <option value="1">February</option>
+                                                <option value="2">March</option>
+                                                <option value="3">April</option>
+                                                <option value="4">May</option>
+                                                <option value="5">June</option>
+                                                <option value="6">July</option>
+                                                <option value="7">August</option>
+                                                <option value="8">September</option>
+                                                <option value="9">October</option>
+                                                <option value="10">November</option>
+                                                <option value="11">December</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div className="col-md-9 pd-left-0">
+                                    <div className="col-md-12 pd-left-0">
+                                        <div className="col-md-6">
+                                            <Pie
+                                                data={this.state.Data}
+                                                options={{
+                                                    maintainAspectRatio: false,
+                                                    legend: {
+                                                        position: 'left',
+                                                        labels: {
+                                                            boxWidth: 10
+                                                        }
+                                                    }
+                                                }} />
+                                        </div>
+                                        <div className="col-12 clearfix">
+                                            <a className="nav-link page-header-emphasis a-float-left"
+                                                href="javascript:void(0);"> Monthly Subscribed Income: ${this.state.subscribedIncome} </a><br />
+                                        </div>
+                                        <div className="col-12 clearfix">
+                                            <a className="nav-link page-header-emphasis a-float-left"
+                                                href="javascript:void(0);">Monthly Pay-Per-View Income: ${this.state.payperviewIncome} </a><br />
+                                        </div>
+                                        <div className="col-12 clearfix">
+                                            <a className="nav-link page-header-emphasis a-float-left"
+                                                href="javascript:void(0);">Monthly Total Income: ${this.state.totalIncome}</a><br />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         )
     }
