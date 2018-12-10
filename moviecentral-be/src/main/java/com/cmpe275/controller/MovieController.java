@@ -61,7 +61,7 @@ public class MovieController {
         }
     }
 
-    @PutMapping(path="/movie/{id}")
+    @DeleteMapping(path="/movie/{id}")
     public ResponseEntity<?> updateIsActive(@PathVariable Long id) {
         try {
             Movie m = movieService.getOneMovie(id);

@@ -300,7 +300,7 @@ export const updateMovie = (payload, movieId) =>
 
 export const setMovieInactive = (movieId) =>
     fetch(`${api}/movie/${movieId}`, {
-        method: 'PUT',
+        method: 'DELETE',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
