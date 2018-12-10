@@ -10,7 +10,7 @@ import FormValidator from './FormValidator';
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({}, dispatch)
-}
+};
 
 const colourStyles = {
     control: styles => ({ ...styles, backgroundColor: 'white', color: 'black' }),
@@ -20,30 +20,29 @@ const colourStyles = {
             color: 'black'
         };
     }
-}
+};
 
 const mapActorsToSelect = (actors) => {
     if (actors.length > 0) {
         return actors.map((actor) => {
             return {
-                value: actor.name,
-                label: actor.name,
-                id: actor.actorId
+                value: actor.actorId.toString(),
+                label: actor.name
             }
         });
     } else {
         return [];
     }
-}
+};
 
 const mapActorsFromSelect = (actors) => {
     return actors.map((actor) => {
         return {
-            name: actor.value,
-            actorId: actor.id
+            name: actor.label,
+            actorId: actor.value
         }
     })
-}
+};
 
 const ratings = [
     { value: 'G', label: 'G' },
@@ -51,14 +50,14 @@ const ratings = [
     { value: 'PG-13', label: 'PG-13' },
     { value: 'R', label: 'R' },
     { value: 'NC-17', label: 'NC-17' }
-]
+];
 
 const availability = [
     { value: "Free", label: "Free" },
     { value: "SubscriptionOnly", label: "Subscription Only" },
     { value: "PayPerViewOnly", label: "Pay Per View Only" },
     { value: "Paid", label: "Paid" },
-]
+];
 
 
 class FullMovieForm extends Component {
@@ -103,6 +102,7 @@ class FullMovieForm extends Component {
             },
             actors: [],
             validation: this.validator.valid(),
+            selectedActors : []
         };
 
         this.submitted = false;
@@ -111,7 +111,7 @@ class FullMovieForm extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleActor = this.handleActor.bind(this);
 
-        this.selectedActors = [];
+
 
     }
 
@@ -196,7 +196,7 @@ class FullMovieForm extends Component {
 
         this.submitted = true;
         if (validation.isValid) {
-            let formattedActors = mapActorsFromSelect(this.selectedActors);
+            let formattedActors = mapActorsFromSelect(this.state.selectedActors);
             let movie = { ...this.state.movie };
             movie.actors = formattedActors;
 
@@ -214,26 +214,54 @@ class FullMovieForm extends Component {
         }
     }
 
-    handleActor(newValue) {
-        this.selectedActors = newValue.filter((actor) => actor.id);
-        newValue.forEach((actor) => {
-            if (actor.__isNew__) {
-                addNewActor({ name: actor.label }).then((result) => {
-                    let newActors = [...this.state.actors];
-                    newActors.push({
-                        value: result.name,
-                        label: result.name,
-                        id: result.actorId
-                    });
-                    this.selectedActors.push({
-                        value: result.name,
-                        label: result.name,
-                        id: result.actorId
-                    })
-                    this.setState({ actors: newActors });
+    async handleActor(newValue) {
+        let selectedActors = [];
+        let actorOptions = [...this.state.actors];
+
+        for(let i=0;i<newValue.length;i++){
+            const actor = newValue[i];
+            if (actor.value === actor.label){
+                const result = await addNewActor({ name: actor.label });
+                actorOptions.push({
+                    value: result.actorId.toString(),
+                    label: result.name,
+                });
+                selectedActors.push({
+                    value: result.actorId.toString(),
+                    label: result.name
+                });
+
+            }else{
+                selectedActors.push({
+                    value: actor.value,
+                    label: actor.label
                 })
             }
-        });
+        }
+        this.setState({ actors: actorOptions , "selectedActors":selectedActors});
+
+        // newValue.forEach((actor) => {
+        //     if (actor.value === actor.label) {
+        //         addNewActor({ name: actor.label }).then((result) => {
+        //             // let newActors = [...this.state.actors];
+        //             // let selectedActors = [...this.state.selectedActors];
+        //             actorOptions.push({
+        //                 value: result.actorId.toString(),
+        //                 label: result.name,
+        //             });
+        //             selectedActors.push({
+        //                 value: result.actorId.toString(),
+        //                 label: result.name
+        //             });
+        //         })
+        //     }else{
+        //         selectedActors.push({
+        //             value: actor.value,
+        //             label: actor.label
+        //         })
+        //     }
+        // });
+
     }
 
     render() {
