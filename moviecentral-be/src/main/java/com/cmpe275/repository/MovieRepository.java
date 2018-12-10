@@ -58,7 +58,7 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie,Long>,
     @Query(value = "SELECT  new com.cmpe275.utility.MovieActivity.MovieActivityAggregateResults(m.title,m.availability,COUNT (ph.movieObj)) from"
             + " PlaybackHistory as ph  JOIN Movie m on m.movieId=ph.movieObj where ph.timestamp >= :previousDate and ph.timestamp <= :currentDate"
             + " and m.isActive = TRUE"
-            + " group by ph.movieObj order by m.title desc")
+            + " group by ph.movieObj order by m.title asc")
     List<MovieActivityAggregateResults> getAllMoviesBasedOnTime(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
 
     List<Movie> findTop10ByIsActiveTrueOrderByAvgratingsDesc();
