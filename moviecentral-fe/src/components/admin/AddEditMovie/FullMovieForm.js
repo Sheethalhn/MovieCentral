@@ -202,7 +202,8 @@ class FullMovieForm extends Component {
 
             if (this.props.type === "edit") {
                 updateMovie(movie, movie.movieId).then((result) => {
-                    this.notify(`Movie Successfully Added!!`);
+                    this.notify(`Movie Successfully Edited!!`);
+                    this.resetForm();
                 })
             } else {
                 addNewMovie(movie).then((result) => {

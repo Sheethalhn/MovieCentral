@@ -123,10 +123,10 @@ class ViewUser extends Component {
                         <h1 className="account-header">Account</h1>
                         <div className="account-messages-container">
                             <div className="ui-message-container ui-message-info">
-                                <div className="ui-message-icon"><i className="fas fa-exclamation-circle"></i></div>
+                                {/* <div className="ui-message-icon"><i className="fas fa-exclamation-circle"></i></div>
                                 <div className="ui-message-contents">
                                     Your membership will be canceled at the end of your current billing period.
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div className="responsive-account-content">
