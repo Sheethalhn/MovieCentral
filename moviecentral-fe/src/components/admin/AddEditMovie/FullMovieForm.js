@@ -127,7 +127,7 @@ class FullMovieForm extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.movie) {
             if (prevProps.movie.title !== this.props.movie.title) {
-                this.setState({ movie: this.props.movie });
+                this.setState({ movie: this.props.movie, selectedActors:  mapActorsToSelect(this.props.movie.actors) });
             }
         }
     }
@@ -184,7 +184,8 @@ class FullMovieForm extends Component {
         }
         this.setState({ 
             movie: movie,
-            selectedActors: []
+            selectedActors: [],
+            validation: this.validator.valid()
         });
     }
 
@@ -203,7 +204,7 @@ class FullMovieForm extends Component {
             if (this.props.type === "edit") {
                 updateMovie(movie, movie.movieId).then((result) => {
                     this.notify(`Movie Successfully Edited!!`);
-                    this.resetForm();
+                    //this.resetForm();
                 })
             } else {
                 addNewMovie(movie).then((result) => {
