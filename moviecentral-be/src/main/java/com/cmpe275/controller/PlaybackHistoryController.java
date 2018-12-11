@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -59,12 +60,16 @@ public class PlaybackHistoryController {
         }
     }
 
-    @GetMapping(path = "/playbackhistorys", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getAllPlaybackHistoryByUser(HttpSession session) {
+    @GetMapping(path = "/playbackhistorys/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllPlaybackHistoryByUser(@PathVariable("userId") Long userId, HttpSession session) {
         try {
             Long sessionUserId = (Long) session.getAttribute("userId");
             User user = new User();
-            user.setUserId(sessionUserId);
+            if(userId != null){
+                user.setUserId(userId);
+            }else{
+                user.setUserId(sessionUserId);
+            }
             List<Movie> playbackHistorys = playbackHistoryService.getAllPaybackHistoryByUser(user);
             if (!CollectionUtils.isEmpty(playbackHistorys)) {
                 responseObject.setData(playbackHistorys);
@@ -81,9 +86,9 @@ public class PlaybackHistoryController {
             return new ResponseEntity(responseObject, HttpStatus.NO_CONTENT);
         }
     }
-    
+
     @GetMapping(path = "/movies/mostwatched")
-    public ResponseEntity<?> getMostWatched(){
+    public ResponseEntity<?> getMostWatched() {
         return ResponseEntity.ok(playbackHistoryService.getMostWatchedMovies());
     }
 }

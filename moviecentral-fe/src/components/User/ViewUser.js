@@ -28,10 +28,17 @@ class ViewUser extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            userObj: this.props.user
-        })
-        API.getAllPlaybackHistoryByUser()
+        // this.setState({
+        //     userObj: this.props.user
+        // })
+        API.getUserById(this.props.match.params.userId).then((resultData)=>{
+            this.setState({
+                userObj: resultData.data
+            })
+        }).catch(error => {
+            this.notify(error);
+        });
+        API.getAllPlaybackHistoryByUser(this.props.match.params.userId)
             .then((resultData) => {
                 console.log("resultData :", resultData);
                 if (!!resultData.data) {
@@ -45,7 +52,7 @@ class ViewUser extends Component {
                 this.notify(error);
             });
 
-        API.getAllSubscriptionByUser()
+        API.getAllSubscriptionByUser(this.props.match.params.userId)
             .then((resultData) => {
                 console.log("resultData :", resultData);
                 if (!!resultData.data) {

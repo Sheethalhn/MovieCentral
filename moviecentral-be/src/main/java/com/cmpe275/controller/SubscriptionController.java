@@ -90,12 +90,16 @@ public class SubscriptionController {
         }
     }
 
-    @GetMapping(path = "/subscriptions", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getAllSubscriptionByUser(HttpSession session) {
+    @GetMapping(path = "/subscriptions/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllSubscriptionByUser(@PathVariable("userId") Long userId, HttpSession session) {
         try {
             Long sessionUserId = (Long) session.getAttribute("userId");
             User user = new User();
-            user.setUserId(sessionUserId);
+            if (userId != null) {
+                user.setUserId(userId);
+            } else {
+                user.setUserId(sessionUserId);
+            }
             List<UserSubscription> userSubscriptions = subscriptionService.getAllUserSubscriptionByUserId(user);
             if (!CollectionUtils.isEmpty(userSubscriptions)) {
                 responseObject.setData(userSubscriptions);

@@ -510,8 +510,8 @@ export const getMostWatchedMovies = () =>
         return error;
     });
 
-export const getAllSubscriptionByUser = () =>
-    fetch(`${api}/subscriptions`, {
+export const getAllSubscriptionByUser = (payload) =>
+    fetch(`${api}/subscriptions/` + payload, {
         method: 'GET',
         headers: {
             ...headers,
@@ -526,8 +526,8 @@ export const getAllSubscriptionByUser = () =>
     });
 
 
-export const getAllPlaybackHistoryByUser = () =>
-    fetch(`${api}/playbackhistorys`, {
+export const getAllPlaybackHistoryByUser = (payload) =>
+    fetch(`${api}/playbackhistorys/` + payload, {
         method: 'GET',
         headers: {
             ...headers,
