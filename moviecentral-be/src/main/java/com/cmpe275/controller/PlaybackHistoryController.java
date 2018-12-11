@@ -8,7 +8,9 @@ package com.cmpe275.controller;
 import com.cmpe275.entity.Movie;
 import com.cmpe275.entity.PlaybackHistory;
 import com.cmpe275.entity.User;
+import com.cmpe275.service.MovieServ;
 import com.cmpe275.service.PlaybackHistoryService;
+import com.cmpe275.service.UserService;
 import com.cmpe275.utility.ResponseFormat;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -34,6 +36,8 @@ public class PlaybackHistoryController {
 
     @Autowired
     private PlaybackHistoryService playbackHistoryService;
+    private UserService userServ;
+    private MovieServ movieServ;
 
     ResponseFormat responseObject = new ResponseFormat();
 
@@ -41,10 +45,25 @@ public class PlaybackHistoryController {
     public ResponseEntity<?> createPlaybackHistory(@RequestBody PlaybackHistory playbackHistory, HttpSession session) {
         try {
             Long userId = (Long) session.getAttribute("userId");
-            User userObj = new User();
-            userObj.setUserId(userId);
-            playbackHistory.setUserObj(userObj);
-            PlaybackHistory playbackHistoryObj = playbackHistoryService.addPlaybackHistory(playbackHistory);
+
+            if(userId == null){
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("401");
+            }
+            if(playbackHistory.getMovieObj() == null || playbackHistory.getMovieObj().getMovieId() == null){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Movie id required");
+            }
+            User u = userServ.getUserById(userId);
+            if(u.getRole().equals("admin")){
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("no userplayback recording for admins");
+            }
+
+            PlaybackHistory p = new PlaybackHistory();
+            p.setUserObj(u);
+            p.setMovieObj(movieServ.getOneMovie(playbackHistory.getMovieObj().getMovieId()));
+//            User userObj = new User();
+//            userObj.setUserId(userId);
+//            playbackHistory.setUserObj(userObj);
+            PlaybackHistory playbackHistoryObj = playbackHistoryService.addPlaybackHistory(p);
             if (playbackHistoryObj != null) {
                 responseObject.setData(playbackHistoryObj);
                 responseObject.setMeta("User Plays recorded succesfully");
