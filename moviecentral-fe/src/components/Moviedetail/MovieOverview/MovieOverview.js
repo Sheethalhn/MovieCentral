@@ -105,6 +105,9 @@ class MovieOverview extends Component {
     }
 
     movieStart() {
+        if(this.props.user.role === "admin"){
+            return;
+        }
         if(this.state.showModal === true){
             this.setState({activeModal:true, playing:false});
             return;
