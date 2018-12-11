@@ -83,6 +83,7 @@ class VerifyPage extends Component {
                                         id="loginCode"
                                         placeholder="Verification Code"
                                         value={this.state.verificationCode}
+                                        readOnly
                                         onChange={(event) => {
                                             this.setState({
                                                 verificationCode: event.target.value
