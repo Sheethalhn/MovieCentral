@@ -36,7 +36,11 @@ public class PlaybackHistoryController {
 
     @Autowired
     private PlaybackHistoryService playbackHistoryService;
+
+    @Autowired
     private UserService userServ;
+
+    @Autowired
     private MovieServ movieServ;
 
     ResponseFormat responseObject = new ResponseFormat();
