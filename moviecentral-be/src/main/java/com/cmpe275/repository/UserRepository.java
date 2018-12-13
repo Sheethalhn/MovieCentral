@@ -30,9 +30,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     User findByVerificationCode(String verificationCode);
 
-    @Query(value = "SELECT u from User u where u.emailVerified = 1 AND u.role = 'customer'")
+    @Query(value = "SELECT u FROM User u LEFT JOIN PlaybackHistory AS ph ON u.userId = ph.userObj WHERE u.emailVerified = 1 AND u.role = 'customer' GROUP BY u.userId ORDER BY COUNT(ph.userObj) DESC")
     List<User> getAllActiveUsers();
-    
+
     @Query(value = "SELECT u from User u where u.emailVerified = 1 AND u.role = 'customer' AND u.createdOn >= :previousDate AND u.createdOn <= :currentDate")
     List<User> getActiveUsersByMonth(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
 
@@ -43,8 +43,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query(value = "SELECT distinct u FROM User as u JOIN UserSubscription as us on u.userId = us.userSubscriptionObj "
             + "where u.role = 'customer' AND us.subscriptionType IN :subscriptionType And us.createdOn >= :previousDate AND us.createdOn <= :currentDate")
-    List<User> getUsersBySubscriptionType(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate,@Param("subscriptionType") List<String> subscriptionTypes);
-    
+    List<User> getUsersBySubscriptionType(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate, @Param("subscriptionType") List<String> subscriptionTypes);
+
     @Query(value = "SELECT distinct u FROM User as u JOIN PlaybackHistory as ph on u.userId = ph.userObj "
             + "where u.role = 'customer' AND ph.timestamp >= :previousDate AND ph.timestamp <= :currentDate")
     List<User> getActiveUserPlayBackByMonth(@Param("previousDate") Date previousDate, @Param("currentDate") Date currentDate);
