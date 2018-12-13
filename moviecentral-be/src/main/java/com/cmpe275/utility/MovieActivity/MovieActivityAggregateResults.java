@@ -4,20 +4,19 @@ import java.util.Date;
 
 public class MovieActivityAggregateResults {
 
-	
     private String title;
     private String availability;
     private Long playCount;
     private Date watchTime;
     private String genre;
-    
-    public MovieActivityAggregateResults(String title,String availability,Long playCount) {
+
+    public MovieActivityAggregateResults(String title, String availability, Long playCount) {
         this.title = title;
         this.availability = availability;
         this.playCount = playCount;
     }
 
-    public MovieActivityAggregateResults(String title, String availability,String genre, Date watchTime) {
+    public MovieActivityAggregateResults(String title, String availability, String genre, Date watchTime) {
         this.title = title;
         this.availability = availability;
         this.watchTime = watchTime;
@@ -26,7 +25,7 @@ public class MovieActivityAggregateResults {
 
     public MovieActivityAggregateResults() {
     }
-	
+
     public String getTitle() {
         return this.title;
     }
@@ -34,7 +33,7 @@ public class MovieActivityAggregateResults {
     public void setTitle(String title) {
         this.title = title;
     }
-    
+
     public String getAvailability() {
         return this.availability;
     }
@@ -44,11 +43,11 @@ public class MovieActivityAggregateResults {
     }
 
     public void setPlayCount(Long playCount) {
-    this.playCount =playCount;
+        this.playCount = playCount;
     }
-    
+
     public Long getPlayCount() {
-    	return this.playCount;
+        return this.playCount;
     }
 
     public Date getWatchTime() {
@@ -66,6 +65,5 @@ public class MovieActivityAggregateResults {
     public void setGenre(String genre) {
         this.genre = genre;
     }
-    
-    
+
 }
