@@ -9,11 +9,11 @@ import com.cmpe275.entity.Movie;
 import com.cmpe275.entity.PlaybackHistory;
 import com.cmpe275.entity.User;
 import com.cmpe275.repository.PlaybackHistoryRepository;
+import com.cmpe275.utility.MovieActivity.MovieActivityAggregateResults;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -44,8 +44,8 @@ public class PlaybackHistoryService {
         return playbackHistoryObj;
     }
 
-    public List<Movie> getAllPaybackHistoryByUser(User user) {
-        List<Movie> playbackHistorys = playbackHistoryRepository.getAllPaybackHistoryByUser(user);
+    public List<MovieActivityAggregateResults> getAllPaybackHistoryByUser(User user) {
+        List<MovieActivityAggregateResults> playbackHistorys = playbackHistoryRepository.getAllPaybackHistoryByUser(user);
         return playbackHistorys;
     }
 

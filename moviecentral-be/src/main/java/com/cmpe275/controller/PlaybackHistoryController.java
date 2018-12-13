@@ -5,10 +5,10 @@
  */
 package com.cmpe275.controller;
 
-import com.cmpe275.entity.Movie;
 import com.cmpe275.entity.PlaybackHistory;
 import com.cmpe275.entity.User;
 import com.cmpe275.service.PlaybackHistoryService;
+import com.cmpe275.utility.MovieActivity.MovieActivityAggregateResults;
 import com.cmpe275.utility.ResponseFormat;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -70,7 +70,7 @@ public class PlaybackHistoryController {
             }else{
                 user.setUserId(sessionUserId);
             }
-            List<Movie> playbackHistorys = playbackHistoryService.getAllPaybackHistoryByUser(user);
+            List<MovieActivityAggregateResults> playbackHistorys = playbackHistoryService.getAllPaybackHistoryByUser(user);
             if (!CollectionUtils.isEmpty(playbackHistorys)) {
                 responseObject.setData(playbackHistorys);
                 responseObject.setMeta("Playback History retrieved succesfully");

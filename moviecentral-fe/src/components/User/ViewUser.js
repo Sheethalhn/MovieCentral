@@ -71,7 +71,7 @@ class ViewUser extends Component {
         const playBackcolumns = [{
             Header: 'Movie Name',
             accessor: 'movieObj',
-            width: 250,
+            width: 200,
             style: { 'whiteSpace': 'unset' },
             Cell: props =>
                 (<span className="visual-sub-title dark"
@@ -80,18 +80,27 @@ class ViewUser extends Component {
         }, {
             Header: 'Genre',
             accessor: 'movieObj',
-            width: 200,
+            width: 100,
             style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
             Cell: props =>
                 (<span className="visual-sub-title dark"
                     style={{ 'display': 'block', 'margin': 'auto' }}>
                     {props.row._original !== null && props.row._original !== undefined && props.row._original.genre}</span>)
         }, {
+            Header: 'Availability',
+            accessor: 'availability',
+            width: 150,
+            style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
+            Cell: props =>
+                (<span className="visual-sub-title dark"
+                    style={{ 'display': 'block', 'margin': 'auto' }}>
+                    {props.row._original !== null && props.row._original !== undefined && props.row._original.availability}</span>)
+        }, {
             Header: 'Watch Time',
             accessor: 'movieObj',
             width: 250,
             style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
-            Cell: props => <span className='number'><Timestamp time={props.row._original.timestamp} format='full' /></span>
+            Cell: props => <span className='number'><Timestamp time={props.row._original.watchTime} format='full' /></span>
         }]
 
         const subscriptioncolumns = [{
