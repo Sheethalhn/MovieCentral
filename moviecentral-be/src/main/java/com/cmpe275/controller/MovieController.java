@@ -38,14 +38,12 @@ public class MovieController {
     }
 
     @PostMapping(path = "/movie", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
-        ResponseFormat resp = new ResponseFormat();
+    public ResponseEntity<?> addMovie(@RequestBody Movie movie) {
         try {
             Movie newMovie = movieService.createMovie(movie);
             return new ResponseEntity<Movie>(newMovie, HttpStatus.CREATED);
         } catch (Exception e) {
-            resp.setData(e);
-            return new ResponseEntity(resp, HttpStatus.NO_CONTENT).noContent().build();
+            return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

@@ -1,7 +1,6 @@
 package com.cmpe275.service;
 import com.cmpe275.Specification.FilterCriteria;
 import com.cmpe275.Specification.MovieSpecification;
-import com.cmpe275.entity.Actor;
 import com.cmpe275.repository.MovieRepository;
 import com.cmpe275.entity.Movie;
 import com.cmpe275.utility.Constant;
