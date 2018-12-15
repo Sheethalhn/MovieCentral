@@ -16,14 +16,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author shahs
  */
 @Service
-@Transactional(rollbackFor = Exception.class)
 public class UserService {
 
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -90,11 +88,11 @@ public class UserService {
         } else {
             cal.set(Calendar.MONTH, 0);
             cal.set(Calendar.YEAR, 1050);
+            cal = Constant.getDateFromTimestamp(cal);
+            previousDate = cal.getTime();
+            currentCal.add(Calendar.DAY_OF_MONTH, 1);
+            currentDate = currentCal.getTime();
         }
-        cal = Constant.getDateFromTimestamp(cal);
-        previousDate = cal.getTime();
-        currentCal.add(Calendar.DAY_OF_MONTH, 1);
-        currentDate = currentCal.getTime();
         System.out.println("previousDate :" + previousDate);
         System.out.println("currentDate :" + currentDate);
         System.out.println("subscriptionType :" + subscriptionType);
@@ -119,11 +117,11 @@ public class UserService {
         } else {
             cal.set(Calendar.MONTH, 0);
             cal.set(Calendar.YEAR, 1050);
+            cal = Constant.getDateFromTimestamp(cal);
+            previousDate = cal.getTime();
+            currentCal.add(Calendar.DAY_OF_MONTH, 1);
+            currentDate = currentCal.getTime();
         }
-        cal = Constant.getDateFromTimestamp(cal);
-        previousDate = cal.getTime();
-        currentCal.add(Calendar.DAY_OF_MONTH, 1);
-        currentDate = currentCal.getTime();
         System.out.println("previousDate :" + previousDate);
         System.out.println("currentDate :" + currentDate);
         List<User> topUsers = userRepository.getActiveUsersByMonth(previousDate, currentDate);
@@ -147,11 +145,11 @@ public class UserService {
         } else {
             cal.set(Calendar.MONTH, 0);
             cal.set(Calendar.YEAR, 1050);
+            cal = Constant.getDateFromTimestamp(cal);
+            previousDate = cal.getTime();
+            currentCal.add(Calendar.DAY_OF_MONTH, 1);
+            currentDate = currentCal.getTime();
         }
-        cal = Constant.getDateFromTimestamp(cal);
-        previousDate = cal.getTime();
-        currentCal.add(Calendar.DAY_OF_MONTH, 1);
-        currentDate = currentCal.getTime();
         System.out.println("previousDate :" + previousDate);
         System.out.println("currentDate :" + currentDate);
         List<User> topUsers = userRepository.getActiveUserPlayBackByMonth(previousDate, currentDate);
