@@ -19,7 +19,7 @@
 4. Studio, Director, Year, Genre, Country: are plain text fields.
 
 ### Click on the site header logo to access the admin dashboard.
-### Top Movie scoreboard data is available 
+### Top Movies/most watched movies scoreboard data is available on the catalog page next to the "SUGGESTIONS" label
 
 ## Click [cmpe275.ddns.net](https://cmpe275.ddns.net) to access
 
