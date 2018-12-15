@@ -22,7 +22,20 @@
 ### Top Movies/most watched movies scoreboard data is available on the catalog page next to the "SUGGESTIONS" label
 ### Click on filters button to access the filter menu.
 
+## Build Instructions
 
+1. Clone this repo.
+2. Build jar for backend:
+ - cd moviecentral-be
+ - ./mvnw package
+ - cd target
+3. Launch backend
+ - java -jar <built jar file name>
+4. install UI dependencies
+ - cd moviecentral-fe
+ - npm install
+5. Launch the UI
+ - npm run
 
 ## Click [cmpe275.ddns.net](https://cmpe275.ddns.net) to access site.
 
