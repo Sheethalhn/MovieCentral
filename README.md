@@ -1,11 +1,43 @@
-# MovieCentral (Team Falcons)
+# MovieCentral (Team Falcons) 
 
 1. **Rachit Chokshi**, ID: 012550044, rachit.chokshi@sjsu.edu
 2. **Shreya Shah**, ID: 012541984, shreya.shah@sjsu.edu
 3. **Sheethal Halandur Nagaraja**, ID: 012564786, sheethal.halandurnagaraja@sjsu.edu
 4. **Tarun Arora**, ID: 012420772, tarun.arora@sjsu.edu
 
+## Instructions for the TA to grade the app
 
+### While Adding/Editing a movie
+
+* please **do not** try to use **autosaved form submissions**
+ 
+#### Instruction for each field (most important first)
+
+1. Image URL: please provide a link to a **jpg** image on the web (e.g https://images-na.ssl-images-amazon.com/images/I/51ZT6MjIXOL.jpg)
+2. Movie URL: Any youtube URL
+3. Actors: choose from list or enter new text and select "Create new"
+4. Studio, Director, Year, Genre, Country: are plain text fields.
+
+### Click on the site header logo to access the admin dashboard.
+### Top Movies/most watched movies scoreboard data is available on the catalog page next to the "SUGGESTIONS" label
+### Click on filters button to access the filter menu.
+
+## Build Instructions
+
+1. Clone this repo.
+2. Build jar for backend:
+	- cd moviecentral-be
+	- ./mvnw package
+	- cd target
+3. Launch backend
+ 	- java -jar ""BUILT JAR PATH""
+4. install UI dependencies
+ 	- cd moviecentral-fe
+ 	- npm install
+5. Launch the UI
+ 	- npm run
+
+## Click [cmpe275.ddns.net](https://cmpe275.ddns.net) to access site.
 
 # Technologies used
 
