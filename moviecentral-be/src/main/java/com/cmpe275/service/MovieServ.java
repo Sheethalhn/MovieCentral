@@ -32,10 +32,12 @@ public class MovieServ {
         this.movieRepo = movieRepo;
     }
 
+    @Transactional
     public Movie createMovie(Movie m){
         return movieRepo.save(m);
     }
 
+    @Transactional
     public Movie updateMovie(Movie m) {
         return movieRepo.save(m);
     }
