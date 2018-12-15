@@ -5,6 +5,7 @@
  */
 package com.cmpe275.controller;
 
+import com.cmpe275.entity.Movie;
 import com.cmpe275.entity.PlaybackHistory;
 import com.cmpe275.entity.User;
 import com.cmpe275.service.MovieServ;
@@ -20,11 +21,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -113,5 +110,20 @@ public class PlaybackHistoryController {
     @GetMapping(path = "/movies/mostwatched")
     public ResponseEntity<?> getMostWatched() {
         return ResponseEntity.ok(playbackHistoryService.getMostWatchedMovies());
+    }
+
+    @GetMapping(path = "/movie/haswatched")
+    public ResponseEntity<?> hasWatched(@RequestParam(value = "movie") Long movie_id,HttpSession session){
+        Long userId = (Long) session.getAttribute("userId");
+        if(userId == null){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("401");
+        }
+
+        if(movie_id == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Movie id required");
+        }
+        User u = userServ.getUserById(userId);
+        Movie m = movieServ.getOneMovie(movie_id);
+        return ResponseEntity.ok(playbackHistoryService.hasWacthed(m,u));
     }
 }

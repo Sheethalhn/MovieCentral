@@ -540,6 +540,22 @@ export const getAllPlaybackHistoryByUser = (payload) =>
         console.log("This is error");
         return error;
     });
+
+export const hasWatched = (movieId) =>
+    fetch(`${api}/movie/haswatched?movie=` + movieId, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
 let successHandler = (res) => {
     if (res.status === 401) {
         // UserHelper.redirectToLogin();

@@ -51,6 +51,15 @@ public class PlaybackHistoryService {
         return playbackHistorys;
     }
 
+    public Boolean hasWacthed(Movie m, User u){
+        long count = playbackHistoryRepository.countAllByMovieObjAndUserObj(m,u);
+        if(count > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public List<Movie> getMostWatchedMovies() {
         return playbackHistoryRepository.getMostWatchedMovies(PageRequest.of(0, 10)).getContent();
     }

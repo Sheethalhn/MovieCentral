@@ -38,4 +38,6 @@ public interface PlaybackHistoryRepository extends CrudRepository<PlaybackHistor
 
     @Query(value = "select p.movieObj from PlaybackHistory p group by p.movieObj order by count(p.id) desc")
     public Page<Movie> getMostWatchedMovies(Pageable p);
+
+    public Long countAllByMovieObjAndUserObj(Movie m,User u);
 }
