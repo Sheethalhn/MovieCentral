@@ -30,7 +30,7 @@
 	- ./mvnw package
 	- cd target
 3. Launch backend
- 	- java -jar <built jar file name>
+ 	- java -jar ""BUILT JAR PATH""
 4. install UI dependencies
  	- cd moviecentral-fe
  	- npm install
