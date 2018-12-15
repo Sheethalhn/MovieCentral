@@ -31,7 +31,7 @@ public class EmailService {
                 + "<p>Hi " + userName + ",<BR/><BR/>\n"
                 + "Click this link to confirm your email address and complete setup for your candidate account.<BR/><BR/>\n"
                 + "\n"
-                + "http://localhost:3000/verify/" + text + "\n"
+                + "https://cmpe275.ddns.net/verify/" + text + "\n"
                 + "<BR/><BR/>\n"
                 + "we request you not to reply to this mail.\n"
                 + "<BR/><BR/>\n"
