@@ -16,6 +16,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -23,6 +24,7 @@ import org.springframework.util.CollectionUtils;
  * @author Shreya Shah
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class PlaybackHistoryService {
 
     @Autowired

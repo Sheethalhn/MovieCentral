@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.Collections;
@@ -22,6 +23,7 @@ import java.util.List;
 /**
  * @author rachitchokshi
  */
+@Transactional(rollbackFor = Exception.class)
 @Service
 public class MovieServ {
     private final MovieRepository movieRepo;
