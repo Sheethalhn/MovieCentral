@@ -26,16 +26,16 @@
 
 1. Clone this repo.
 2. Build jar for backend:
- - cd moviecentral-be
- - ./mvnw package
- - cd target
+	- cd moviecentral-be
+	- ./mvnw package
+	- cd target
 3. Launch backend
- - java -jar <built jar file name>
+ 	- java -jar <built jar file name>
 4. install UI dependencies
- - cd moviecentral-fe
- - npm install
+ 	- cd moviecentral-fe
+ 	- npm install
 5. Launch the UI
- - npm run
+ 	- npm run
 
 ## Click [cmpe275.ddns.net](https://cmpe275.ddns.net) to access site.
 
