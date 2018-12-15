@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.Collections;
@@ -30,10 +31,12 @@ public class MovieServ {
         this.movieRepo = movieRepo;
     }
 
+    @Transactional
     public Movie createMovie(Movie m){
         return movieRepo.save(m);
     }
 
+    @Transactional
     public Movie updateMovie(Movie m) {
         return movieRepo.save(m);
     }

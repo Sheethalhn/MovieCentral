@@ -1,6 +1,5 @@
 package com.cmpe275.controller;
 
-import com.cmpe275.entity.Actor;
 import com.cmpe275.service.ActorService;
 import com.cmpe275.service.MovieServ;
 import com.cmpe275.entity.Movie;
@@ -16,10 +15,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,6 +36,7 @@ public class MovieController {
         this.movieService = movieService; this.actorService = a;
     }
 
+    @Transactional
     @PostMapping(path = "/movie", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addMovie(@RequestBody Movie movie) {
         try {
@@ -47,6 +47,7 @@ public class MovieController {
         }
     }
 
+    @Transactional
     @PutMapping(path = "/movie/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateMovie(@RequestBody Movie movie, @PathVariable Long id) {
         ResponseFormat resp = new ResponseFormat();
