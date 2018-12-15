@@ -1,11 +1,20 @@
-# MovieCentral (Team Falcons)
+# MovieCentral (Team Falcons) 
 
 1. **Rachit Chokshi**, ID: 012550044, rachit.chokshi@sjsu.edu
 2. **Shreya Shah**, ID: 012541984, shreya.shah@sjsu.edu
 3. **Sheethal Halandur Nagaraja**, ID: 012564786, sheethal.halandurnagaraja@sjsu.edu
 4. **Tarun Arora**, ID: 012420772, tarun.arora@sjsu.edu
 
+## Instructions for the TA to grade the app
 
+### While Adding/Editing a movie
+
+* please **do not** try to use **autosaved form submissions**
+ 
+#### Instruction for each field (most important first)
+
+1. 
+## Click [cmpe275.ddns.net](https://cmpe275.ddns.net) to access
 
 # Technologies used
 
