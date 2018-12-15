@@ -13,7 +13,14 @@
  
 #### Instruction for each field (most important first)
 
-1. 
+1. Image URL: please provide a link to a **jpg** image on the web (e.g https://images-na.ssl-images-amazon.com/images/I/51ZT6MjIXOL.jpg)
+2. Movie URL: Any youtube URL
+3. Actors: choose from list or enter new text and select "Create new"
+4. Studio, Director, Year, Genre, Country: are plain text fields.
+
+### Click on the site header logo to access the admin dashboard.
+### Top Movie scoreboard data is available 
+
 ## Click [cmpe275.ddns.net](https://cmpe275.ddns.net) to access
 
 # Technologies used
