@@ -111,6 +111,9 @@ public class MovieSpecification implements Specification<Movie> {
                                 ),
                                 builder.like(
                                         builder.lower(root.get("synopsis")),"%" + keyword.toLowerCase() + "%"
+                                ),
+                                builder.like(
+                                        builder.lower(root.join("actors").get("name")),"%" + keyword.toLowerCase() + "%"
                                 )
                         )
                 );
