@@ -29,7 +29,7 @@ public interface PlaybackHistoryRepository extends CrudRepository<PlaybackHistor
     <S extends PlaybackHistory> S save(S s);
 
     @Query(value = "SELECT new com.cmpe275.utility.MovieActivity.MovieActivityAggregateResults(m.title,m.availability,m.genre,u.timestamp) from "
-            + " PlaybackHistory as u JOIN Movie as m ON m.movieId = u.movieObj where u.userObj = :user")
+            + " PlaybackHistory as u JOIN Movie as m ON m.movieId = u.movieObj where u.userObj = :user ORDER BY timestamp DESC")
     List<MovieActivityAggregateResults> getAllPaybackHistoryByUser(@Param("user") User user);
 
     @Query(value = "SELECT ph FROM PlaybackHistory as ph where ph.timestamp >= :previousDate "
