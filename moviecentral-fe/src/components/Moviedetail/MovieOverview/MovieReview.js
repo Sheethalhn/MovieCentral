@@ -31,15 +31,9 @@ class MovieReview extends Component {
             });
         API.hasWatched(this.props.movie.movieId)
             .then((result) => {
-                if(result === 'true'){
-                    this.setState({
-                        hasWatched: true
-                    })
-                }else{
-                    this.setState({
-                        hasWatched: false
-                    })
-                }
+                this.setState({
+                    hasWatched: result
+                })
             })
     }
 
