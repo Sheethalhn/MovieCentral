@@ -22,9 +22,7 @@ class MovieOverview extends Component {
             movietype: "",
             isSubscribed: false,
             PaidForMovie: false,
-            PPVpaidForMovie: false,
-            activeModal: false,
-            playing: false
+            PPVpaidForMovie: false
         };
 
         this.onReady = this.onReady.bind(this);
@@ -44,6 +42,7 @@ class MovieOverview extends Component {
     // }
 
     onReady() {
+        if(this.props.user.role === "admin") return;
         var movietype = this.props.movie.availability;
         var userSubscription = this.props.user.userSubscriptions;
 
@@ -108,10 +107,7 @@ class MovieOverview extends Component {
         if(this.props.user.role === "admin"){
             return;
         }
-        if(this.state.showModal === true){
-            this.setState({activeModal:true, playing:false});
-            return;
-        }
+
         var movieObj = this.props.movie;
         playbackHistory({
             movieObj: { movieId: movieObj.movieId }
@@ -144,7 +140,6 @@ class MovieOverview extends Component {
                                         width="130%"
                                         onStart={this.movieStart}
                                         onReady={this.onReady}
-                                        playing={this.state.playing}
                                     />
                                 </div>
                             </div>
@@ -156,7 +151,7 @@ class MovieOverview extends Component {
                 </div>
 
                 <SubscriptionModal
-                    show={this.state.activeModal}
+                    show={this.state.showModal}
                     onHide={this.hideModal}
                     movietype={this.state.movietype}
                     isSubscribed={this.state.isSubscribed}
